@@ -421,8 +421,11 @@ document.addEventListener('DOMContentLoaded', async () => {
   if (path.includes('encuentros')) {
     recordVisit('Encuentros Familiares', 'Consulta de Calendario de Encuentros');
     renderCalendar();
-  } else if (path.includes('admin')) {
+  } else if (path.includes((adminSlug || 'admin451200').toLowerCase()) || path.includes('admin451200')) {
     initAdminPage();
+  } else if (path.includes('admin')) {
+    window.location.href = '/';
+    return;
   } else if (path.includes('primera-infancia')) {
     recordCycleVisit('primera_infancia', 'Primera Infancia (J y T)');
     renderCyclePublicPage('primera_infancia');

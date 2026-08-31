@@ -16,6 +16,11 @@ const PORT = process.env.PORT || 3000;
 app.use(express.json({ limit: '25mb' }));
 app.use(express.urlencoded({ extended: true, limit: '25mb' }));
 
+// Bloquear acceso público genérico a admin.html o /admin (redirigir al inicio)
+app.get(['/admin', '/admin.html', '/panel', '/login'], (req, res) => {
+  res.redirect('/');
+});
+
 // Servir archivos estáticos desde la carpeta public
 app.use(express.static(path.join(__dirname, 'public')));
 
@@ -490,9 +495,16 @@ app.get(['/ciclos/especializado', '/especializado', '/ciclos/especializado.html'
   res.sendFile(path.join(__dirname, 'public', 'ciclos', 'especializado.html'));
 });
 
-// 4. Ruta Dinámica o Estática al Panel de Administración
-app.get(['/admin451200', '/admin', '/admin.html'], (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'admin.html'));
+// 4. Ruta Secreta del Panel de Administración (Solo accesible con el slug secreto)
+app.get(['/admin451200', '/:slug'], (req, res, next) => {
+  const db = readDb();
+  const validSlug = (db.adminSlug || 'admin451200').toLowerCase();
+  const reqSlug = (req.params.slug || req.path.replace(/^\//, '')).toLowerCase().replace('.html', '');
+  
+  if (reqSlug === validSlug) {
+    return res.sendFile(path.join(__dirname, 'public', 'admin.html'));
+  }
+  next();
 });
 
 // Ruta Keep-Alive / Anti-Inactividad para Render.com (UptimeRobot / Cron-Job)
@@ -519,11 +531,8 @@ app.get('/api/status', (req, res) => {
   });
 });
 
-// Manejador para cualquier otra ruta (Redirigir a inicio o admin)
+// Manejador para cualquier otra ruta no encontrada (404 -> Redirigir a inicio)
 app.use((req, res) => {
-  if (req.path.toLowerCase().includes('admin')) {
-    return res.sendFile(path.join(__dirname, 'public', 'admin.html'));
-  }
   res.status(404).sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
