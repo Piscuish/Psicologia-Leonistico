@@ -2875,6 +2875,12 @@ function renderCycleBlockByType(b, meta, isPublic = true) {
   const titleAlign = b.titleAlign || 'left';
   const hasImg = !!b.imageUrl;
 
+  const alignBadgeStyle = titleAlign === 'center' 
+    ? 'display: table; margin-left: auto; margin-right: auto; text-align: center;' 
+    : (titleAlign === 'right' ? 'display: table; margin-left: auto; margin-right: 0; text-align: right;' : 'display: table; margin-left: 0; margin-right: auto; text-align: left;');
+
+  const alignBtnStyle = `display: flex; justify-content: ${titleAlign === 'center' ? 'center' : (titleAlign === 'right' ? 'flex-end' : 'flex-start')}; width: 100%; margin-top: 18px;`;
+
   switch (type) {
     case 'hero_banner':
       return `
@@ -2885,14 +2891,14 @@ function renderCycleBlockByType(b, meta, isPublic = true) {
             </div>
           ` : ''}
           <div class="hero-content-wrap title-align-${titleAlign}" style="flex: 1; text-align: ${titleAlign};">
-            <span class="cycle-block-badge ${meta.pillClass}">${b.badgeText || meta.grades}</span>
-            <div class="hero-title-wrap">
-              <h2>${b.title}</h2>
+            <span class="cycle-block-badge ${meta.pillClass}" style="${alignBadgeStyle}">${b.badgeText || meta.grades}</span>
+            <div class="hero-title-wrap" style="text-align: ${titleAlign};">
+              <h2 style="text-align: ${titleAlign};">${b.title}</h2>
             </div>
-            ${b.subtitle ? `<div class="hero-subtitle-wrap">${b.subtitle}</div>` : ''}
-            <div class="hero-text-wrap">${b.text}</div>
+            ${b.subtitle ? `<div class="hero-subtitle-wrap" style="text-align: ${titleAlign};">${b.subtitle}</div>` : ''}
+            <div class="hero-text-wrap" style="text-align: ${titleAlign};">${b.text}</div>
             ${b.buttonText ? `
-              <div class="hero-btn-wrap">
+              <div class="hero-btn-wrap" style="${alignBtnStyle}">
                 <a href="${b.buttonUrl || '#'}" class="btn btn-primary btn-lg">
                   ${b.buttonText} →
                 </a>
@@ -2917,12 +2923,12 @@ function renderCycleBlockByType(b, meta, isPublic = true) {
               <img src="${b.imageUrl}" alt="${b.title}" loading="lazy">
             </div>
           ` : ''}
-          <div class="title-align-${titleAlign}" style="text-align: ${titleAlign};">
-            <span class="cycle-block-badge ${meta.pillClass}">${b.badgeText || 'Lectura Recomendada'}</span>
-            <h3 class="cycle-block-title" style="font-size: 1.5rem; margin-top: 6px;">${b.title}</h3>
-            ${b.subtitle ? `<div class="cycle-block-subtitle" style="font-size: 0.95rem;">${b.subtitle}</div>` : ''}
+          <div class="title-align-${titleAlign}" style="text-align: ${titleAlign}; width: 100%;">
+            <span class="cycle-block-badge ${meta.pillClass}" style="${alignBadgeStyle}">${b.badgeText || 'Lectura Recomendada'}</span>
+            <h3 class="cycle-block-title" style="font-size: 1.5rem; margin-top: 6px; text-align: ${titleAlign};">${b.title}</h3>
+            ${b.subtitle ? `<div class="cycle-block-subtitle" style="font-size: 0.95rem; text-align: ${titleAlign};">${b.subtitle}</div>` : ''}
           </div>
-          <div class="article-body-content" style="margin-top: 14px;">${b.text}</div>
+          <div class="article-body-content" style="margin-top: 14px; text-align: ${titleAlign};">${b.text}</div>
         </div>
       `;
 
@@ -2932,11 +2938,11 @@ function renderCycleBlockByType(b, meta, isPublic = true) {
       return `
         <div class="cycle-block-card size-${size} type-callout_tip accent-${color} ${meta.borderClass}">
           <div class="callout-icon-circle">${emoji}</div>
-          <div style="flex: 1; text-align: ${titleAlign};" class="title-align-${titleAlign}">
-            <span class="cycle-block-badge ${meta.pillClass}">${b.badgeText || 'Consejo Práctico'}</span>
-            <h4 class="cycle-block-title" style="font-size: 1.2rem; color: #1e293b; margin-top: 2px;">${b.title}</h4>
-            ${b.subtitle ? `<div class="cycle-block-subtitle" style="color: #64748b; font-weight: 700;">${b.subtitle}</div>` : ''}
-            <div class="cycle-block-text" style="font-size: 0.96rem; color: #334155; font-weight: 500;">${b.text}</div>
+          <div style="flex: 1; text-align: ${titleAlign}; width: 100%;" class="title-align-${titleAlign}">
+            <span class="cycle-block-badge ${meta.pillClass}" style="${alignBadgeStyle}">${b.badgeText || 'Consejo Práctico'}</span>
+            <h4 class="cycle-block-title" style="font-size: 1.2rem; color: #1e293b; margin-top: 2px; text-align: ${titleAlign};">${b.title}</h4>
+            ${b.subtitle ? `<div class="cycle-block-subtitle" style="color: #64748b; font-weight: 700; text-align: ${titleAlign};">${b.subtitle}</div>` : ''}
+            <div class="cycle-block-text" style="font-size: 0.96rem; color: #334155; font-weight: 500; text-align: ${titleAlign};">${b.text}</div>
           </div>
         </div>
       `;
@@ -2947,11 +2953,11 @@ function renderCycleBlockByType(b, meta, isPublic = true) {
       ];
       return `
         <div class="cycle-block-card size-${size} type-cards_grid ${meta.borderClass}">
-          <div class="title-align-${titleAlign}" style="text-align: ${titleAlign};">
-            <span class="cycle-block-badge ${meta.pillClass}">${b.badgeText || meta.name}</span>
-            <h3 class="cycle-block-title">${b.title}</h3>
-            ${b.subtitle ? `<div class="cycle-block-subtitle">${b.subtitle}</div>` : ''}
-            ${b.text ? `<div class="cycle-block-text" style="margin-bottom: 12px;">${b.text}</div>` : ''}
+          <div class="title-align-${titleAlign}" style="text-align: ${titleAlign}; width: 100%;">
+            <span class="cycle-block-badge ${meta.pillClass}" style="${alignBadgeStyle}">${b.badgeText || meta.name}</span>
+            <h3 class="cycle-block-title" style="text-align: ${titleAlign};">${b.title}</h3>
+            ${b.subtitle ? `<div class="cycle-block-subtitle" style="text-align: ${titleAlign};">${b.subtitle}</div>` : ''}
+            ${b.text ? `<div class="cycle-block-text" style="margin-bottom: 12px; text-align: ${titleAlign};">${b.text}</div>` : ''}
           </div>
           <div class="block-subcards-grid">
             ${cards.map(c => `
@@ -2971,10 +2977,10 @@ function renderCycleBlockByType(b, meta, isPublic = true) {
       ];
       return `
         <div class="cycle-block-card size-${size} type-faq_accordion ${meta.borderClass}">
-          <div class="title-align-${titleAlign}" style="text-align: ${titleAlign};">
-            <span class="cycle-block-badge ${meta.pillClass}">${b.badgeText || 'Preguntas Frecuentes'}</span>
-            <h3 class="cycle-block-title">${b.title}</h3>
-            ${b.subtitle ? `<div class="cycle-block-subtitle">${b.subtitle}</div>` : ''}
+          <div class="title-align-${titleAlign}" style="text-align: ${titleAlign}; width: 100%;">
+            <span class="cycle-block-badge ${meta.pillClass}" style="${alignBadgeStyle}">${b.badgeText || 'Preguntas Frecuentes'}</span>
+            <h3 class="cycle-block-title" style="text-align: ${titleAlign};">${b.title}</h3>
+            ${b.subtitle ? `<div class="cycle-block-subtitle" style="text-align: ${titleAlign};">${b.subtitle}</div>` : ''}
           </div>
           <div class="cycle-accordion-list">
             ${faqs.map((item, i) => `
@@ -2998,10 +3004,10 @@ function renderCycleBlockByType(b, meta, isPublic = true) {
       ];
       return `
         <div class="cycle-block-card size-${size} type-resources_download ${meta.borderClass}">
-          <div class="title-align-${titleAlign}" style="text-align: ${titleAlign};">
-            <span class="cycle-block-badge ${meta.pillClass}">${b.badgeText || 'Descargables'}</span>
-            <h3 class="cycle-block-title">${b.title}</h3>
-            ${b.subtitle ? `<div class="cycle-block-subtitle">${b.subtitle}</div>` : ''}
+          <div class="title-align-${titleAlign}" style="text-align: ${titleAlign}; width: 100%;">
+            <span class="cycle-block-badge ${meta.pillClass}" style="${alignBadgeStyle}">${b.badgeText || 'Descargables'}</span>
+            <h3 class="cycle-block-title" style="text-align: ${titleAlign};">${b.title}</h3>
+            ${b.subtitle ? `<div class="cycle-block-subtitle" style="text-align: ${titleAlign};">${b.subtitle}</div>` : ''}
           </div>
           <div class="cycle-resources-grid">
             ${resources.map(r => `
@@ -3029,11 +3035,11 @@ function renderCycleBlockByType(b, meta, isPublic = true) {
       ];
       return `
         <div class="cycle-block-card size-${size} type-photo_gallery ${meta.borderClass}">
-          <div class="title-align-${titleAlign}" style="text-align: ${titleAlign};">
-            <span class="cycle-block-badge ${meta.pillClass}">${b.badgeText || 'Galería de Fotos'}</span>
-            <h3 class="cycle-block-title">${b.title}</h3>
-            ${b.subtitle ? `<div class="cycle-block-subtitle">${b.subtitle}</div>` : ''}
-            ${b.text ? `<div class="cycle-block-text" style="margin-bottom: 16px;">${b.text}</div>` : ''}
+          <div class="title-align-${titleAlign}" style="text-align: ${titleAlign}; width: 100%;">
+            <span class="cycle-block-badge ${meta.pillClass}" style="${alignBadgeStyle}">${b.badgeText || 'Galería de Fotos'}</span>
+            <h3 class="cycle-block-title" style="text-align: ${titleAlign};">${b.title}</h3>
+            ${b.subtitle ? `<div class="cycle-block-subtitle" style="text-align: ${titleAlign};">${b.subtitle}</div>` : ''}
+            ${b.text ? `<div class="cycle-block-text" style="margin-bottom: 16px; text-align: ${titleAlign};">${b.text}</div>` : ''}
           </div>
           <div class="cycle-photo-gallery-grid">
             ${photos.map(p => `

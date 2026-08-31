@@ -306,6 +306,14 @@ initDb();
 // API REST CENTRALIZADA PARA SINCRONIZACIÓN EN TIEMPO REAL
 // ============================================================
 
+// Middleware para evitar que los navegadores guarden en caché datos desactualizados
+app.use('/api', (req, res, next) => {
+  res.setHeader('Cache-Control', 'no-store, no-cache, must-revalidate, proxy-revalidate');
+  res.setHeader('Pragma', 'no-cache');
+  res.setHeader('Expires', '0');
+  next();
+});
+
 // 1. Obtener todos los datos del portal
 app.get('/api/data', (req, res) => {
   const db = readDb();

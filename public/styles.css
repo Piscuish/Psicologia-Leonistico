@@ -3662,30 +3662,90 @@ body.admin-dark .cal-compact-date {
 }
 
 /* Clases de Alineación de Título y Encabezado */
-.title-align-left {
+.title-align-left,
+.title-align-left h2,
+.title-align-left h3,
+.title-align-left h4,
+.title-align-left h5,
+.title-align-left h6,
+.title-align-left .hero-title-wrap,
+.title-align-left .hero-subtitle-wrap,
+.title-align-left .hero-text-wrap,
+.title-align-left .cycle-block-title,
+.title-align-left .cycle-block-subtitle,
+.title-align-left .cycle-block-text,
+.title-align-left .article-body-content {
   text-align: left !important;
 }
 
-.title-align-center {
+.title-align-left .cycle-block-badge {
+  display: table !important;
+  margin-left: 0 !important;
+  margin-right: auto !important;
+}
+
+.title-align-left .hero-btn-wrap {
+  display: flex !important;
+  justify-content: flex-start !important;
+  width: 100% !important;
+}
+
+.title-align-center,
+.title-align-center h2,
+.title-align-center h3,
+.title-align-center h4,
+.title-align-center h5,
+.title-align-center h6,
+.title-align-center .hero-title-wrap,
+.title-align-center .hero-subtitle-wrap,
+.title-align-center .hero-text-wrap,
+.title-align-center .cycle-block-title,
+.title-align-center .cycle-block-subtitle,
+.title-align-center .cycle-block-text,
+.title-align-center .article-body-content {
   text-align: center !important;
 }
 
-.title-align-right {
-  text-align: right !important;
-}
-
-.title-align-center .cycle-block-badge,
-.title-align-center .hero-btn-wrap {
+.title-align-center .cycle-block-badge {
+  display: table !important;
   margin-left: auto !important;
   margin-right: auto !important;
   text-align: center !important;
 }
 
-.title-align-right .cycle-block-badge,
-.title-align-right .hero-btn-wrap {
+.title-align-center .hero-btn-wrap {
+  display: flex !important;
+  justify-content: center !important;
+  width: 100% !important;
+}
+
+.title-align-right,
+.title-align-right h2,
+.title-align-right h3,
+.title-align-right h4,
+.title-align-right h5,
+.title-align-right h6,
+.title-align-right .hero-title-wrap,
+.title-align-right .hero-subtitle-wrap,
+.title-align-right .hero-text-wrap,
+.title-align-right .cycle-block-title,
+.title-align-right .cycle-block-subtitle,
+.title-align-right .cycle-block-text,
+.title-align-right .article-body-content {
+  text-align: right !important;
+}
+
+.title-align-right .cycle-block-badge {
+  display: table !important;
   margin-left: auto !important;
   margin-right: 0 !important;
   text-align: right !important;
+}
+
+.title-align-right .hero-btn-wrap {
+  display: flex !important;
+  justify-content: flex-end !important;
+  width: 100% !important;
 }
 
 /* ============================================================
