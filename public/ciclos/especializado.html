@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ciclo Especializado (10° y 11°) | Psicoorientación Escolar</title>
+  
+  <!-- Preconnect -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://lh3.googleusercontent.com" crossorigin>
+  <link rel="dns-prefetch" href="https://lh3.googleusercontent.com">
+  <link rel="dns-prefetch" href="https://unpkg.com">
+
+  <!-- Favicon -->
+  <link rel="icon" id="faviconTag" href="https://lh3.googleusercontent.com/sitesv/AG8ngQWMa1kc6jVbY3mSnIQYpVjxxkhTMgHuRLzpm-o3lAMgJtWUIgekXnXlWjgQDeRwQSCOLH_U5l8ztQCfaCv7r3JjyQ0JCQn2-3saSzHRhDM5duB-idQtoKG9ZYz6BUZLMM3SJfxvtYVinOuckRqSmPIT5Am07h5B7Luapy3c76dc1lYmoUBJGB0UCr38E0u29coTDmwWwuiFH6RIlpW448k" type="image/x-icon">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Oswald:wght@500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest" defer></script>
+
+  <!-- Custom Styles -->
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+
+  <!-- Main Navigation Header -->
+  <header class="main-header">
+    <div class="container nav-container">
+      <a href="/" class="brand-logo">
+        <div class="logo-img-wrapper">
+          <img id="siteBrandLogo" src="https://lh3.googleusercontent.com/sitesv/AG8ngQXPXXrReW33dy7TVTPLbtzVRorfO3DggGyZ2zPzCU8xHZihOUZ73rOtyxtOw8W6b-Ry1dvVTRgD9cXAi1PeOeBYBjYcRYJmjkDCa-In40HLlE0ZqGMI0v8Vm30pwJNToW-SKtWmik47Pnir0VAv4VW-kkrallHR0PnYc_cPd_uIBQNvJoe1Iu6Z7ACf=w16383" alt="Logo Colegio Leonístico La Merced" class="logo-img">
+        </div>
+        <div class="brand-text">
+          <span class="brand-title">Caminando Juntos</span>
+          <span class="brand-subtitle">Psicoorientación Escolar • Colegio Leonístico La Merced</span>
+        </div>
+      </a>
+
+      <!-- Desktop Nav Menu -->
+      <nav class="nav-menu">
+        <!-- Inicio Dropdown -->
+        <div class="nav-dropdown">
+          <a href="/" class="nav-dropdown-toggle">
+            <i data-lucide="home"></i> Inicio <i data-lucide="chevron-down" class="chevron-icon"></i>
+          </a>
+          <div class="nav-dropdown-menu">
+            <a href="/" class="nav-dropdown-item">
+              <i data-lucide="home"></i> Portada Principal
+            </a>
+            <a href="/#quienes-somos" class="nav-dropdown-item">
+              <i data-lucide="heart-handshake"></i> ¿Quiénes Somos?
+            </a>
+            
+          </div>
+        </div>
+
+        <!-- Encuentros Familiares -->
+        <a href="/encuentros" class="nav-btn">
+          <i data-lucide="users"></i> Encuentros Familiares
+          
+        </a>
+
+        <!-- Ciclos Dropdown -->
+        <div class="nav-dropdown">
+          <a href="#" class="nav-dropdown-toggle active" id="navCiclosBtn">
+            <i data-lucide="layers"></i> Ciclos <i data-lucide="chevron-down" class="chevron-icon"></i>
+          </a>
+          <div class="nav-dropdown-menu" style="min-width: 280px;">
+            <a href="/ciclos/primera-infancia" class="nav-dropdown-item">
+              <span class="dropdown-pill pill-pink">J y T</span> Primera Infancia
+            </a>
+            <a href="/ciclos/infantil" class="nav-dropdown-item">
+              <span class="dropdown-pill pill-teal">1, 2 y 3</span> Ciclo Infantil
+            </a>
+            <a href="/ciclos/basico" class="nav-dropdown-item">
+              <span class="dropdown-pill pill-yellow">4 y 5</span> Ciclo Básico
+            </a>
+            <a href="/ciclos/fundamental" class="nav-dropdown-item">
+              <span class="dropdown-pill pill-purple">6 y 7</span> Ciclo Fundamental
+            </a>
+            <a href="/ciclos/exploratorio" class="nav-dropdown-item">
+              <span class="dropdown-pill pill-blue">8 y 9</span> Ciclo Exploratorio
+            </a>
+            <a href="/ciclos/especializado" class="nav-dropdown-item" style="background: #eff6ff; color: var(--primary);">
+              <span class="dropdown-pill pill-green">10 y 11</span> Ciclo Especializado
+            </a>
+          </div>
+        </div>
+      </nav>
+
+      <!-- Action Button & Mobile Toggle -->
+      <div class="header-actions">
+        <button class="menu-toggle" onclick="toggleMobileMenu()" aria-label="Abrir menú">
+          <i data-lucide="menu"></i>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Nav Drawer -->
+    <div class="mobile-nav" id="mobileNav">
+      <a href="/" class="mobile-nav-btn">
+        <i data-lucide="home"></i> Inicio (Portada)
+      </a>
+      <a href="/#quienes-somos" class="mobile-nav-btn" style="padding-left: 28px; font-size: 0.9rem;">
+        <i data-lucide="heart-handshake"></i> └ ¿Quiénes Somos?
+      </a>
+      
+      <a href="/encuentros" class="mobile-nav-btn">
+        <i data-lucide="users"></i> Encuentros Familiares
+      </a>
+      <div style="font-size: 0.75rem; font-weight: 700; color: #64748b; text-transform: uppercase; padding: 6px 12px 2px 12px; letter-spacing: 0.5px;">
+        Ciclos Escolares
+      </div>
+      <a href="/ciclos/primera-infancia" class="mobile-nav-btn" style="padding-left: 24px; font-size: 0.9rem;">
+        <span class="dropdown-pill pill-pink" style="font-size: 0.68rem; min-width: 48px;">J y T</span> Primera Infancia
+      </a>
+      <a href="/ciclos/infantil" class="mobile-nav-btn" style="padding-left: 24px; font-size: 0.9rem;">
+        <span class="dropdown-pill pill-teal" style="font-size: 0.68rem; min-width: 48px;">1, 2 y 3</span> Ciclo Infantil
+      </a>
+      <a href="/ciclos/basico" class="mobile-nav-btn" style="padding-left: 24px; font-size: 0.9rem;">
+        <span class="dropdown-pill pill-yellow" style="font-size: 0.68rem; min-width: 48px;">4 y 5</span> Ciclo Básico
+      </a>
+      <a href="/ciclos/fundamental" class="mobile-nav-btn" style="padding-left: 24px; font-size: 0.9rem;">
+        <span class="dropdown-pill pill-purple" style="font-size: 0.68rem; min-width: 48px;">6 y 7</span> Ciclo Fundamental
+      </a>
+      <a href="/ciclos/exploratorio" class="mobile-nav-btn" style="padding-left: 24px; font-size: 0.9rem;">
+        <span class="dropdown-pill pill-blue" style="font-size: 0.68rem; min-width: 48px;">8 y 9</span> Ciclo Exploratorio
+      </a>
+      <a href="/ciclos/especializado" class="mobile-nav-btn active" style="padding-left: 24px; font-size: 0.9rem;">
+        <span class="dropdown-pill pill-green" style="font-size: 0.68rem; min-width: 48px;">10 y 11</span> Ciclo Especializado
+      </a>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main style="background-color: #f8fafc; padding-bottom: 60px;">
+    <!-- Cycle Hero -->
+    <section style="padding: 48px 20px 24px; text-align: center;">
+      <div class="container" style="max-width: 800px;">
+        <span class="dropdown-pill pill-green" style="font-size: 0.85rem; padding: 6px 16px; margin-bottom: 12px; display: inline-block;">
+          GRADOS 10° Y 11°
+        </span>
+        <h1 style="font-family: var(--font-heading); font-size: 2.8rem; color: #1e293b; margin: 8px 0; letter-spacing: 0.5px;">
+          CICLO ESPECIALIZADO
+        </h1>
+        <p style="color: #64748b; font-size: 1.05rem; line-height: 1.5; margin: 0 auto; max-width: 620px;">
+          Orientación vocacional, proyecto de vida, preparación para la educación superior y toma de decisiones.
+        </p>
+      </div>
+    </section>
+
+    <!-- Dynamic Cycle Content Blocks Grid -->
+    <section class="section-container" style="padding-top: 10px;">
+      <div class="container">
+        <div id="cycleBlocksContainer" class="cycle-blocks-grid">
+          <!-- Rendered dynamically by renderCyclePublicPage('especializado') in app.js -->
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="main-footer">
+    <div class="container">
+      <div class="footer-bottom text-center" style="border-top: none; padding: 20px 0;">
+        <p>&copy; 2026 Colegio Leonístico La Merced • Psicoorientación Escolar. Todos los derechos reservados.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="/app.js" defer></script>
+</body>
+</html>
+
+

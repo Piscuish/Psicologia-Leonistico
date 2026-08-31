@@ -1,0 +1,1414 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Panel de Administración | Psicoorientación Escolar</title>
+  
+  <!-- Preconnect -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="dns-prefetch" href="https://unpkg.com">
+
+  <!-- Favicon -->
+  <link rel="icon" id="faviconTag" href="https://lh3.googleusercontent.com/sitesv/AG8ngQWMa1kc6jVbY3mSnIQYpVjxxkhTMgHuRLzpm-o3lAMgJtWUIgekXnXlWjgQDeRwQSCOLH_U5l8ztQCfaCv7r3JjyQ0JCQn2-3saSzHRhDM5duB-idQtoKG9ZYz6BUZLMM3SJfxvtYVinOuckRqSmPIT5Am07h5B7Luapy3c76dc1lYmoUBJGB0UCr38E0u29coTDmwWwuiFH6RIlpW448k" type="image/x-icon">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest" defer></script>
+
+  <!-- Custom Styles -->
+  <link rel="stylesheet" href="/styles.css">
+
+  <style>
+    body {
+      background-color: #f1f5f9;
+      min-height: 100vh;
+      transition: background-color 0.25s ease, color 0.25s ease;
+    }
+    .admin-standalone-wrapper {
+      padding: 24px 28px;
+      max-width: 98%;
+      width: 100%;
+      margin: 0 auto;
+      box-sizing: border-box;
+    }
+    .admin-login-box {
+      max-width: 440px;
+      margin: 80px auto;
+      background: white;
+      padding: 40px;
+      border-radius: var(--radius-xl);
+      box-shadow: var(--shadow-xl);
+      border: 1px solid var(--border-color);
+      text-align: center;
+      transition: background 0.25s ease, border-color 0.25s ease;
+    }
+    .admin-dashboard-container {
+      background: white;
+      border-radius: var(--radius-xl);
+      padding: 32px 36px;
+      box-shadow: var(--shadow-md);
+      border: 1px solid var(--border-color);
+      transition: background 0.25s ease, border-color 0.25s ease;
+      width: 100%;
+      box-sizing: border-box;
+    }
+
+    /* Dark Mode Direct Overrides */
+    body.admin-dark {
+      background-color: #0b1120 !important;
+      color: #f1f5f9 !important;
+    }
+    body.admin-dark .admin-dashboard-container,
+    body.admin-dark .admin-login-box {
+      background: #0f172a !important;
+      border-color: #1e293b !important;
+      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5) !important;
+    }
+    body.admin-dark .admin-dash-header {
+      border-bottom-color: #1e293b !important;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="admin-standalone-wrapper">
+    
+    <!-- 1. LOGIN SECTION (WHEN NOT LOGGED IN) -->
+    <div id="adminLoginSection" class="admin-login-box">
+      <div class="admin-login-shield-wrap">
+        <div class="admin-shield-icon">🔐</div>
+        <h2 style="font-family: var(--font-display); font-size: 1.5rem; color: #0f172a; margin-bottom: 6px;">Portal de Administración</h2>
+        <p style="font-size: 0.88rem; color: #64748b;">Psicoorientación Escolar • Colegio Leonístico</p>
+      </div>
+
+      <form onsubmit="handleAdminLogin(event)">
+        <div class="form-group" style="text-align: left; margin-bottom: 20px;">
+          <label for="adminPass">Contraseña de Acceso:</label>
+          <input type="password" id="adminPass" placeholder="••••••••" required autocomplete="current-password">
+        </div>
+        <button type="submit" class="btn btn-primary btn-block">
+          <i data-lucide="unlock"></i> Ingresar al Panel
+        </button>
+      </form>
+
+      <div style="margin-top: 24px; border-top: 1px solid #e2e8f0; padding-top: 16px;">
+        <a href="/" style="font-size: 0.85rem; color: #64748b; display: inline-flex; align-items: center; gap: 6px;">
+          <i data-lucide="arrow-left"></i> Volver a la página principal
+        </a>
+      </div>
+    </div>
+
+    <!-- 2. FULL DASHBOARD SECTION (WHEN LOGGED IN) -->
+    <div id="adminDashboardSection" class="admin-dashboard-container" style="display: none;">
+      
+      <!-- Dashboard Top Header -->
+      <div class="admin-dash-header">
+        <div class="dash-title-group">
+          <div class="dash-logo">🦁</div>
+          <div>
+            <h3>Panel de Control • Psicoorientación</h3>
+            <p>Colegio Leonístico La Merced • Gestión de calendario, inscritos, métricas y contenidos</p>
+          </div>
+        </div>
+
+        <div class="dash-actions">
+          <button class="btn btn-secondary btn-sm" id="adminThemeToggle" onclick="toggleAdminTheme()" title="Alternar modo oscuro / claro" style="display: inline-flex; align-items: center; gap: 6px; font-weight: 700;">
+            <i data-lucide="moon" id="themeToggleIcon"></i> <span id="themeToggleText">Modo Oscuro</span>
+          </button>
+          <a href="/" target="_blank" class="btn btn-secondary btn-sm" title="Ver sitio público">
+            <i data-lucide="external-link"></i> Ver Inicio
+          </a>
+          <a href="/encuentros" target="_blank" class="btn btn-secondary btn-sm" title="Ver calendario público">
+            <i data-lucide="calendar"></i> Ver Calendario
+          </a>
+          <button class="btn btn-outline btn-sm" onclick="handleAdminLogout()" style="color: #dc2626; border-color: #fca5a5;">
+            <i data-lucide="log-out"></i> Cerrar Sesión
+          </button>
+        </div>
+      </div>
+
+      <!-- BARRA SUPERIOR DE MÓDULO ACTIVO (BOTÓN ATRÁS) -->
+      <div class="admin-module-navbar" id="adminModuleNavbar" style="display: none;">
+        <button class="btn-back-hub" onclick="returnToAdminHub()">
+          <i data-lucide="arrow-left"></i> Atrás (Menú Principal)
+        </button>
+        <div id="adminActiveModuleTitle" style="font-weight: 800; font-size: 1.05rem; color: #1e3a8a;">
+          Módulo
+        </div>
+      </div>
+
+      <!-- VISTA PRINCIPAL: CUADRÍCULA DE MÓDULOS (HUB) -->
+      <div id="adminHubGrid" class="admin-hub-grid">
+        <!-- 1. Estadísticas & Visitas -->
+        <div class="hub-module-card" onclick="openAdminModule('estadisticas')">
+          <div>
+            <div class="hub-module-icon hub-icon-blue">
+              <i data-lucide="bar-chart-2"></i>
+            </div>
+            <div class="hub-module-info">
+              <h4>Estadísticas & Visitas</h4>
+              <p>Métricas de tráfico en tiempo real, visitantes únicos y desglose de los 6 ciclos escolares.</p>
+            </div>
+          </div>
+          <div class="hub-module-footer">
+            <span class="hub-action-link">Abrir módulo <i data-lucide="arrow-right"></i></span>
+          </div>
+        </div>
+
+        <!-- 2. Calendario Encuentros -->
+        <div class="hub-module-card" onclick="openAdminModule('calendario')">
+          <div>
+            <div class="hub-module-icon hub-icon-purple">
+              <i data-lucide="calendar"></i>
+            </div>
+            <div class="hub-module-info">
+              <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px;">
+                <h4 style="margin-bottom: 0;">Calendario Encuentros</h4>
+                <span class="dash-count-pill" style="background:#8b5cf6;" id="badgeCalendarioCount">8</span>
+              </div>
+              <p>Gestionar fechas, temáticas por grado y subir presentaciones o diapositivas (PDF, PPT, Google Slides).</p>
+            </div>
+          </div>
+          <div class="hub-module-footer">
+            <span class="hub-action-link">Abrir módulo <i data-lucide="arrow-right"></i></span>
+          </div>
+        </div>
+
+        <!-- 3. Gestor de Imágenes -->
+        <div class="hub-module-card" onclick="openAdminModule('imagenes')">
+          <div>
+            <div class="hub-module-icon hub-icon-emerald">
+              <i data-lucide="image"></i>
+            </div>
+            <div class="hub-module-info">
+              <h4>Gestor de Imágenes</h4>
+              <p>Subir desde tu computador o cambiar los enlaces del Logo institucional, Portada y Quiénes Somos.</p>
+            </div>
+          </div>
+          <div class="hub-module-footer">
+            <span class="hub-action-link">Abrir módulo <i data-lucide="arrow-right"></i></span>
+          </div>
+        </div>
+
+        <!-- 4. Orientadoras Escolares -->
+        <div class="hub-module-card" onclick="openAdminModule('psicologas')">
+          <div>
+            <div class="hub-module-icon hub-icon-rose">
+              <i data-lucide="user-check"></i>
+            </div>
+            <div class="hub-module-info">
+              <h4>Orientadoras Escolares</h4>
+              <p>Personalizar nombres, fotos de perfil, descripciones formativas y correos de contacto.</p>
+            </div>
+          </div>
+          <div class="hub-module-footer">
+            <span class="hub-action-link">Abrir módulo <i data-lucide="arrow-right"></i></span>
+          </div>
+        </div>
+
+        <!-- 5. Gestor de Ciclos Escolares -->
+        <div class="hub-module-card" onclick="openAdminModule('ciclos')">
+          <div>
+            <div class="hub-module-icon hub-icon-purple">
+              <i data-lucide="layers"></i>
+            </div>
+            <div class="hub-module-info">
+              <h4>Gestor de Ciclos Escolares</h4>
+              <p>Elige el ciclo escolar, agrega cuadritos con texto e imágenes, y acomódalos para las familias.</p>
+            </div>
+          </div>
+          <div class="hub-module-footer">
+            <span class="hub-action-link">Abrir módulo <i data-lucide="arrow-right"></i></span>
+          </div>
+        </div>
+
+        <!-- 6. Seguridad & Enlace -->
+        <div class="hub-module-card" onclick="openAdminModule('seguridad')">
+          <div>
+            <div class="hub-module-icon hub-icon-amber">
+              <i data-lucide="shield-check"></i>
+            </div>
+            <div class="hub-module-info">
+              <h4>Seguridad & Enlace</h4>
+              <p>Cambiar contraseña maestra de acceso y personalizar la ruta secreta de ingreso /admin.</p>
+            </div>
+          </div>
+          <div class="hub-module-footer">
+            <span class="hub-action-link">Abrir módulo <i data-lucide="arrow-right"></i></span>
+          </div>
+        </div>
+      </div>
+
+      <!-- PANE 1: ESTADÍSTICAS & VISITAS -->
+      <div class="dash-pane" id="pane-estadisticas">
+        
+        <!-- KPI Summary Cards -->
+        <div class="analytics-cards-grid">
+          <div class="stat-kpi-card">
+            <div class="kpi-icon-wrap kpi-blue">👥</div>
+            <div class="kpi-content">
+              <h5>Total Visitas</h5>
+              <div class="kpi-value" id="kpiTotalVisits">0</div>
+              <div class="kpi-sub" id="kpiLastVisit">Cargando...</div>
+            </div>
+          </div>
+
+          <div class="stat-kpi-card">
+            <div class="kpi-icon-wrap kpi-green">🌐</div>
+            <div class="kpi-content">
+              <h5>Sesiones Únicas</h5>
+              <div class="kpi-value" id="kpiUniqueSessions">0</div>
+              <div class="kpi-sub">Visitantes distintos</div>
+            </div>
+          </div>
+
+          <div class="stat-kpi-card">
+            <div class="kpi-icon-wrap kpi-amber">⭐</div>
+            <div class="kpi-content">
+              <h5>Pestaña Más Vista</h5>
+              <div class="kpi-value" style="font-size: 1.25rem;" id="kpiTopTab">Inicio</div>
+              <div class="kpi-sub" id="kpiTopTabPercent">0% del tráfico</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Breakdown Section -->
+        <div class="analytics-panels-grid">
+          
+          <!-- Tab Distribution -->
+          <div class="analytics-chart-box">
+            <h5><i data-lucide="pie-chart"></i> Distribución de Visitas por Pestaña / Sección</h5>
+            
+            <div class="tab-stats-list">
+              <div class="tab-stat-row">
+                <div class="tab-stat-header">
+                  <span>🏠 Inicio / Portada</span>
+                  <span id="statCountInicio">0 visitas (0%)</span>
+                </div>
+                <div class="tab-progress-bar">
+                  <div class="tab-progress-fill fill-blue" id="statFillInicio" style="width: 0%;"></div>
+                </div>
+              </div>
+
+              <div class="tab-stat-row">
+                <div class="tab-stat-header">
+                  <span>👨‍👩‍👧 Encuentros Familiares</span>
+                  <span id="statCountEncuentros">0 visitas (0%)</span>
+                </div>
+                <div class="tab-progress-bar">
+                  <div class="tab-progress-fill fill-teal" id="statFillEncuentros" style="width: 0%;"></div>
+                </div>
+              </div>
+
+              <!-- Estadísticas de Ciclos Escolares (Desplegable) -->
+              <div class="tab-stat-row" style="cursor: pointer; background: #f8fafc; border: 1.5px solid #cbd5e1; border-radius: var(--radius-md); padding: 14px; margin-top: 10px; transition: var(--transition);" onclick="toggleCycleStatsDropdown()">
+                <div class="tab-stat-header" style="margin-bottom: 8px;">
+                  <span style="font-weight: 700; color: #1e3a8a; display: flex; align-items: center; gap: 8px;">
+                    <i data-lucide="layers"></i> 🎓 Ciclos Escolares (Total)
+                    <span id="cycleDropdownHint" style="font-size: 0.72rem; font-weight: 700; background: #dbeafe; color: #1e40af; padding: 2px 8px; border-radius: 999px;">Clic para desplegar ▼</span>
+                  </span>
+                  <span id="statCountCiclos" style="font-weight: 700; color: #1e3a8a;">0 visitas (0%)</span>
+                </div>
+                <div class="tab-progress-bar">
+                  <div class="tab-progress-fill fill-purple" id="statFillCiclos" style="width: 0%; background: #7c3aed;"></div>
+                </div>
+              </div>
+
+              <!-- Desglose por Ciclo (Expandible) -->
+              <div id="cycleStatsDropdown" style="display: none; margin-top: 8px; padding: 16px; background: #ffffff; border: 1px solid #cbd5e1; border-radius: var(--radius-md); box-shadow: var(--shadow-sm);">
+                <div style="font-size: 0.8rem; font-weight: 700; color: #475569; margin-bottom: 14px; text-transform: uppercase; letter-spacing: 0.5px; display: flex; align-items: center; justify-content: space-between;">
+                  <span>Visitas por cada ciclo:</span>
+                  <span style="color: #64748b; font-weight: 600; font-size: 0.75rem;">(6 Ciclos)</span>
+                </div>
+
+                <div style="display: flex; flex-direction: column; gap: 14px;">
+                  <!-- 1. Primera Infancia -->
+                  <div class="cycle-stat-subrow">
+                    <div style="display: flex; justify-content: space-between; align-items: center; font-size: 0.88rem; margin-bottom: 4px;">
+                      <span><span class="dropdown-pill pill-pink" style="font-size: 0.65rem; min-width: 44px;">J y T</span> Primera Infancia</span>
+                      <strong id="statCountCycle_primera_infancia" style="color: #be123c;">0 visitas (0%)</strong>
+                    </div>
+                    <div class="tab-progress-bar" style="height: 6px;">
+                      <div class="tab-progress-fill" id="statFillCycle_primera_infancia" style="width: 0%; background: #e11d48;"></div>
+                    </div>
+                  </div>
+
+                  <!-- 2. Ciclo Infantil -->
+                  <div class="cycle-stat-subrow">
+                    <div style="display: flex; justify-content: space-between; align-items: center; font-size: 0.88rem; margin-bottom: 4px;">
+                      <span><span class="dropdown-pill pill-teal" style="font-size: 0.65rem; min-width: 44px;">1, 2 y 3</span> Ciclo Infantil</span>
+                      <strong id="statCountCycle_infantil" style="color: #0f766e;">0 visitas (0%)</strong>
+                    </div>
+                    <div class="tab-progress-bar" style="height: 6px;">
+                      <div class="tab-progress-fill" id="statFillCycle_infantil" style="width: 0%; background: #0d9488;"></div>
+                    </div>
+                  </div>
+
+                  <!-- 3. Ciclo Básico -->
+                  <div class="cycle-stat-subrow">
+                    <div style="display: flex; justify-content: space-between; align-items: center; font-size: 0.88rem; margin-bottom: 4px;">
+                      <span><span class="dropdown-pill pill-yellow" style="font-size: 0.65rem; min-width: 44px;">4 y 5</span> Ciclo Básico</span>
+                      <strong id="statCountCycle_basico" style="color: #b45309;">0 visitas (0%)</strong>
+                    </div>
+                    <div class="tab-progress-bar" style="height: 6px;">
+                      <div class="tab-progress-fill" id="statFillCycle_basico" style="width: 0%; background: #d97706;"></div>
+                    </div>
+                  </div>
+
+                  <!-- 4. Ciclo Fundamental -->
+                  <div class="cycle-stat-subrow">
+                    <div style="display: flex; justify-content: space-between; align-items: center; font-size: 0.88rem; margin-bottom: 4px;">
+                      <span><span class="dropdown-pill pill-purple" style="font-size: 0.65rem; min-width: 44px;">6 y 7</span> Ciclo Fundamental</span>
+                      <strong id="statCountCycle_fundamental" style="color: #7e22ce;">0 visitas (0%)</strong>
+                    </div>
+                    <div class="tab-progress-bar" style="height: 6px;">
+                      <div class="tab-progress-fill" id="statFillCycle_fundamental" style="width: 0%; background: #9333ea;"></div>
+                    </div>
+                  </div>
+
+                  <!-- 5. Ciclo Exploratorio -->
+                  <div class="cycle-stat-subrow">
+                    <div style="display: flex; justify-content: space-between; align-items: center; font-size: 0.88rem; margin-bottom: 4px;">
+                      <span><span class="dropdown-pill pill-blue" style="font-size: 0.65rem; min-width: 44px;">8 y 9</span> Ciclo Exploratorio</span>
+                      <strong id="statCountCycle_exploratorio" style="color: #1d4ed8;">0 visitas (0%)</strong>
+                    </div>
+                    <div class="tab-progress-bar" style="height: 6px;">
+                      <div class="tab-progress-fill" id="statFillCycle_exploratorio" style="width: 0%; background: #2563eb;"></div>
+                    </div>
+                  </div>
+
+                  <!-- 6. Ciclo Especializado -->
+                  <div class="cycle-stat-subrow">
+                    <div style="display: flex; justify-content: space-between; align-items: center; font-size: 0.88rem; margin-bottom: 4px;">
+                      <span><span class="dropdown-pill pill-green" style="font-size: 0.65rem; min-width: 44px;">10 y 11</span> Ciclo Especializado</span>
+                      <strong id="statCountCycle_especializado" style="color: #15803d;">0 visitas (0%)</strong>
+                    </div>
+                    <div class="tab-progress-bar" style="height: 6px;">
+                      <div class="tab-progress-fill" id="statFillCycle_especializado" style="width: 0%; background: #16a34a;"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Activity Log Table -->
+        <div class="pane-header" style="margin-top: 10px;">
+          <div>
+            <h4>Registro Detallado de Actividad Reciente</h4>
+            <p>Historial cronológico de visitas por sección y acciones de usuarios</p>
+          </div>
+          <div class="dash-actions">
+            <div class="pane-filter">
+              <input type="text" id="filterAnalyticsInput" placeholder="🔍 Buscar por sección o acción..." oninput="renderAnalyticsLogTable()">
+            </div>
+            <button class="btn btn-secondary btn-sm" onclick="exportAnalyticsCsv()">
+              <i data-lucide="download"></i> Descargar Reporte CSV
+            </button>
+            <button class="btn btn-outline btn-sm" onclick="resetAnalyticsStats()" style="color: #dc2626;">
+              <i data-lucide="rotate-ccw"></i> Restablecer Métricas
+            </button>
+          </div>
+        </div>
+
+        <div class="dash-table-wrapper">
+          <table class="dash-table">
+            <thead>
+              <tr>
+                <th>Fecha y Hora</th>
+                <th>Pestaña / Sección</th>
+                <th>Acción Realizada</th>
+                <th>Dispositivo</th>
+              </tr>
+            </thead>
+            <tbody id="tableAnalyticsBody">
+              <!-- Rendered via JS -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- PANE 2: GESTOR DE CALENDARIO DE ENCUENTROS -->
+      <div class="dash-pane" id="pane-calendario">
+        <div class="pane-header">
+          <div>
+            <h4>Gestor del Calendario de Encuentros Familiares (2026-2027)</h4>
+            <p>Programa nuevos talleres, selecciona día/mes, adjunta diapositivas o imágenes y previsualiza en vivo:</p>
+          </div>
+          <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+            <button class="btn btn-outline btn-sm" onclick="resetCalendarToDefault()">
+              <i data-lucide="rotate-ccw"></i> Restablecer Calendario Oficial
+            </button>
+          </div>
+        </div>
+
+        <!-- 2-Column Editor & Live Preview -->
+        <div class="cal-editor-layout" id="calendarFormWrap">
+          
+          <!-- Columna 1: Formulario -->
+          <div class="cal-form-panel">
+            <h5 style="font-size: 1.05rem; font-weight: 800; color: #1e293b; margin-bottom: 16px; display: flex; align-items: center; gap: 8px;">
+              <i data-lucide="edit-3"></i> <span id="calFormHeaderTitle">Crear o Editar Encuentro</span>
+            </h5>
+            
+            <form id="calendarWorkshopForm" onsubmit="handleSaveCalendarWorkshop(event)">
+              <input type="hidden" id="calEditId" value="">
+              
+              <!-- Selectores de Mes y Día -->
+              <div class="form-row">
+                <div class="form-group" style="flex: 1.2;">
+                  <label>1. Mes de Programación *</label>
+                  <select id="calMonthSelect" onchange="handleCalDateAutoGenerate()" required>
+                    <option value="SEPTIEMBRE">SEPTIEMBRE</option>
+                    <option value="OCTUBRE">OCTUBRE</option>
+                    <option value="NOVIEMBRE">NOVIEMBRE</option>
+                    <option value="DICIEMBRE">DICIEMBRE</option>
+                    <option value="ENERO">ENERO</option>
+                    <option value="FEBRERO">FEBRERO</option>
+                    <option value="MARZO">MARZO</option>
+                    <option value="ABRIL">ABRIL</option>
+                    <option value="MAYO">MAYO</option>
+                    <option value="JUNIO">JUNIO</option>
+                  </select>
+                </div>
+
+                <div class="form-group" style="flex: 0.8;">
+                  <label>2. Día del Mes *</label>
+                  <select id="calDayNumberSelect" onchange="handleCalDateAutoGenerate()" required>
+                    <!-- 1 al 31 populated via JS or static -->
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                    <option value="9">9</option>
+                    <option value="10">10</option>
+                    <option value="11">11</option>
+                    <option value="12">12</option>
+                    <option value="13">13</option>
+                    <option value="14">14</option>
+                    <option value="15">15</option>
+                    <option value="16">16</option>
+                    <option value="17">17</option>
+                    <option value="18">18</option>
+                    <option value="19">19</option>
+                    <option value="20">20</option>
+                    <option value="21">21</option>
+                    <option value="22">22</option>
+                    <option value="23">23</option>
+                    <option value="24">24</option>
+                    <option value="25" selected>25</option>
+                    <option value="26">26</option>
+                    <option value="27">27</option>
+                    <option value="28">28</option>
+                    <option value="29">29</option>
+                    <option value="30">30</option>
+                    <option value="31">31</option>
+                  </select>
+                </div>
+              </div>
+
+              <!-- Texto de Fecha Calculado / Editable -->
+              <div class="form-group">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
+                  <label>3. Fecha Final que se Mostrará en la Tarjeta *</label>
+                  <span style="font-size: 0.75rem; color: #64748b;">(Se genera automáticamente)</span>
+                </div>
+                <input type="text" id="calDateInput" placeholder="Ej: 25 DE SEPTIEMBRE" oninput="updateCalLivePreview()" required>
+              </div>
+
+              <!-- Grados Participantes con chips de acceso rápido -->
+              <div class="form-group">
+                <label>4. Grados Participantes *</label>
+                <input type="text" id="calGradesInput" placeholder="Ej: 1°, 2° Y 3°" oninput="updateCalLivePreview()" required>
+                <div class="cal-grade-chips">
+                  <span style="font-size: 0.72rem; color: #64748b; margin-right: 4px; display: inline-flex; align-items: center;">Sugerencias:</span>
+                  <button type="button" class="grade-chip-btn" onclick="selectGradeChip('J° Y T°')">J° Y T°</button>
+                  <button type="button" class="grade-chip-btn" onclick="selectGradeChip('1°, 2° Y 3°')">1°, 2° Y 3°</button>
+                  <button type="button" class="grade-chip-btn" onclick="selectGradeChip('4° Y 5°')">4° Y 5°</button>
+                  <button type="button" class="grade-chip-btn" onclick="selectGradeChip('6° Y 7°')">6° Y 7°</button>
+                  <button type="button" class="grade-chip-btn" onclick="selectGradeChip('8° Y 9°')">8° Y 9°</button>
+                  <button type="button" class="grade-chip-btn" onclick="selectGradeChip('10° Y 11°')">10° Y 11°</button>
+                  <button type="button" class="grade-chip-btn" onclick="selectGradeChip('TODOS LOS GRADOS')">Todos</button>
+                </div>
+              </div>
+
+              <!-- Título del Taller -->
+              <div class="form-group">
+                <label>5. Título / Temática del Taller *</label>
+                <input type="text" id="calTitleInput" placeholder="Ej: ACOMPAÑO A MI HIJO A DESCUBRIR QUIEN ES" oninput="updateCalLivePreview()" required>
+              </div>
+
+              <!-- Descripción -->
+              <div class="form-group">
+                <label>6. Descripción Detallada (Se abre al tocar el taller) *</label>
+                <textarea id="calDescInput" rows="3" placeholder="Explica de qué trata este encuentro para los padres y familias..." oninput="updateCalLivePreview()" required></textarea>
+              </div>
+
+              <!-- Sección de Material Adjunto (Diapositivas o Imágenes) -->
+              <div style="background: #f8fafc; border: 1.5px dashed #cbd5e1; border-radius: var(--radius-md); padding: 18px; margin-bottom: 20px;">
+                <label style="font-weight: 700; color: #1e293b; display: flex; align-items: center; gap: 8px; margin-bottom: 4px; font-size: 0.95rem;">
+                  <i data-lucide="folder-plus"></i> 7. Diapositivas o Imagen del Encuentro (Opcional)
+                </label>
+                <p style="font-size: 0.82rem; color: #64748b; margin-bottom: 12px;">
+                  Puedes adjuntar la presentación de la charla (PDF / Google Slides) o una imagen / infografía del taller:
+                </p>
+
+                <div class="form-row" style="margin-bottom: 10px;">
+                  <div class="form-group" style="flex: 1;">
+                    <label style="font-size: 0.82rem; font-weight: 600;">📁 Opción 1: Subir Archivo desde PC (PDF, PPT, Imagen)</label>
+                    <input type="file" id="calFileInput" accept=".pdf,.ppt,.pptx,.key,.png,.jpg,.jpeg,.webp" onchange="handleSlidesFileUpload(event)">
+                    <div id="calFileUploadStatus" style="font-size: 0.8rem; color: #16a34a; font-weight: 600; margin-top: 4px; display: none;"></div>
+                  </div>
+
+                  <div class="form-group" style="flex: 1;">
+                    <label style="font-size: 0.82rem; font-weight: 600;">🔗 Opción 2: O pegar Enlace (Google Slides, Canva o URL)</label>
+                    <input type="url" id="calSlidesUrlInput" placeholder="https://docs.google.com/presentation/... o URL" oninput="handleSlidesUrlInput()">
+                  </div>
+                </div>
+
+                <!-- Hidden inputs to store attachment state -->
+                <input type="hidden" id="calSlidesUrlHidden" value="">
+                <input type="hidden" id="calSlidesNameHidden" value="">
+
+                <!-- Attachment Preview & Remove -->
+                <div id="calAttachmentPreview" style="display: none; align-items: center; justify-content: space-between; background: #ecfdf5; border: 1px solid #a7f3d0; border-radius: var(--radius-sm); padding: 8px 14px; margin-top: 8px;">
+                  <div style="display: flex; align-items: center; gap: 8px; font-size: 0.85rem; color: #065f46; font-weight: 600;">
+                    <i data-lucide="file-check"></i>
+                    <span>Adjunto: <strong id="calAttachmentName">ninguno</strong></span>
+                  </div>
+                  <button type="button" class="btn-table-action btn-del" onclick="removeAttachedSlides()" style="padding: 3px 10px;" title="Quitar adjunto">
+                    ✕ Quitar
+                  </button>
+                </div>
+              </div>
+
+              <!-- Botones de Acción del Formulario -->
+              <div style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap;">
+                <button type="submit" class="btn btn-primary" id="calFormSubmitBtn">
+                  <i data-lucide="plus-circle"></i> Guardar Encuentro
+                </button>
+                <button type="button" class="btn btn-secondary" id="calCancelEditBtn" onclick="resetCalendarForm()" style="display: none;">
+                  Cancelar Edición
+                </button>
+              </div>
+            </form>
+          </div>
+
+          <!-- Columna 2: Vista Previa en Vivo -->
+          <div class="cal-preview-panel">
+            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px;">
+              <h5 style="font-size: 0.95rem; font-weight: 800; color: #1e3a8a; display: flex; align-items: center; gap: 6px; margin-bottom: 0;">
+                <i data-lucide="eye"></i> Vista Previa en Vivo
+              </h5>
+              <span style="font-size: 0.75rem; background: #dbeafe; color: #1e40af; padding: 2px 8px; border-radius: 999px; font-weight: 700;">Así se verá</span>
+            </div>
+
+            <p style="font-size: 0.8rem; color: #64748b; margin-bottom: 14px;">
+              Los cambios que realices en el formulario se reflejan aquí en tiempo real:
+            </p>
+
+            <!-- Tarjeta Simulada del Encuentro -->
+            <div id="livePreviewWorkshopCard" class="cal-workshop-card card-border-pink" style="cursor: default; margin-bottom: 16px;">
+              <div class="cal-card-date" id="livePrevDate">25 DE SEPTIEMBRE</div>
+              <div class="cal-card-grades" id="livePrevGrades">J° Y T°</div>
+              <div class="cal-card-title" id="livePrevTitle">"ACOMPAÑO A MI HIJO A DESCUBRIR QUIEN ES"</div>
+              <div id="livePrevSlidesBadge" class="cal-card-slides-badge" style="display: none;">
+                <i data-lucide="presentation"></i> Diapositivas / Imagen
+              </div>
+              <div class="cal-card-click-hint">
+                <i data-lucide="info"></i> Clic para ver descripción
+              </div>
+            </div>
+
+            <!-- Miniatura de Vista Previa de Imagen o Presentación -->
+            <div id="livePrevAttachmentBox" style="display: none; background: white; border: 1px solid #cbd5e1; border-radius: var(--radius-md); padding: 12px; text-align: center;">
+              <div style="font-size: 0.78rem; font-weight: 700; color: #475569; margin-bottom: 8px;">
+                🖼️ Material adjunto al encuentro:
+              </div>
+              <div id="livePrevAttachmentMedia">
+                <!-- Injected via JS -->
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+
+        <!-- Lista de Encuentros Activos con Filtro -->
+        <div style="margin-top: 30px;">
+          <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; margin-bottom: 14px;">
+            <h5 style="font-size: 1.1rem; font-weight: 800; color: #1e293b; margin-bottom: 0;">
+              📅 Encuentros Activos en el Tablero
+            </h5>
+            <button class="btn btn-primary btn-sm" onclick="startNewWorkshopCreation()">
+              <i data-lucide="plus"></i> ➕ Nuevo Encuentro
+            </button>
+          </div>
+
+          <!-- Filtro por Mes -->
+          <div class="cal-filter-bar" id="calendarMonthFilterBar">
+            <button class="cal-filter-btn active" onclick="filterAdminCalendar('TODOS', this)">Todos</button>
+            <button class="cal-filter-btn" onclick="filterAdminCalendar('SEPTIEMBRE', this)">Septiembre</button>
+            <button class="cal-filter-btn" onclick="filterAdminCalendar('OCTUBRE', this)">Octubre</button>
+            <button class="cal-filter-btn" onclick="filterAdminCalendar('NOVIEMBRE', this)">Noviembre</button>
+            <button class="cal-filter-btn" onclick="filterAdminCalendar('DICIEMBRE', this)">Diciembre</button>
+            <button class="cal-filter-btn" onclick="filterAdminCalendar('ENERO', this)">Enero</button>
+            <button class="cal-filter-btn" onclick="filterAdminCalendar('FEBRERO', this)">Febrero</button>
+          </div>
+
+          <div id="adminCalendarList">
+            <!-- Rendered via JS -->
+          </div>
+        </div>
+
+      </div>
+
+      <!-- PANE 3: GESTOR DE IMÁGENES -->
+      <div class="dash-pane" id="pane-imagenes">
+        <div class="pane-header">
+          <div>
+            <h4>Gestor de Imágenes de la Página</h4>
+            <p>Puedes subir archivos directamente desde tu PC o ingresar un enlace de imagen:</p>
+          </div>
+        </div>
+
+        <div class="media-manager-grid">
+          
+          <!-- Logo -->
+          <div class="media-card-edit">
+            <div class="media-card-title">
+              <h5>1. Logo Institucional</h5>
+              <span class="card-tag">Encabezado y Pie</span>
+            </div>
+            <div class="media-preview-box is-logo">
+              <img id="previewImgLogo" src="" alt="Logo">
+            </div>
+            <div class="media-upload-actions">
+              <div class="file-input-wrapper">
+                <button type="button" class="btn-upload-pc"><i data-lucide="upload"></i> Subir imagen desde mi PC</button>
+                <input type="file" accept="image/*" onchange="handleImageFileUpload('logo', this)">
+              </div>
+              <div class="url-input-row">
+                <input type="text" id="urlInputLogo" placeholder="O pega la URL de la imagen..." onchange="handleImageUrlChange('logo', this.value)">
+              </div>
+              <a class="btn-reset-img" onclick="resetImageToDefault('logo')">Restablecer imagen original</a>
+            </div>
+          </div>
+
+          <!-- Hero Banner -->
+          <div class="media-card-edit">
+            <div class="media-card-title">
+              <h5>2. Banner Principal (Hero)</h5>
+              <span class="card-tag">Fondo Portada</span>
+            </div>
+            <div class="media-preview-box">
+              <img id="previewImgHero" src="" alt="Banner">
+            </div>
+            <div class="media-upload-actions">
+              <div class="file-input-wrapper">
+                <button type="button" class="btn-upload-pc"><i data-lucide="upload"></i> Subir imagen desde mi PC</button>
+                <input type="file" accept="image/*" onchange="handleImageFileUpload('heroBg', this)">
+              </div>
+              <div class="url-input-row">
+                <input type="text" id="urlInputHero" placeholder="O pega la URL de la imagen..." onchange="handleImageUrlChange('heroBg', this.value)">
+              </div>
+              <a class="btn-reset-img" onclick="resetImageToDefault('heroBg')">Restablecer imagen original</a>
+            </div>
+          </div>
+
+          <!-- Bienvenidos -->
+          <div class="media-card-edit">
+            <div class="media-card-title">
+              <h5>3. Imagen "Bienvenidos"</h5>
+              <span class="card-tag">Sección Filosofía</span>
+            </div>
+            <div class="media-preview-box">
+              <img id="previewImgWelcome" src="" alt="Bienvenidos">
+            </div>
+            <div class="media-upload-actions">
+              <div class="file-input-wrapper">
+                <button type="button" class="btn-upload-pc"><i data-lucide="upload"></i> Subir imagen desde mi PC</button>
+                <input type="file" accept="image/*" onchange="handleImageFileUpload('welcomeImg', this)">
+              </div>
+              <div class="url-input-row">
+                <input type="text" id="urlInputWelcome" placeholder="O pega la URL de la imagen..." onchange="handleImageUrlChange('welcomeImg', this.value)">
+              </div>
+              <a class="btn-reset-img" onclick="resetImageToDefault('welcomeImg')">Restablecer imagen original</a>
+            </div>
+          </div>
+
+          <!-- Quiénes somos -->
+          <div class="media-card-edit">
+            <div class="media-card-title">
+              <h5>4. Imagen "¿Quiénes Somos?"</h5>
+              <span class="card-tag">Sección Equipo</span>
+            </div>
+            <div class="media-preview-box">
+              <img id="previewImgAbout" src="" alt="Quiénes Somos">
+            </div>
+            <div class="media-upload-actions">
+              <div class="file-input-wrapper">
+                <button type="button" class="btn-upload-pc"><i data-lucide="upload"></i> Subir imagen desde mi PC</button>
+                <input type="file" accept="image/*" onchange="handleImageFileUpload('aboutImg', this)">
+              </div>
+              <div class="url-input-row">
+                <input type="text" id="urlInputAbout" placeholder="O pega la URL de la imagen..." onchange="handleImageUrlChange('aboutImg', this.value)">
+              </div>
+              <a class="btn-reset-img" onclick="resetImageToDefault('aboutImg')">Restablecer imagen original</a>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- PANE 6: CONFIGURAR PSICÓLOGAS -->
+      <div class="dash-pane" id="pane-psicologas">
+        <div class="pane-header">
+          <div>
+            <h4>Personalizar Perfiles de las Orientadoras</h4>
+            <p>Edita nombres, descripciones, correos institucionales y fotos de perfil:</p>
+          </div>
+        </div>
+
+        <div class="custom-profiles-grid">
+          
+          <!-- Perfil 1 -->
+          <div class="custom-card-edit">
+            <div class="custom-card-header">
+              <div class="avatar-preview" id="previewAvatar1">👩‍🏫</div>
+              <div>
+                <h5 style="font-size: 1.1rem; color: #1e293b;" id="previewName1">Nancy Hurtado Viveros</h5>
+                <span class="team-badge" id="previewBadge1">Grupos A</span>
+              </div>
+            </div>
+
+            <form onsubmit="savePsychologistProfile(event, 0)">
+              <div class="form-group">
+                <label>Foto de Perfil (Subir desde PC):</label>
+                <div class="file-input-wrapper" style="margin-bottom: 8px;">
+                  <button type="button" class="btn-upload-pc"><i data-lucide="upload"></i> Cambiar foto desde PC</button>
+                  <input type="file" accept="image/*" onchange="handlePsychologistPhotoUpload(0, this)">
+                </div>
+                <input type="text" placeholder="O escribe un Emoji / URL de foto" onchange="handlePsychologistPhotoUrl(0, this.value)">
+                <a class="btn-reset-img" onclick="resetPsychologistPhoto(0)">Restablecer icono por defecto</a>
+              </div>
+
+              <div class="form-row">
+                <div class="form-group">
+                  <label>Nombre y Título:</label>
+                  <input type="text" id="editName0" required>
+                </div>
+                <div class="form-group">
+                  <label>Insignia / Grupos:</label>
+                  <input type="text" id="editBadge0" required>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label>Correo Electrónico Institucional:</label>
+                <input type="email" id="editEmail0" required>
+              </div>
+
+              <div class="form-group">
+                <label>Descripción / Enfoque:</label>
+                <textarea id="editDesc0" rows="3" required></textarea>
+              </div>
+
+              <button type="submit" class="btn btn-primary btn-block">
+                <i data-lucide="save"></i> Guardar Cambios en Perfil
+              </button>
+            </form>
+          </div>
+
+          <!-- Perfil 2 -->
+          <div class="custom-card-edit">
+            <div class="custom-card-header">
+              <div class="avatar-preview preview-blue" id="previewAvatar2">👩‍⚕️</div>
+              <div>
+                <h5 style="font-size: 1.1rem; color: #1e293b;" id="previewName2">María del Mar Echeverry</h5>
+                <span class="team-badge badge-blue" id="previewBadge2">Grupos B</span>
+              </div>
+            </div>
+
+            <form onsubmit="savePsychologistProfile(event, 1)">
+              <div class="form-group">
+                <label>Foto de Perfil (Subir desde PC):</label>
+                <div class="file-input-wrapper" style="margin-bottom: 8px;">
+                  <button type="button" class="btn-upload-pc"><i data-lucide="upload"></i> Cambiar foto desde PC</button>
+                  <input type="file" accept="image/*" onchange="handlePsychologistPhotoUpload(1, this)">
+                </div>
+                <input type="text" placeholder="O escribe un Emoji / URL de foto" onchange="handlePsychologistPhotoUrl(1, this.value)">
+                <a class="btn-reset-img" onclick="resetPsychologistPhoto(1)">Restablecer icono por defecto</a>
+              </div>
+
+              <div class="form-row">
+                <div class="form-group">
+                  <label>Nombre y Título:</label>
+                  <input type="text" id="editName1" required>
+                </div>
+                <div class="form-group">
+                  <label>Insignia / Grupos:</label>
+                  <input type="text" id="editBadge1" required>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label>Correo Electrónico Institucional:</label>
+                <input type="email" id="editEmail1" required>
+              </div>
+
+              <div class="form-group">
+                <label>Descripción / Enfoque:</label>
+                <textarea id="editDesc1" rows="3" required></textarea>
+              </div>
+
+              <button type="submit" class="btn btn-primary btn-block">
+                <i data-lucide="save"></i> Guardar Cambios en Perfil
+              </button>
+            </form>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- PANE 5: GESTOR DE CICLOS ESCOLARES (CUADRITOS DE CONTENIDO) -->
+      <!-- PANE 5: GESTOR DE CICLOS ESCOLARES (CONSTRUCTOR VISUAL) -->
+      <div class="dash-pane" id="pane-ciclos">
+        <div class="pane-header">
+          <div>
+            <h4>🎨 Constructor Visual de Ciclos Escolares (CMS / Blog)</h4>
+            <p>Diseña y personaliza el contenido de cada ciclo con bloques modulares, artículos, consejos, acordeones, imágenes y más:</p>
+          </div>
+          <div style="display: flex; gap: 8px;">
+            <button type="button" class="btn btn-primary btn-sm" onclick="openBlockTypePickerModal()">
+              <i data-lucide="plus-circle"></i> ➕ Agregar Bloque
+            </button>
+            <button type="button" class="btn btn-outline btn-sm" onclick="openActiveCyclePublicPage()">
+              <i data-lucide="external-link"></i> Ver Página Pública
+            </button>
+          </div>
+        </div>
+
+        <!-- Barra de Selección de Ciclo Escolar -->
+        <div style="margin-bottom: 22px;">
+          <label style="font-size: 0.88rem; font-weight: 800; color: #1e293b; display: block; margin-bottom: 8px;">
+            1. Elige el Ciclo Escolar que deseas editar:
+          </label>
+          <div class="cycle-select-bar" id="adminCycleSelectBar">
+            <button type="button" class="cycle-tab-btn active" onclick="selectAdminCycle('primera_infancia', this)">
+              <span>🌸</span> Primera Infancia <small>(J° y T°)</small>
+            </button>
+            <button type="button" class="cycle-tab-btn" onclick="selectAdminCycle('infantil', this)">
+              <span>🌱</span> Ciclo Infantil <small>(1°, 2° y 3°)</small>
+            </button>
+            <button type="button" class="cycle-tab-btn" onclick="selectAdminCycle('basico', this)">
+              <span>📘</span> Ciclo Básico <small>(4° y 5°)</small>
+            </button>
+            <button type="button" class="cycle-tab-btn" onclick="selectAdminCycle('fundamental', this)">
+              <span>🔮</span> Ciclo Fundamental <small>(6° y 7°)</small>
+            </button>
+            <button type="button" class="cycle-tab-btn" onclick="selectAdminCycle('exploratorio', this)">
+              <span>🧭</span> Ciclo Exploratorio <small>(8° y 9°)</small>
+            </button>
+            <button type="button" class="cycle-tab-btn" onclick="selectAdminCycle('especializado', this)">
+              <span>🎓</span> Ciclo Especializado <small>(10° y 11°)</small>
+            </button>
+          </div>
+        </div>
+
+        <!-- Studio de Edición Visual & Vista Previa en Vivo -->
+        <div class="cycle-studio-wrap" id="cycleBlockFormWrap">
+          
+          <!-- Columna 1: Formulario Studio del Bloque -->
+          <div class="cycle-studio-form-card">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; flex-wrap: wrap; gap: 10px; padding-bottom: 14px; border-bottom: 1.5px solid #f1f5f9;">
+              <div style="display: flex; align-items: center; gap: 10px;">
+                <div style="width: 38px; height: 38px; border-radius: 10px; background: #ede9fe; color: #7c3aed; display: flex; align-items: center; justify-content: center; font-size: 1.3rem;">
+                  ✨
+                </div>
+                <div>
+                  <h5 style="font-size: 1.15rem; font-weight: 800; color: #0f172a; margin-bottom: 2px;" id="cycleBlockFormHeader">
+                    Constructor Visual de Bloque
+                  </h5>
+                  <span style="font-size: 0.8rem; color: #64748b;">Configura los datos del bloque y mira la vista previa en vivo</span>
+                </div>
+              </div>
+
+              <div style="display: flex; align-items: center; gap: 8px;">
+                <span id="activeBlockTypeBadge" style="background: #ede9fe; color: #7c3aed; padding: 6px 14px; border-radius: var(--radius-full); font-size: 0.82rem; font-weight: 800; border: 1px solid #ddd6fe;">
+                  📰 Banner Principal
+                </span>
+                <button type="button" class="btn btn-outline btn-sm" onclick="openBlockTypePickerModal()" style="padding: 6px 12px; font-size: 0.8rem; font-weight: 700;">
+                  🔄 Cambiar Formato
+                </button>
+              </div>
+            </div>
+
+            <form id="cycleBlockForm" onsubmit="handleSaveCycleBlock(event)">
+              <input type="hidden" id="cycleBlockEditId" value="">
+              <input type="hidden" id="cycleBlockType" value="hero_banner">
+              <input type="hidden" id="cycleBlockSize" value="full">
+              <input type="hidden" id="cycleBlockTitleAlign" value="left">
+              <input type="hidden" id="cycleCalloutEmoji" value="💡">
+              <input type="hidden" id="cycleCalloutColor" value="purple">
+
+              <!-- Sección 1: Formato Grande Horizontal & Alineación del Título -->
+              <div class="form-row" style="margin-bottom: 18px;">
+                <div class="form-group" style="flex: 1; margin-bottom: 0;">
+                  <label style="font-size: 0.86rem; font-weight: 800; color: #1e293b; display: block; margin-bottom: 6px;">
+                    📐 Formato del Bloque:
+                  </label>
+                  <div style="background: #f5f3ff; border: 2px solid #7c3aed; border-radius: var(--radius-md); padding: 10px 16px; display: flex; align-items: center; gap: 8px; color: #6d28d9; font-weight: 800; font-size: 0.88rem;">
+                    <span style="font-size: 1.1rem;">🟦</span> Grande Horizontal (100% Ancho)
+                  </div>
+                </div>
+
+                <div class="form-group" style="flex: 1; margin-bottom: 0;">
+                  <label style="font-size: 0.86rem; font-weight: 800; color: #1e293b; display: block; margin-bottom: 6px;">
+                    🎯 Alineación del Encabezado:
+                  </label>
+                  <div class="title-align-selector-group" id="titleAlignSelectorGroup" style="margin-top: 0; margin-bottom: 0;">
+                    <button type="button" class="align-choice-btn active" id="alignBtn-left" onclick="setCycleBlockTitleAlign('left')">
+                      ⬅️ Izquierda
+                    </button>
+                    <button type="button" class="align-choice-btn" id="alignBtn-center" onclick="setCycleBlockTitleAlign('center')">
+                      ⏺️ Centro
+                    </button>
+                    <button type="button" class="align-choice-btn" id="alignBtn-right" onclick="setCycleBlockTitleAlign('right')">
+                      ➡️ Derecha
+                    </button>
+                  </div>
+                </div>
+              </div>
+              
+              <!-- Sección 2: Título y Subtítulo -->
+              <div class="form-group">
+                <label style="font-weight: 700; color: #1e293b;">Título Principal del Bloque *</label>
+                <input type="text" id="cycleBlockTitle" placeholder="Ej: Desarrollo Socioemocional / Hábitos de Estudio" oninput="updateCycleBlockLivePreview()" required style="font-size: 1rem; font-weight: 600; padding: 12px 14px;">
+              </div>
+
+              <div class="form-row">
+                <div class="form-group" style="flex: 1;">
+                  <label>Subtítulo o Categoría (Opcional)</label>
+                  <input type="text" id="cycleBlockSubtitle" placeholder="Ej: Pautas para Familias / Actividad del Mes" oninput="updateCycleBlockLivePreview()">
+                </div>
+                <div class="form-group" style="flex: 1;">
+                  <label>Insignia / Etiqueta Superior</label>
+                  <input type="text" id="cycleBlockBadge" placeholder="Ej: Recomendado / Importante / Familias" oninput="updateCycleBlockLivePreview()">
+                </div>
+              </div>
+
+              <!-- Sección 3: Contenido / Texto Principal -->
+              <div class="form-group">
+                <label style="font-weight: 700; color: #1e293b;">Texto Principal / Redacción Completa *</label>
+                <textarea id="cycleBlockText" rows="5" placeholder="Escribe aquí las pautas, explicaciones, artículos, notas formativas o información detallada..." oninput="updateCycleBlockLivePreview()" required style="font-size: 0.95rem; line-height: 1.6;"></textarea>
+              </div>
+
+              <!-- GRUPO DINÁMICO 1: Botón de Enlace (Para Hero y Split) -->
+              <div id="groupBlockButton" style="background: #f8fafc; border: 1.5px solid #e2e8f0; border-radius: var(--radius-lg); padding: 18px; margin-bottom: 20px;">
+                <label style="font-weight: 800; color: #1e293b; font-size: 0.9rem; display: flex; align-items: center; gap: 8px; margin-bottom: 10px;">
+                  <i data-lucide="mouse-pointer-click"></i> Botón de Enlace / Acción (Opcional)
+                </label>
+                <div class="form-row">
+                  <div class="form-group" style="flex: 1; margin-bottom: 0;">
+                    <label style="font-size: 0.82rem;">Texto del Botón</label>
+                    <input type="text" id="cycleBlockBtnText" placeholder="Ej: Ver Talleres / Descargar Guía" oninput="updateCycleBlockLivePreview()">
+                  </div>
+                  <div class="form-group" style="flex: 1; margin-bottom: 0;">
+                    <label style="font-size: 0.82rem;">Enlace / URL de Destino</label>
+                    <input type="text" id="cycleBlockBtnUrl" placeholder="Ej: /encuentros o https://..." oninput="updateCycleBlockLivePreview()">
+                  </div>
+                </div>
+              </div>
+
+              <!-- GRUPO DINÁMICO 2: Personalización de Consejo / Tip (Callout) -->
+              <div id="groupBlockCallout" style="display: none; background: #faf5ff; border: 1.5px solid #d8b4fe; border-radius: var(--radius-lg); padding: 20px; margin-bottom: 20px;">
+                <label style="font-weight: 800; color: #6b21a8; font-size: 0.95rem; margin-bottom: 12px; display: block;">
+                  💡 Personalización de la Caja de Consejo:
+                </label>
+                
+                <div style="margin-bottom: 14px;">
+                  <label style="font-size: 0.82rem; font-weight: 700; color: #475569; display: block; margin-bottom: 8px;">1. Elige el Icono con 1 Clic:</label>
+                  <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+                    <button type="button" class="btn btn-outline btn-sm callout-emoji-btn active" data-emoji="💡" onclick="setCalloutIcon('💡')">💡 Bombillo</button>
+                    <button type="button" class="btn btn-outline btn-sm callout-emoji-btn" data-emoji="💖" onclick="setCalloutIcon('💖')">💖 Afecto</button>
+                    <button type="button" class="btn btn-outline btn-sm callout-emoji-btn" data-emoji="🤝" onclick="setCalloutIcon('🤝')">🤝 Paz</button>
+                    <button type="button" class="btn btn-outline btn-sm callout-emoji-btn" data-emoji="📚" onclick="setCalloutIcon('📚')">📚 Estudio</button>
+                    <button type="button" class="btn btn-outline btn-sm callout-emoji-btn" data-emoji="🌟" onclick="setCalloutIcon('🌟')">🌟 Éxito</button>
+                    <button type="button" class="btn btn-outline btn-sm callout-emoji-btn" data-emoji="🛡️" onclick="setCalloutIcon('🛡️')">🛡️ Cuidado</button>
+                    <button type="button" class="btn btn-outline btn-sm callout-emoji-btn" data-emoji="⏰" onclick="setCalloutIcon('⏰')">⏰ Rutina</button>
+                    <button type="button" class="btn btn-outline btn-sm callout-emoji-btn" data-emoji="🎯" onclick="setCalloutIcon('🎯')">🎯 Metas</button>
+                  </div>
+                </div>
+
+                <div>
+                  <label style="font-size: 0.82rem; font-weight: 700; color: #475569; display: block; margin-bottom: 8px;">2. Elige el Color de Acento:</label>
+                  <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+                    <button type="button" class="btn btn-outline btn-sm callout-color-btn active" data-color="purple" onclick="setCalloutColor('purple')">🟣 Morado</button>
+                    <button type="button" class="btn btn-outline btn-sm callout-color-btn" data-color="pink" onclick="setCalloutColor('pink')">🌸 Rosa</button>
+                    <button type="button" class="btn btn-outline btn-sm callout-color-btn" data-color="teal" onclick="setCalloutColor('teal')">🌱 Teal</button>
+                    <button type="button" class="btn btn-outline btn-sm callout-color-btn" data-color="yellow" onclick="setCalloutColor('yellow')">🟡 Amarillo</button>
+                    <button type="button" class="btn btn-outline btn-sm callout-color-btn" data-color="blue" onclick="setCalloutColor('blue')">🔵 Azul</button>
+                    <button type="button" class="btn btn-outline btn-sm callout-color-btn" data-color="green" onclick="setCalloutColor('green')">🟢 Verde</button>
+                  </div>
+                </div>
+              </div>
+
+              <!-- GRUPO DINÁMICO 3: Cuadrícula Interactiva de Tarjetas / Pautas -->
+              <div id="groupBlockSubcards" style="display: none; background: #f0fdf4; border: 1.5px solid #bbf7d0; border-radius: var(--radius-lg); padding: 20px; margin-bottom: 20px;">
+                <div style="margin-bottom: 12px;">
+                  <label style="font-weight: 800; color: #166534; font-size: 0.95rem; margin-bottom: 2px; display: block;">
+                    🌟 Tarjetas de Pautas y Recomendaciones:
+                  </label>
+                  <span style="font-size: 0.8rem; color: #475569;">Crea tarjetas individuales con su propio icono, título y descripción</span>
+                </div>
+
+                <div id="builderCardsListContainer">
+                  <!-- Rendered via JS -->
+                </div>
+
+                <button type="button" class="btn-add-item-large" onclick="addCardItemToBuilder()" style="color: #166534; border-color: #86efac;">
+                  <i data-lucide="plus-circle"></i> ➕ Agregar Otra Tarjeta de Pauta
+                </button>
+              </div>
+
+              <!-- GRUPO DINÁMICO 4: Recursos Descargables Interactivos -->
+              <div id="groupBlockResources" style="display: none; background: #fefce8; border: 1.5px solid #fef08a; border-radius: var(--radius-lg); padding: 20px; margin-bottom: 20px;">
+                <div style="margin-bottom: 12px;">
+                  <label style="font-weight: 800; color: #854d0e; font-size: 0.95rem; margin-bottom: 2px; display: block;">
+                    📥 Documentos y Guías Descargables (PDF):
+                  </label>
+                  <span style="font-size: 0.8rem; color: #475569;">Archivos y materiales que los padres pueden descargar con 1 clic</span>
+                </div>
+
+                <div id="builderResourcesListContainer">
+                  <!-- Rendered via JS -->
+                </div>
+
+                <button type="button" class="btn-add-item-large" onclick="addResourceItemToBuilder()" style="color: #854d0e; border-color: #fde047;">
+                  <i data-lucide="plus-circle"></i> ➕ Agregar Otro Documento / Guía
+                </button>
+              </div>
+
+              <!-- GRUPO DINÁMICO 5: Galería de Fotos (Mosaico de Imágenes) -->
+              <div id="groupBlockGallery" style="display: none; background: #fdf4ff; border: 1.5px solid #f0abfc; border-radius: var(--radius-lg); padding: 20px; margin-bottom: 20px;">
+                <div style="margin-bottom: 12px;">
+                  <label style="font-weight: 800; color: #86198f; font-size: 0.95rem; margin-bottom: 2px; display: block;">
+                    🎞️ Gestor Visual de la Galería de Fotos:
+                  </label>
+                  <span style="font-size: 0.8rem; color: #475569;">Sube múltiples fotos desde tu computador o añade enlaces web</span>
+                </div>
+
+                <div style="display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 10px;">
+                  <input type="file" id="cycleGalleryFileInput" multiple accept="image/*" style="display: none;" onchange="handleGalleryMultipleUpload(event)">
+                  
+                  <button type="button" class="btn btn-primary" onclick="document.getElementById('cycleGalleryFileInput').click()" style="background: #9333ea; border-color: #9333ea; padding: 10px 18px; font-weight: 800; font-size: 0.88rem; display: flex; align-items: center; gap: 8px;">
+                    <i data-lucide="upload"></i> 📁 Subir Fotos desde tu Computador
+                  </button>
+                </div>
+
+                <div style="display: flex; gap: 8px; margin-top: 10px; margin-bottom: 14px;">
+                  <input type="url" id="cycleGalleryUrlInput" placeholder="O pega un enlace web directo de imagen (https://...)" style="flex: 1; font-size: 0.88rem;">
+                  <button type="button" class="btn btn-secondary" onclick="addGalleryPhotoFromUrlInput()" style="font-weight: 700; white-space: nowrap; padding: 8px 14px;">
+                    ➕ Agregar Enlace
+                  </button>
+                </div>
+
+                <div class="gallery-thumbnails-manager" id="builderGalleryGridContainer">
+                  <!-- Rendered via JS -->
+                </div>
+              </div>
+
+              <!-- SECCIÓN 4: IMAGEN O FOTOGRAFÍA INDIVIDUAL (Para Hero, Blog) -->
+              <div id="groupBlockImage" style="background: #f8fafc; border: 1.5px dashed #cbd5e1; border-radius: var(--radius-lg); padding: 20px; margin-bottom: 24px;">
+                <label style="font-weight: 800; color: #1e293b; display: flex; align-items: center; gap: 8px; margin-bottom: 4px; font-size: 0.95rem;">
+                  <i data-lucide="image"></i> Imagen o Foto del Bloque (Opcional)
+                </label>
+                <p style="font-size: 0.82rem; color: #64748b; margin-bottom: 14px;">
+                  Sube una foto desde tu computador o pega un enlace de imagen:
+                </p>
+
+                <div class="form-row" style="margin-bottom: 12px;">
+                  <div class="form-group" style="flex: 1; margin-bottom: 0;">
+                    <label style="font-size: 0.82rem; font-weight: 700;">📁 Subir Foto desde PC</label>
+                    <input type="file" id="cycleBlockFileInput" accept="image/*" onchange="handleCycleBlockPhotoUpload(event)">
+                  </div>
+                  <div class="form-group" style="flex: 1; margin-bottom: 0;">
+                    <label style="font-size: 0.82rem; font-weight: 700;">🔗 O pegar Enlace Web (URL)</label>
+                    <input type="url" id="cycleBlockImageUrlInput" placeholder="https://..." oninput="handleCycleBlockUrlInput()">
+                  </div>
+                </div>
+
+                <input type="hidden" id="cycleBlockImageUrlHidden" value="">
+
+                <!-- Selector de Posición / Acomodo de Imagen -->
+                <div class="form-group" style="margin-top: 14px; margin-bottom: 0;">
+                  <label style="font-size: 0.84rem; font-weight: 700; color: #1e293b;">
+                    📐 Acomodo / Posición de la Imagen en la Tarjeta:
+                  </label>
+                  <select id="cycleBlockImagePos" onchange="updateCycleBlockLivePreview()" style="font-weight: 600;">
+                    <option value="left">⬅️ A la izquierda del texto (Horizontal Elegante)</option>
+                    <option value="right">➡️ A la derecha del texto (Horizontal Elegante)</option>
+                    <option value="banner">🖼️ Banner panorámico (Arriba ancho completo)</option>
+                    <option value="top">⬆️ Arriba del texto (Estándar)</option>
+                  </select>
+                </div>
+
+                <!-- Preview de Imagen Adjunta -->
+                <div id="cycleBlockImagePreviewBox" style="display: none; align-items: center; justify-content: space-between; background: #ecfdf5; border: 1.5px solid #a7f3d0; border-radius: var(--radius-md); padding: 10px 16px; margin-top: 12px;">
+                  <div style="display: flex; align-items: center; gap: 8px; font-size: 0.88rem; color: #065f46; font-weight: 700;">
+                    <i data-lucide="image-check"></i>
+                    <span id="cycleBlockImagePreviewText">Imagen lista</span>
+                  </div>
+                  <button type="button" class="btn-table-action btn-del" onclick="removeCycleBlockImage()" style="padding: 4px 12px; font-weight: 700;">
+                    ✕ Quitar Imagen
+                  </button>
+                </div>
+              </div>
+
+              <!-- Botones de Acción -->
+              <div style="display: flex; gap: 12px; align-items: center; flex-wrap: wrap;">
+                <button type="submit" class="btn btn-primary" id="cycleBlockSubmitBtn" style="padding: 12px 28px; font-size: 1rem; font-weight: 800;">
+                  <i data-lucide="plus-circle"></i> 💾 Guardar / Agregar Bloque
+                </button>
+                <button type="button" class="btn btn-secondary" id="cycleBlockCancelBtn" onclick="resetCycleBlockForm()" style="display: none; padding: 12px 20px; font-weight: 700;">
+                  Cancelar Edición
+                </button>
+              </div>
+            </form>
+          </div>
+
+          <!-- Columna 2: Simulador Visual en Vivo -->
+          <div class="cycle-studio-preview-card">
+            
+            <div class="studio-preview-browser-bar">
+              <div class="studio-browser-dots">
+                <span class="studio-dot dot-red"></span>
+                <span class="studio-dot dot-yellow"></span>
+                <span class="studio-dot dot-green"></span>
+              </div>
+              <div class="studio-browser-url">
+                🌐 Vista Previa en Vivo • Página del Ciclo
+              </div>
+              <span id="liveCycleBlockSizeBadge" style="font-size: 0.74rem; background: #ede9fe; color: #7c3aed; padding: 3px 10px; border-radius: 999px; font-weight: 800;">
+                100% Horizontal
+              </span>
+            </div>
+
+            <p style="font-size: 0.82rem; color: #64748b; margin-bottom: 16px; line-height: 1.4;">
+              Así se verá este bloque exactamente para las familias y estudiantes en la web:
+            </p>
+
+            <!-- Contenedor de Vista Previa Dinámica Responsiva -->
+            <div id="liveCycleBlockCardWrap">
+              <!-- Rendered via JS -->
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Lista de Bloques Activos en el Ciclo Seleccionado -->
+        <div style="margin-top: 36px;">
+          <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; margin-bottom: 14px;">
+            <div>
+              <h5 style="font-size: 1.2rem; font-weight: 800; color: #1e293b; margin-bottom: 4px;">
+                📑 Bloques y Artículos en: <span id="adminCycleActiveName" style="color: #7c3aed;">Primera Infancia</span>
+              </h5>
+              <div style="display: inline-flex; align-items: center; gap: 6px; background: #ede9fe; color: #6d28d9; padding: 4px 12px; border-radius: var(--radius-sm); font-size: 0.82rem; font-weight: 700;">
+                <i data-lucide="move"></i> 💡 Tip didáctico: Puedes arrastrar ⠿ cualquier bloque con el ratón o usar ⬆️ ⬇️ para ordenar
+              </div>
+            </div>
+            <button type="button" class="btn btn-primary btn-sm" onclick="startNewCycleBlockCreation()">
+              <i data-lucide="plus"></i> ➕ Crear / Agregar Bloque
+            </button>
+          </div>
+
+          <div id="adminCycleBlocksList" class="cycle-blocks-grid">
+            <!-- Rendered via JS -->
+          </div>
+        </div>
+
+      </div>
+
+      <!-- PANE 6: SEGURIDAD & ENLACE SECRETO -->
+      <div class="dash-pane" id="pane-seguridad">
+        <div class="pane-header">
+          <div>
+            <h4>Seguridad y Enlace Secreto de Acceso</h4>
+            <p>Gestiona tu clave de administrador y personaliza la ruta de acceso:</p>
+          </div>
+        </div>
+
+        <div class="security-card-box">
+          <h5 style="font-size: 1rem; color: #1e293b; margin-bottom: 10px;">🔗 Enlace Secreto de Acceso Actual:</h5>
+          <p style="font-size: 0.85rem; color: #64748b;">Guarda este enlace en tus marcadores para ingresar al panel sin botones públicos en la página:</p>
+          
+          <div class="secret-url-display">
+            <code id="secretUrlCode">http://localhost:3000/admin451200</code>
+            <button class="btn btn-secondary btn-sm" onclick="copySecretAdminUrl()">
+              <i data-lucide="copy"></i> Copiar Enlace
+            </button>
+          </div>
+
+          <form onsubmit="handleSlugChange(event)" style="margin-top: 20px;">
+            <div class="form-group">
+              <label>Personalizar Ruta Secreta:</label>
+              <div style="display: flex; gap: 8px;">
+                <input type="text" id="customSlugInput" value="admin451200" placeholder="ej: orientacion2026" required>
+                <button type="submit" class="btn btn-secondary" style="white-space: nowrap;">
+                  <i data-lucide="save"></i> Cambiar Ruta
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+
+        <div class="security-card-box">
+          <h5 style="font-size: 1rem; color: #1e293b; margin-bottom: 14px;">🔑 Cambiar Contraseña de Administrador:</h5>
+          
+          <form onsubmit="handlePasswordChange(event)">
+            <div class="form-group">
+              <label>Contraseña Actual *</label>
+              <input type="password" id="currentPass" placeholder="••••••••" required autocomplete="current-password">
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label>Nueva Contraseña *</label>
+                <input type="password" id="newPass" placeholder="Mínimo 3 caracteres" required autocomplete="new-password">
+              </div>
+              <div class="form-group">
+                <label>Confirmar Nueva Contraseña *</label>
+                <input type="password" id="confirmPass" placeholder="Repite la nueva contraseña" required autocomplete="new-password">
+              </div>
+            </div>
+
+            <button type="submit" class="btn btn-primary">
+              <i data-lucide="key"></i> Actualizar Contraseña
+            </button>
+          </form>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal Selector de Tipos de Bloques (WordPress / Sites Block Picker) -->
+  <div class="modal-overlay" id="blockTypePickerModal">
+    <div class="modal-card modal-card-wide" style="max-width: 800px;">
+      <div class="modal-header">
+        <div style="display: flex; align-items: center; gap: 8px;">
+          <span style="font-size: 1.4rem;">🎨</span>
+          <h3>Catálogo de Bloques Disponibles</h3>
+        </div>
+        <button class="modal-close" onclick="closeBlockTypePickerModal()">✕</button>
+      </div>
+
+      <p style="font-size: 0.88rem; color: #64748b; margin-bottom: 8px;">
+        Selecciona el tipo de bloque o contenido que deseas agregar a este ciclo escolar:
+      </p>
+
+      <div class="block-picker-grid" id="blockPickerGrid">
+        <!-- Rendered via JS -->
+      </div>
+
+      <div style="display: flex; justify-content: flex-end; margin-top: 18px;">
+        <button type="button" class="btn btn-secondary" onclick="closeBlockTypePickerModal()">
+          Cerrar
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Workshop Detail Modal with Embedded Viewer -->
+  <div class="modal-overlay" id="workshopDetailModal">
+    <div class="modal-card modal-card-wide">
+      <div class="modal-header">
+        <div style="display: flex; align-items: center; gap: 8px;">
+          <span style="font-size: 1.4rem;">🦁</span>
+          <h3 id="detailWorkshopModalHeader">Detalles del Encuentro Familiar</h3>
+        </div>
+        <button class="modal-close" onclick="closeWorkshopDetailModal()">✕</button>
+      </div>
+
+      <div class="workshop-detail-box">
+        <div class="detail-pill-row">
+          <span class="detail-pill" id="detailWorkshopMonth" style="background: #e0f2fe; color: #0369a1;">Mes</span>
+          <span class="detail-pill" id="detailWorkshopDate" style="background: #fef3c7; color: #92400e;">Fecha</span>
+          <span class="detail-pill" id="detailWorkshopGrades" style="background: #dcfce7; color: #166534;">Grados</span>
+        </div>
+        
+        <h4 id="detailWorkshopTitle" style="font-family: var(--font-display); font-size: 1.25rem; color: #0f172a; margin-bottom: 12px; line-height: 1.35;">
+          Título del Taller
+        </h4>
+        
+        <p class="detail-desc" id="detailWorkshopDesc">
+          Descripción del taller...
+        </p>
+
+        <!-- Visor Embebido de Diapositivas o Imagen -->
+        <div id="detailWorkshopSlidesEmbedWrap" class="slides-embed-wrapper" style="display: none;">
+          <div class="slides-embed-header">
+            <span>
+              <i data-lucide="presentation"></i> <span id="detailWorkshopSlidesTitle">Diapositivas / Imagen del Encuentro</span>
+            </span>
+            <div style="display: flex; gap: 8px; align-items: center;">
+              <a id="detailWorkshopSlidesExternalBtn" href="#" target="_blank" class="btn btn-sm" style="background: rgba(255,255,255,0.2); color: white; padding: 4px 10px; font-size: 0.78rem; text-decoration: none; border-radius: 6px; display: inline-flex; align-items: center; gap: 4px;">
+                <i data-lucide="external-link"></i> Abrir / Descargar
+              </a>
+            </div>
+          </div>
+          <div class="slides-embed-body" id="slidesEmbedContainer">
+            <!-- Injected via JS -->
+          </div>
+        </div>
+      </div>
+
+      <div style="display: flex; justify-content: flex-end; margin-top: 14px;">
+        <button class="btn btn-secondary" onclick="closeWorkshopDetailModal()" style="min-width: 120px;">
+          Cerrar
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal de Confirmación de Eliminación -->
+  <div class="modal-overlay" id="confirmDeleteModal">
+    <div class="modal-card" style="max-width: 440px; text-align: center; padding: 32px 28px;">
+      <div style="font-size: 2.6rem; margin-bottom: 12px;">🗑️</div>
+      <h4 style="font-size: 1.25rem; font-weight: 800; color: #0f172a; margin-bottom: 8px;">¿Estás seguro?</h4>
+      <p style="font-size: 0.92rem; color: #64748b; line-height: 1.45; margin-bottom: 24px;" id="confirmDeleteMsg">
+        ¿Deseas eliminar este encuentro del calendario?
+      </p>
+      <div style="display: flex; gap: 12px; justify-content: center;">
+        <button type="button" class="btn btn-secondary" onclick="closeConfirmDeleteModal()" style="min-width: 120px; font-weight: 700;">
+          No, Cancelar
+        </button>
+        <button type="button" class="btn btn-primary" id="btnConfirmDeleteAction" style="background: #dc2626; border-color: #dc2626; min-width: 120px; font-weight: 700;">
+          Sí, Eliminar
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Box -->
+  <div class="toast-container" id="toastBox">
+    <div class="toast-content">
+      <i data-lucide="check-circle" class="toast-icon"></i>
+      <span id="toastMsg">Notificación</span>
+    </div>
+  </div>
+
+  <!-- Main JavaScript Logic -->
+  <script src="/app.js" defer></script>
+</body>
+</html>
