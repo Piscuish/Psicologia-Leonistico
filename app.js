@@ -159,85 +159,7 @@ const DEFAULT_RSVPS = [
   }
 ];
 
-const DEFAULT_CYCLE_BLOCKS = [
-  {
-    id: 1,
-    cycleId: "primera_infancia",
-    title: "Desarrollo Socioemocional y Autoconcepto",
-    subtitle: "Área de Orientación • Jardín y Transición",
-    text: "En Primera Infancia acompañamos a los niños en la identificación de sus emociones, la construcción de vínculos afectivos seguros, el desarrollo del lenguaje y la autonomía básica en sus rutinas diarias.",
-    imageUrl: "https://lh3.googleusercontent.com/sitesv/AG8ngQWOyxLk67vCI15BlZoCjOwd8xUiVdKQzLu-M2WJcEPpTf9i3QDpCzc1-5m6X-sKqpvyWPGZBwQ-rH8UhgQL7YTxjIlxDFe_bipo6xrnJX-R5AzoEojbfXeILt4DV4eHhLkoRtPmt0qDN9i4vhtAbDolgStj2fPdU9XVS2h5y405j0qv0gtNpOby2sONDNOeFMCsNGdXiYbURk_wJfVERZBegFn7tlsmLq3pjw8f=w1280",
-    imagePosition: "top",
-    badgeText: "J° y T°",
-    order: 1
-  },
-  {
-    id: 2,
-    cycleId: "primera_infancia",
-    title: "Pautas de Crianza y Límites Amorosos",
-    subtitle: "Para Familias Leonísticas",
-    text: "Recomendaciones prácticas para establecer acuerdos claros en casa mediante el diálogo, la paciencia y el refuerzo positivo, fomentando la seguridad y confianza de nuestros pequeños.",
-    imageUrl: "",
-    imagePosition: "top",
-    badgeText: "Familias",
-    order: 2
-  },
-  {
-    id: 3,
-    cycleId: "infantil",
-    title: "Empatía, Convivencia y Amistad",
-    subtitle: "Grados 1°, 2° y 3°",
-    text: "Fortalecemos la convivencia escolar en el Ciclo Infantil guiando a los estudiantes en la empatía, el trabajo en equipo, la resolución pacífica de conflictos y el respeto mutuo en el aula de clase.",
-    imageUrl: "",
-    imagePosition: "top",
-    badgeText: "1°, 2° y 3°",
-    order: 1
-  },
-  {
-    id: 4,
-    cycleId: "basico",
-    title: "Hábitos de Estudio y Gestión del Tiempo",
-    subtitle: "Grados 4° y 5°",
-    text: "Estrategias para que los estudiantes de Ciclo Básico organicen su tiempo de estudio, fortalezcan su concentración y asuman con motivación y responsabilidad sus compromisos académicos.",
-    imageUrl: "",
-    imagePosition: "top",
-    badgeText: "4° y 5°",
-    order: 1
-  },
-  {
-    id: 5,
-    cycleId: "fundamental",
-    title: "Transición a la Secundaria y Autonomía",
-    subtitle: "Grados 6° y 7°",
-    text: "Acompañamiento integral en los cambios socioemocionales de la preadolescencia, promoviendo el pensamiento crítico, la autoestima y la adaptación positiva a la vida en secundaria.",
-    imageUrl: "",
-    imagePosition: "top",
-    badgeText: "6° y 7°",
-    order: 1
-  },
-  {
-    id: 6,
-    cycleId: "exploratorio",
-    title: "Prevención de Riesgos y Comunicación Asertiva",
-    subtitle: "Grados 8° y 9°",
-    text: "Espacio de orientación para adolescentes enfocado en el autocuidado, el manejo saludable de la presión social, la prevención ante riesgos y el fortalecimiento de la confianza con la familia.",
-    imageUrl: "",
-    imagePosition: "top",
-    badgeText: "8° y 9°",
-    order: 1
-  },
-  {
-    id: 7,
-    cycleId: "especializado",
-    title: "Orientación Vocacional y Proyecto de Vida",
-    subtitle: "Grados 10° y 11°",
-    text: "Asesoría y acompañamiento para la clarificación de intereses vocacionales, toma informada de decisiones profesionales, preparación para las Pruebas Saber y proyección al futuro universitario.",
-    imageUrl: "",
-    imagePosition: "top",
-    badgeText: "10° y 11°",
-    order: 1
-  }
-];
+const DEFAULT_CYCLE_BLOCKS = [];
 
 const DEFAULT_SUGGESTIONS = [
   { id: 1, text: "Cómo hablar de educación financiera básica con los adolescentes.", date: "22/08/2026" },
@@ -253,11 +175,7 @@ let adminPassword = localStorage.getItem('psicologia_admin_password') || '123';
 let adminSlug = localStorage.getItem('psicologia_admin_slug') || 'admin451200';
 let psychologists = JSON.parse(localStorage.getItem('psicologia_psychologists')) || DEFAULT_PSYCHOLOGISTS;
 let calendarWorkshops = JSON.parse(localStorage.getItem('psicologia_calendar_workshops')) || DEFAULT_CALENDAR_WORKSHOPS;
-let cycleBlocks = JSON.parse(localStorage.getItem('psicologia_cycle_blocks'));
-if (!cycleBlocks || !Array.isArray(cycleBlocks) || cycleBlocks.length === 0) {
-  cycleBlocks = DEFAULT_CYCLE_BLOCKS;
-  localStorage.setItem('psicologia_cycle_blocks', JSON.stringify(cycleBlocks));
-}
+let cycleBlocks = JSON.parse(localStorage.getItem('psicologia_cycle_blocks')) || [];
 let suggestions = JSON.parse(localStorage.getItem('psicologia_suggestions')) || DEFAULT_SUGGESTIONS;
 let analytics = JSON.parse(localStorage.getItem('psicologia_analytics')) || DEFAULT_ANALYTICS;
 let isAdminLoggedIn = sessionStorage.getItem('psicologia_admin_logged') === 'true';
@@ -286,7 +204,7 @@ async function loadServerData() {
         psychologists = data.psychologists;
         localStorage.setItem('psicologia_psychologists', JSON.stringify(psychologists));
       }
-      if (data.cycleBlocks && Array.isArray(data.cycleBlocks) && data.cycleBlocks.length > 0) {
+      if (data.cycleBlocks && Array.isArray(data.cycleBlocks)) {
         cycleBlocks = data.cycleBlocks;
         localStorage.setItem('psicologia_cycle_blocks', JSON.stringify(cycleBlocks));
       }

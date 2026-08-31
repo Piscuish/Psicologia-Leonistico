@@ -3406,18 +3406,34 @@ body.admin-dark .cal-compact-date {
   padding: 28px 32px;
 }
 
-.cycle-block-card.size-full.layout-left {
+.cycle-block-card.size-full.layout-left.has-img,
+.cycle-block-card.size-full.layout-left:has(.cycle-block-img-wrap) {
   display: grid;
   grid-template-columns: minmax(180px, 320px) minmax(200px, 1fr);
   gap: 28px;
   align-items: center;
 }
 
-.cycle-block-card.size-full.layout-right {
+.cycle-block-card.size-full.layout-right.has-img,
+.cycle-block-card.size-full.layout-right:has(.cycle-block-img-wrap) {
   display: grid;
   grid-template-columns: minmax(200px, 1fr) minmax(180px, 320px);
   gap: 28px;
   align-items: center;
+}
+
+.cycle-block-card.no-img,
+.cycle-block-card:not(:has(.cycle-block-img-wrap)) {
+  display: flex !important;
+  flex-direction: column !important;
+  width: 100% !important;
+}
+
+.cycle-block-card.no-img .hero-content-wrap,
+.cycle-block-card:not(:has(.cycle-block-img-wrap)) .hero-content-wrap {
+  width: 100% !important;
+  max-width: 100% !important;
+  flex: 1 1 100% !important;
 }
 
 .cycle-block-card.size-full.layout-left .cycle-block-img-wrap,

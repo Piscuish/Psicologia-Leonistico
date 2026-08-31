@@ -472,7 +472,9 @@
       "imagePosition": "top",
       "badgeText": "1°, 2° y 3°",
       "order": 1,
-      "type": "hero_banner"
+      "type": "hero_banner",
+      "titleAlign": "left",
+      "size": "full"
     },
     {
       "id": 4,
@@ -484,7 +486,9 @@
       "imagePosition": "top",
       "badgeText": "4° y 5°",
       "order": 1,
-      "type": "hero_banner"
+      "type": "hero_banner",
+      "titleAlign": "left",
+      "size": "full"
     },
     {
       "id": 5,
@@ -496,7 +500,9 @@
       "imagePosition": "top",
       "badgeText": "6° y 7°",
       "order": 1,
-      "type": "hero_banner"
+      "type": "hero_banner",
+      "titleAlign": "left",
+      "size": "full"
     },
     {
       "id": 7,
@@ -508,7 +514,9 @@
       "imagePosition": "top",
       "badgeText": "10° y 11°",
       "order": 1,
-      "type": "hero_banner"
+      "type": "hero_banner",
+      "titleAlign": "left",
+      "size": "full"
     },
     {
       "id": 1788140752050,
