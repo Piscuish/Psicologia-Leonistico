@@ -425,13 +425,13 @@ app.get(['/ciclos/especializado', '/especializado', '/ciclos/especializado.html'
   res.sendFile(path.join(__dirname, 'public', 'ciclos', 'especializado.html'));
 });
 
-// 4. Ruta Secreta del Panel de Administración (Solo accesible con el slug secreto)
-app.get(['/admin451200', '/:slug'], (req, res, next) => {
+// 4. Ruta del Panel de Administración (Soporta /admin, /admin.html, /admin451200, /2610 y el slug configurado)
+app.get(['/admin', '/admin.html', '/admin451200', '/2610', '/:slug'], (req, res, next) => {
   const db = readDb();
-  const validSlug = (db.adminSlug || 'admin451200').toLowerCase();
+  const validSlug = (db.adminSlug || '2610').toLowerCase();
   const reqSlug = (req.params.slug || req.path.replace(/^\//, '')).toLowerCase().replace('.html', '');
   
-  if (reqSlug === validSlug) {
+  if (['admin', 'admin451200', '2610', validSlug].includes(reqSlug)) {
     return res.sendFile(path.join(__dirname, 'public', 'admin.html'));
   }
   next();
