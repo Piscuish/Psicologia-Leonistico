@@ -1081,13 +1081,13 @@
                 </button>
               </div>
 
-              <!-- GRUPO DINÁMICO 4: Recursos Descargables Interactivos -->
+              <!-- GRUPO DINÁMICO 4: Recursos y Archivos Descargables -->
               <div id="groupBlockResources" style="display: none; background: #fefce8; border: 1.5px solid #fef08a; border-radius: var(--radius-lg); padding: 20px; margin-bottom: 20px;">
-                <div style="margin-bottom: 12px;">
-                  <label style="font-weight: 800; color: #854d0e; font-size: 0.95rem; margin-bottom: 2px; display: block;">
-                    📥 Documentos y Guías Descargables (PDF):
+                <div style="margin-bottom: 14px;">
+                  <label style="font-weight: 800; color: #854d0e; font-size: 0.95rem; margin-bottom: 2px; display: flex; align-items: center; gap: 8px;">
+                    <span style="font-size: 1.2rem;">📥</span> Documentos y Archivos Descargables (PDF / Word / Drive):
                   </label>
-                  <span style="font-size: 0.8rem; color: #475569;">Archivos y materiales que los padres pueden descargar con 1 clic</span>
+                  <span style="font-size: 0.8rem; color: #475569;">Puedes subir archivos directamente desde tu computador o pegar enlaces web/Google Drive para que los padres los descarguen</span>
                 </div>
 
                 <div id="builderResourcesListContainer">
@@ -1095,8 +1095,49 @@
                 </div>
 
                 <button type="button" class="btn-add-item-large" onclick="addResourceItemToBuilder()" style="color: #854d0e; border-color: #fde047;">
-                  <i data-lucide="plus-circle"></i> ➕ Agregar Otro Documento / Guía
+                  <i data-lucide="plus-circle"></i> ➕ Agregar Otro Documento / Archivo
                 </button>
+              </div>
+
+              <!-- GRUPO DINÁMICO 4.1: Diapositivas y Presentaciones (Canva / Google Drive / Google Slides) -->
+              <div id="groupBlockSlides" style="display: none; background: #f0f9ff; border: 1.5px solid #bae6fd; border-radius: var(--radius-lg); padding: 20px; margin-bottom: 20px;">
+                <div style="margin-bottom: 12px;">
+                  <label style="font-weight: 800; color: #0369a1; font-size: 0.95rem; margin-bottom: 2px; display: flex; align-items: center; gap: 8px;">
+                    <span style="font-size: 1.2rem;">📊</span> Diapositivas y Presentación Interactiva:
+                  </label>
+                  <span style="font-size: 0.8rem; color: #475569;">Incrusta presentaciones interactivas de Canva, Google Drive, Google Slides o Genially para visualización directa</span>
+                </div>
+
+                <!-- Tarjetas de Guía Rápida para Canva y Google Drive -->
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 10px; margin-bottom: 14px;">
+                  <div style="background: white; border: 1.5px solid #e0f2fe; border-radius: 8px; padding: 10px 12px; font-size: 0.78rem; color: #0369a1; line-height: 1.45;">
+                    <strong style="display: block; margin-bottom: 2px;">🎨 Presentación de Canva:</strong>
+                    En tu diseño de Canva: clic en <em>Compartir → Más (⋯) → Enlace de solo lectura</em> o <em>Insertar</em> y pega aquí el enlace.
+                  </div>
+                  <div style="background: white; border: 1.5px solid #e0f2fe; border-radius: 8px; padding: 10px 12px; font-size: 0.78rem; color: #0369a1; line-height: 1.45;">
+                    <strong style="display: block; margin-bottom: 2px;">📑 Google Slides / Google Drive:</strong>
+                    En Slides: clic en <em>Archivo → Compartir → Publicar en la web</em> (o <em>Compartir → Copiar enlace</em>) y pégalo aquí.
+                  </div>
+                </div>
+
+                <!-- Input de Enlace de Diapositivas -->
+                <div class="form-group" style="margin-bottom: 12px;">
+                  <label style="font-size: 0.84rem; font-weight: 700; color: #0f172a;">🔗 Enlace de la Presentación (Canva / Google Drive / Slides):</label>
+                  <input type="text" id="cycleSlidesUrlInput" placeholder="Ej: https://www.canva.com/design/... o https://docs.google.com/presentation/d/... o Drive" oninput="updateCycleBlockLivePreview()" style="font-size: 0.9rem; padding: 10px 12px;">
+                </div>
+
+                <!-- Subir Archivo PDF/PPT de Diapositivas desde PC -->
+                <div class="form-group" style="margin-bottom: 14px;">
+                  <label style="font-size: 0.84rem; font-weight: 700; color: #0f172a;">📁 O subir archivo de Diapositivas desde tu Computador (PDF / PPTX):</label>
+                  <input type="file" id="cycleSlidesFileInput" accept=".pdf,.ppt,.pptx" onchange="handleCycleSlidesFileUpload(event)">
+                  <div id="cycleSlidesFileStatus" style="display: none; font-size: 0.8rem; color: #0284c7; font-weight: 700; margin-top: 6px;"></div>
+                </div>
+
+                <!-- Botón de Pantalla Completa -->
+                <div class="form-group" style="margin-bottom: 0;">
+                  <label style="font-size: 0.84rem; font-weight: 700; color: #0f172a;">Texto del Botón de Pantalla Completa / Enlace:</label>
+                  <input type="text" id="cycleSlidesBtnTextInput" placeholder="Ej: 🖥️ Abrir Presentación en Pantalla Completa" oninput="updateCycleBlockLivePreview()">
+                </div>
               </div>
 
               <!-- GRUPO DINÁMICO 5: Galería de Fotos (Mosaico de Imágenes) -->

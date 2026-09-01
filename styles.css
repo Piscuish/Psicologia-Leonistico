@@ -4230,6 +4230,77 @@ body.admin-dark .cal-compact-date {
   flex-shrink: 0;
 }
 
+/* 7.1 Presentación / Diapositivas Interactivas (Canva / Drive / Google Slides) */
+.cycle-block-card.type-slides_embed {
+  background: #ffffff;
+  border: 2px solid var(--border-color);
+  padding: 32px 28px;
+  border-radius: var(--radius-xl);
+}
+
+.slides-embed-player-wrap {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  min-height: 280px;
+  max-height: 540px;
+  background: #0f172a;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  border: 1.5px solid #cbd5e1;
+  box-shadow: 0 6px 20px -4px rgba(15, 23, 42, 0.12);
+  margin-top: 18px;
+  margin-bottom: 18px;
+  position: relative;
+}
+
+.slides-embed-player-wrap iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+  display: block;
+}
+
+.slides-embed-placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+  color: #f8fafc;
+  text-align: center;
+}
+
+.slides-embed-placeholder .placeholder-icon {
+  font-size: 3rem;
+  margin-bottom: 10px;
+}
+
+.slides-embed-placeholder h5 {
+  font-size: 1.1rem;
+  font-weight: 800;
+  color: #ffffff;
+  margin-bottom: 6px;
+}
+
+.slides-embed-placeholder p {
+  font-size: 0.84rem;
+  color: #94a3b8;
+  max-width: 450px;
+  line-height: 1.4;
+}
+
+.slides-action-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 14px;
+}
+
 /* 8. Photo Gallery Block */
 .cycle-photo-gallery-grid {
   display: grid;

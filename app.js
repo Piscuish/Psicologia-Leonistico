@@ -1980,16 +1980,95 @@ const CYCLES_METADATA = [
 
 const CYCLE_BLOCK_TYPES = [
   { type: 'hero_banner', name: 'Banner Principal', icon: '📰', desc: 'Encabezado con título grande, subtítulo, botón de acción y foto/banner.' },
+  { type: 'slides_embed', name: 'Diapositivas / Canva / Drive', icon: '📊', desc: 'Incrusta presentaciones interactivas de Canva, Google Slides, Google Drive o Genially.' },
+  { type: 'resources_download', name: 'Guías y Archivos Descargables', icon: '📥', desc: 'Sube archivos PDF, Word, Excel o pega enlaces de descarga con botón.' },
   { type: 'article_blog', name: 'Artículo de Blog', icon: '📝', desc: 'Lectura amplia con autor, fecha, contenido extenso y foto de portada.' },
   { type: 'callout_tip', name: 'Consejo / Tip', icon: '💡', desc: 'Caja destacada con icono personalizado y color para consejos de orientación.' },
   { type: 'cards_grid', name: 'Cuadrícula de Pautas', icon: '🌟', desc: 'Tarjetas con iconos para resumir 2, 3 o 4 ideas clave de crianza o estudio.' },
-  { type: 'resources_download', name: 'Guías Descargables', icon: '📥', desc: 'Documentos PDF e infografías con botón de descarga.' },
   { type: 'photo_gallery', name: 'Galería de Fotos', icon: '🎞️', desc: 'Mosaico visual de fotografías o infografías ilustrativas.' }
 ];
 
 let selectedAdminCycleKey = 'primera_infancia';
 let selectedBlockType = 'hero_banner';
 let blockIdToDelete = null;
+
+// Helper para convertir enlaces de Canva, Google Drive y Google Slides a formatos embebibles
+function getEmbeddableSlidesUrl(rawUrl) {
+  if (!rawUrl) return '';
+  let url = rawUrl.trim();
+
+  // Si el usuario pegó el código iframe completo
+  const iframeMatch = url.match(/src=["']([^"']+)["']/i);
+  if (iframeMatch) {
+    url = iframeMatch[1];
+  }
+
+  // Canva links: https://www.canva.com/design/XXXX/view -> add ?embed
+  if (url.includes('canva.com/design/')) {
+    if (!url.includes('embed')) {
+      const base = url.split('?')[0];
+      if (base.endsWith('/view')) {
+        url = `${base}?embed`;
+      } else {
+        url = `${base}/view?embed`;
+      }
+    }
+    return url;
+  }
+
+  // Google Slides: https://docs.google.com/presentation/d/ID/...
+  if (url.includes('docs.google.com/presentation/d/')) {
+    const match = url.match(/presentation\/d\/([a-zA-Z0-9-_]+)/);
+    if (match) {
+      return `https://docs.google.com/presentation/d/${match[1]}/embed?start=false&loop=false&delayms=3000`;
+    }
+  }
+
+  // Google Drive File: https://drive.google.com/file/d/FILE_ID/view...
+  if (url.includes('drive.google.com/file/d/')) {
+    const match = url.match(/drive\.google\.com\/file\/d\/([a-zA-Z0-9-_]+)/);
+    if (match) {
+      return `https://drive.google.com/file/d/${match[1]}/preview`;
+    }
+  }
+
+  // Google Drive Open: https://drive.google.com/open?id=FILE_ID
+  if (url.includes('drive.google.com/open?id=')) {
+    const match = url.match(/id=([a-zA-Z0-9-_]+)/);
+    if (match) {
+      return `https://drive.google.com/file/d/${match[1]}/preview`;
+    }
+  }
+
+  // Genially: https://view.genial.ly/XXXX
+  if (url.includes('view.genial.ly/')) {
+    return url;
+  }
+
+  return url;
+}
+
+let currentEditingSlidesFileData = '';
+let currentEditingSlidesFileName = '';
+
+function handleCycleSlidesFileUpload(event) {
+  const file = event.target.files[0];
+  if (!file) return;
+
+  const reader = new FileReader();
+  reader.onload = function(e) {
+    currentEditingSlidesFileData = e.target.result;
+    currentEditingSlidesFileName = file.name;
+    const statusEl = document.getElementById('cycleSlidesFileStatus');
+    if (statusEl) {
+      statusEl.textContent = `✓ Archivo "${file.name}" cargado (${(file.size / 1024).toFixed(0)} KB)`;
+      statusEl.style.display = 'block';
+    }
+    updateCycleBlockLivePreview();
+    showToast(`📊 Diapositivas "${file.name}" cargadas`);
+  };
+  reader.readAsDataURL(file);
+}
 
 function selectAdminCycle(cycleKey, btnElement) {
   selectedAdminCycleKey = cycleKey;
@@ -2051,7 +2130,7 @@ let currentEditingCardsList = [
 ];
 
 let currentEditingResourcesList = [
-  { title: 'Guía de Orientación Familiar (PDF)', desc: 'Material imprimible de apoyo para el hogar.', icon: 'file-text' }
+  { title: 'Guía de Orientación Familiar (PDF)', desc: 'Material imprimible de apoyo para el hogar.', fileUrl: '', fileName: '', fileSize: '', icon: 'file-text' }
 ];
 
 let currentEditingGalleryPhotos = [
@@ -2077,6 +2156,7 @@ function setCycleBlockType(type) {
   const groupImage = document.getElementById('groupBlockImage');
   const groupSubcards = document.getElementById('groupBlockSubcards');
   const groupResources = document.getElementById('groupBlockResources');
+  const groupSlides = document.getElementById('groupBlockSlides');
   const groupGallery = document.getElementById('groupBlockGallery');
 
   if (groupButton) groupButton.style.display = (type === 'hero_banner') ? 'block' : 'none';
@@ -2084,6 +2164,7 @@ function setCycleBlockType(type) {
   if (groupImage) groupImage.style.display = (type === 'hero_banner' || type === 'article_blog') ? 'block' : 'none';
   if (groupSubcards) groupSubcards.style.display = (type === 'cards_grid') ? 'block' : 'none';
   if (groupResources) groupResources.style.display = (type === 'resources_download') ? 'block' : 'none';
+  if (groupSlides) groupSlides.style.display = (type === 'slides_embed') ? 'block' : 'none';
   if (groupGallery) groupGallery.style.display = (type === 'photo_gallery') ? 'block' : 'none';
 
   // Renderizar constructores dinámicos
@@ -2151,31 +2232,129 @@ function updateCardItemField(idx, field, value) {
   }
 }
 
-// 2. Interactive Resources Builder
+// 2. Interactive Resources Builder (Subida de Archivos y Enlaces)
 function renderResourcesBuilderUI() {
   const container = document.getElementById('builderResourcesListContainer');
   if (!container) return;
 
-  container.innerHTML = currentEditingResourcesList.map((res, idx) => `
-    <div class="builder-item-card">
-      <div class="builder-item-header">
-        <span class="builder-item-title" style="color: #854d0e;">
-          <span>📄</span> Documento Descargable #${idx + 1}
-        </span>
-        <button type="button" class="btn-table-action btn-del" onclick="removeResourceItemFromBuilder(${idx})" ${currentEditingResourcesList.length <= 1 ? 'disabled' : ''} style="padding: 2px 8px;">
-          🗑️ Eliminar
-        </button>
+  container.innerHTML = currentEditingResourcesList.map((res, idx) => {
+    const hasFile = !!(res.fileData || res.fileUrl);
+    const fileNameDisplay = res.fileName || (res.fileUrl ? 'Enlace Web / Drive configurado' : 'Ningún archivo adjunto aún');
+
+    return `
+      <div class="builder-item-card" style="border: 1.5px solid ${hasFile ? '#86efac' : '#fde047'}; background: ${hasFile ? '#f0fdf4' : '#fffbeb'}; margin-bottom: 14px; padding: 16px; border-radius: var(--radius-md);">
+        <div class="builder-item-header" style="margin-bottom: 12px;">
+          <span class="builder-item-title" style="color: #854d0e; font-weight: 800; font-size: 0.92rem;">
+            <span>📄</span> Documento / Archivo #${idx + 1}
+          </span>
+          <button type="button" class="btn-table-action btn-del" onclick="removeResourceItemFromBuilder(${idx})" ${currentEditingResourcesList.length <= 1 ? 'disabled' : ''} style="padding: 4px 10px; font-weight: 700;">
+            🗑️ Eliminar
+          </button>
+        </div>
+
+        <div class="form-row" style="margin-bottom: 10px;">
+          <div class="form-group" style="flex: 1.5; margin-bottom: 0;">
+            <label style="font-size: 0.8rem; font-weight: 700; color: #1e293b;">Nombre / Título del Documento *</label>
+            <input type="text" value="${(res.title || '').replace(/"/g, '&quot;')}" placeholder="Ej: Guía de Crianza Positiva (PDF)" oninput="updateResourceItemField(${idx}, 'title', this.value)" required style="font-size: 0.88rem; font-weight: 600;">
+          </div>
+          <div class="form-group" style="flex: 1; margin-bottom: 0;">
+            <label style="font-size: 0.8rem; font-weight: 700; color: #1e293b;">Descripción Corta:</label>
+            <input type="text" value="${(res.desc || '').replace(/"/g, '&quot;')}" placeholder="Ej: Material imprimible de 4 páginas" oninput="updateResourceItemField(${idx}, 'desc', this.value)" style="font-size: 0.88rem;">
+          </div>
+        </div>
+
+        <!-- Opciones de Archivo (Subir desde PC o Enlace Drive/Web) -->
+        <div style="background: white; border: 1px solid #e2e8f0; border-radius: var(--radius-sm); padding: 12px; margin-top: 8px;">
+          <div class="form-row" style="margin-bottom: 0; align-items: flex-end;">
+            <div class="form-group" style="flex: 1; margin-bottom: 0;">
+              <label style="font-size: 0.78rem; font-weight: 700; color: #0f172a;">📁 Subir Archivo desde PC (PDF, Word, Excel, PPT):</label>
+              <input type="file" accept=".pdf,.doc,.docx,.ppt,.pptx,.xls,.xlsx,.zip,image/*" onchange="handleResourceFileUpload(event, ${idx})" style="font-size: 0.8rem; padding: 6px;">
+            </div>
+            <div class="form-group" style="flex: 1.2; margin-bottom: 0;">
+              <label style="font-size: 0.78rem; font-weight: 700; color: #0f172a;">🔗 O Enlace Web / Google Drive:</label>
+              <input type="url" value="${(res.fileUrl || '').replace(/"/g, '&quot;')}" placeholder="https://drive.google.com/... o https://..." oninput="updateResourceItemField(${idx}, 'fileUrl', this.value)" style="font-size: 0.8rem;">
+            </div>
+          </div>
+
+          <!-- Estado del archivo adjunto -->
+          ${hasFile ? `
+            <div style="display: flex; align-items: center; justify-content: space-between; background: #ecfdf5; border: 1px solid #a7f3d0; border-radius: 6px; padding: 6px 12px; margin-top: 10px; font-size: 0.8rem; color: #065f46; font-weight: 700;">
+              <div style="display: flex; align-items: center; gap: 6px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
+                <span>✓</span> <span>${fileNameDisplay}</span> ${res.fileSize ? `<small style="color: #047857;">(${res.fileSize})</small>` : ''}
+              </div>
+              <button type="button" onclick="removeResourceAttachedFile(${idx})" style="background: none; border: none; color: #dc2626; font-size: 0.75rem; cursor: pointer; font-weight: 700;">
+                ✕ Quitar Archivo
+              </button>
+            </div>
+          ` : `
+            <div style="font-size: 0.75rem; color: #94a3b8; margin-top: 6px;">
+              💡 Elige un archivo desde tu PC o pega un enlace de Google Drive / Dropbox para descarga directa.
+            </div>
+          `}
+        </div>
       </div>
-      <div class="form-group" style="margin-bottom: 8px;">
-        <label style="font-size: 0.78rem;">Nombre del Documento o Guía:</label>
-        <input type="text" value="${res.title.replace(/"/g, '&quot;')}" placeholder="Ej: Guía de Crianza Positiva (PDF)" oninput="updateResourceItemField(${idx}, 'title', this.value)" required>
-      </div>
-      <div class="form-group" style="margin-bottom: 0;">
-        <label style="font-size: 0.78rem;">Descripción corta del archivo:</label>
-        <input type="text" value="${(res.desc || '').replace(/"/g, '&quot;')}" placeholder="Ej: Material imprimible de 4 páginas" oninput="updateResourceItemField(${idx}, 'desc', this.value)">
-      </div>
-    </div>
-  `).join('');
+    `;
+  }).join('');
+}
+
+function handleResourceFileUpload(event, idx) {
+  const file = event.target.files[0];
+  if (!file) return;
+
+  const reader = new FileReader();
+  reader.onload = function(e) {
+    if (currentEditingResourcesList[idx]) {
+      currentEditingResourcesList[idx].fileData = e.target.result;
+      currentEditingResourcesList[idx].fileName = file.name;
+      currentEditingResourcesList[idx].fileSize = (file.size / 1024).toFixed(0) + ' KB';
+      if (!currentEditingResourcesList[idx].title || currentEditingResourcesList[idx].title.startsWith('Guía Formativa #')) {
+        currentEditingResourcesList[idx].title = file.name.replace(/\.[^/.]+$/, "");
+      }
+      renderResourcesBuilderUI();
+      updateCycleBlockLivePreview();
+      showToast(`📁 Archivo "${file.name}" cargado`);
+    }
+  };
+  reader.readAsDataURL(file);
+}
+
+function removeResourceAttachedFile(idx) {
+  if (currentEditingResourcesList[idx]) {
+    currentEditingResourcesList[idx].fileData = '';
+    currentEditingResourcesList[idx].fileName = '';
+    currentEditingResourcesList[idx].fileUrl = '';
+    currentEditingResourcesList[idx].fileSize = '';
+    renderResourcesBuilderUI();
+    updateCycleBlockLivePreview();
+    showToast('Archivo quitado');
+  }
+}
+
+function addResourceItemToBuilder() {
+  currentEditingResourcesList.push({
+    title: `Documento #${currentEditingResourcesList.length + 1} (PDF)`,
+    desc: 'Material descargable de apoyo para el hogar.',
+    fileUrl: '',
+    fileName: '',
+    fileSize: '',
+    icon: 'file-text'
+  });
+  renderResourcesBuilderUI();
+  updateCycleBlockLivePreview();
+}
+
+function removeResourceItemFromBuilder(idx) {
+  if (currentEditingResourcesList.length <= 1) return;
+  currentEditingResourcesList.splice(idx, 1);
+  renderResourcesBuilderUI();
+  updateCycleBlockLivePreview();
+}
+
+function updateResourceItemField(idx, field, value) {
+  if (currentEditingResourcesList[idx]) {
+    currentEditingResourcesList[idx][field] = value;
+    updateCycleBlockLivePreview();
+  }
 }
 
 function addResourceItemToBuilder() {
@@ -2421,6 +2600,9 @@ function updateCycleBlockLivePreview() {
   const iconEmoji = document.getElementById('cycleCalloutEmoji')?.value || '💡';
   const accentColor = document.getElementById('cycleCalloutColor')?.value || 'purple';
 
+  const slidesUrl = document.getElementById('cycleSlidesUrlInput')?.value.trim() || '';
+  const slidesBtnText = document.getElementById('cycleSlidesBtnTextInput')?.value.trim() || '';
+
   const previewContainer = document.getElementById('liveCycleBlockCardWrap');
   const sizeBadge = document.getElementById('liveCycleBlockSizeBadge');
 
@@ -2446,6 +2628,10 @@ function updateCycleBlockLivePreview() {
     buttonUrl: btnUrl,
     iconEmoji,
     accentColor,
+    slidesUrl,
+    slidesBtnText,
+    slidesFileData: currentEditingSlidesFileData,
+    slidesFileName: currentEditingSlidesFileName,
     itemsList: currentEditingCardsList,
     resourcesList: currentEditingResourcesList,
     photosList: currentEditingGalleryPhotos
@@ -2477,6 +2663,9 @@ function handleSaveCycleBlock(event) {
   const iconEmoji = document.getElementById('cycleCalloutEmoji')?.value || '💡';
   const accentColor = document.getElementById('cycleCalloutColor')?.value || 'purple';
 
+  const slidesUrl = (document.getElementById('cycleSlidesUrlInput')?.value || '').trim();
+  const slidesBtnText = (document.getElementById('cycleSlidesBtnTextInput')?.value || '').trim();
+
   const currentCycleBlocks = cycleBlocks.filter(b => b.cycleId === selectedAdminCycleKey);
 
   if (idInput) {
@@ -2498,6 +2687,10 @@ function handleSaveCycleBlock(event) {
         buttonUrl,
         iconEmoji,
         accentColor,
+        slidesUrl,
+        slidesBtnText,
+        slidesFileData: currentEditingSlidesFileData || cycleBlocks[index].slidesFileData || '',
+        slidesFileName: currentEditingSlidesFileName || cycleBlocks[index].slidesFileName || '',
         itemsList: currentEditingCardsList,
         resourcesList: currentEditingResourcesList,
         photosList: currentEditingGalleryPhotos
@@ -2521,6 +2714,10 @@ function handleSaveCycleBlock(event) {
       buttonUrl,
       iconEmoji,
       accentColor,
+      slidesUrl,
+      slidesBtnText,
+      slidesFileData: currentEditingSlidesFileData,
+      slidesFileName: currentEditingSlidesFileName,
       itemsList: currentEditingCardsList,
       resourcesList: currentEditingResourcesList,
       photosList: currentEditingGalleryPhotos,
@@ -2575,6 +2772,28 @@ function editCycleBlock(id) {
   if (block.iconEmoji) setCalloutIcon(block.iconEmoji);
   if (block.accentColor) setCalloutColor(block.accentColor);
 
+  // Cargar diapositivas
+  const slidesInput = document.getElementById('cycleSlidesUrlInput');
+  const slidesBtnInput = document.getElementById('cycleSlidesBtnTextInput');
+  const slidesFileStatus = document.getElementById('cycleSlidesFileStatus');
+  const slidesFileInput = document.getElementById('cycleSlidesFileInput');
+
+  if (slidesInput) slidesInput.value = block.slidesUrl || '';
+  if (slidesBtnInput) slidesBtnInput.value = block.slidesBtnText || '';
+  if (slidesFileInput) slidesFileInput.value = '';
+
+  currentEditingSlidesFileData = block.slidesFileData || '';
+  currentEditingSlidesFileName = block.slidesFileName || '';
+
+  if (slidesFileStatus) {
+    if (block.slidesFileName) {
+      slidesFileStatus.textContent = `✓ Archivo cargado: ${block.slidesFileName}`;
+      slidesFileStatus.style.display = 'block';
+    } else {
+      slidesFileStatus.style.display = 'none';
+    }
+  }
+
   // Cargar tarjetas interactivas
   if (block.itemsList && block.itemsList.length) {
     currentEditingCardsList = JSON.parse(JSON.stringify(block.itemsList));
@@ -2586,7 +2805,7 @@ function editCycleBlock(id) {
   if (block.resourcesList && block.resourcesList.length) {
     currentEditingResourcesList = JSON.parse(JSON.stringify(block.resourcesList));
   } else {
-    currentEditingResourcesList = [{ title: 'Guía Familiar (PDF)', desc: 'Material imprimible de apoyo.', icon: 'file-text' }];
+    currentEditingResourcesList = [{ title: 'Guía Familiar (PDF)', desc: 'Material imprimible de apoyo.', fileUrl: '', fileName: '', fileSize: '', icon: 'file-text' }];
   }
 
   // Cargar fotos de galería
@@ -2638,12 +2857,17 @@ function resetCycleBlockForm() {
   setCalloutIcon('💡');
   setCalloutColor('purple');
 
+  currentEditingSlidesFileData = '';
+  currentEditingSlidesFileName = '';
+  const slidesFileStatus = document.getElementById('cycleSlidesFileStatus');
+  if (slidesFileStatus) slidesFileStatus.style.display = 'none';
+
   currentEditingCardsList = [
     { icon: '💖', title: 'Afecto y Diálogo', text: 'Acompañamiento cercano y validación emocional constante.' },
     { icon: '⏰', title: 'Rutina y Horarios', text: 'Fijar horas para estudiar, descansar y compartir en familia.' }
   ];
   currentEditingResourcesList = [
-    { title: 'Guía de Orientación Familiar (PDF)', desc: 'Material imprimible de apoyo para el hogar.', icon: 'file-text' }
+    { title: 'Guía de Orientación Familiar (PDF)', desc: 'Material imprimible de apoyo para el hogar.', fileUrl: '', fileName: '', fileSize: '', icon: 'file-text' }
   ];
   currentEditingGalleryPhotos = [
     { url: 'https://images.unsplash.com/photo-1577896851231-70ef18881754?auto=format&fit=crop&w=600&q=80', caption: 'Talleres y actividades del ciclo' }
@@ -2916,6 +3140,51 @@ function renderCycleBlockByType(b, meta, isPublic = true) {
         </div>
       `;
 
+    case 'slides_embed':
+      const rawSlidesUrl = (b.slidesUrl || '').trim();
+      const embedSlidesUrl = getEmbeddableSlidesUrl(rawSlidesUrl);
+      const hasValidSlides = !!embedSlidesUrl || !!b.slidesFileData;
+      const fullScreenUrl = rawSlidesUrl || b.slidesFileData || '#';
+      const slidesBtnLabel = b.slidesBtnText || b.buttonText || '🖥️ Abrir Presentación en Pantalla Completa';
+
+      return `
+        <div class="cycle-block-card size-${size} type-slides_embed ${meta.borderClass}">
+          <div class="title-align-${titleAlign}" style="text-align: ${titleAlign}; width: 100%;">
+            <span class="cycle-block-badge ${meta.pillClass}" style="${alignBadgeStyle}">${b.badgeText || 'Diapositivas y Taller'}</span>
+            <h3 class="cycle-block-title" style="text-align: ${titleAlign};">${b.title}</h3>
+            ${b.subtitle ? `<div class="cycle-block-subtitle" style="text-align: ${titleAlign};">${b.subtitle}</div>` : ''}
+            ${b.text ? `<div class="cycle-block-text" style="margin-bottom: 14px; text-align: ${titleAlign};">${b.text}</div>` : ''}
+          </div>
+
+          <!-- Visor de Diapositivas 16:9 -->
+          <div class="slides-embed-player-wrap">
+            ${embedSlidesUrl ? `
+              <iframe src="${embedSlidesUrl}" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true" loading="lazy"></iframe>
+            ` : (b.slidesFileData ? `
+              <iframe src="${b.slidesFileData}" allowfullscreen="true" style="background: white;"></iframe>
+            ` : `
+              <div class="slides-embed-placeholder">
+                <div class="placeholder-icon">📊</div>
+                <h5>Presentación Interactiva</h5>
+                <p>Pega un enlace de Canva, Google Drive o Google Slides en el gestor para que la presentación se reproduzca aquí directamente.</p>
+              </div>
+            `)}
+          </div>
+
+          <!-- Barra de Acción y Botón de Pantalla Completa -->
+          <div class="slides-action-bar" style="justify-content: ${titleAlign === 'center' ? 'center' : (titleAlign === 'right' ? 'flex-end' : 'space-between')};">
+            <div style="font-size: 0.84rem; color: #64748b; font-weight: 700;">
+              💡 Puedes interactuar con las diapositivas o verlas en grande
+            </div>
+            ${hasValidSlides ? `
+              <a href="${fullScreenUrl}" target="_blank" class="btn btn-primary btn-md" style="font-weight: 800; display: inline-flex; align-items: center; gap: 8px;">
+                <i data-lucide="external-link"></i> ${slidesBtnLabel}
+              </a>
+            ` : ''}
+          </div>
+        </div>
+      `;
+
     case 'resources_download':
       const resources = b.resourcesList && b.resourcesList.length ? b.resourcesList : [
         { title: b.title, desc: b.text, icon: 'file-text' }
@@ -2926,22 +3195,40 @@ function renderCycleBlockByType(b, meta, isPublic = true) {
             <span class="cycle-block-badge ${meta.pillClass}" style="${alignBadgeStyle}">${b.badgeText || 'Descargables'}</span>
             <h3 class="cycle-block-title" style="text-align: ${titleAlign};">${b.title}</h3>
             ${b.subtitle ? `<div class="cycle-block-subtitle" style="text-align: ${titleAlign};">${b.subtitle}</div>` : ''}
+            ${b.text ? `<div class="cycle-block-text" style="margin-bottom: 14px; text-align: ${titleAlign};">${b.text}</div>` : ''}
           </div>
           <div class="cycle-resources-grid">
-            ${resources.map(r => `
-              <div class="resource-download-card">
-                <div class="resource-card-header">
-                  <div class="resource-card-icon"><i data-lucide="${r.icon || 'file-text'}"></i></div>
-                  <div class="resource-card-info">
-                    <h5>${r.title}</h5>
-                    <p>${r.desc}</p>
+            ${resources.map(r => {
+              const fileLink = r.fileData || r.fileUrl || '#';
+              const isDownloadable = !!r.fileData;
+              const isExternal = !!r.fileUrl;
+              const fileName = r.fileName || `${r.title}.pdf`;
+
+              return `
+                <div class="resource-download-card">
+                  <div class="resource-card-header">
+                    <div class="resource-card-icon"><i data-lucide="${r.icon || 'file-text'}"></i></div>
+                    <div class="resource-card-info">
+                      <h5>${r.title}</h5>
+                      <p>${r.desc || (r.fileName ? `Archivo: ${r.fileName}` : 'Material descargable de orientación escolar')}</p>
+                    </div>
                   </div>
+                  ${isDownloadable ? `
+                    <a href="${fileLink}" download="${fileName}" class="btn btn-primary btn-sm" style="display: inline-flex; align-items: center; justify-content: center; gap: 8px; font-weight: 700;">
+                      <i data-lucide="download"></i> Descargar Documento ${r.fileSize ? `(${r.fileSize})` : ''}
+                    </a>
+                  ` : (isExternal ? `
+                    <a href="${fileLink}" target="_blank" class="btn btn-primary btn-sm" style="display: inline-flex; align-items: center; justify-content: center; gap: 8px; font-weight: 700;">
+                      <i data-lucide="external-link"></i> Abrir / Descargar Archivo
+                    </a>
+                  ` : `
+                    <button type="button" class="btn btn-outline btn-sm" onclick="showToast('📥 Documento formativo disponible en orientación escolar')">
+                      <i data-lucide="download"></i> Descargar Documento
+                    </button>
+                  `)}
                 </div>
-                <button type="button" class="btn btn-outline btn-sm" onclick="showToast('📥 Descargando archivo...')">
-                  <i data-lucide="download"></i> Descargar Documento
-                </button>
-              </div>
-            `).join('')}
+              `;
+            }).join('')}
           </div>
         </div>
       `;
@@ -3062,12 +3349,14 @@ function renderAdminCycleBlocks() {
 
   const typeIcons = {
     'hero_banner': '📰 Banner',
-    'split_horizontal': '🖼️ Dividido',
+    'slides_embed': '📊 Diapositivas',
+    'resources_download': '📥 Descargables',
     'article_blog': '📝 Artículo',
     'callout_tip': '💡 Consejo',
     'cards_grid': '🌟 Cuadrícula',
     'faq_accordion': '📑 Acordeón',
-    'resources_download': '📥 Descargables'
+    'photo_gallery': '🎞️ Galería',
+    'split_horizontal': '🖼️ Dividido'
   };
 
   const sizeLabels = {
