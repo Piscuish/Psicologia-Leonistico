@@ -22,7 +22,15 @@ app.get(['/admin', '/admin.html', '/panel', '/login'], (req, res) => {
 });
 
 // Servir archivos estáticos desde la carpeta public
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'public'), {
+  etag: false,
+  maxAge: 0,
+  setHeaders: (res, path) => {
+    res.setHeader('Cache-Control', 'no-store, no-cache, must-revalidate, proxy-revalidate');
+    res.setHeader('Pragma', 'no-cache');
+    res.setHeader('Expires', '0');
+  }
+}));
 
 // ============================================================
 // BASE DE DATOS CENTRALIZADA EN ARCHIVO JSON (data/db.json)
@@ -163,8 +171,129 @@ const DEFAULT_PSYCHOLOGISTS = [
 
 const DEFAULT_CYCLE_BLOCKS = [];
 
+const DEFAULT_NAV_ITEMS = [
+  {
+    id: "nav_inicio",
+    title: "Inicio",
+    url: "/",
+    icon: "home",
+    type: "dropdown",
+    order: 1,
+    isSystem: true,
+    children: [
+      { id: "sub_portada", title: "Portada Principal", url: "/", icon: "home", order: 1 },
+      { id: "sub_quienes_somos", title: "¿Quiénes Somos?", url: "/#quienes-somos", icon: "heart-handshake", order: 2 }
+    ]
+  },
+  {
+    id: "nav_encuentros",
+    title: "Encuentros Familiares",
+    url: "/encuentros",
+    icon: "users",
+    type: "link",
+    order: 2,
+    isSystem: true
+  },
+  {
+    id: "nav_ciclos",
+    title: "Ciclos",
+    url: "#",
+    icon: "layers",
+    type: "dropdown",
+    order: 3,
+    isSystem: true,
+    isCyclesDropdown: true
+  }
+];
+
+const DEFAULT_CYCLES_LIST = [
+  {
+    key: "primera_infancia",
+    slug: "primera-infancia",
+    name: "Primera Infancia",
+    grades: "JARDÍN Y TRANSICIÓN",
+    badgeText: "J y T",
+    pillClass: "pill-pink",
+    borderClass: "card-border-pink",
+    icon: "🌸",
+    subtitle: "Espacio formativo y de acompañamiento socioemocional para las familias y estudiantes de los primeros años escolares.",
+    order: 1,
+    pageUrl: "/ciclos/primera-infancia"
+  },
+  {
+    key: "infantil",
+    slug: "infantil",
+    name: "Ciclo Infantil",
+    grades: "1°, 2° Y 3°",
+    badgeText: "1, 2 y 3",
+    pillClass: "pill-teal",
+    borderClass: "card-border-teal",
+    icon: "🌱",
+    subtitle: "Acompañamiento socioemocional y fortalecimiento de la convivencia, empatía y habilidades de aprendizaje.",
+    order: 2,
+    pageUrl: "/ciclos/infantil"
+  },
+  {
+    key: "basico",
+    slug: "basico",
+    name: "Ciclo Básico",
+    grades: "4° Y 5°",
+    badgeText: "4 y 5",
+    pillClass: "pill-yellow",
+    borderClass: "card-border-yellow",
+    icon: "📘",
+    subtitle: "Orientación en hábitos de estudio, autonomía escolar y desarrollo integral de preadolescentes.",
+    order: 3,
+    pageUrl: "/ciclos/basico"
+  },
+  {
+    key: "fundamental",
+    slug: "fundamental",
+    name: "Ciclo Fundamental",
+    grades: "6° Y 7°",
+    badgeText: "6 y 7",
+    pillClass: "pill-purple",
+    borderClass: "card-border-purple",
+    icon: "🔮",
+    subtitle: "Transición a la secundaria, gestión de emociones, prevención y fortalecimiento de la autoestima.",
+    order: 4,
+    pageUrl: "/ciclos/fundamental"
+  },
+  {
+    key: "exploratorio",
+    slug: "exploratorio",
+    name: "Ciclo Exploratorio",
+    grades: "8° Y 9°",
+    badgeText: "8 y 9",
+    pillClass: "pill-blue",
+    borderClass: "card-border-blue",
+    icon: "🧭",
+    subtitle: "Comunicación asertiva, prevención de riesgos psicosociales y construcción de relaciones saludables.",
+    order: 5,
+    pageUrl: "/ciclos/exploratorio"
+  },
+  {
+    key: "especializado",
+    slug: "especializado",
+    name: "Ciclo Especializado",
+    grades: "10° Y 11°",
+    badgeText: "10 y 11",
+    pillClass: "pill-green",
+    borderClass: "card-border-green",
+    icon: "🎓",
+    subtitle: "Orientación vocacional, preparación para la educación superior y consolidación del proyecto de vida.",
+    order: 6,
+    pageUrl: "/ciclos/especializado"
+  }
+];
+
+const DEFAULT_CUSTOM_PAGES = [];
+
 function getInitialDb() {
   return {
+    navItems: DEFAULT_NAV_ITEMS,
+    cyclesList: DEFAULT_CYCLES_LIST,
+    customPages: DEFAULT_CUSTOM_PAGES,
     calendarWorkshops: DEFAULT_CALENDAR_WORKSHOPS,
     siteImages: DEFAULT_IMAGES,
     psychologists: DEFAULT_PSYCHOLOGISTS,
@@ -203,7 +332,27 @@ function readDb() {
   try {
     initDb();
     const raw = fs.readFileSync(DB_FILE, 'utf-8');
-    return JSON.parse(raw);
+    const db = JSON.parse(raw);
+    let modified = false;
+
+    if (!db.navItems || !Array.isArray(db.navItems) || db.navItems.length === 0) {
+      db.navItems = DEFAULT_NAV_ITEMS;
+      modified = true;
+    }
+    if (!db.cyclesList || !Array.isArray(db.cyclesList) || db.cyclesList.length === 0) {
+      db.cyclesList = DEFAULT_CYCLES_LIST;
+      modified = true;
+    }
+    if (!db.customPages || !Array.isArray(db.customPages)) {
+      db.customPages = DEFAULT_CUSTOM_PAGES;
+      modified = true;
+    }
+
+    if (modified) {
+      fs.writeFileSync(DB_FILE, JSON.stringify(db, null, 2), 'utf-8');
+    }
+
+    return db;
   } catch (err) {
     console.error('Error leyendo base de datos JSON:', err);
     return getInitialDb();
@@ -222,7 +371,7 @@ function saveDb(data) {
 }
 
 // Inicializar DB al arrancar
-initDb();
+readDb();
 
 // ============================================================
 // API REST CENTRALIZADA PARA SINCRONIZACIÓN EN TIEMPO REAL
@@ -240,6 +389,9 @@ app.use('/api', (req, res, next) => {
 app.get('/api/data', (req, res) => {
   const db = readDb();
   res.json({
+    navItems: db.navItems || DEFAULT_NAV_ITEMS,
+    cyclesList: db.cyclesList || DEFAULT_CYCLES_LIST,
+    customPages: db.customPages || DEFAULT_CUSTOM_PAGES,
     calendarWorkshops: db.calendarWorkshops || DEFAULT_CALENDAR_WORKSHOPS,
     siteImages: db.siteImages || DEFAULT_IMAGES,
     psychologists: db.psychologists || DEFAULT_PSYCHOLOGISTS,
@@ -249,6 +401,42 @@ app.get('/api/data', (req, res) => {
     adminPassword: db.adminPassword || '123',
     adminSlug: db.adminSlug || 'admin451200'
   });
+});
+
+// 1.1 Guardar / Actualizar Elementos del Menú de Navegación
+app.post('/api/navigation', (req, res) => {
+  const { navItems } = req.body;
+  if (!Array.isArray(navItems)) {
+    return res.status(400).json({ error: 'Formato inválido de elementos de navegación' });
+  }
+  const db = readDb();
+  db.navItems = navItems;
+  saveDb(db);
+  res.json({ success: true, count: navItems.length });
+});
+
+// 1.2 Guardar / Actualizar Lista de Ciclos Escolares
+app.post('/api/cycles-list', (req, res) => {
+  const { cyclesList } = req.body;
+  if (!Array.isArray(cyclesList)) {
+    return res.status(400).json({ error: 'Formato inválido de lista de ciclos' });
+  }
+  const db = readDb();
+  db.cyclesList = cyclesList;
+  saveDb(db);
+  res.json({ success: true, count: cyclesList.length });
+});
+
+// 1.3 Guardar / Actualizar Páginas Personalizadas
+app.post('/api/custom-pages', (req, res) => {
+  const { customPages } = req.body;
+  if (!Array.isArray(customPages)) {
+    return res.status(400).json({ error: 'Formato inválido de páginas personalizadas' });
+  }
+  const db = readDb();
+  db.customPages = customPages;
+  saveDb(db);
+  res.json({ success: true, count: customPages.length });
 });
 
 // 2. Guardar / Actualizar Calendario de Encuentros
@@ -400,29 +588,36 @@ app.get('/encuentros', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'encuentros.html'));
 });
 
-// 3. Rutas de Ciclos Escolares (Soporta múltiples alias y extensiones)
-app.get(['/ciclos/primera-infancia', '/primera-infancia', '/ciclos/primera-infancia.html'], (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'ciclos', 'primera-infancia.html'));
+// 3. Rutas de Ciclos Escolares (Soporta ciclos existentes y dinámicos)
+app.get(['/ciclos/:slug', '/ciclos/:slug.html'], (req, res, next) => {
+  const rawSlug = req.params.slug.toLowerCase().replace('.html', '');
+  const specificPath = path.join(__dirname, 'public', 'ciclos', `${rawSlug}.html`);
+
+  if (fs.existsSync(specificPath)) {
+    return res.sendFile(specificPath);
+  }
+
+  // Fallback a plantilla unificada para ciclos creados dinámicamente
+  const templatePath = path.join(__dirname, 'public', 'ciclos', 'template.html');
+  if (fs.existsSync(templatePath)) {
+    return res.sendFile(templatePath);
+  }
+  res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
-app.get(['/ciclos/infantil', '/infantil', '/ciclos/infantil.html'], (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'ciclos', 'infantil.html'));
+// Alias directos para ciclos clásicos
+app.get(['/primera-infancia', '/infantil', '/basico', '/fundamental', '/exploratorio', '/especializado'], (req, res) => {
+  const cleanName = req.path.replace(/^\//, '').toLowerCase();
+  res.redirect(`/ciclos/${cleanName}`);
 });
 
-app.get(['/ciclos/basico', '/basico', '/ciclos/basico.html'], (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'ciclos', 'basico.html'));
-});
-
-app.get(['/ciclos/fundamental', '/fundamental', '/ciclos/fundamental.html'], (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'ciclos', 'fundamental.html'));
-});
-
-app.get(['/ciclos/exploratorio', '/exploratorio', '/ciclos/exploratorio.html'], (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'ciclos', 'exploratorio.html'));
-});
-
-app.get(['/ciclos/especializado', '/especializado', '/ciclos/especializado.html'], (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'ciclos', 'especializado.html'));
+// 3.1 Rutas de Páginas Personalizadas Dinámicas
+app.get(['/pagina/:slug', '/pagina/:slug.html', '/p/:slug'], (req, res) => {
+  const pagePath = path.join(__dirname, 'public', 'pagina.html');
+  if (fs.existsSync(pagePath)) {
+    return res.sendFile(pagePath);
+  }
+  res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
 // 4. Ruta del Panel de Administración (Soporta /admin, /admin.html, /admin451200, /2610 y el slug configurado)
@@ -455,7 +650,7 @@ app.get('/api/status', (req, res) => {
   res.json({
     status: 'ok',
     app: 'Psicoorientación Colegio Leonístico La Merced',
-    version: '2.0.0 (Synced JSON DB)',
+    version: '2.5.0 (Dynamic Pages & Cycles Sync)',
     uptime: process.uptime(),
     timestamp: new Date()
   });

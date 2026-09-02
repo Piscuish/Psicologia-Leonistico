@@ -1741,15 +1741,17 @@ button {
   align-items: center;
   justify-content: center;
   padding: 20px;
-  z-index: 200;
+  z-index: 99999 !important;
   opacity: 0;
+  visibility: hidden;
   pointer-events: none;
-  transition: opacity 0.15s ease-out;
+  transition: opacity 0.15s ease-out, visibility 0.15s ease-out;
   will-change: opacity;
 }
 
 .modal-overlay.active {
   opacity: 1;
+  visibility: visible;
   pointer-events: auto;
 }
 

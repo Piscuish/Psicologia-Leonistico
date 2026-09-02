@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title id="cycleDocTitle">Ciclo Escolar | Psicoorientación Escolar</title>
+  
+  <!-- Preconnect -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://lh3.googleusercontent.com" crossorigin>
+  <link rel="dns-prefetch" href="https://lh3.googleusercontent.com">
+  <link rel="dns-prefetch" href="https://unpkg.com">
+
+  <!-- Favicon -->
+  <link rel="icon" id="faviconTag" href="https://lh3.googleusercontent.com/sitesv/AG8ngQWMa1kc6jVbY3mSnIQYpVjxxkhTMgHuRLzpm-o3lAMgJtWUIgekXnXlWjgQDeRwQSCOLH_U5l8ztQCfaCv7r3JjyQ0JCQn2-3saSzHRhDM5duB-idQtoKG9ZYz6BUZLMM3SJfxvtYVinOuckRqSmPIT5Am07h5B7Luapy3c76dc1lYmoUBJGB0UCr38E0u29coTDmwWwuiFH6RIlpW448k" type="image/x-icon">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Oswald:wght@500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest" defer></script>
+
+  <!-- Custom Styles -->
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+
+  <!-- Main Navigation Header -->
+  <header class="main-header">
+    <div class="container nav-container">
+      <a href="/" class="brand-logo">
+        <div class="logo-img-wrapper">
+          <img id="siteBrandLogo" src="https://lh3.googleusercontent.com/sitesv/AG8ngQXPXXrReW33dy7TVTPLbtzVRorfO3DggGyZ2zPzCU8xHZihOUZ73rOtyxtOw8W6b-Ry1dvVTRgD9cXAi1PeOeBYBjYcRYJmjkDCa-In40HLlE0ZqGMI0v8Vm30pwJNToW-SKtWmik47Pnir0VAv4VW-kkrallHR0PnYc_cPd_uIBQNvJoe1Iu6Z7ACf=w16383" alt="Logo Colegio Leonístico La Merced" class="logo-img">
+        </div>
+        <div class="brand-text">
+          <span class="brand-title">Caminando Juntos</span>
+          <span class="brand-subtitle">Psicoorientación Escolar • Colegio Leonístico La Merced</span>
+        </div>
+      </a>
+
+      <!-- Desktop Nav Menu (Rendered dynamically by app.js) -->
+      <nav class="nav-menu" id="mainNavMenu">
+        <!-- Rendered by renderPublicNavbar() -->
+      </nav>
+
+      <!-- Action Button & Mobile Toggle -->
+      <div class="header-actions">
+        <button class="menu-toggle" onclick="toggleMobileMenu()" aria-label="Abrir menú">
+          <i data-lucide="menu"></i>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Nav Drawer (Rendered dynamically by app.js) -->
+    <div class="mobile-nav" id="mobileNav">
+      <!-- Rendered by renderPublicNavbar() -->
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main style="background-color: #f8fafc; padding-bottom: 60px;">
+    <!-- Cycle Hero -->
+    <section style="padding: 48px 20px 24px; text-align: center;">
+      <div class="container" style="max-width: 800px;">
+        <span class="dropdown-pill pill-pink" id="cycleHeroBadge" style="font-size: 0.85rem; padding: 6px 16px; margin-bottom: 12px; display: inline-block;">
+          GRADOS
+        </span>
+        <h1 id="cycleHeroTitle" style="font-family: var(--font-heading); font-size: 2.8rem; color: #1e293b; margin: 8px 0; letter-spacing: 0.5px;">
+          CICLO ESCOLAR
+        </h1>
+        <p id="cycleHeroSubtitle" style="color: #64748b; font-size: 1.05rem; line-height: 1.5; margin: 0 auto; max-width: 620px;">
+          Espacio formativo y de acompañamiento socioemocional para las familias y estudiantes.
+        </p>
+      </div>
+    </section>
+
+    <!-- Dynamic Cycle Content Blocks Grid -->
+    <section class="section-container" style="padding-top: 10px;">
+      <div class="container">
+        <div id="cycleBlocksContainer" class="cycle-blocks-grid">
+          <!-- Rendered dynamically by app.js -->
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="main-footer">
+    <div class="container">
+      <div class="footer-bottom text-center" style="border-top: none; padding: 20px 0;">
+        <p>&copy; 2026 Colegio Leonístico La Merced • Psicoorientación Escolar. Todos los derechos reservados.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="/app.js" defer></script>
+</body>
+</html>

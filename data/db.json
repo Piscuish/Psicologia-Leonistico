@@ -132,23 +132,95 @@
   ],
   "suggestions": [],
   "analytics": {
-    "totalVisits": 44,
+    "totalVisits": 54,
     "uniqueSessions": 0,
-    "lastVisitDate": "30/8/2026 09:30 p. m.",
+    "lastVisitDate": "2/9/2026 09:12 a. m.",
     "tabs": {
-      "inicio": 13,
+      "inicio": 16,
       "encuentros": 10,
-      "ciclos": 21
+      "ciclos": 28
     },
     "cycles": {
-      "primera_infancia": 10,
-      "infantil": 2,
-      "basico": 4,
+      "primera_infancia": 11,
+      "infantil": 3,
+      "basico": 5,
       "fundamental": 0,
-      "exploratorio": 5,
-      "especializado": 0
+      "exploratorio": 6,
+      "especializado": 1,
+      "cycle_1788358317660": 1,
+      "cycle_1788358007488": 1
     },
     "logs": [
+      {
+        "id": 1788358346750,
+        "date": "2/9/2026 09:12 a. m.",
+        "section": "Ciclos: Ciclo Exploratorio (8° Y 9°)",
+        "action": "Visita a la página de Ciclo Exploratorio (8° Y 9°)",
+        "device": "Escritorio"
+      },
+      {
+        "id": 1788358344389,
+        "date": "2/9/2026 09:12 a. m.",
+        "section": "Ciclos: Ciclo Especializado (10° Y 11°)",
+        "action": "Visita a la página de Ciclo Especializado (10° Y 11°)",
+        "device": "Escritorio"
+      },
+      {
+        "id": 1788358341747,
+        "date": "2/9/2026 09:12 a. m.",
+        "section": "Ciclos: Ciclo Juvenil Pro (9°, 10° y 11°)",
+        "action": "Visita a la página de Ciclo Juvenil Pro (9°, 10° y 11°)",
+        "device": "Escritorio"
+      },
+      {
+        "id": 1788358337942,
+        "date": "2/9/2026 09:12 a. m.",
+        "section": "Ciclos: 1 (T)",
+        "action": "Visita a la página de 1 (T)",
+        "device": "Escritorio"
+      },
+      {
+        "id": 1788358305330,
+        "date": "2/9/2026 09:11 a. m.",
+        "section": "Ciclos: Ciclo Básico (4° Y 5°)",
+        "action": "Visita a la página de Ciclo Básico (4° Y 5°)",
+        "device": "Escritorio"
+      },
+      {
+        "id": 1788358303930,
+        "date": "2/9/2026 09:11 a. m.",
+        "section": "Ciclos: Ciclo Infantil (1°, 2° Y 3°)",
+        "action": "Visita a la página de Ciclo Infantil (1°, 2° Y 3°)",
+        "device": "Escritorio"
+      },
+      {
+        "id": 1788358302065,
+        "date": "2/9/2026 09:11 a. m.",
+        "section": "Ciclos: Primera Infancia (JARDÍN Y TRANSICIÓN)",
+        "action": "Visita a la página de Primera Infancia (JARDÍN Y TRANSICIÓN)",
+        "device": "Escritorio"
+      },
+      {
+        "id": 1788358294999,
+        "date": "2/9/2026 09:11 a. m.",
+        "section": "Inicio / Portada",
+        "action": "Ingreso a la página de Inicio",
+        "device": "Escritorio"
+      },
+      {
+        "id": 1788358224431,
+        "date": "2/9/2026 09:10 a. m.",
+        "section": "Inicio / Portada",
+        "action": "Ingreso a la página de Inicio",
+        "device": "Escritorio"
+      },
+      {
+        "id": 1788356763223,
+        "date": "2/9/2026 08:46 a. m.",
+        "section": "Inicio / Portada",
+        "action": "Ingreso a la página de Inicio",
+        "device": "Escritorio"
+      },
       {
         "id": 1788143453743,
         "date": "30/8/2026 09:30 p. m.",
@@ -428,34 +500,6 @@
         "section": "Ciclos: Ciclo Exploratorio (8 y 9)",
         "action": "Visita a la página de Ciclo Exploratorio (8 y 9)",
         "device": "Escritorio"
-      },
-      {
-        "id": 1787598953164,
-        "date": "24/8/2026 02:15 p. m.",
-        "section": "Inicio / Portada",
-        "action": "Ingreso a la página de Inicio",
-        "device": "Escritorio"
-      },
-      {
-        "id": 1787598193718,
-        "date": "24/8/2026 02:03 p. m.",
-        "section": "Ciclos: Primera Infancia (J y T)",
-        "action": "Visita a la página de Primera Infancia (J y T)",
-        "device": "Escritorio"
-      },
-      {
-        "id": 1787598173590,
-        "date": "24/8/2026 02:02 p. m.",
-        "section": "Inicio / Portada",
-        "action": "Ingreso a la página de Inicio",
-        "device": "Escritorio"
-      },
-      {
-        "id": 1787598020877,
-        "date": "24/8/2026 02:00 p. m.",
-        "section": "Encuentros Familiares",
-        "action": "Consulta de Calendario de Encuentros",
-        "device": "Escritorio"
       }
     ]
   },
@@ -555,6 +599,254 @@
         }
       ],
       "order": 2
+    },
+    {
+      "id": 1788358008335,
+      "cycleId": "cycle_1788358007488",
+      "type": "hero_banner",
+      "size": "full",
+      "titleAlign": "left",
+      "title": "Liderazgo y Orientación Vocacional 2026",
+      "subtitle": "Taller formativo para estudiantes de media académica",
+      "badgeText": "DESTACADO",
+      "text": "Este espacio formativo brinda herramientas para la elección de carrera y vida profesional.",
+      "imageUrl": "",
+      "imagePosition": "left",
+      "buttonText": "",
+      "buttonUrl": "",
+      "iconEmoji": "💡",
+      "accentColor": "purple",
+      "slidesUrl": "",
+      "slidesBtnText": "",
+      "slidesFileData": "",
+      "slidesFileName": "",
+      "itemsList": [
+        {
+          "icon": "💖",
+          "title": "Afecto y Diálogo",
+          "text": "Acompañamiento cercano y validación emocional constante."
+        },
+        {
+          "icon": "⏰",
+          "title": "Rutina y Horarios",
+          "text": "Fijar horas para estudiar, descansar y compartir en familia."
+        }
+      ],
+      "resourcesList": [
+        {
+          "title": "Guía de Orientación Familiar (PDF)",
+          "desc": "Material imprimible de apoyo para el hogar.",
+          "fileUrl": "",
+          "fileName": "",
+          "fileSize": "",
+          "icon": "file-text"
+        }
+      ],
+      "photosList": [
+        {
+          "url": "https://images.unsplash.com/photo-1577896851231-70ef18881754?auto=format&fit=crop&w=600&q=80",
+          "caption": "Talleres y actividades del ciclo"
+        },
+        {
+          "url": "https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&w=600&q=80",
+          "caption": "Encuentros formativos"
+        }
+      ],
+      "order": 1
+    },
+    {
+      "id": 1788358207022,
+      "cycleId": "primera_infancia",
+      "type": "photo_gallery",
+      "size": "full",
+      "titleAlign": "left",
+      "title": "A",
+      "subtitle": "A",
+      "badgeText": "A",
+      "text": "A",
+      "imageUrl": "",
+      "imagePosition": "left",
+      "buttonText": "",
+      "buttonUrl": "",
+      "iconEmoji": "💡",
+      "accentColor": "purple",
+      "slidesUrl": "",
+      "slidesBtnText": "",
+      "slidesFileData": "",
+      "slidesFileName": "",
+      "itemsList": [
+        {
+          "icon": "💖",
+          "title": "Afecto y Diálogo",
+          "text": "Acompañamiento cercano y validación emocional constante."
+        },
+        {
+          "icon": "⏰",
+          "title": "Rutina y Horarios",
+          "text": "Fijar horas para estudiar, descansar y compartir en familia."
+        }
+      ],
+      "resourcesList": [
+        {
+          "title": "Guía de Orientación Familiar (PDF)",
+          "desc": "Material imprimible de apoyo para el hogar.",
+          "fileUrl": "",
+          "fileName": "",
+          "fileSize": "",
+          "icon": "file-text"
+        }
+      ],
+      "photosList": [
+        {
+          "url": "https://images.unsplash.com/photo-1577896851231-70ef18881754?auto=format&fit=crop&w=600&q=80",
+          "caption": "Talleres y actividades del ciclo"
+        },
+        {
+          "url": "https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&w=600&q=80",
+          "caption": "Encuentros formativos"
+        }
+      ],
+      "order": 1
     }
-  ]
+  ],
+  "navItems": [
+    {
+      "id": "nav_inicio",
+      "title": "Inicio",
+      "url": "/",
+      "icon": "home",
+      "type": "dropdown",
+      "order": 1,
+      "isSystem": true,
+      "children": [
+        {
+          "id": "sub_portada",
+          "title": "Portada Principal",
+          "url": "/",
+          "icon": "home",
+          "order": 1
+        },
+        {
+          "id": "sub_quienes_somos",
+          "title": "¿Quiénes Somos?",
+          "url": "/#quienes-somos",
+          "icon": "heart-handshake",
+          "order": 2
+        }
+      ]
+    },
+    {
+      "id": "nav_encuentros",
+      "title": "Encuentros Familiares",
+      "url": "/encuentros",
+      "icon": "users",
+      "type": "link",
+      "order": 2,
+      "isSystem": true
+    },
+    {
+      "id": "nav_ciclos",
+      "title": "Ciclos",
+      "url": "#",
+      "icon": "layers",
+      "type": "dropdown",
+      "order": 3,
+      "isSystem": true,
+      "isCyclesDropdown": true
+    }
+  ],
+  "cyclesList": [
+    {
+      "key": "primera_infancia",
+      "slug": "primera-infancia",
+      "name": "Primera Infancia",
+      "grades": "JARDÍN Y TRANSICIÓN",
+      "badgeText": "J y T",
+      "pillClass": "pill-pink",
+      "borderClass": "card-border-pink",
+      "icon": "🌸",
+      "subtitle": "Espacio formativo y de acompañamiento socioemocional para las familias y estudiantes de los primeros años escolares.",
+      "order": 1,
+      "pageUrl": "/ciclos/primera-infancia"
+    },
+    {
+      "key": "infantil",
+      "slug": "infantil",
+      "name": "Ciclo Infantil",
+      "grades": "1°, 2° Y 3°",
+      "badgeText": "1, 2 y 3",
+      "pillClass": "pill-teal",
+      "borderClass": "card-border-teal",
+      "icon": "🌱",
+      "subtitle": "Acompañamiento socioemocional y fortalecimiento de la convivencia, empatía y habilidades de aprendizaje.",
+      "order": 2,
+      "pageUrl": "/ciclos/infantil"
+    },
+    {
+      "key": "basico",
+      "slug": "basico",
+      "name": "Ciclo Básico",
+      "grades": "4° Y 5°",
+      "badgeText": "4 y 5",
+      "pillClass": "pill-yellow",
+      "borderClass": "card-border-yellow",
+      "icon": "📘",
+      "subtitle": "Orientación en hábitos de estudio, autonomía escolar y desarrollo integral de preadolescentes.",
+      "order": 3,
+      "pageUrl": "/ciclos/basico"
+    },
+    {
+      "key": "fundamental",
+      "slug": "fundamental",
+      "name": "Ciclo Fundamental",
+      "grades": "6° Y 7°",
+      "badgeText": "6 y 7",
+      "pillClass": "pill-purple",
+      "borderClass": "card-border-purple",
+      "icon": "🔮",
+      "subtitle": "Transición a la secundaria, gestión de emociones, prevención y fortalecimiento de la autoestima.",
+      "order": 4,
+      "pageUrl": "/ciclos/fundamental"
+    },
+    {
+      "key": "exploratorio",
+      "slug": "exploratorio",
+      "name": "Ciclo Exploratorio",
+      "grades": "8° Y 9°",
+      "badgeText": "8 y 9",
+      "pillClass": "pill-blue",
+      "borderClass": "card-border-blue",
+      "icon": "🧭",
+      "subtitle": "Comunicación asertiva, prevención de riesgos psicosociales y construcción de relaciones saludables.",
+      "order": 5,
+      "pageUrl": "/ciclos/exploratorio"
+    },
+    {
+      "key": "especializado",
+      "slug": "especializado",
+      "name": "Ciclo Especializado",
+      "grades": "10° Y 11°",
+      "badgeText": "10 y 11",
+      "pillClass": "pill-green",
+      "borderClass": "card-border-green",
+      "icon": "🎓",
+      "subtitle": "Orientación vocacional, preparación para la educación superior y consolidación del proyecto de vida.",
+      "order": 6,
+      "pageUrl": "/ciclos/especializado"
+    },
+    {
+      "key": "cycle_1788358007488",
+      "slug": "ciclo-juvenil-pro",
+      "name": "Ciclo Juvenil Pro",
+      "grades": "9°, 10° y 11°",
+      "badgeText": "9 10 y 11",
+      "pillClass": "pill-pink",
+      "borderClass": "card-border-pink",
+      "icon": "🎓",
+      "subtitle": "Espacio formativo y de orientación escolar.",
+      "order": 7,
+      "pageUrl": "/ciclos/ciclo-juvenil-pro"
+    }
+  ],
+  "customPages": []
 }
