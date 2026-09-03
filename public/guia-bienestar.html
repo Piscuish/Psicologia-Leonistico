@@ -1,0 +1,768 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Guía de Bienestar Emocional | Colegio Leonístico La Merced</title>
+  
+  <!-- Preconnect & DNS-Prefetch -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://lh3.googleusercontent.com" crossorigin>
+  <link rel="dns-prefetch" href="https://lh3.googleusercontent.com">
+  <link rel="dns-prefetch" href="https://unpkg.com">
+
+  <!-- Favicon -->
+  <link rel="icon" id="faviconTag" href="https://lh3.googleusercontent.com/sitesv/AG8ngQWMa1kc6jVbY3mSnIQYpVjxxkhTMgHuRLzpm-o3lAMgJtWUIgekXnXlWjgQDeRwQSCOLH_U5l8ztQCfaCv7r3JjyQ0JCQn2-3saSzHRhDM5duB-idQtoKG9ZYz6BUZLMM3SJfxvtYVinOuckRqSmPIT5Am07h5B7Luapy3c76dc1lYmoUBJGB0UCr38E0u29coTDmwWwuiFH6RIlpW448k" type="image/x-icon">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Oswald:wght@500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest" defer></script>
+
+  <!-- Custom Styles -->
+  <link rel="stylesheet" href="/styles.css">
+
+  <style>
+    .bienestar-hero {
+      background: linear-gradient(135deg, #1e3a8a 0%, #1e40af 50%, #0d9488 100%);
+      color: white;
+      padding: 56px 20px 48px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .bienestar-hero::after {
+      content: "";
+      position: absolute;
+      top: -50%;
+      right: -10%;
+      width: 400px;
+      height: 400px;
+      background: radial-gradient(circle, rgba(254, 240, 138, 0.15) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .bienestar-hero .hero-chip-white {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(255, 255, 255, 0.18);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      color: #fef08a;
+      padding: 6px 18px;
+      border-radius: 9999px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      margin-bottom: 16px;
+      backdrop-filter: blur(4px);
+    }
+    .bienestar-title {
+      font-family: var(--font-heading);
+      font-size: 2.8rem;
+      letter-spacing: 0.5px;
+      margin-bottom: 12px;
+      text-transform: uppercase;
+      line-height: 1.15;
+    }
+    .bienestar-subtitle {
+      max-width: 680px;
+      margin: 0 auto;
+      font-size: 1.1rem;
+      color: #e2e8f0;
+      line-height: 1.6;
+    }
+
+    .emotion-compass-card {
+      background: white;
+      border-radius: var(--radius-lg);
+      padding: 36px 32px;
+      box-shadow: var(--shadow-md);
+      border: 1px solid var(--border-color);
+      margin-top: -30px;
+      position: relative;
+      z-index: 10;
+    }
+    .emotion-buttons-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+      gap: 14px;
+      margin: 24px 0;
+    }
+    .emotion-btn {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 16px 14px;
+      background: #f8fafc;
+      border: 2px solid #e2e8f0;
+      border-radius: var(--radius-md);
+      transition: var(--transition);
+      cursor: pointer;
+      text-align: center;
+    }
+    .emotion-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-sm);
+    }
+    .emotion-btn.active {
+      background: #eff6ff;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(29, 78, 216, 0.15);
+    }
+    .emotion-btn .emotion-emoji {
+      font-size: 2rem;
+      margin-bottom: 6px;
+    }
+    .emotion-btn .emotion-name {
+      font-weight: 700;
+      font-size: 0.95rem;
+      color: #1e293b;
+    }
+
+    .emotion-feedback-box {
+      background: #f8fafc;
+      border-left: 5px solid var(--primary);
+      border-radius: var(--radius-sm);
+      padding: 22px 24px;
+      margin-top: 20px;
+      animation: fadeIn 0.25s ease-in-out;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .pillar-card {
+      background: white;
+      border-radius: var(--radius-lg);
+      padding: 28px 24px;
+      border: 1px solid var(--border-color);
+      box-shadow: var(--shadow-sm);
+      display: flex;
+      flex-direction: column;
+      transition: var(--transition);
+      position: relative;
+    }
+    .pillar-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-lg);
+      border-color: #cbd5e1;
+    }
+    .pillar-card-icon {
+      width: 52px;
+      height: 52px;
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      margin-bottom: 16px;
+    }
+    .pillar-title {
+      font-family: var(--font-display);
+      font-size: 1.3rem;
+      color: #0f172a;
+      margin-bottom: 10px;
+      line-height: 1.3;
+    }
+    .pillar-desc {
+      color: #475569;
+      font-size: 0.95rem;
+      line-height: 1.6;
+      margin-bottom: 16px;
+      flex-grow: 1;
+    }
+    .pillar-tips-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      border-top: 1px solid #f1f5f9;
+      padding-top: 12px;
+    }
+    .pillar-tips-list li {
+      position: relative;
+      padding-left: 22px;
+      font-size: 0.88rem;
+      color: #334155;
+      margin-bottom: 8px;
+      line-height: 1.45;
+    }
+    .pillar-tips-list li::before {
+      content: "✓";
+      position: absolute;
+      left: 0;
+      top: 0;
+      color: var(--secondary);
+      font-weight: bold;
+    }
+
+    .breathing-box {
+      background: linear-gradient(135deg, #0d9488 0%, #1e3a8a 100%);
+      color: white;
+      border-radius: var(--radius-lg);
+      padding: 36px 28px;
+      text-align: center;
+      margin: 40px 0;
+      box-shadow: var(--shadow-md);
+    }
+    .breathing-circle-wrapper {
+      width: 140px;
+      height: 140px;
+      margin: 24px auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+    .breathing-circle {
+      width: 110px;
+      height: 110px;
+      background: rgba(255, 255, 255, 0.25);
+      border: 3px solid rgba(255, 255, 255, 0.7);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 1.1rem;
+      transition: all 4s ease-in-out;
+    }
+    .breathing-circle.inhale {
+      transform: scale(1.35);
+      background: rgba(254, 240, 138, 0.35);
+      border-color: #fef08a;
+    }
+    .breathing-circle.exhale {
+      transform: scale(0.9);
+      background: rgba(255, 255, 255, 0.15);
+    }
+
+    @media (max-width: 768px) {
+      .bienestar-title {
+        font-size: 2.1rem;
+      }
+      .emotion-compass-card {
+        padding: 24px 18px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Main Navigation Header -->
+  <header class="main-header">
+    <div class="container nav-container">
+      <a href="/" class="brand-logo">
+        <div class="logo-img-wrapper">
+          <img id="siteBrandLogo" src="https://lh3.googleusercontent.com/sitesv/AG8ngQXPXXrReW33dy7TVTPLbtzVRorfO3DggGyZ2zPzCU8xHZihOUZ73rOtyxtOw8W6b-Ry1dvVTRgD9cXAi1PeOeBYBjYcRYJmjkDCa-In40HLlE0ZqGMI0v8Vm30pwJNToW-SKtWmik47Pnir0VAv4VW-kkrallHR0PnYc_cPd_uIBQNvJoe1Iu6Z7ACf=w16383" alt="Logo Colegio Leonístico La Merced" class="logo-img">
+        </div>
+        <div class="brand-text">
+          <span class="brand-title">Caminando Juntos</span>
+          <span class="brand-subtitle">Psicoorientación Escolar • Colegio Leonístico La Merced</span>
+        </div>
+      </a>
+
+      <!-- Desktop Nav Menu -->
+      <nav class="nav-menu" id="mainNavMenu">
+        <div class="nav-dropdown">
+          <a href="/" class="nav-dropdown-toggle" id="navDropdownBtn">
+            <i data-lucide="home"></i> Inicio <i data-lucide="chevron-down" class="chevron-icon"></i>
+          </a>
+          <div class="nav-dropdown-menu">
+            <a href="/" class="nav-dropdown-item">
+              <i data-lucide="home"></i> Portada Principal
+            </a>
+            <a href="/#quienes-somos" class="nav-dropdown-item">
+              <i data-lucide="heart-handshake"></i> ¿Quiénes Somos?
+            </a>
+          </div>
+        </div>
+
+        <a href="/guia-bienestar" class="nav-btn active">
+          <i data-lucide="heart-pulse"></i> Guía De Bienestar Emocional
+        </a>
+
+        <a href="/encuentros" class="nav-btn">
+          <i data-lucide="users"></i> Encuentros Familiares
+        </a>
+
+        <div class="nav-dropdown">
+          <a href="#" class="nav-dropdown-toggle" id="navCiclosBtn">
+            <i data-lucide="layers"></i> Ciclos <i data-lucide="chevron-down" class="chevron-icon"></i>
+          </a>
+          <div class="nav-dropdown-menu" style="min-width: 280px;">
+            <a href="/ciclos/primera-infancia" class="nav-dropdown-item">
+              <span class="dropdown-pill pill-pink">J y T</span> Primera Infancia
+            </a>
+            <a href="/ciclos/infantil" class="nav-dropdown-item">
+              <span class="dropdown-pill pill-teal">1, 2 y 3</span> Ciclo Infantil
+            </a>
+            <a href="/ciclos/basico" class="nav-dropdown-item">
+              <span class="dropdown-pill pill-yellow">4 y 5</span> Ciclo Básico
+            </a>
+            <a href="/ciclos/fundamental" class="nav-dropdown-item">
+              <span class="dropdown-pill pill-purple">6 y 7</span> Ciclo Fundamental
+            </a>
+            <a href="/ciclos/exploratorio" class="nav-dropdown-item">
+              <span class="dropdown-pill pill-blue">8 y 9</span> Ciclo Exploratorio
+            </a>
+            <a href="/ciclos/especializado" class="nav-dropdown-item">
+              <span class="dropdown-pill pill-green">10 y 11</span> Ciclo Especializado
+            </a>
+          </div>
+        </div>
+      </nav>
+
+      <div class="header-actions">
+        <button class="menu-toggle" onclick="toggleMobileMenu()" aria-label="Abrir menú">
+          <i data-lucide="menu"></i>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Nav Drawer -->
+    <div class="mobile-nav" id="mobileNav">
+      <a href="/" class="mobile-nav-btn">
+        <i data-lucide="home"></i> Inicio (Portada)
+      </a>
+      <a href="/#quienes-somos" class="mobile-nav-btn" style="padding-left: 28px; font-size: 0.9rem;">
+        <i data-lucide="heart-handshake"></i> └ ¿Quiénes Somos?
+      </a>
+      <a href="/guia-bienestar" class="mobile-nav-btn active">
+        <i data-lucide="heart-pulse"></i> Guía De Bienestar Emocional
+      </a>
+      <a href="/encuentros" class="mobile-nav-btn">
+        <i data-lucide="users"></i> Encuentros Familiares
+      </a>
+      <div style="font-size: 0.75rem; font-weight: 700; color: #64748b; text-transform: uppercase; padding: 6px 12px 2px 12px; letter-spacing: 0.5px;">
+        Ciclos Escolares
+      </div>
+      <a href="/ciclos/primera-infancia" class="mobile-nav-btn" style="padding-left: 24px; font-size: 0.9rem;">
+        <span class="dropdown-pill pill-pink" style="font-size: 0.68rem; min-width: 48px;">J y T</span> Primera Infancia
+      </a>
+      <a href="/ciclos/infantil" class="mobile-nav-btn" style="padding-left: 24px; font-size: 0.9rem;">
+        <span class="dropdown-pill pill-teal" style="font-size: 0.68rem; min-width: 48px;">1, 2 y 3</span> Ciclo Infantil
+      </a>
+      <a href="/ciclos/basico" class="mobile-nav-btn" style="padding-left: 24px; font-size: 0.9rem;">
+        <span class="dropdown-pill pill-yellow" style="font-size: 0.68rem; min-width: 48px;">4 y 5</span> Ciclo Básico
+      </a>
+      <a href="/ciclos/fundamental" class="mobile-nav-btn" style="padding-left: 24px; font-size: 0.9rem;">
+        <span class="dropdown-pill pill-purple" style="font-size: 0.68rem; min-width: 48px;">6 y 7</span> Ciclo Fundamental
+      </a>
+      <a href="/ciclos/exploratorio" class="mobile-nav-btn" style="padding-left: 24px; font-size: 0.9rem;">
+        <span class="dropdown-pill pill-blue" style="font-size: 0.68rem; min-width: 48px;">8 y 9</span> Ciclo Exploratorio
+      </a>
+      <a href="/ciclos/especializado" class="mobile-nav-btn" style="padding-left: 24px; font-size: 0.9rem;">
+        <span class="dropdown-pill pill-green" style="font-size: 0.68rem; min-width: 48px;">10 y 11</span> Ciclo Especializado
+      </a>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main>
+    
+    <section class="bienestar-hero">
+      <div class="container">
+        <span class="hero-chip-white">
+          <i data-lucide="sparkles"></i> Recursos y Orientación Psicoemocional
+        </span>
+        <h1 class="bienestar-title">Guía De Bienestar Emocional</h1>
+        <p class="bienestar-subtitle">
+          Un espacio cálido y formativo para aprender a reconocer, expresar y cuidar nuestras emociones, fortaleciendo la salud mental de nuestros estudiantes y familias leonísticas.
+        </p>
+      </div>
+    </section>
+
+    <!-- Interactive Emotion Compass Section -->
+    <section class="container" style="margin-bottom: 40px;">
+      <div class="emotion-compass-card">
+        <div class="text-center">
+          <span class="dropdown-pill pill-pink" style="font-size: 0.8rem; padding: 4px 14px; margin-bottom: 8px; display: inline-block;">
+            AUTOCONOCIMIENTO
+          </span>
+          <h2 style="font-family: var(--font-heading); font-size: 2rem; color: #1e293b; margin: 4px 0;">
+            ¿CÓMO TE SIENTES HOY?
+          </h2>
+          <p style="color: #64748b; font-size: 0.98rem; max-width: 600px; margin: 0 auto;">
+            Haz clic en la emoción que mejor describa tu momento actual para recibir pautas y ejercicios de apoyo inmediato:
+          </p>
+        </div>
+
+        <div class="emotion-buttons-grid">
+          <button class="emotion-btn active" onclick="selectEmotion('calma', event)">
+            <span class="emotion-emoji">🌿</span>
+            <span class="emotion-name">En Calma</span>
+          </button>
+          <button class="emotion-btn" onclick="selectEmotion('ansiedad', event)">
+            <span class="emotion-emoji">⚡</span>
+            <span class="emotion-name">Con Estrés / Ansiedad</span>
+          </button>
+          <button class="emotion-btn" onclick="selectEmotion('tristeza', event)">
+            <span class="emotion-emoji">🌧️</span>
+            <span class="emotion-name">Con Desánimo / Tristeza</span>
+          </button>
+          <button class="emotion-btn" onclick="selectEmotion('enojo', event)">
+            <span class="emotion-emoji">🔥</span>
+            <span class="emotion-name">Con Frustración / Enojo</span>
+          </button>
+          <button class="emotion-btn" onclick="selectEmotion('motivacion', event)">
+            <span class="emotion-emoji">✨</span>
+            <span class="emotion-name">Motivado / Inspirado</span>
+          </button>
+        </div>
+
+        <div id="emotionFeedback" class="emotion-feedback-box">
+          <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 8px;">
+            <span style="font-size: 1.6rem;" id="fbEmoji">🌿</span>
+            <h3 id="fbTitle" style="font-family: var(--font-display); font-size: 1.25rem; color: #0f172a; margin: 0;">
+              Qué valioso sentir calma y serenidad
+            </h3>
+          </div>
+          <p id="fbText" style="color: #334155; font-size: 0.95rem; line-height: 1.6; margin-bottom: 12px;">
+            Aprovecha este momento para saborear la tranquilidad, agradecer por las cosas cotidianas y ser un espacio de escucha y paz para quienes te rodean en casa y en el salón de clases.
+          </p>
+          <div id="fbExercise" style="background: white; border-radius: var(--radius-sm); padding: 12px 16px; border: 1px dashed #cbd5e1; font-size: 0.88rem; color: #475569;">
+            <strong>💡 Ejercicio sugerido:</strong> Practica un minuto de gratitud consciente identificando 3 detalles de tu día por los que te sientas agradecido hoy.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Pilares Fundamentales del Bienestar -->
+    <section class="section-container" style="padding: 20px 0 50px;">
+      <div class="container">
+        <div class="text-center" style="margin-bottom: 36px;">
+          <span class="dropdown-pill pill-teal" style="font-size: 0.8rem; padding: 4px 14px; margin-bottom: 8px; display: inline-block;">
+            PILARES CLAVE
+          </span>
+          <h2 style="font-family: var(--font-heading); font-size: 2.3rem; color: #1e293b; margin: 6px 0;">
+            ESTRATEGIAS PARA EL DÍA A DÍA
+          </h2>
+          <p style="color: #64748b; font-size: 1.05rem; max-width: 650px; margin: 0 auto;">
+            Pautas fundamentales desarrolladas por el Departamento de Psicoorientación para acompañar el desarrollo socioemocional de la comunidad leonística.
+          </p>
+        </div>
+
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 24px;">
+          
+          <div class="pillar-card">
+            <div class="pillar-card-icon" style="background: #eff6ff; color: #1d4ed8;">
+              <i data-lucide="brain-circuit"></i>
+            </div>
+            <span class="dropdown-pill pill-blue" style="font-size: 0.72rem; width: fit-content; margin-bottom: 8px;">AUTOCONTROL & REGULACIÓN</span>
+            <h3 class="pillar-title">1. Gestión del Estrés Escolar</h3>
+            <p class="pillar-desc">
+              Las evaluaciones y retos académicos generan inquietud natural. Aprender a responder con calma y organización transforma la tensión en aprendizaje y confianza.
+            </p>
+            <ul class="pillar-tips-list">
+              <li>Planifica el estudio en bloques de 25 minutos con 5 minutos de pausa activa (Técnica Pomodoro).</li>
+              <li>Sustituye la frase '¿Y si me va mal?' por '¿Qué paso concreto puedo dar hoy para prepararme mejor?'.</li>
+              <li>Recuerda que una nota no define tu valor integral como persona ni tu potencial futuro.</li>
+            </ul>
+          </div>
+
+          <div class="pillar-card">
+            <div class="pillar-card-icon" style="background: #f0fdfa; color: #0d9488;">
+              <i data-lucide="message-circle-heart"></i>
+            </div>
+            <span class="dropdown-pill pill-teal" style="font-size: 0.72rem; width: fit-content; margin-bottom: 8px;">VÍNCULOS EN EL HOGAR</span>
+            <h3 class="pillar-title">2. Comunicación Asertiva en Familia</h3>
+            <p class="pillar-desc">
+              El hogar es el refugio emocional por excelencia. Construir puentes de confianza permite a los hijos hablar abiertamente sin temor al juicio o al reproche inmediato.
+            </p>
+            <ul class="pillar-tips-list">
+              <li>Practica la escucha empática: escucha para comprender, no simplemente para responder o corregir.</li>
+              <li>Dedica al menos 15 minutos al día a conversar sin pantallas de por medio en la mesa o antes de dormir.</li>
+              <li>Valida las emociones de los hijos: 'Entiendo que estés triste o molesto, aquí estoy para acompañarte'.</li>
+            </ul>
+          </div>
+
+          <div class="pillar-card">
+            <div class="pillar-card-icon" style="background: #fdf2f8; color: #db2777;">
+              <i data-lucide="sparkles"></i>
+            </div>
+            <span class="dropdown-pill pill-pink" style="font-size: 0.72rem; width: fit-content; margin-bottom: 8px;">DESARROLLO PERSONAL</span>
+            <h3 class="pillar-title">3. Autoestima y Amor Propio</h3>
+            <p class="pillar-desc">
+              Reconocer nuestras fortalezas y aceptar nuestras áreas de mejora con compasión es el cimiento de una salud mental sólida y duradera en niños y adolescentes.
+            </p>
+            <ul class="pillar-tips-list">
+              <li>Evita las comparaciones con compañeros, hermanos o modelos idealizados en redes sociales.</li>
+              <li>Celebra el esfuerzo, la perseverancia y la actitud positiva, no solo los resultados finales.</li>
+              <li>Fomenta un diálogo interno amable: háblate a ti mismo como le hablarías a tu mejor amigo.</li>
+            </ul>
+          </div>
+
+          <div class="pillar-card">
+            <div class="pillar-card-icon" style="background: #fefce8; color: #ca8a04;">
+              <i data-lucide="moon"></i>
+            </div>
+            <span class="dropdown-pill pill-yellow" style="font-size: 0.72rem; width: fit-content; margin-bottom: 8px;">HÁBITOS SALUDABLES</span>
+            <h3 class="pillar-title">4. Sueño Reparador y Desconexión Digital</h3>
+            <p class="pillar-desc">
+              El cerebro infantil y juvenil necesita entre 8 y 10 horas de sueño profundo para procesar la memoria, consolidar el aprendizaje y regular adecuadamente las emociones.
+            </p>
+            <ul class="pillar-tips-list">
+              <li>Apaga teléfonos, tabletas y computadores al menos 45 minutos antes de acostarte a dormir.</li>
+              <li>Mantén horarios regulares para levantarse y acostarse, incluso durante los fines de semana.</li>
+              <li>Evita el consumo de bebidas con cafeína o azucaradas al final de la tarde o noche.</li>
+            </ul>
+          </div>
+
+          <div class="pillar-card">
+            <div class="pillar-card-icon" style="background: #faf5ff; color: #7e22ce;">
+              <i data-lucide="users-round"></i>
+            </div>
+            <span class="dropdown-pill pill-purple" style="font-size: 0.72rem; width: fit-content; margin-bottom: 8px;">CONVIVENCIA ESCOLAR</span>
+            <h3 class="pillar-title">5. Empatía y Resolución de Conflictos</h3>
+            <p class="pillar-desc">
+              Saber decir 'no' con respeto, resolver desacuerdos dialogando y cultivar relaciones sanas protege el bienestar colectivo en el aula y en la vida diaria.
+            </p>
+            <ul class="pillar-tips-list">
+              <li>Usa la fórmula asertiva: 'Cuando ocurre [hecho], yo me siento [emoción] y te propongo [acuerdo]'.</li>
+              <li>Sé un agente de buen trato: rechaza activamente los apodos hirientes y el aislamiento de compañeros.</li>
+              <li>Aprende a pedir disculpas sinceras y a reparar el daño cuando te equivoques.</li>
+            </ul>
+          </div>
+
+          <div class="pillar-card">
+            <div class="pillar-card-icon" style="background: #f0fdf4; color: #16a34a;">
+              <i data-lucide="shield-check"></i>
+            </div>
+            <span class="dropdown-pill pill-green" style="font-size: 0.72rem; width: fit-content; margin-bottom: 8px;">RED DE APOYO</span>
+            <h3 class="pillar-title">6. Cuándo Solicitar Apoyo Psicológico</h3>
+            <p class="pillar-desc">
+              Pedir ayuda a tiempo es un acto de valentía y madurez. El colegio cuenta con profesionales dispuestos a orientar a estudiantes y familias en momentos difíciles.
+            </p>
+            <ul class="pillar-tips-list">
+              <li>Cambios drásticos y prolongados en el estado de ánimo, apetito o rendimiento académico.</li>
+              <li>Sentimientos constantes de aislamiento, desesperanza o ansiedad que impiden la rutina normal.</li>
+              <li>Dificultades familiares o situaciones de duelo en las que se requiera orientación especializada.</li>
+            </ul>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- Ejercicio Guiado de Respiración Consciente -->
+    <section class="container" style="margin-bottom: 50px;">
+      <div class="breathing-box">
+        <span style="background: rgba(255,255,255,0.2); padding: 4px 14px; border-radius: 9999px; font-size: 0.85rem; font-weight: 600;">
+          TÉCNICA DE CALMA RÁPIDA (4 - 4 - 4)
+        </span>
+        <h2 style="font-family: var(--font-heading); font-size: 2.2rem; margin: 12px 0 6px;">
+          RESPIRA CON NOSOTROS
+        </h2>
+        <p style="color: #cbd5e1; max-width: 580px; margin: 0 auto 20px; font-size: 1rem;">
+          Tómate un momento para sincronizar tu respiración con el círculo. Inhala cuando se expanda y exhala cuando se contraiga.
+        </p>
+
+        <div class="breathing-circle-wrapper">
+          <div id="breathCircle" class="breathing-circle">
+            <span id="breathText">Inhala</span>
+          </div>
+        </div>
+
+        <button id="toggleBreathBtn" class="btn" style="background: #fef08a; color: #854d0e; font-weight: 700; padding: 10px 24px; border-radius: 9999px; cursor: pointer; transition: var(--transition);" onclick="toggleBreathing()">
+          Pausar Ejercicio
+        </button>
+      </div>
+    </section>
+
+    <!-- Orientadoras Institucionales / Contacto -->
+    <section class="section-container" style="background: #ffffff; padding: 50px 0; border-top: 1px solid var(--border-color);">
+      <div class="container">
+        <div class="text-center" style="margin-bottom: 36px;">
+          <span class="dropdown-pill pill-purple" style="font-size: 0.8rem; padding: 4px 14px; margin-bottom: 8px; display: inline-block;">
+            ACOMPAÑAMIENTO INSTITUCIONAL
+          </span>
+          <h2 style="font-family: var(--font-heading); font-size: 2.2rem; color: #1e293b; margin: 6px 0;">
+            ESTAMOS AQUÍ PARA ESCUCHARTE
+          </h2>
+          <p style="color: #64748b; font-size: 1rem; max-width: 600px; margin: 0 auto;">
+            El Departamento de Psicoorientación del Colegio Leonístico La Merced te brinda un espacio seguro, cercano y confidencial.
+          </p>
+        </div>
+
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px; max-width: 850px; margin: 0 auto;">
+          
+          <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: var(--radius-lg); padding: 24px; text-align: center;">
+            <div style="font-size: 2.5rem; margin-bottom: 10px;">👩‍💼</div>
+            <span class="dropdown-pill pill-blue" style="font-size: 0.75rem; margin-bottom: 8px; display: inline-block;">PSICÓLOGA BACHILLERATO</span>
+            <h3 style="font-family: var(--font-display); font-size: 1.25rem; color: #0f172a; margin-bottom: 6px;">
+              Nancy Rocío Torres Silva
+            </h3>
+            <p style="color: #64748b; font-size: 0.88rem; margin-bottom: 14px; line-height: 1.5;">
+              Acompañamiento a estudiantes y familias de grados 6° a 11°. Proyecto de vida, orientación vocacional y bienestar socioemocional.
+            </p>
+            <a href="mailto:nhurtadov@leonisticolamerced.edu.co" class="btn btn-sm" style="background: #1e3a8a; color: white; display: inline-flex; align-items: center; gap: 6px; padding: 8px 18px; border-radius: 8px; text-decoration: none; font-size: 0.88rem;">
+              <i data-lucide="mail"></i> Contactar por Correo
+            </a>
+          </div>
+
+          <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: var(--radius-lg); padding: 24px; text-align: center;">
+            <div style="font-size: 2.5rem; margin-bottom: 10px;">👩‍🏫</div>
+            <span class="dropdown-pill pill-pink" style="font-size: 0.75rem; margin-bottom: 8px; display: inline-block;">PSICÓLOGA PRIMARIA Y PREESCOLAR</span>
+            <h3 style="font-family: var(--font-display); font-size: 1.25rem; color: #0f172a; margin-bottom: 6px;">
+              María Isabel Rodríguez
+            </h3>
+            <p style="color: #64748b; font-size: 0.88rem; margin-bottom: 14px; line-height: 1.5;">
+              Acompañamiento integral a niños y padres de Jardín, Transición y grados 1° a 5°. Crianza positiva y desarrollo infantil.
+            </p>
+            <a href="mailto:mmecheverry@leonistico.com" class="btn btn-sm" style="background: #0d9488; color: white; display: inline-flex; align-items: center; gap: 6px; padding: 8px 18px; border-radius: 8px; text-decoration: none; font-size: 0.88rem;">
+              <i data-lucide="mail"></i> Contactar por Correo
+            </a>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="main-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div class="logo-img-wrapper" style="width: 44px; height: 44px;">
+            <img id="footerBrandLogo" src="https://lh3.googleusercontent.com/sitesv/AG8ngQXPXXrReW33dy7TVTPLbtzVRorfO3DggGyZ2zPzCU8xHZihOUZ73rOtyxtOw8W6b-Ry1dvVTRgD9cXAi1PeOeBYBjYcRYJmjkDCa-In40HLlE0ZqGMI0v8Vm30pwJNToW-SKtWmik47Pnir0VAv4VW-kkrallHR0PnYc_cPd_uIBQNvJoe1Iu6Z7ACf=w16383" alt="Logo" class="logo-img">
+          </div>
+          <h3>Caminando Juntos</h3>
+          <p>Departamento de Psicoorientación Escolar</p>
+          <p class="footer-motto">"Educando con el corazón y guiando con vocación."</p>
+        </div>
+
+        <div class="footer-nav">
+          <h4>Navegación</h4>
+          <ul>
+            <li><a href="/">Inicio</a></li>
+            <li><a href="/guia-bienestar">Guía De Bienestar Emocional</a></li>
+            <li><a href="/encuentros">Encuentros Familiares</a></li>
+            <li><a href="/#quienes-somos">¿Quiénes Somos?</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-contact">
+          <h4>Contacto Institucional</h4>
+          <p><i data-lucide="building"></i> Colegio Leonístico La Merced</p>
+          <p id="footerContactNancy"><i data-lucide="mail"></i> Orientación Grupos A: nhurtadov@leonisticolamerced.edu.co</p>
+          <p id="footerContactMaria"><i data-lucide="mail"></i> Orientación Grupos B: mmecheverry@leonistico.com</p>
+        </div>
+      </div>
+
+      <div class="footer-bottom text-center">
+        <p>&copy; 2026 Colegio Leonístico La Merced • Psicoorientación Escolar. Todos los derechos reservados.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Lógica Interactiva Específica de la Guía de Bienestar -->
+  <script>
+    const EMOTION_DATA = {
+      calma: {
+        emoji: '🌿',
+        title: 'Qué valioso sentir calma y serenidad',
+        text: 'Aprovecha este momento para saborear la tranquilidad, agradecer por las cosas cotidianas y ser un espacio de escucha y paz para quienes te rodean en casa y en el salón de clases.',
+        exercise: '💡 Ejercicio sugerido: Practica un minuto de gratitud consciente identificando 3 detalles de tu día por los que te sientas agradecido.'
+      },
+      ansiedad: {
+        emoji: '⚡',
+        title: 'Respira hondo: la ansiedad es temporal y manejable',
+        text: 'Sentir inquietud o preocupación es una señal de que algo te importa. Tu cuerpo está en alerta, pero no estás en peligro real en este momento. Permítete soltar los hombros y aflojar la mandíbula.',
+        exercise: '💡 Ejercicio sugerido (Técnica 5-4-3-2-1): Mira a tu alrededor y nombra 5 cosas que ves, 4 cosas que puedes tocar, 3 que puedes oír, 2 que puedes oler y 1 pensamiento positivo sobre ti.'
+      },
+      tristeza: {
+        emoji: '🌧️',
+        title: 'Está bien sentirse triste; tus emociones merecen cuidado',
+        text: 'La tristeza nos invita a pausar, descansar y reconectar con lo que nos duele. No necesitas fingir que todo está bien todo el tiempo. Sé gentil contigo mismo hoy.',
+        exercise: '💡 Ejercicio sugerido: Escribe en un papel lo que estás sintiendo sin censurarte o habla con un amigo, familiar u orientadora en quien confíes.'
+      },
+      enojo: {
+        emoji: '🔥',
+        title: 'El enojo nos señala límites, aprende a canalizarlo',
+        text: 'Sentir rabia o frustración es natural cuando percibimos injusticias o bloqueos. Lo importante es cómo decidimos actuar con esa energía sin lastimar a los demás ni a nosotros mismos.',
+        exercise: '💡 Ejercicio sugerido: Toma un vaso de agua lentamente, da un paseo corto de 5 minutos o escribe lo que te molesta antes de responder a una situación tensa.'
+      },
+      motivacion: {
+        emoji: '✨',
+        title: '¡Aprovecha esa chispa de inspiración y energía!',
+        text: 'Cuando te sientes motivado, tu creatividad y capacidad de enfoque se multiplican. Es el momento idóneo para avanzar en tus proyectos, aprender algo nuevo o apoyar a un compañero.',
+        exercise: '💡 Ejercicio sugerido: Elige una meta que venías postergando y dedica los próximos 20 minutos a dar el primer paso concreto con toda tu atención.'
+      }
+    };
+
+    function selectEmotion(key, ev) {
+      const data = EMOTION_DATA[key];
+      if (!data) return;
+
+      document.querySelectorAll('.emotion-btn').forEach(btn => btn.classList.remove('active'));
+      const activeBtn = ev ? (ev.currentTarget || ev.target.closest('.emotion-btn')) : null;
+      if (activeBtn) activeBtn.classList.add('active');
+
+      const fb = document.getElementById('emotionFeedback');
+      document.getElementById('fbEmoji').textContent = data.emoji;
+      document.getElementById('fbTitle').textContent = data.title;
+      document.getElementById('fbText').textContent = data.text;
+      document.getElementById('fbExercise').innerHTML = data.exercise;
+
+      fb.style.animation = 'none';
+      fb.offsetHeight;
+      fb.style.animation = 'fadeIn 0.25s ease-in-out';
+    }
+
+    let breathInterval = null;
+    let isInhale = false;
+    let isBreathingActive = true;
+
+    function startBreathingCycle() {
+      const circle = document.getElementById('breathCircle');
+      const text = document.getElementById('breathText');
+      if (!circle || !text) return;
+
+      isInhale = true;
+      circle.classList.add('inhale');
+      circle.classList.remove('exhale');
+      text.textContent = 'Inhala';
+
+      breathInterval = setInterval(() => {
+        isInhale = !isInhale;
+        if (isInhale) {
+          circle.classList.add('inhale');
+          circle.classList.remove('exhale');
+          text.textContent = 'Inhala';
+        } else {
+          circle.classList.remove('inhale');
+          circle.classList.add('exhale');
+          text.textContent = 'Exhala';
+        }
+      }, 4000);
+    }
+
+    function toggleBreathing() {
+      const btn = document.getElementById('toggleBreathBtn');
+      const text = document.getElementById('breathText');
+      if (isBreathingActive) {
+        clearInterval(breathInterval);
+        isBreathingActive = false;
+        btn.textContent = 'Iniciar Ejercicio';
+        text.textContent = 'Pausa';
+      } else {
+        isBreathingActive = true;
+        btn.textContent = 'Pausar Ejercicio';
+        startBreathingCycle();
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      startBreathingCycle();
+    });
+  </script>
+
+  <!-- Main JavaScript Logic -->
+  <script src="/app.js" defer></script>
+</body>
+</html>

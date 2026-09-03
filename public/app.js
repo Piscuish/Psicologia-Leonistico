@@ -176,12 +176,21 @@ const DEFAULT_NAV_ITEMS = [
     ]
   },
   {
+    id: "nav_guia_bienestar",
+    title: "Guía De Bienestar Emocional",
+    url: "/guia-bienestar",
+    icon: "heart-pulse",
+    type: "link",
+    order: 2,
+    isSystem: true
+  },
+  {
     id: "nav_encuentros",
     title: "Encuentros Familiares",
     url: "/encuentros",
     icon: "users",
     type: "link",
-    order: 2,
+    order: 3,
     isSystem: true
   },
   {
@@ -190,7 +199,7 @@ const DEFAULT_NAV_ITEMS = [
     url: "#",
     icon: "layers",
     type: "dropdown",
-    order: 3,
+    order: 4,
     isSystem: true,
     isCyclesDropdown: true
   }

@@ -186,12 +186,21 @@ const DEFAULT_NAV_ITEMS = [
     ]
   },
   {
+    id: "nav_guia_bienestar",
+    title: "Guía De Bienestar Emocional",
+    url: "/guia-bienestar",
+    icon: "heart-pulse",
+    type: "link",
+    order: 2,
+    isSystem: true
+  },
+  {
     id: "nav_encuentros",
     title: "Encuentros Familiares",
     url: "/encuentros",
     icon: "users",
     type: "link",
-    order: 2,
+    order: 3,
     isSystem: true
   },
   {
@@ -200,7 +209,7 @@ const DEFAULT_NAV_ITEMS = [
     url: "#",
     icon: "layers",
     type: "dropdown",
-    order: 3,
+    order: 4,
     isSystem: true,
     isCyclesDropdown: true
   }
@@ -583,7 +592,12 @@ app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
-// 2. Página de Encuentros Familiares / Talleres
+// 2. Página de Guía de Bienestar Emocional
+app.get(['/guia-bienestar', '/guia-bienestar-emocional', '/bienestar-emocional', '/guia-bienestar.html'], (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'guia-bienestar.html'));
+});
+
+// 2.1 Página de Encuentros Familiares / Talleres
 app.get('/encuentros', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'encuentros.html'));
 });
