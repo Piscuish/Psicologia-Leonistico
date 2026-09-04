@@ -1,0 +1,23 @@
+{
+  "name": "psicologia-leonistico",
+  "version": "1.0.0",
+  "description": "Portal de Psicoorientación Escolar - Colegio Leonístico La Merced",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "keywords": [
+    "psicologia",
+    "colegio-leonistico",
+    "web-service",
+    "render"
+  ],
+  "author": "Colegio Leonístico La Merced",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.21.0",
+    "isomorphic-git": "^1.41.9",
+    "puppeteer-core": "^25.9.0"
+  }
+}

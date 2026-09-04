@@ -3,9 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Calendario Encuentros Familiares 2026-2027 | Colegio Leonístico La Merced</title>
+  <title>Ciclo Fundamental (6° y 7°) | Psicoorientación Escolar</title>
   
-  <!-- Preconnect & DNS-Prefetch -->
+  <!-- Preconnect -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="preconnect" href="https://lh3.googleusercontent.com" crossorigin>
@@ -43,7 +43,7 @@
       <nav class="nav-menu">
         <!-- Inicio Dropdown -->
         <div class="nav-dropdown">
-          <a href="/" class="nav-dropdown-toggle" id="navDropdownBtn">
+          <a href="/" class="nav-dropdown-toggle">
             <i data-lucide="home"></i> Inicio <i data-lucide="chevron-down" class="chevron-icon"></i>
           </a>
           <div class="nav-dropdown-menu">
@@ -53,17 +53,21 @@
             <a href="/#quienes-somos" class="nav-dropdown-item">
               <i data-lucide="heart-handshake"></i> ¿Quiénes Somos?
             </a>
+            <a href="/#recursos-comunidad" class="nav-dropdown-item">
+              <i data-lucide="book-open"></i> Recursos & Enlaces
+            </a>
           </div>
         </div>
 
         <!-- Encuentros Familiares -->
-        <a href="/encuentros" class="nav-btn active">
+        <a href="/encuentros" class="nav-btn">
           <i data-lucide="users"></i> Encuentros Familiares
+          <span class="nav-badge">Talleres</span>
         </a>
 
         <!-- Ciclos Dropdown -->
         <div class="nav-dropdown">
-          <a href="#" class="nav-dropdown-toggle" id="navCiclosBtn">
+          <a href="#" class="nav-dropdown-toggle active" id="navCiclosBtn">
             <i data-lucide="layers"></i> Ciclos <i data-lucide="chevron-down" class="chevron-icon"></i>
           </a>
           <div class="nav-dropdown-menu" style="min-width: 280px;">
@@ -76,7 +80,7 @@
             <a href="/ciclos/basico" class="nav-dropdown-item">
               <span class="dropdown-pill pill-yellow">4 y 5</span> Ciclo Básico
             </a>
-            <a href="/ciclos/fundamental" class="nav-dropdown-item">
+            <a href="/ciclos/fundamental" class="nav-dropdown-item" style="background: #eff6ff; color: var(--primary);">
               <span class="dropdown-pill pill-purple">6 y 7</span> Ciclo Fundamental
             </a>
             <a href="/ciclos/exploratorio" class="nav-dropdown-item">
@@ -105,7 +109,10 @@
       <a href="/#quienes-somos" class="mobile-nav-btn" style="padding-left: 28px; font-size: 0.9rem;">
         <i data-lucide="heart-handshake"></i> └ ¿Quiénes Somos?
       </a>
-      <a href="/encuentros" class="mobile-nav-btn active">
+      <a href="/#recursos-comunidad" class="mobile-nav-btn" style="padding-left: 28px; font-size: 0.9rem;">
+        <i data-lucide="book-open"></i> └ Recursos & Enlaces
+      </a>
+      <a href="/encuentros" class="mobile-nav-btn">
         <i data-lucide="users"></i> Encuentros Familiares
       </a>
       <div style="font-size: 0.75rem; font-weight: 700; color: #64748b; text-transform: uppercase; padding: 6px 12px 2px 12px; letter-spacing: 0.5px;">
@@ -120,7 +127,7 @@
       <a href="/ciclos/basico" class="mobile-nav-btn" style="padding-left: 24px; font-size: 0.9rem;">
         <span class="dropdown-pill pill-yellow" style="font-size: 0.68rem; min-width: 48px;">4 y 5</span> Ciclo Básico
       </a>
-      <a href="/ciclos/fundamental" class="mobile-nav-btn" style="padding-left: 24px; font-size: 0.9rem;">
+      <a href="/ciclos/fundamental" class="mobile-nav-btn active" style="padding-left: 24px; font-size: 0.9rem;">
         <span class="dropdown-pill pill-purple" style="font-size: 0.68rem; min-width: 48px;">6 y 7</span> Ciclo Fundamental
       </a>
       <a href="/ciclos/exploratorio" class="mobile-nav-btn" style="padding-left: 24px; font-size: 0.9rem;">
@@ -132,138 +139,30 @@
     </div>
   </header>
 
-  <!-- Main Content -->
-  <main>
-    
-    <!-- Hero Section Encuentros (Clean, without Certificado/28 Agosto pills) -->
-    <section class="encuentros-hero">
-      <div class="container">
-        <span class="hero-chip-white">
-          <i data-lucide="heart-handshake"></i> Escuela de Familias Leonísticas
-        </span>
-        <h1 class="encuentros-title">Encuentros Familiares</h1>
-        <p class="encuentros-subtitle">
-          Espacios formativos y de diálogo para fortalecer los vínculos en casa y guiar el desarrollo socioemocional de nuestros hijos.
-        </p>
-      </div>
-    </section>
-
-    <!-- CALENDARIO DE ENCUENTROS FAMILIARES 2026-2027 (REPRODUCCIÓN DEL TABLERO) -->
-    <section class="calendar-wrapper-section">
-      <div class="container">
-        
-        <div class="calendar-main-header">
-          <h2 class="calendar-main-title">CALENDARIO ENCUENTROS FAMILIARES</h2>
-          <div class="calendar-main-year">2026-2027</div>
-          <div class="calendar-help-tip">
-            <i data-lucide="mouse-pointer-click"></i> Haz clic en cualquier encuentro para ver la descripción de la temática e inscribirte
-          </div>
-        </div>
-
-        <!-- 5 Columns Month Board -->
-        <div class="calendar-columns-board" id="calendarColumnsContainer">
-          <!-- Rendered dynamically by renderCalendar() in app.js -->
-        </div>
-
-      </div>
-    </section>
-
+  <!-- Clean Blank Content -->
+  <main style="min-height: 65vh; display: flex; align-items: center; justify-content: center; padding: 60px 20px; background-color: #f8fafc;">
+    <div class="container text-center" style="max-width: 700px;">
+      <span class="dropdown-pill pill-purple" style="font-size: 0.9rem; padding: 6px 16px; margin-bottom: 16px;">
+        GRADOS 6° Y 7°
+      </span>
+      <h1 style="font-family: var(--font-heading); font-size: 3rem; color: #1e293b; margin: 12px 0; letter-spacing: 1px;">
+        CICLO FUNDAMENTAL
+      </h1>
+      <p style="color: #64748b; font-size: 1.1rem; line-height: 1.6; margin-bottom: 24px;">
+        Página en construcción para la información, actividades y contenidos de Ciclo Fundamental.
+      </p>
+    </div>
   </main>
 
   <!-- Footer -->
   <footer class="main-footer">
     <div class="container">
-      <div class="footer-grid">
-        <div class="footer-brand">
-          <div class="logo-img-wrapper" style="width: 44px; height: 44px;">
-            <img id="footerBrandLogo" src="https://lh3.googleusercontent.com/sitesv/AG8ngQXPXXrReW33dy7TVTPLbtzVRorfO3DggGyZ2zPzCU8xHZihOUZ73rOtyxtOw8W6b-Ry1dvVTRgD9cXAi1PeOeBYBjYcRYJmjkDCa-In40HLlE0ZqGMI0v8Vm30pwJNToW-SKtWmik47Pnir0VAv4VW-kkrallHR0PnYc_cPd_uIBQNvJoe1Iu6Z7ACf=w16383" alt="Logo" class="logo-img">
-          </div>
-          <h3>Caminando Juntos</h3>
-          <p>Departamento de Psicoorientación Escolar</p>
-          <p class="footer-motto">"Educando con el corazón y guiando con vocación."</p>
-        </div>
-
-        <div class="footer-nav">
-          <h4>Navegación</h4>
-          <ul>
-            <li><a href="/">Inicio</a></li>
-            <li><a href="/encuentros">Encuentros Familiares</a></li>
-            <li><a href="/#quienes-somos">¿Quiénes Somos?</a></li>
-          </ul>
-        </div>
-
-        <div class="footer-contact">
-          <h4>Contacto Institucional</h4>
-          <p><i data-lucide="building"></i> Colegio Leonístico La Merced</p>
-          <p id="footerContactNancy"><i data-lucide="mail"></i> Orientación Grupos A: nhurtadov@leonisticolamerced.edu.co</p>
-          <p id="footerContactMaria"><i data-lucide="mail"></i> Orientación Grupos B: mmecheverry@leonistico.com</p>
-        </div>
-      </div>
-
-      <div class="footer-bottom text-center">
+      <div class="footer-bottom text-center" style="border-top: none; padding: 20px 0;">
         <p>&copy; 2026 Colegio Leonístico La Merced • Psicoorientación Escolar. Todos los derechos reservados.</p>
       </div>
     </div>
   </footer>
 
-  <!-- WORKSHOP DETAIL MODAL (ON CALENDAR CARD CLICK) -->
-  <div class="modal-overlay" id="workshopDetailModal">
-    <div class="modal-card">
-      <div class="modal-header">
-        <h3><i data-lucide="calendar"></i> Detalle del Encuentro</h3>
-        <button class="close-modal-btn" onclick="closeWorkshopDetailModal()"><i data-lucide="x"></i></button>
-      </div>
-      
-      <div class="workshop-detail-box">
-        <div class="detail-pill-row">
-          <span class="detail-pill" id="detailWorkshopMonth" style="background: #e0f2fe; color: #0369a1;">Mes</span>
-          <span class="detail-pill" id="detailWorkshopDate" style="background: #fef3c7; color: #92400e;">Fecha</span>
-          <span class="detail-pill" id="detailWorkshopGrades" style="background: #dcfce7; color: #166534;">Grados</span>
-        </div>
-        
-        <h4 id="detailWorkshopTitle" style="font-family: var(--font-display); font-size: 1.25rem; color: #0f172a; margin-bottom: 12px; line-height: 1.35;">
-          Título del Taller
-        </h4>
-        
-        <p class="detail-desc" id="detailWorkshopDesc">
-          Descripción del taller...
-        </p>
-
-        <!-- Visor Embebido de Diapositivas en la propia Web -->
-        <div id="detailWorkshopSlidesEmbedWrap" class="slides-embed-wrapper" style="display: none;">
-          <div class="slides-embed-header">
-            <span>
-              <i data-lucide="presentation"></i> <span id="detailWorkshopSlidesTitle">Diapositivas del Encuentro</span>
-            </span>
-            <div style="display: flex; gap: 8px; align-items: center;">
-              <a id="detailWorkshopSlidesExternalBtn" href="#" target="_blank" class="btn btn-sm" style="background: rgba(255,255,255,0.2); color: white; padding: 4px 10px; font-size: 0.78rem; text-decoration: none; border-radius: 6px; display: inline-flex; align-items: center; gap: 4px;">
-                <i data-lucide="external-link"></i> Abrir / Descargar
-              </a>
-            </div>
-          </div>
-          <div class="slides-embed-body" id="slidesEmbedContainer">
-            <!-- Injected via JS -->
-          </div>
-        </div>
-      </div>
-
-      <div style="display: flex; justify-content: flex-end; margin-top: 14px;">
-        <button class="btn btn-secondary" onclick="closeWorkshopDetailModal()" style="min-width: 120px;">
-          Cerrar
-        </button>
-      </div>
-    </div>
-  </div>
-
-  <!-- Toast Box -->
-  <div class="toast-container" id="toastBox">
-    <div class="toast-content">
-      <i data-lucide="check-circle" class="toast-icon"></i>
-      <span id="toastMsg">Notificación</span>
-    </div>
-  </div>
-
-  <!-- Main JavaScript Logic -->
   <script src="/app.js" defer></script>
 </body>
 </html>
