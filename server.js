@@ -36,8 +36,21 @@ app.use(express.static(path.join(__dirname, 'public'), {
 // BASE DE DATOS CENTRALIZADA EN ARCHIVO JSON (data/db.json)
 // ============================================================
 
-const DATA_DIR = path.join(__dirname, 'data');
+const isVercel = Boolean(process.env.VERCEL || process.env.AWS_LAMBDA_FUNCTION_NAME);
+const DATA_DIR = isVercel ? '/tmp' : path.join(__dirname, 'data');
 const DB_FILE = path.join(DATA_DIR, 'db.json');
+
+// Si corre en Vercel, copiar la semilla de data/db.json a /tmp/db.json si no existe
+if (isVercel && !fs.existsSync(DB_FILE)) {
+  const seedFile = path.join(__dirname, 'data', 'db.json');
+  if (fs.existsSync(seedFile)) {
+    try {
+      fs.copyFileSync(seedFile, DB_FILE);
+    } catch (e) {
+      console.warn('Could not seed /tmp/db.json:', e.message);
+    }
+  }
+}
 
 const DEFAULT_CALENDAR_WORKSHOPS = [
   {
