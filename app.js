@@ -742,8 +742,9 @@ async function syncSecurityToServer(adminPassword, adminSlug) {
 // ============================================================
 
 document.addEventListener('DOMContentLoaded', async () => {
-  // Sincronizar primero con la base de datos centralizada del servidor
-  await loadServerData();
+  // 1. Renderizado INMEDIATO instantáneo con datos locales (0 milisegundos de espera)
+  renderPublicNavbar();
+  applySiteImages();
 
   const path = window.location.pathname.toLowerCase();
   
@@ -767,6 +768,13 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
   }
 
+  renderTeamCards();
+  updateBadgeCounts();
+
+  // 2. Comprobar versión en segundo plano sin retrasar el renderizado visual
+  await loadServerData();
+
+  // 3. Re-renderizar si hubo actualización desde el servidor
   renderPublicNavbar();
   applySiteImages();
   renderTeamCards();

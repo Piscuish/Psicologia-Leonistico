@@ -465,17 +465,17 @@
   ],
   "suggestions": [],
   "analytics": {
-    "totalVisits": 95,
+    "totalVisits": 97,
     "uniqueSessions": 0,
-    "lastVisitDate": "6/9/2026 07:23 p. m.",
+    "lastVisitDate": "6/9/2026 08:00 p. m.",
     "tabs": {
       "inicio": 35,
       "encuentros": 14,
-      "ciclos": 46
+      "ciclos": 48
     },
     "cycles": {
-      "primera_infancia": 22,
-      "infantil": 5,
+      "primera_infancia": 23,
+      "infantil": 6,
       "basico": 7,
       "fundamental": 1,
       "exploratorio": 7,
@@ -484,6 +484,20 @@
       "cycle_1788358007488": 2
     },
     "logs": [
+      {
+        "id": 1788742810835,
+        "date": "6/9/2026 08:00 p. m.",
+        "section": "Ciclos: Primera Infancia (JARDÍN Y TRANSICIÓN)",
+        "action": "Visita a la página de Primera Infancia (JARDÍN Y TRANSICIÓN)",
+        "device": "Escritorio"
+      },
+      {
+        "id": 1788742809715,
+        "date": "6/9/2026 08:00 p. m.",
+        "section": "Ciclos: Ciclo Infantil (1°, 2° Y 3°)",
+        "action": "Visita a la página de Ciclo Infantil (1°, 2° Y 3°)",
+        "device": "Escritorio"
+      },
       {
         "id": 1788740639128,
         "date": "6/9/2026 07:23 p. m.",
@@ -819,24 +833,10 @@
         "section": "Ciclos: Primera Infancia (JARDÍN Y TRANSICIÓN)",
         "action": "Visita a la página de Primera Infancia (JARDÍN Y TRANSICIÓN)",
         "device": "Escritorio"
-      },
-      {
-        "id": 1788358294999,
-        "date": "2/9/2026 09:11 a. m.",
-        "section": "Inicio / Portada",
-        "action": "Ingreso a la página de Inicio",
-        "device": "Escritorio"
-      },
-      {
-        "id": 1788358224431,
-        "date": "2/9/2026 09:10 a. m.",
-        "section": "Inicio / Portada",
-        "action": "Ingreso a la página de Inicio",
-        "device": "Escritorio"
       }
     ]
   },
   "adminPassword": "123",
   "adminSlug": "2610",
-  "version": "1788740639128"
+  "version": "1788742810835"
 }
