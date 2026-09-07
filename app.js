@@ -507,9 +507,75 @@ const DEFAULT_SUGGESTIONS = [
 // APP STATE & PERSISTENCE (HYBRID LOCAL + SERVER DATABASE)
 // ============================================================
 
-let navItems = JSON.parse(localStorage.getItem('psicologia_nav_items')) || DEFAULT_NAV_ITEMS;
-let cyclesList = JSON.parse(localStorage.getItem('psicologia_cycles_list')) || DEFAULT_CYCLES_LIST;
-let customPages = JSON.parse(localStorage.getItem('psicologia_custom_pages')) || DEFAULT_CUSTOM_PAGES;
+const APP_BUILD_VERSION = '2.8.5-20260907';
+
+function initializeAppState() {
+  const currentBuild = localStorage.getItem('psicologia_app_build_version');
+  let nav = null;
+  let cycles = null;
+  let pages = null;
+
+  try { nav = JSON.parse(localStorage.getItem('psicologia_nav_items')); } catch (_) {}
+  try { cycles = JSON.parse(localStorage.getItem('psicologia_cycles_list')); } catch (_) {}
+  try { pages = JSON.parse(localStorage.getItem('psicologia_custom_pages')); } catch (_) {}
+
+  // Si no hay datos guardados o la versión de la aplicación se actualizó en el código
+  if (!Array.isArray(nav) || currentBuild !== APP_BUILD_VERSION) {
+    if (!Array.isArray(nav) || nav.length === 0) {
+      nav = DEFAULT_NAV_ITEMS;
+    } else {
+      // Fusionar items del sistema por defecto que puedan faltar (ej. Guía De Bienestar Emocional)
+      DEFAULT_NAV_ITEMS.forEach(defaultItem => {
+        const exists = nav.some(item => item.id === defaultItem.id || (defaultItem.url && item.url === defaultItem.url));
+        if (!exists) {
+          nav.push(defaultItem);
+        }
+      });
+      nav.sort((a, b) => (a.order || 0) - (b.order || 0));
+    }
+    localStorage.setItem('psicologia_nav_items', JSON.stringify(nav));
+  }
+
+  if (!Array.isArray(cycles) || currentBuild !== APP_BUILD_VERSION) {
+    if (!Array.isArray(cycles) || cycles.length === 0) {
+      cycles = DEFAULT_CYCLES_LIST;
+    } else {
+      // Asegurar que las imágenes de fondo (heroBgImage) y atributos actualizados se sincronicen
+      cycles = cycles.map(cycle => {
+        const def = DEFAULT_CYCLES_LIST.find(d => d.key === cycle.key || d.slug === cycle.slug);
+        if (def) {
+          return {
+            ...cycle,
+            heroBgImage: cycle.heroBgImage || def.heroBgImage || '',
+            pillClass: cycle.pillClass || def.pillClass,
+            borderClass: cycle.borderClass || def.borderClass,
+            icon: cycle.icon || def.icon
+          };
+        }
+        return cycle;
+      });
+      DEFAULT_CYCLES_LIST.forEach(defCycle => {
+        if (!cycles.some(c => c.key === defCycle.key || c.slug === defCycle.slug)) {
+          cycles.push(defCycle);
+        }
+      });
+    }
+    localStorage.setItem('psicologia_cycles_list', JSON.stringify(cycles));
+  }
+
+  if (!Array.isArray(pages)) {
+    pages = DEFAULT_CUSTOM_PAGES;
+    localStorage.setItem('psicologia_custom_pages', JSON.stringify(pages));
+  }
+
+  localStorage.setItem('psicologia_app_build_version', APP_BUILD_VERSION);
+  return { nav, cycles, pages };
+}
+
+const { nav: initialNav, cycles: initialCycles, pages: initialPages } = initializeAppState();
+let navItems = initialNav;
+let cyclesList = initialCycles;
+let customPages = initialPages;
 
 let siteImages = JSON.parse(localStorage.getItem('psicologia_site_images')) || DEFAULT_SITE_IMAGES;
 let adminPassword = localStorage.getItem('psicologia_admin_password') || '123';
@@ -779,6 +845,15 @@ document.addEventListener('DOMContentLoaded', async () => {
   applySiteImages();
   renderTeamCards();
   updateBadgeCounts();
+
+  if (path.includes('encuentros')) {
+    renderCalendar();
+  } else if (path.includes('ciclos')) {
+    const matchedCycle = cyclesList.find(c => path.includes(c.slug) || path.includes(c.key));
+    if (matchedCycle) {
+      renderCyclePublicPage(matchedCycle.key);
+    }
+  }
 
   // Secret keyboard shortcut (Ctrl + Alt + A)
   document.addEventListener('keydown', (e) => {
@@ -2104,6 +2179,105 @@ function resetAnalyticsStats() {
     renderAnalyticsDashboard();
     showToast('Métricas restablecidas a cero.');
   }
+}
+
+function exportPortalDataJson() {
+  const exportData = {
+    version: Date.now().toString(),
+    navItems,
+    cyclesList,
+    customPages,
+    calendarWorkshops,
+    siteImages,
+    psychologists,
+    cycleBlocks,
+    suggestions,
+    analytics,
+    adminPassword,
+    adminSlug
+  };
+  const jsonStr = JSON.stringify(exportData, null, 2);
+  const blob = new Blob([jsonStr], { type: 'application/json' });
+  const url = URL.createObjectURL(blob);
+  const link = document.createElement('a');
+  link.href = url;
+  link.download = `psicologia_leonistico_db_${new Date().toISOString().slice(0, 10)}.json`;
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+  URL.revokeObjectURL(url);
+  showToast('💾 Copia de respaldo JSON descargada.');
+}
+
+function copyPortalDataJson() {
+  const exportData = {
+    version: Date.now().toString(),
+    navItems,
+    cyclesList,
+    customPages,
+    calendarWorkshops,
+    siteImages,
+    psychologists,
+    cycleBlocks,
+    suggestions,
+    analytics,
+    adminPassword,
+    adminSlug
+  };
+  const jsonStr = JSON.stringify(exportData, null, 2);
+  navigator.clipboard.writeText(jsonStr).then(() => {
+    showToast('📋 Datos JSON copiados al portapapeles.');
+  }).catch(() => {
+    showToast('⚠️ No se pudo copiar al portapapeles.');
+  });
+}
+
+function importPortalDataJson(event) {
+  const file = event?.target?.files?.[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = (e) => {
+    try {
+      const data = JSON.parse(e.target.result);
+      if (data.navItems && Array.isArray(data.navItems)) {
+        navItems = data.navItems;
+        localStorage.setItem('psicologia_nav_items', JSON.stringify(navItems));
+      }
+      if (data.cyclesList && Array.isArray(data.cyclesList)) {
+        cyclesList = data.cyclesList;
+        localStorage.setItem('psicologia_cycles_list', JSON.stringify(cyclesList));
+      }
+      if (data.customPages && Array.isArray(data.customPages)) {
+        customPages = data.customPages;
+        localStorage.setItem('psicologia_custom_pages', JSON.stringify(customPages));
+      }
+      if (data.calendarWorkshops && Array.isArray(data.calendarWorkshops)) {
+        calendarWorkshops = data.calendarWorkshops;
+        localStorage.setItem('psicologia_calendar_workshops', JSON.stringify(calendarWorkshops));
+      }
+      if (data.siteImages && typeof data.siteImages === 'object') {
+        siteImages = { ...DEFAULT_SITE_IMAGES, ...data.siteImages };
+        localStorage.setItem('psicologia_site_images', JSON.stringify(siteImages));
+      }
+      if (data.psychologists && Array.isArray(data.psychologists)) {
+        psychologists = data.psychologists;
+        localStorage.setItem('psicologia_psychologists', JSON.stringify(psychologists));
+      }
+      if (data.cycleBlocks && Array.isArray(data.cycleBlocks)) {
+        cycleBlocks = data.cycleBlocks;
+        localStorage.setItem('psicologia_cycle_blocks', JSON.stringify(cycleBlocks));
+      }
+      if (data.suggestions && Array.isArray(data.suggestions)) {
+        suggestions = data.suggestions;
+        localStorage.setItem('psicologia_suggestions', JSON.stringify(suggestions));
+      }
+      showToast('✅ ¡Datos importados exitosamente! Recargando...');
+      setTimeout(() => window.location.reload(), 900);
+    } catch (err) {
+      showToast('❌ El archivo seleccionado no es un JSON válido.');
+    }
+  };
+  reader.readAsText(file);
 }
 
 // ============================================================
@@ -4380,10 +4554,13 @@ function renderCyclePublicPage(cycleKey) {
 
   // Imagen de fondo del encabezado / Hero
   const heroSection = document.getElementById('cycleHeroSection') || document.querySelector('.cycle-hero-section');
+  const defaultMeta = DEFAULT_CYCLES_LIST.find(c => c.key === meta.key || c.slug === meta.slug);
+  const heroBg = meta.heroBgImage || defaultMeta?.heroBgImage || '';
+
   if (heroSection) {
-    if (meta.heroBgImage) {
+    if (heroBg) {
       heroSection.classList.add('has-bg-img');
-      heroSection.style.backgroundImage = `linear-gradient(135deg, rgba(15, 23, 42, 0.82) 0%, rgba(30, 27, 75, 0.86) 100%), url("${meta.heroBgImage}")`;
+      heroSection.style.backgroundImage = `linear-gradient(135deg, rgba(15, 23, 42, 0.82) 0%, rgba(30, 27, 75, 0.86) 100%), url("${heroBg}")`;
       heroSection.style.backgroundSize = 'cover';
       heroSection.style.backgroundPosition = 'center';
     } else {

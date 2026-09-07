@@ -16,10 +16,6 @@ const PORT = process.env.PORT || 3000;
 app.use(express.json({ limit: '25mb' }));
 app.use(express.urlencoded({ extended: true, limit: '25mb' }));
 
-// Bloquear acceso público genérico a admin.html o /admin (redirigir al inicio)
-app.get(['/admin', '/admin.html', '/panel', '/login'], (req, res) => {
-  res.redirect('/');
-});
 
 // Servir uploads con cache inmutable de 30 días
 const UPLOADS_DIR = path.join(__dirname, 'public', 'uploads');

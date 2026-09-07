@@ -1536,6 +1536,28 @@
           </form>
         </div>
 
+        <div class="security-card-box" style="margin-top: 20px; border-left: 4px solid #3b82f6;">
+          <h5 style="font-size: 1rem; color: #1e293b; margin-bottom: 8px;">🔄 Sincronización y Copia de Respaldo (JSON)</h5>
+          <p style="font-size: 0.85rem; color: #64748b; margin-bottom: 14px; line-height: 1.5;">
+            Si realizas cambios desde tu celular o computadora y deseas transferirlos entre dispositivos o guardarlos en GitHub:
+          </p>
+          <div style="display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 16px;">
+            <button type="button" class="btn btn-primary btn-sm" onclick="exportPortalDataJson()">
+              <i data-lucide="download"></i> Descargar Respaldo JSON
+            </button>
+            <button type="button" class="btn btn-secondary btn-sm" onclick="copyPortalDataJson()">
+              <i data-lucide="copy"></i> Copiar JSON al Portapapeles
+            </button>
+            <label class="btn btn-secondary btn-sm" style="margin-bottom: 0; cursor: pointer; display: inline-flex; align-items: center; gap: 6px;">
+              <i data-lucide="upload"></i> Importar Archivo JSON
+              <input type="file" accept=".json" onchange="importPortalDataJson(event)" style="display: none;">
+            </label>
+          </div>
+          <small style="display: block; color: #64748b; font-size: 0.78rem;">
+            💡 <strong>Tip:</strong> Puedes descargar este archivo JSON y guardarlo como <code>data/db.json</code> en tu repositorio de GitHub para que los cambios se reflejen a todos los usuarios en Vercel.
+          </small>
+        </div>
+
       </div>
     </div>
   </div>

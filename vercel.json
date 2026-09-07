@@ -23,40 +23,32 @@
   ],
   "rewrites": [
     {
-      "source": "/api/(.*)",
-      "destination": "/api/index.js"
-    },
-    {
-      "source": "/ping",
-      "destination": "/api/index.js"
-    },
-    {
-      "source": "/keep-alive",
-      "destination": "/api/index.js"
-    },
-    {
-      "source": "/ciclos/(.*)",
-      "destination": "/api/index.js"
-    },
-    {
-      "source": "/pagina/(.*)",
-      "destination": "/api/index.js"
-    },
-    {
-      "source": "/p/(.*)",
-      "destination": "/api/index.js"
-    },
-    {
       "source": "/admin451200",
-      "destination": "/api/index.js"
+      "destination": "/admin.html"
     },
     {
       "source": "/2610",
-      "destination": "/api/index.js"
+      "destination": "/admin.html"
     },
     {
-      "source": "/((?!api/|uploads/|.*\\..*).*)",
-      "destination": "/api/index.js"
+      "source": "/guia-bienestar",
+      "destination": "/guia-bienestar.html"
+    },
+    {
+      "source": "/encuentros",
+      "destination": "/encuentros.html"
+    },
+    {
+      "source": "/pagina/(.*)",
+      "destination": "/pagina.html"
+    },
+    {
+      "source": "/p/(.*)",
+      "destination": "/pagina.html"
+    },
+    {
+      "source": "/ciclos/(.*)",
+      "destination": "/ciclos/template.html"
     }
   ]
 }
