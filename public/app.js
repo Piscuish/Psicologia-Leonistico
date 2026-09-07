@@ -9,11 +9,13 @@
 // ============================================================
 
 const DEFAULT_SITE_IMAGES = {
-  logo: 'https://lh3.googleusercontent.com/sitesv/AG8ngQXPXXrReW33dy7TVTPLbtzVRorfO3DggGyZ2zPzCU8xHZihOUZ73rOtyxtOw8W6b-Ry1dvVTRgD9cXAi1PeOeBYBjYcRYJmjkDCa-In40HLlE0ZqGMI0v8Vm30pwJNToW-SKtWmik47Pnir0VAv4VW-kkrallHR0PnYc_cPd_uIBQNvJoe1Iu6Z7ACf=w16383',
-  favicon: 'https://lh3.googleusercontent.com/sitesv/AG8ngQWMa1kc6jVbY3mSnIQYpVjxxkhTMgHuRLzpm-o3lAMgJtWUIgekXnXlWjgQDeRwQSCOLH_U5l8ztQCfaCv7r3JjyQ0JCQn2-3saSzHRhDM5duB-idQtoKG9ZYz6BUZLMM3SJfxvtYVinOuckRqSmPIT5Am07h5B7Luapy3c76dc1lYmoUBJGB0UCr38E0u29coTDmwWwuiFH6RIlpW448k',
-  heroBg: 'https://lh3.googleusercontent.com/sitesv/AG8ngQXf5KMbSedK98LmnR8hVcZ1tQNv9JpPIYgJ_P1-N6Q5iSqACGKpSGodX_1rSgcQRceZEaHYmEwNBCUykyD4Vt8zF3dKk9QwMAvf5jqK5ubLKRI0lMQqm-mTeqlLq8tmwVFvMbK1VVJuALhgmnXCUplp-P89XqCfB8P3BbzoBi6GI6YAXc4_nlBfKojb=w16383',
-  welcomeImg: 'https://lh3.googleusercontent.com/sitesv/AG8ngQWOyxLk67vCI15BlZoCjOwd8xUiVdKQzLu-M2WJcEPpTf9i3QDpCzc1-5m6X-sKqpvyWPGZBwQ-rH8UhgQL7YTxjIlxDFe_bipo6xrnJX-R5AzoEojbfXeILt4DV4eHhLkoRtPmt0qDN9i4vhtAbDolgStj2fPdU9XVS2h5y405j0qv0gtNpOby2sONDNOeFMCsNGdXiYbURk_wJfVERZBegFn7tlsmLq3pjw8f=w1280',
-  aboutImg: 'https://lh3.googleusercontent.com/sitesv/AG8ngQXTnHzijkLW5x4q0oxIMOi07YzG-IBG1OfPXeoVkIVB8fjkFXyd17Exs0GpjRWuO_ve89ISCOVUerGrrxM5Btnf5tup2wv79zMnKOoluKmpvA0bbZU3sVSnjk80O_PqvnpU7L_xlejXLWd0rR4xWkxGQj7g0dTAeH3vz104NNIAC_EwotDlnekiU7aMZOxbjrQAZ56qxhieVbVysrZ75FKa5z5OY7hICFCfX1Ptwyo=w1280'
+  "logo": "/uploads/site_logo_1788739866816.png",
+  "welcome": "https://lh3.googleusercontent.com/sitesv/AG8ngQWOyxLk67vCI15BlZoCjOwd8xUiVdKQzLu-M2WJcEPpTf9i3QDpCzc1-5m6X-sKqpvyWPGZBwQ-rH8UhgQL7YTxjIlxDFe_bipo6xrnJX-R5AzoEojbfXeILt4DV4eHhLkoRtPmt0qDN9i4vhtAbDolgStj2fPdU9XVS2h5y405j0qv0gtNpOby2sONDNOeFMCsNGdXiYbURk_wJfVERZBegFn7tlsmLq3pjw8f=w1280",
+  "about": "https://lh3.googleusercontent.com/sitesv/AG8ngQXTnHzijkLW5x4q0oxIMOi07YzG-IBG1OfPXeoVkIVB8fjkFXyd17Exs0GpjRWuO_ve89ISCOVUerGrrxM5Btnf5tup2wv79zMnKOoluKmpvA0bbZU3sVSnjk80O_PqvnpU7L_xlejXLWd0rR4xWkxGQj7g0dTAeH3vz104NNIAC_EwotDlnekiU7aMZOxbjrQAZ56qxhieVbVysrZ75FKa5z5OY7hICFCfX1Ptwyo=w1280",
+  "favicon": "https://lh3.googleusercontent.com/sitesv/AG8ngQWMa1kc6jVbY3mSnIQYpVjxxkhTMgHuRLzpm-o3lAMgJtWUIgekXnXlWjgQDeRwQSCOLH_U5l8ztQCfaCv7r3JjyQ0JCQn2-3saSzHRhDM5duB-idQtoKG9ZYz6BUZLMM3SJfxvtYVinOuckRqSmPIT5Am07h5B7Luapy3c76dc1lYmoUBJGB0UCr38E0u29coTDmwWwuiFH6RIlpW448k",
+  "heroBg": "https://lh3.googleusercontent.com/sitesv/AG8ngQXf5KMbSedK98LmnR8hVcZ1tQNv9JpPIYgJ_P1-N6Q5iSqACGKpSGodX_1rSgcQRceZEaHYmEwNBCUykyD4Vt8zF3dKk9QwMAvf5jqK5ubLKRI0lMQqm-mTeqlLq8tmwVFvMbK1VVJuALhgmnXCUplp-P89XqCfB8P3BbzoBi6GI6YAXc4_nlBfKojb=w16383",
+  "welcomeImg": "https://lh3.googleusercontent.com/sitesv/AG8ngQWOyxLk67vCI15BlZoCjOwd8xUiVdKQzLu-M2WJcEPpTf9i3QDpCzc1-5m6X-sKqpvyWPGZBwQ-rH8UhgQL7YTxjIlxDFe_bipo6xrnJX-R5AzoEojbfXeILt4DV4eHhLkoRtPmt0qDN9i4vhtAbDolgStj2fPdU9XVS2h5y405j0qv0gtNpOby2sONDNOeFMCsNGdXiYbURk_wJfVERZBegFn7tlsmLq3pjw8f=w1280",
+  "aboutImg": "https://lh3.googleusercontent.com/sitesv/AG8ngQXTnHzijkLW5x4q0oxIMOi07YzG-IBG1OfPXeoVkIVB8fjkFXyd17Exs0GpjRWuO_ve89ISCOVUerGrrxM5Btnf5tup2wv79zMnKOoluKmpvA0bbZU3sVSnjk80O_PqvnpU7L_xlejXLWd0rR4xWkxGQj7g0dTAeH3vz104NNIAC_EwotDlnekiU7aMZOxbjrQAZ56qxhieVbVysrZ75FKa5z5OY7hICFCfX1Ptwyo=w1280"
 };
 
 const DEFAULT_PSYCHOLOGISTS = [
@@ -159,121 +161,338 @@ const DEFAULT_RSVPS = [
   }
 ];
 
-const DEFAULT_CYCLE_BLOCKS = [];
+const DEFAULT_CYCLE_BLOCKS = [
+  {
+    "id": 3,
+    "cycleId": "infantil",
+    "title": "Empatía, Convivencia y Amistad",
+    "subtitle": "Grados 1°, 2° y 3°",
+    "text": "Fortalecemos la convivencia escolar en el Ciclo Infantil guiando a los estudiantes en la empatía, el trabajo en equipo, la resolución pacífica de conflictos y el respeto mutuo en el aula de clase.",
+    "imageUrl": "",
+    "imagePosition": "top",
+    "badgeText": "1°, 2° y 3°",
+    "order": 1,
+    "type": "hero_banner",
+    "titleAlign": "left",
+    "size": "full",
+    "imageSize": "full",
+    "imageFit": "contain"
+  },
+  {
+    "id": 4,
+    "cycleId": "basico",
+    "title": "Hábitos de Estudio y Gestión del Tiempo",
+    "subtitle": "Grados 4° y 5°",
+    "text": "Estrategias para que los estudiantes de Ciclo Básico organicen su tiempo de estudio, fortalezcan su concentración y asuman con motivación y responsabilidad sus compromisos académicos.",
+    "imageUrl": "",
+    "imagePosition": "top",
+    "badgeText": "4° y 5°",
+    "order": 1,
+    "type": "hero_banner",
+    "titleAlign": "left",
+    "size": "full",
+    "imageSize": "full",
+    "imageFit": "contain"
+  },
+  {
+    "id": 5,
+    "cycleId": "fundamental",
+    "title": "Transición a la Secundaria y Autonomía",
+    "subtitle": "Grados 6° y 7°",
+    "text": "Acompañamiento integral en los cambios socioemocionales de la preadolescencia, promoviendo el pensamiento crítico, la autoestima y la adaptación positiva a la vida en secundaria.",
+    "imageUrl": "",
+    "imagePosition": "top",
+    "badgeText": "6° y 7°",
+    "order": 1,
+    "type": "hero_banner",
+    "titleAlign": "left",
+    "size": "full",
+    "imageSize": "full",
+    "imageFit": "contain"
+  },
+  {
+    "id": 7,
+    "cycleId": "especializado",
+    "title": "Orientación Vocacional y Proyecto de Vida",
+    "subtitle": "Grados 10° y 11°",
+    "text": "Asesoría y acompañamiento para la clarificación de intereses vocacionales, toma informada de decisiones profesionales, preparación para las Pruebas Saber y proyección al futuro universitario.",
+    "imageUrl": "",
+    "imagePosition": "top",
+    "badgeText": "10° y 11°",
+    "order": 1,
+    "type": "hero_banner",
+    "titleAlign": "left",
+    "size": "full",
+    "imageSize": "full",
+    "imageFit": "contain"
+  },
+  {
+    "id": 1788358008335,
+    "cycleId": "cycle_1788358007488",
+    "type": "hero_banner",
+    "size": "full",
+    "titleAlign": "left",
+    "title": "Liderazgo y Orientación Vocacional 2026",
+    "subtitle": "Taller formativo para estudiantes de media académica",
+    "badgeText": "DESTACADO",
+    "text": "Este espacio formativo brinda herramientas para la elección de carrera y vida profesional.",
+    "imageUrl": "",
+    "imagePosition": "left",
+    "buttonText": "",
+    "buttonUrl": "",
+    "iconEmoji": "💡",
+    "accentColor": "purple",
+    "slidesUrl": "",
+    "slidesBtnText": "",
+    "slidesFileData": "",
+    "slidesFileName": "",
+    "itemsList": [
+      {
+        "icon": "💖",
+        "title": "Afecto y Diálogo",
+        "text": "Acompañamiento cercano y validación emocional constante."
+      },
+      {
+        "icon": "⏰",
+        "title": "Rutina y Horarios",
+        "text": "Fijar horas para estudiar, descansar y compartir en familia."
+      }
+    ],
+    "resourcesList": [
+      {
+        "title": "Guía de Orientación Familiar (PDF)",
+        "desc": "Material imprimible de apoyo para el hogar.",
+        "fileUrl": "",
+        "fileName": "",
+        "fileSize": "",
+        "icon": "file-text"
+      }
+    ],
+    "photosList": [
+      {
+        "url": "https://images.unsplash.com/photo-1577896851231-70ef18881754?auto=format&fit=crop&w=600&q=80",
+        "caption": "Talleres y actividades del ciclo"
+      },
+      {
+        "url": "https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&w=600&q=80",
+        "caption": "Encuentros formativos"
+      }
+    ],
+    "order": 1,
+    "imageSize": "full",
+    "imageFit": "contain"
+  },
+  {
+    "id": 1788358207022,
+    "cycleId": "primera_infancia",
+    "type": "photo_gallery",
+    "size": "full",
+    "titleAlign": "center",
+    "title": "Bienvenidos",
+    "subtitle": "Caminemos juntos en la construcción de entornos seguros, amorosos y respetuosos para nuestros niños y niñas.",
+    "badgeText": "Jardín y transición",
+    "text": "En este espacio encontrarás herramientas, estrategias y recursos para acompañar el desarrollo integral de la primera infancia desde el área de Psicoorientación.\n\nNuestro propósito es brindar orientaciones prácticas que permitan a familias, docentes y comunidad educativa acompañar a los niños y niñas en sus procesos emocionales, sociales, cognitivos y educativos, fortaleciendo su bienestar y desarrollo.",
+    "imageUrl": "",
+    "imagePosition": "left",
+    "buttonText": "",
+    "buttonUrl": "",
+    "iconEmoji": "💡",
+    "accentColor": "purple",
+    "slidesUrl": "",
+    "slidesBtnText": "",
+    "slidesFileData": "",
+    "slidesFileName": "",
+    "itemsList": [
+      {
+        "icon": "💖",
+        "title": "Afecto y Diálogo",
+        "text": "Acompañamiento cercano y validación emocional constante."
+      },
+      {
+        "icon": "⏰",
+        "title": "Rutina y Horarios",
+        "text": "Fijar horas para estudiar, descansar y compartir en familia."
+      }
+    ],
+    "resourcesList": [
+      {
+        "title": "Guía de Orientación Familiar (PDF)",
+        "desc": "Material imprimible de apoyo para el hogar.",
+        "fileUrl": "",
+        "fileName": "",
+        "fileSize": "",
+        "icon": "file-text"
+      }
+    ],
+    "photosList": [
+      {
+        "url": "/uploads/gallery_1788358207022_0_1788739866827.jpg",
+        "caption": ""
+      }
+    ],
+    "order": 1,
+    "galleryLayout": "cols_3",
+    "galleryFit": "square",
+    "galleryAlign": "left",
+    "imageSize": "full",
+    "imageFit": "contain"
+  }
+];
 
 const DEFAULT_NAV_ITEMS = [
   {
-    id: "nav_inicio",
-    title: "Inicio",
-    url: "/",
-    icon: "home",
-    type: "dropdown",
-    order: 1,
-    isSystem: true,
-    children: [
-      { id: "sub_portada", title: "Portada Principal", url: "/", icon: "home", order: 1 },
-      { id: "sub_quienes_somos", title: "¿Quiénes Somos?", url: "/#quienes-somos", icon: "heart-handshake", order: 2 }
+    "id": "nav_inicio",
+    "title": "Inicio",
+    "url": "/",
+    "icon": "home",
+    "type": "dropdown",
+    "order": 1,
+    "isSystem": true,
+    "children": [
+      {
+        "id": "sub_portada",
+        "title": "Portada Principal",
+        "url": "/",
+        "icon": "home",
+        "order": 1
+      },
+      {
+        "id": "sub_quienes_somos",
+        "title": "¿Quiénes Somos?",
+        "url": "/#quienes-somos",
+        "icon": "heart-handshake",
+        "order": 2
+      }
     ]
   },
   {
-    id: "nav_encuentros",
-    title: "Encuentros Familiares",
-    url: "/encuentros",
-    icon: "users",
-    type: "link",
-    order: 2,
-    isSystem: true
+    "id": "nav_guia_bienestar",
+    "title": "Guía De Bienestar Emocional",
+    "url": "/guia-bienestar",
+    "icon": "heart-pulse",
+    "type": "link",
+    "order": 2,
+    "isSystem": true
   },
   {
-    id: "nav_ciclos",
-    title: "Ciclos",
-    url: "#",
-    icon: "layers",
-    type: "dropdown",
-    order: 3,
-    isSystem: true,
-    isCyclesDropdown: true
+    "id": "nav_encuentros",
+    "title": "Encuentros Familiares",
+    "url": "/encuentros",
+    "icon": "users",
+    "type": "link",
+    "order": 3,
+    "isSystem": true
+  },
+  {
+    "id": "nav_ciclos",
+    "title": "Ciclos",
+    "url": "#",
+    "icon": "layers",
+    "type": "dropdown",
+    "order": 4,
+    "isSystem": true,
+    "isCyclesDropdown": true
   }
 ];
 
 const DEFAULT_CYCLES_LIST = [
   {
-    key: "primera_infancia",
-    slug: "primera-infancia",
-    name: "Primera Infancia",
-    grades: "JARDÍN Y TRANSICIÓN",
-    badgeText: "J y T",
-    pillClass: "pill-pink",
-    borderClass: "card-border-pink",
-    icon: "🌸",
-    subtitle: "Espacio formativo y de acompañamiento socioemocional para las familias y estudiantes de los primeros años escolares.",
-    order: 1,
-    pageUrl: "/ciclos/primera-infancia"
+    "key": "primera_infancia",
+    "slug": "primera-infancia",
+    "name": "Primera Infancia",
+    "grades": "JARDÍN Y TRANSICIÓN",
+    "badgeText": "J y T",
+    "pillClass": "pill-pink",
+    "borderClass": "card-border-pink",
+    "icon": "🌸",
+    "subtitle": "Espacio formativo y de acompañamiento socioemocional para las familias y estudiantes de los primeros años escolares.",
+    "order": 1,
+    "pageUrl": "/ciclos/primera-infancia",
+    "heroBgImage": "/uploads/hero_primera_infancia_1788740308704_gb5dj.jpg"
   },
   {
-    key: "infantil",
-    slug: "infantil",
-    name: "Ciclo Infantil",
-    grades: "1°, 2° Y 3°",
-    badgeText: "1, 2 y 3",
-    pillClass: "pill-teal",
-    borderClass: "card-border-teal",
-    icon: "🌱",
-    subtitle: "Acompañamiento socioemocional y fortalecimiento de la convivencia, empatía y habilidades de aprendizaje.",
-    order: 2,
-    pageUrl: "/ciclos/infantil"
+    "key": "infantil",
+    "slug": "infantil",
+    "name": "Ciclo Infantil",
+    "grades": "1°, 2° Y 3°",
+    "badgeText": "1, 2 y 3",
+    "pillClass": "pill-teal",
+    "borderClass": "card-border-teal",
+    "icon": "🌱",
+    "subtitle": "Acompañamiento socioemocional y fortalecimiento de la convivencia, empatía y habilidades de aprendizaje.",
+    "order": 2,
+    "pageUrl": "/ciclos/infantil",
+    "heroBgImage": ""
   },
   {
-    key: "basico",
-    slug: "basico",
-    name: "Ciclo Básico",
-    grades: "4° Y 5°",
-    badgeText: "4 y 5",
-    pillClass: "pill-yellow",
-    borderClass: "card-border-yellow",
-    icon: "📘",
-    subtitle: "Orientación en hábitos de estudio, autonomía escolar y desarrollo integral de preadolescentes.",
-    order: 3,
-    pageUrl: "/ciclos/basico"
+    "key": "basico",
+    "slug": "basico",
+    "name": "Ciclo Básico",
+    "grades": "4° Y 5°",
+    "badgeText": "4 y 5",
+    "pillClass": "pill-yellow",
+    "borderClass": "card-border-yellow",
+    "icon": "📘",
+    "subtitle": "Orientación en hábitos de estudio, autonomía escolar y desarrollo integral de preadolescentes.",
+    "order": 3,
+    "pageUrl": "/ciclos/basico",
+    "heroBgImage": ""
   },
   {
-    key: "fundamental",
-    slug: "fundamental",
-    name: "Ciclo Fundamental",
-    grades: "6° Y 7°",
-    badgeText: "6 y 7",
-    pillClass: "pill-purple",
-    borderClass: "card-border-purple",
-    icon: "🔮",
-    subtitle: "Transición a la secundaria, gestión de emociones, prevención y fortalecimiento de la autoestima.",
-    order: 4,
-    pageUrl: "/ciclos/fundamental"
+    "key": "fundamental",
+    "slug": "fundamental",
+    "name": "Ciclo Fundamental",
+    "grades": "6° Y 7°",
+    "badgeText": "6 y 7",
+    "pillClass": "pill-purple",
+    "borderClass": "card-border-purple",
+    "icon": "🔮",
+    "subtitle": "Transición a la secundaria, gestión de emociones, prevención y fortalecimiento de la autoestima.",
+    "order": 4,
+    "pageUrl": "/ciclos/fundamental",
+    "heroBgImage": ""
   },
   {
-    key: "exploratorio",
-    slug: "exploratorio",
-    name: "Ciclo Exploratorio",
-    grades: "8° Y 9°",
-    badgeText: "8 y 9",
-    pillClass: "pill-blue",
-    borderClass: "card-border-blue",
-    icon: "🧭",
-    subtitle: "Comunicación asertiva, prevención de riesgos psicosociales y construcción de relaciones saludables.",
-    order: 5,
-    pageUrl: "/ciclos/exploratorio"
+    "key": "exploratorio",
+    "slug": "exploratorio",
+    "name": "Ciclo Exploratorio",
+    "grades": "8° Y 9°",
+    "badgeText": "8 y 9",
+    "pillClass": "pill-blue",
+    "borderClass": "card-border-blue",
+    "icon": "🧭",
+    "subtitle": "Comunicación asertiva, prevención de riesgos psicosociales y construcción de relaciones saludables.",
+    "order": 5,
+    "pageUrl": "/ciclos/exploratorio",
+    "heroBgImage": "/uploads/hero_exploratorio_1788740308711_wv1w9.jpg"
   },
   {
-    key: "especializado",
-    slug: "especializado",
-    name: "Ciclo Especializado",
-    grades: "10° Y 11°",
-    badgeText: "10 y 11",
-    pillClass: "pill-green",
-    borderClass: "card-border-green",
-    icon: "🎓",
-    subtitle: "Orientación vocacional, preparación para la educación superior y consolidación del proyecto de vida.",
-    order: 6,
-    pageUrl: "/ciclos/especializado"
+    "key": "especializado",
+    "slug": "especializado",
+    "name": "Ciclo Especializado",
+    "grades": "10° Y 11°",
+    "badgeText": "10 y 11",
+    "pillClass": "pill-green",
+    "borderClass": "card-border-green",
+    "icon": "🎓",
+    "subtitle": "Orientación vocacional, preparación para la educación superior y consolidación del proyecto de vida.",
+    "order": 6,
+    "pageUrl": "/ciclos/especializado",
+    "heroBgImage": ""
+  },
+  {
+    "key": "cycle_1788358007488",
+    "slug": "ciclo-juvenil-pro",
+    "name": "Ciclo Juvenil Pro",
+    "grades": "9°, 10° y 11°",
+    "badgeText": "9 10 y 11",
+    "pillClass": "pill-pink",
+    "borderClass": "card-border-pink",
+    "icon": "🎓",
+    "subtitle": "Espacio formativo y de orientación escolar.",
+    "order": 7,
+    "pageUrl": "/ciclos/ciclo-juvenil-pro",
+    "heroBgImage": ""
   }
 ];
 
@@ -297,7 +516,7 @@ let adminPassword = localStorage.getItem('psicologia_admin_password') || '123';
 let adminSlug = localStorage.getItem('psicologia_admin_slug') || 'admin451200';
 let psychologists = JSON.parse(localStorage.getItem('psicologia_psychologists')) || DEFAULT_PSYCHOLOGISTS;
 let calendarWorkshops = JSON.parse(localStorage.getItem('psicologia_calendar_workshops')) || DEFAULT_CALENDAR_WORKSHOPS;
-let cycleBlocks = JSON.parse(localStorage.getItem('psicologia_cycle_blocks')) || [];
+let cycleBlocks = JSON.parse(localStorage.getItem('psicologia_cycle_blocks')) || DEFAULT_CYCLE_BLOCKS;
 let suggestions = JSON.parse(localStorage.getItem('psicologia_suggestions')) || DEFAULT_SUGGESTIONS;
 let analytics = JSON.parse(localStorage.getItem('psicologia_analytics')) || DEFAULT_ANALYTICS;
 let isAdminLoggedIn = sessionStorage.getItem('psicologia_admin_logged') === 'true';
@@ -311,9 +530,25 @@ const TAB_VISIT_COOLDOWN_MS = 15 * 60 * 1000;
 
 async function loadServerData() {
   try {
+    // Optimización Vercel: Comprobar versión ligera (~40 bytes)
+    // Si la versión local en localStorage coincide con la del servidor, no gastamos datos descargando la base de datos completa.
+    const localVersion = localStorage.getItem('psicologia_db_version');
+    try {
+      const vRes = await fetch('/api/version');
+      if (vRes.ok) {
+        const vData = await vRes.json();
+        if (vData.v && localVersion && vData.v === localVersion) {
+          return;
+        }
+      }
+    } catch (_) {}
+
     const res = await fetch('/api/data');
     if (res.ok) {
       const data = await res.json();
+      if (data.version) {
+        localStorage.setItem('psicologia_db_version', data.version);
+      }
       if (data.navItems && Array.isArray(data.navItems) && data.navItems.length > 0) {
         navItems = data.navItems;
         localStorage.setItem('psicologia_nav_items', JSON.stringify(navItems));
@@ -547,39 +782,6 @@ document.addEventListener('DOMContentLoaded', async () => {
   if (window.lucide) {
     lucide.createIcons();
   }
-
-  // Sincronización continua en segundo plano para que los cambios del admin se actualicen automáticamente a los visitantes
-  setInterval(async () => {
-    try {
-      const prevCycles = JSON.stringify(cycleBlocks);
-      const res = await fetch('/api/data');
-      if (res.ok) {
-        const data = await res.json();
-        if (data.cycleBlocks && Array.isArray(data.cycleBlocks)) {
-          const newCycles = JSON.stringify(data.cycleBlocks);
-          if (prevCycles !== newCycles) {
-            cycleBlocks = data.cycleBlocks;
-            localStorage.setItem('psicologia_cycle_blocks', newCycles);
-            
-            // Si el usuario está viendo un ciclo público, refrescarlo de inmediato
-            const currentPath = window.location.pathname.toLowerCase();
-            cyclesList.forEach(m => {
-              if (currentPath.includes(m.slug) || currentPath.includes(m.key)) {
-                renderCyclePublicPage(m.key);
-              }
-            });
-            
-            // Si está en el admin y no está escribiendo en el formulario de edición
-            if (currentPath.includes('admin') && !document.getElementById('cycleBlockEditId')?.value) {
-              renderAdminCycleBlocks();
-            }
-          }
-        }
-      }
-    } catch (e) {
-      // Background sync silent fail
-    }
-  }, 4000);
 });
 
 // Renderizado Dinámico de Barra de Navegación Pública (Desktop y Móvil)
@@ -2380,6 +2582,17 @@ function openCreateCycleModal() {
   document.getElementById('cycleEditKey').value = '';
   document.getElementById('cycleModalTitle').innerHTML = `<span>➕</span> Crear Nuevo Ciclo Escolar`;
   document.getElementById('cycleFormIcon').value = '🌟';
+
+  // Resetear fondo del ciclo
+  const heroBgHidden = document.getElementById('cycleFormHeroBgHidden');
+  const heroBgUrl = document.getElementById('cycleFormHeroBgUrl');
+  const heroBgFile = document.getElementById('cycleFormHeroBgFile');
+  const previewBox = document.getElementById('cycleHeroBgPreviewBox');
+  if (heroBgHidden) heroBgHidden.value = '';
+  if (heroBgUrl) heroBgUrl.value = '';
+  if (heroBgFile) heroBgFile.value = '';
+  if (previewBox) previewBox.style.display = 'none';
+
   document.getElementById('cycleModal').classList.add('active');
   setTimeout(() => document.getElementById('cycleFormName')?.focus(), 100);
   if (window.lucide) lucide.createIcons();
@@ -2397,6 +2610,24 @@ function openEditActiveCycleModal() {
   document.getElementById('cycleFormSlug').value = meta.slug || '';
   document.getElementById('cycleFormSubtitle').value = meta.subtitle || '';
 
+  // Cargar Imagen de Fondo del Ciclo
+  const heroBgHidden = document.getElementById('cycleFormHeroBgHidden');
+  const heroBgUrl = document.getElementById('cycleFormHeroBgUrl');
+  const heroBgFile = document.getElementById('cycleFormHeroBgFile');
+  const previewBox = document.getElementById('cycleHeroBgPreviewBox');
+  const previewText = document.getElementById('cycleHeroBgPreviewText');
+
+  if (heroBgHidden) heroBgHidden.value = meta.heroBgImage || '';
+  if (heroBgUrl) heroBgUrl.value = (meta.heroBgImage && !meta.heroBgImage.startsWith('data:')) ? meta.heroBgImage : '';
+  if (heroBgFile) heroBgFile.value = '';
+
+  if (meta.heroBgImage && previewBox && previewText) {
+    previewText.textContent = '✓ Imagen de fondo configurada';
+    previewBox.style.display = 'flex';
+  } else if (previewBox) {
+    previewBox.style.display = 'none';
+  }
+
   let matchedColor = 'pink';
   for (const [col, val] of Object.entries(COLOR_SCHEME_MAP)) {
     if (meta.pillClass && meta.pillClass.includes(col)) {
@@ -2410,6 +2641,66 @@ function openEditActiveCycleModal() {
   document.getElementById('cycleModal').classList.add('active');
   setTimeout(() => document.getElementById('cycleFormName')?.focus(), 100);
   if (window.lucide) lucide.createIcons();
+}
+
+function openHeroBgModalForActiveCycle() {
+  openEditActiveCycleModal();
+  setTimeout(() => {
+    const fileInput = document.getElementById('cycleFormHeroBgFile');
+    if (fileInput) fileInput.scrollIntoView({ behavior: 'smooth' });
+  }, 150);
+}
+
+function handleCycleHeroBgFileUpload(event) {
+  const file = event.target.files[0];
+  if (!file) return;
+
+  const reader = new FileReader();
+  reader.onload = function(e) {
+    const dataUrl = e.target.result;
+    document.getElementById('cycleFormHeroBgHidden').value = dataUrl;
+    document.getElementById('cycleFormHeroBgUrl').value = '';
+
+    const previewBox = document.getElementById('cycleHeroBgPreviewBox');
+    const previewText = document.getElementById('cycleHeroBgPreviewText');
+    if (previewBox && previewText) {
+      previewText.textContent = `✓ Foto "${file.name}" cargada como fondo`;
+      previewBox.style.display = 'flex';
+    }
+    showToast(`🖼️ Imagen de fondo "${file.name}" cargada`);
+  };
+  reader.readAsDataURL(file);
+}
+
+function handleCycleHeroBgUrlInput() {
+  const url = (document.getElementById('cycleFormHeroBgUrl')?.value || '').trim();
+  const hiddenUrl = document.getElementById('cycleFormHeroBgHidden');
+  const previewBox = document.getElementById('cycleHeroBgPreviewBox');
+  const previewText = document.getElementById('cycleHeroBgPreviewText');
+
+  if (url) {
+    hiddenUrl.value = url;
+    if (previewBox && previewText) {
+      previewText.textContent = `✓ Imagen Web de fondo configurada`;
+      previewBox.style.display = 'flex';
+    }
+  } else if (!document.getElementById('cycleFormHeroBgFile')?.files.length) {
+    hiddenUrl.value = '';
+    if (previewBox) previewBox.style.display = 'none';
+  }
+}
+
+function removeCycleHeroBgImage() {
+  const hiddenUrl = document.getElementById('cycleFormHeroBgHidden');
+  const urlInput = document.getElementById('cycleFormHeroBgUrl');
+  const fileInput = document.getElementById('cycleFormHeroBgFile');
+  const previewBox = document.getElementById('cycleHeroBgPreviewBox');
+
+  if (hiddenUrl) hiddenUrl.value = '';
+  if (urlInput) urlInput.value = '';
+  if (fileInput) fileInput.value = '';
+  if (previewBox) previewBox.style.display = 'none';
+  showToast('Fondo de ciclo retirado.');
 }
 
 function closeCycleModal() {
@@ -2453,6 +2744,7 @@ function handleSaveCycle(event) {
   let slug = document.getElementById('cycleFormSlug')?.value.trim();
   const colorKey = document.getElementById('cycleFormColor')?.value || 'pink';
   const subtitle = document.getElementById('cycleFormSubtitle')?.value.trim() || 'Espacio formativo y de orientación escolar.';
+  const heroBgImage = document.getElementById('cycleFormHeroBgHidden')?.value || '';
 
   if (!slug) {
     slug = name.toLowerCase()
@@ -2474,6 +2766,7 @@ function handleSaveCycle(event) {
         badgeText,
         slug,
         subtitle,
+        heroBgImage,
         pillClass: scheme.pill,
         borderClass: scheme.border,
         pageUrl: `/ciclos/${slug}`
@@ -2492,6 +2785,7 @@ function handleSaveCycle(event) {
       borderClass: scheme.border,
       icon,
       subtitle,
+      heroBgImage,
       order: cyclesList.length + 1,
       pageUrl: `/ciclos/${slug}`
     };
@@ -2922,7 +3216,7 @@ function handleGalleryMultipleUpload(event) {
     reader.onload = function(e) {
       currentEditingGalleryPhotos.push({
         url: e.target.result,
-        caption: file.name.replace(/\.[^/.]+$/, "")
+        caption: ""
       });
       loadedCount++;
       if (loadedCount === files.length) {
@@ -2942,7 +3236,7 @@ function addGalleryPhotoFromUrlInput() {
   if (url && (url.startsWith('http://') || url.startsWith('https://') || url.startsWith('data:'))) {
     currentEditingGalleryPhotos.push({
       url: url,
-      caption: 'Fotografía'
+      caption: ""
     });
     if (input) input.value = '';
     renderGalleryBuilderUI();
@@ -2958,7 +3252,7 @@ function addGalleryPhotoByUrlPrompt() {
   if (url && url.trim().startsWith('http')) {
     currentEditingGalleryPhotos.push({
       url: url.trim(),
-      caption: 'Fotografía'
+      caption: ""
     });
     renderGalleryBuilderUI();
     updateCycleBlockLivePreview();
@@ -3108,6 +3402,11 @@ function updateCycleBlockLivePreview() {
     const text = document.getElementById('cycleBlockText')?.value || '';
     const imageUrl = document.getElementById('cycleBlockImageUrlHidden')?.value || '';
     const imagePos = document.getElementById('cycleBlockImagePos')?.value || 'left';
+    const imageSize = document.getElementById('cycleBlockImageSize')?.value || 'full';
+    const imageFit = document.getElementById('cycleBlockImageFit')?.value || 'contain';
+    const galleryLayout = document.getElementById('cycleGalleryLayout')?.value || 'single_full';
+    const galleryFit = document.getElementById('cycleGalleryFit')?.value || 'natural';
+    const galleryAlign = document.getElementById('cycleGalleryAlign')?.value || 'center';
     const btnText = document.getElementById('cycleBlockBtnText')?.value || '';
     const btnUrl = document.getElementById('cycleBlockBtnUrl')?.value || '#';
     const iconEmoji = document.getElementById('cycleCalloutEmoji')?.value || '💡';
@@ -3137,6 +3436,11 @@ function updateCycleBlockLivePreview() {
       text: text.trim() || 'Aquí se mostrará la información y contenidos redactados para este ciclo.',
       imageUrl,
       imagePosition: imagePos,
+      imageSize,
+      imageFit,
+      galleryLayout,
+      galleryFit,
+      galleryAlign,
       buttonText: btnText.trim(),
       buttonUrl: btnUrl.trim() || '#',
       iconEmoji,
@@ -3174,6 +3478,11 @@ function handleSaveCycleBlock(event) {
   const text = (document.getElementById('cycleBlockText')?.value || '').trim();
   const imageUrl = (document.getElementById('cycleBlockImageUrlHidden')?.value || '').trim();
   const imagePosition = document.getElementById('cycleBlockImagePos')?.value || 'left';
+  const imageSize = document.getElementById('cycleBlockImageSize')?.value || 'full';
+  const imageFit = document.getElementById('cycleBlockImageFit')?.value || 'contain';
+  const galleryLayout = document.getElementById('cycleGalleryLayout')?.value || 'single_full';
+  const galleryFit = document.getElementById('cycleGalleryFit')?.value || 'natural';
+  const galleryAlign = document.getElementById('cycleGalleryAlign')?.value || 'center';
   const buttonText = (document.getElementById('cycleBlockBtnText')?.value || '').trim();
   const buttonUrl = (document.getElementById('cycleBlockBtnUrl')?.value || '').trim();
   const iconEmoji = document.getElementById('cycleCalloutEmoji')?.value || '💡';
@@ -3211,6 +3520,11 @@ function handleSaveCycleBlock(event) {
         text,
         imageUrl,
         imagePosition,
+        imageSize,
+        imageFit,
+        galleryLayout,
+        galleryFit,
+        galleryAlign,
         buttonText,
         buttonUrl,
         iconEmoji,
@@ -3238,6 +3552,11 @@ function handleSaveCycleBlock(event) {
       text,
       imageUrl,
       imagePosition,
+      imageSize,
+      imageFit,
+      galleryLayout,
+      galleryFit,
+      galleryAlign,
       buttonText,
       buttonUrl,
       iconEmoji,
@@ -3294,6 +3613,12 @@ function editCycleBlock(id) {
   document.getElementById('cycleBlockBadge').value = block.badgeText || '';
   document.getElementById('cycleBlockText').value = block.text || '';
   document.getElementById('cycleBlockImagePos').value = block.imagePosition || 'left';
+  if (document.getElementById('cycleBlockImageSize')) document.getElementById('cycleBlockImageSize').value = block.imageSize || 'full';
+  if (document.getElementById('cycleBlockImageFit')) document.getElementById('cycleBlockImageFit').value = block.imageFit || 'contain';
+  if (document.getElementById('cycleGalleryLayout')) document.getElementById('cycleGalleryLayout').value = block.galleryLayout || 'single_full';
+  if (document.getElementById('cycleGalleryFit')) document.getElementById('cycleGalleryFit').value = block.galleryFit || 'natural';
+  if (document.getElementById('cycleGalleryAlign')) document.getElementById('cycleGalleryAlign').value = block.galleryAlign || 'center';
+
   document.getElementById('cycleBlockBtnText').value = block.buttonText || '';
   document.getElementById('cycleBlockBtnUrl').value = block.buttonUrl || '';
 
@@ -3341,7 +3666,7 @@ function editCycleBlock(id) {
     currentEditingGalleryPhotos = JSON.parse(JSON.stringify(block.photosList));
   } else {
     currentEditingGalleryPhotos = [
-      { url: 'https://images.unsplash.com/photo-1577896851231-70ef18881754?auto=format&fit=crop&w=600&q=80', caption: 'Actividad escolar' }
+      { url: 'https://images.unsplash.com/photo-1577896851231-70ef18881754?auto=format&fit=crop&w=600&q=80', caption: '' }
     ];
   }
 
@@ -3384,6 +3709,11 @@ function resetCycleBlockForm() {
   setCycleBlockTitleAlign('left');
   setCalloutIcon('💡');
   setCalloutColor('purple');
+  if (document.getElementById('cycleBlockImageSize')) document.getElementById('cycleBlockImageSize').value = 'full';
+  if (document.getElementById('cycleBlockImageFit')) document.getElementById('cycleBlockImageFit').value = 'contain';
+  if (document.getElementById('cycleGalleryLayout')) document.getElementById('cycleGalleryLayout').value = 'single_full';
+  if (document.getElementById('cycleGalleryFit')) document.getElementById('cycleGalleryFit').value = 'natural';
+  if (document.getElementById('cycleGalleryAlign')) document.getElementById('cycleGalleryAlign').value = 'center';
 
   currentEditingSlidesFileData = '';
   currentEditingSlidesFileName = '';
@@ -3398,7 +3728,7 @@ function resetCycleBlockForm() {
     { title: 'Guía de Orientación Familiar (PDF)', desc: 'Material imprimible de apoyo para el hogar.', fileUrl: '', fileName: '', fileSize: '', icon: 'file-text' }
   ];
   currentEditingGalleryPhotos = [
-    { url: 'https://images.unsplash.com/photo-1577896851231-70ef18881754?auto=format&fit=crop&w=600&q=80', caption: 'Talleres y actividades del ciclo' }
+    { url: 'https://images.unsplash.com/photo-1577896851231-70ef18881754?auto=format&fit=crop&w=600&q=80', caption: '' }
   ];
 
   renderCardsBuilderUI();
@@ -3589,6 +3919,8 @@ function renderCycleBlockByType(b, meta, isPublic = true) {
   const pos = b.imagePosition || 'left';
   const titleAlign = b.titleAlign || 'left';
   const hasImg = !!b.imageUrl;
+  const imageSize = b.imageSize || 'full';
+  const imageFit = b.imageFit || 'contain';
 
   const alignBadgeStyle = titleAlign === 'center' 
     ? 'display: table; margin-left: auto; margin-right: auto; text-align: center;' 
@@ -3601,7 +3933,7 @@ function renderCycleBlockByType(b, meta, isPublic = true) {
       return `
         <div class="cycle-block-card size-${size} type-hero_banner layout-${pos} ${meta.borderClass}">
           ${hasImg ? `
-            <div class="cycle-block-img-wrap">
+            <div class="cycle-block-img-wrap img-size-${imageSize} img-fit-${imageFit}">
               <img src="${b.imageUrl}" alt="${b.title}" loading="lazy">
             </div>
           ` : ''}
@@ -3634,7 +3966,7 @@ function renderCycleBlockByType(b, meta, isPublic = true) {
             </div>
           </div>
           ${hasImg ? `
-            <div class="cycle-block-img-wrap" style="margin-bottom: 18px; max-height: 320px;">
+            <div class="cycle-block-img-wrap img-size-${imageSize} img-fit-${imageFit}" style="margin-bottom: 18px;">
               <img src="${b.imageUrl}" alt="${b.title}" loading="lazy">
             </div>
           ` : ''}
@@ -3808,9 +4140,13 @@ function renderCycleBlockByType(b, meta, isPublic = true) {
 
     case 'photo_gallery':
       const photos = b.photosList && b.photosList.length ? b.photosList : [
-        { url: b.imageUrl || 'https://images.unsplash.com/photo-1577896851231-70ef18881754?auto=format&fit=crop&w=600&q=80', caption: 'Talleres y actividades del ciclo' },
-        { url: 'https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&w=600&q=80', caption: 'Encuentros formativos' }
+        { url: b.imageUrl || 'https://images.unsplash.com/photo-1577896851231-70ef18881754?auto=format&fit=crop&w=600&q=80', caption: '' },
+        { url: 'https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&w=600&q=80', caption: '' }
       ];
+      const galleryLayout = b.galleryLayout || (photos.length === 1 ? 'single_full' : 'cols_2');
+      const galleryFit = b.galleryFit || 'natural';
+      const galleryAlign = b.galleryAlign || 'center';
+
       return `
         <div class="cycle-block-card size-${size} type-photo_gallery ${meta.borderClass}">
           <div class="title-align-${titleAlign}" style="text-align: ${titleAlign}; width: 100%;">
@@ -3819,13 +4155,28 @@ function renderCycleBlockByType(b, meta, isPublic = true) {
             ${b.subtitle ? `<div class="cycle-block-subtitle" style="text-align: ${titleAlign};">${b.subtitle}</div>` : ''}
             ${b.text ? `<div class="cycle-block-text" style="margin-bottom: 16px; text-align: ${titleAlign};">${b.text}</div>` : ''}
           </div>
-          <div class="cycle-photo-gallery-grid">
-            ${photos.map(p => `
-              <div class="gallery-photo-item">
-                <img src="${p.url}" alt="${p.caption || 'Foto'}" loading="lazy">
-                ${p.caption ? `<div class="gallery-photo-caption">${p.caption}</div>` : ''}
-              </div>
-            `).join('')}
+          <div class="cycle-photo-gallery-grid layout-${galleryLayout} fit-${galleryFit} align-${galleryAlign}">
+            ${photos.map(p => {
+              const rawCaption = (p.caption || '').trim();
+              const isMeaningfulCaption = Boolean(
+                rawCaption &&
+                !rawCaption.includes('WhatsApp Image') &&
+                !rawCaption.toLowerCase().endsWith('.jpg') &&
+                !rawCaption.toLowerCase().endsWith('.png') &&
+                !rawCaption.toLowerCase().endsWith('.jpeg') &&
+                rawCaption !== 'Foto' &&
+                rawCaption !== 'Fotografía' &&
+                rawCaption !== 'Talleres y actividades del ciclo' &&
+                rawCaption !== 'Actividad escolar'
+              );
+
+              return `
+                <div class="gallery-photo-item">
+                  <img src="${p.url}" alt="${isMeaningfulCaption ? rawCaption : 'Fotografía'}" loading="lazy">
+                  ${isMeaningfulCaption ? `<div class="gallery-photo-caption">${rawCaption}</div>` : ''}
+                </div>
+              `;
+            }).join('')}
           </div>
         </div>
       `;
@@ -3861,7 +4212,7 @@ function renderCycleBlockByType(b, meta, isPublic = true) {
       return `
         <div class="cycle-block-card size-${size} layout-${pos} ${meta.borderClass}">
           ${hasImg ? `
-            <div class="cycle-block-img-wrap">
+            <div class="cycle-block-img-wrap img-size-${imageSize} img-fit-${imageFit}">
               <img src="${b.imageUrl}" alt="${b.title}" loading="lazy">
             </div>
           ` : ''}
@@ -4017,6 +4368,22 @@ function renderCyclePublicPage(cycleKey) {
   const heroSub = document.getElementById('cycleHeroSubtitle');
   if (heroSub && meta.subtitle) {
     heroSub.textContent = meta.subtitle;
+  }
+
+  // Imagen de fondo del encabezado / Hero
+  const heroSection = document.getElementById('cycleHeroSection') || document.querySelector('.cycle-hero-section');
+  if (heroSection) {
+    if (meta.heroBgImage) {
+      heroSection.classList.add('has-bg-img');
+      heroSection.style.backgroundImage = `linear-gradient(135deg, rgba(15, 23, 42, 0.82) 0%, rgba(30, 27, 75, 0.86) 100%), url("${meta.heroBgImage}")`;
+      heroSection.style.backgroundSize = 'cover';
+      heroSection.style.backgroundPosition = 'center';
+    } else {
+      heroSection.classList.remove('has-bg-img');
+      heroSection.style.backgroundImage = '';
+      heroSection.style.backgroundSize = '';
+      heroSection.style.backgroundPosition = '';
+    }
   }
 
   if (!container) return;
@@ -4373,5 +4740,26 @@ window.deleteNavItem = deleteNavItem;
 window.moveNavItemOrder = moveNavItemOrder;
 window.resetNavItemForm = resetNavItemForm;
 
-
-
+// Cycle Hero Background & Media Upload Bindings
+window.openHeroBgModalForActiveCycle = openHeroBgModalForActiveCycle;
+window.handleCycleHeroBgFileUpload = handleCycleHeroBgFileUpload;
+window.handleCycleHeroBgUrlInput = handleCycleHeroBgUrlInput;
+window.removeCycleHeroBgImage = removeCycleHeroBgImage;
+window.handleGalleryMultipleUpload = handleGalleryMultipleUpload;
+window.addGalleryPhotoFromUrlInput = addGalleryPhotoFromUrlInput;
+window.addGalleryPhotoByUrlPrompt = addGalleryPhotoByUrlPrompt;
+window.removeGalleryPhoto = removeGalleryPhoto;
+window.updateGalleryCaption = updateGalleryCaption;
+window.handleCycleBlockPhotoUpload = handleCycleBlockPhotoUpload;
+window.handleCycleBlockUrlInput = handleCycleBlockUrlInput;
+window.removeCycleBlockImage = removeCycleBlockImage;
+window.handleCycleSlidesFileUpload = handleCycleSlidesFileUpload;
+window.removeCycleSlidesAttachedFile = removeCycleSlidesAttachedFile;
+window.addResourceItemToBuilder = addResourceItemToBuilder;
+window.removeResourceItemFromBuilder = removeResourceItemFromBuilder;
+window.updateResourceItemField = updateResourceItemField;
+window.handleResourceFileUpload = handleResourceFileUpload;
+window.removeResourceAttachedFile = removeResourceAttachedFile;
+window.addCardItemToBuilder = addCardItemToBuilder;
+window.removeCardItemFromBuilder = removeCardItemFromBuilder;
+window.updateCardItemField = updateCardItemField;

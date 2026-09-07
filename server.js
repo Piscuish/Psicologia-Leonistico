@@ -21,16 +21,55 @@ app.get(['/admin', '/admin.html', '/panel', '/login'], (req, res) => {
   res.redirect('/');
 });
 
-// Servir archivos estáticos desde la carpeta public
+// Servir uploads con cache inmutable de 30 días
+const UPLOADS_DIR = path.join(__dirname, 'public', 'uploads');
+if (!fs.existsSync(UPLOADS_DIR)) {
+  fs.mkdirSync(UPLOADS_DIR, { recursive: true });
+}
+app.use('/uploads', express.static(UPLOADS_DIR, {
+  maxAge: '30d',
+  immutable: true
+}));
+
+// Servir archivos estáticos con ETag y encabezados de caché optimizados para CDN
 app.use(express.static(path.join(__dirname, 'public'), {
-  etag: false,
-  maxAge: 0,
-  setHeaders: (res, path) => {
-    res.setHeader('Cache-Control', 'no-store, no-cache, must-revalidate, proxy-revalidate');
-    res.setHeader('Pragma', 'no-cache');
-    res.setHeader('Expires', '0');
+  etag: true,
+  maxAge: '1d',
+  setHeaders: (res, filePath) => {
+    if (filePath.endsWith('.html')) {
+      res.setHeader('Cache-Control', 'public, max-age=0, must-revalidate');
+    } else if (filePath.endsWith('.css') || filePath.endsWith('.js')) {
+      res.setHeader('Cache-Control', 'public, max-age=86400, stale-while-revalidate=604800');
+    } else if (/\.(jpg|jpeg|png|gif|svg|webp|ico|woff2|woff|ttf)$/i.test(filePath)) {
+      res.setHeader('Cache-Control', 'public, max-age=2592000, immutable');
+    }
   }
 }));
+
+// Helper para guardar imágenes Base64 automáticamente en disco /uploads/
+function saveBase64ToFile(base64Str, prefix = 'img') {
+  if (!base64Str || typeof base64Str !== 'string' || !base64Str.startsWith('data:image/')) {
+    return base64Str;
+  }
+  try {
+    const matches = base64Str.match(/^data:image\/([a-zA-Z0-9+]+);base64,(.+)$/);
+    if (!matches) return base64Str;
+    const ext = matches[1] === 'jpeg' ? 'jpg' : matches[1];
+    const filename = `${prefix}_${Date.now()}_${Math.random().toString(36).substring(2, 7)}.${ext}`;
+    const filePath = path.join(UPLOADS_DIR, filename);
+    fs.writeFileSync(filePath, Buffer.from(matches[2], 'base64'));
+    const rootUploadsPath = path.join(__dirname, 'uploads', filename);
+    try {
+      if (fs.existsSync(path.join(__dirname, 'uploads'))) {
+        fs.copyFileSync(filePath, rootUploadsPath);
+      }
+    } catch (_) {}
+    return `/uploads/${filename}`;
+  } catch (err) {
+    console.error('Error guardando imagen base64:', err);
+    return base64Str;
+  }
+}
 
 // ============================================================
 // BASE DE DATOS CENTRALIZADA EN ARCHIVO JSON (data/db.json)
@@ -152,7 +191,7 @@ const DEFAULT_CALENDAR_WORKSHOPS = [
 ];
 
 const DEFAULT_IMAGES = {
-  logo: 'https://lh3.googleusercontent.com/sitesv/AG8ngQRh5eH3l9X52c-n-5wZg6n4-0H9Q-W6qE5qV-1q3Q4t9X_uY9pZ=w1200',
+  logo: '/uploads/site_logo_1788739866816.png',
   welcome: 'https://lh3.googleusercontent.com/sitesv/AG8ngQWOyxLk67vCI15BlZoCjOwd8xUiVdKQzLu-M2WJcEPpTf9i3QDpCzc1-5m6X-sKqpvyWPGZBwQ-rH8UhgQL7YTxjIlxDFe_bipo6xrnJX-R5AzoEojbfXeILt4DV4eHhLkoRtPmt0qDN9i4vhtAbDolgStj2fPdU9XVS2h5y405j0qv0gtNpOby2sONDNOeFMCsNGdXiYbURk_wJfVERZBegFn7tlsmLq3pjw8f=w1280',
   about: 'https://lh3.googleusercontent.com/sitesv/AG8ngQXTnHzijkLW5x4q0oxIMOi07YzG-IBG1OfPXeoVkIVB8fjkFXyd17Exs0GpjRWuO_ve89ISCOVUerGrrxM5Btnf5tup2wv79zMnKOoluKmpvA0bbZU3sVSnjk80O_PqvnpU7L_xlejXLWd0rR4xWkxGQj7g0dTAeH3vz104NNIAC_EwotDlnekiU7aMZOxbjrQAZ56qxhieVbVysrZ75FKa5z5OY7hICFCfX1Ptwyo=w1280'
 };
@@ -221,82 +260,102 @@ const DEFAULT_NAV_ITEMS = [
 
 const DEFAULT_CYCLES_LIST = [
   {
-    key: "primera_infancia",
-    slug: "primera-infancia",
-    name: "Primera Infancia",
-    grades: "JARDÍN Y TRANSICIÓN",
-    badgeText: "J y T",
-    pillClass: "pill-pink",
-    borderClass: "card-border-pink",
-    icon: "🌸",
-    subtitle: "Espacio formativo y de acompañamiento socioemocional para las familias y estudiantes de los primeros años escolares.",
-    order: 1,
-    pageUrl: "/ciclos/primera-infancia"
+    "key": "primera_infancia",
+    "slug": "primera-infancia",
+    "name": "Primera Infancia",
+    "grades": "JARDÍN Y TRANSICIÓN",
+    "badgeText": "J y T",
+    "pillClass": "pill-pink",
+    "borderClass": "card-border-pink",
+    "icon": "🌸",
+    "subtitle": "Espacio formativo y de acompañamiento socioemocional para las familias y estudiantes de los primeros años escolares.",
+    "order": 1,
+    "pageUrl": "/ciclos/primera-infancia",
+    "heroBgImage": "/uploads/hero_primera_infancia_1788740308704_gb5dj.jpg"
   },
   {
-    key: "infantil",
-    slug: "infantil",
-    name: "Ciclo Infantil",
-    grades: "1°, 2° Y 3°",
-    badgeText: "1, 2 y 3",
-    pillClass: "pill-teal",
-    borderClass: "card-border-teal",
-    icon: "🌱",
-    subtitle: "Acompañamiento socioemocional y fortalecimiento de la convivencia, empatía y habilidades de aprendizaje.",
-    order: 2,
-    pageUrl: "/ciclos/infantil"
+    "key": "infantil",
+    "slug": "infantil",
+    "name": "Ciclo Infantil",
+    "grades": "1°, 2° Y 3°",
+    "badgeText": "1, 2 y 3",
+    "pillClass": "pill-teal",
+    "borderClass": "card-border-teal",
+    "icon": "🌱",
+    "subtitle": "Acompañamiento socioemocional y fortalecimiento de la convivencia, empatía y habilidades de aprendizaje.",
+    "order": 2,
+    "pageUrl": "/ciclos/infantil",
+    "heroBgImage": ""
   },
   {
-    key: "basico",
-    slug: "basico",
-    name: "Ciclo Básico",
-    grades: "4° Y 5°",
-    badgeText: "4 y 5",
-    pillClass: "pill-yellow",
-    borderClass: "card-border-yellow",
-    icon: "📘",
-    subtitle: "Orientación en hábitos de estudio, autonomía escolar y desarrollo integral de preadolescentes.",
-    order: 3,
-    pageUrl: "/ciclos/basico"
+    "key": "basico",
+    "slug": "basico",
+    "name": "Ciclo Básico",
+    "grades": "4° Y 5°",
+    "badgeText": "4 y 5",
+    "pillClass": "pill-yellow",
+    "borderClass": "card-border-yellow",
+    "icon": "📘",
+    "subtitle": "Orientación en hábitos de estudio, autonomía escolar y desarrollo integral de preadolescentes.",
+    "order": 3,
+    "pageUrl": "/ciclos/basico",
+    "heroBgImage": ""
   },
   {
-    key: "fundamental",
-    slug: "fundamental",
-    name: "Ciclo Fundamental",
-    grades: "6° Y 7°",
-    badgeText: "6 y 7",
-    pillClass: "pill-purple",
-    borderClass: "card-border-purple",
-    icon: "🔮",
-    subtitle: "Transición a la secundaria, gestión de emociones, prevención y fortalecimiento de la autoestima.",
-    order: 4,
-    pageUrl: "/ciclos/fundamental"
+    "key": "fundamental",
+    "slug": "fundamental",
+    "name": "Ciclo Fundamental",
+    "grades": "6° Y 7°",
+    "badgeText": "6 y 7",
+    "pillClass": "pill-purple",
+    "borderClass": "card-border-purple",
+    "icon": "🔮",
+    "subtitle": "Transición a la secundaria, gestión de emociones, prevención y fortalecimiento de la autoestima.",
+    "order": 4,
+    "pageUrl": "/ciclos/fundamental",
+    "heroBgImage": ""
   },
   {
-    key: "exploratorio",
-    slug: "exploratorio",
-    name: "Ciclo Exploratorio",
-    grades: "8° Y 9°",
-    badgeText: "8 y 9",
-    pillClass: "pill-blue",
-    borderClass: "card-border-blue",
-    icon: "🧭",
-    subtitle: "Comunicación asertiva, prevención de riesgos psicosociales y construcción de relaciones saludables.",
-    order: 5,
-    pageUrl: "/ciclos/exploratorio"
+    "key": "exploratorio",
+    "slug": "exploratorio",
+    "name": "Ciclo Exploratorio",
+    "grades": "8° Y 9°",
+    "badgeText": "8 y 9",
+    "pillClass": "pill-blue",
+    "borderClass": "card-border-blue",
+    "icon": "🧭",
+    "subtitle": "Comunicación asertiva, prevención de riesgos psicosociales y construcción de relaciones saludables.",
+    "order": 5,
+    "pageUrl": "/ciclos/exploratorio",
+    "heroBgImage": "/uploads/hero_exploratorio_1788740308711_wv1w9.jpg"
   },
   {
-    key: "especializado",
-    slug: "especializado",
-    name: "Ciclo Especializado",
-    grades: "10° Y 11°",
-    badgeText: "10 y 11",
-    pillClass: "pill-green",
-    borderClass: "card-border-green",
-    icon: "🎓",
-    subtitle: "Orientación vocacional, preparación para la educación superior y consolidación del proyecto de vida.",
-    order: 6,
-    pageUrl: "/ciclos/especializado"
+    "key": "especializado",
+    "slug": "especializado",
+    "name": "Ciclo Especializado",
+    "grades": "10° Y 11°",
+    "badgeText": "10 y 11",
+    "pillClass": "pill-green",
+    "borderClass": "card-border-green",
+    "icon": "🎓",
+    "subtitle": "Orientación vocacional, preparación para la educación superior y consolidación del proyecto de vida.",
+    "order": 6,
+    "pageUrl": "/ciclos/especializado",
+    "heroBgImage": ""
+  },
+  {
+    "key": "cycle_1788358007488",
+    "slug": "ciclo-juvenil-pro",
+    "name": "Ciclo Juvenil Pro",
+    "grades": "9°, 10° y 11°",
+    "badgeText": "9 10 y 11",
+    "pillClass": "pill-pink",
+    "borderClass": "card-border-pink",
+    "icon": "🎓",
+    "subtitle": "Espacio formativo y de orientación escolar.",
+    "order": 7,
+    "pageUrl": "/ciclos/ciclo-juvenil-pro",
+    "heroBgImage": ""
   }
 ];
 
@@ -375,6 +434,7 @@ function readDb() {
 function saveDb(data) {
   try {
     initDb();
+    data.version = Date.now().toString();
     fs.writeFileSync(DB_FILE, JSON.stringify(data, null, 2), 'utf-8');
     return true;
   } catch (err) {
@@ -390,7 +450,7 @@ readDb();
 // API REST CENTRALIZADA PARA SINCRONIZACIÓN EN TIEMPO REAL
 // ============================================================
 
-// Middleware para evitar que los navegadores guarden en caché datos desactualizados
+// Middleware para evitar que los navegadores guarden en caché datos de API desactualizados
 app.use('/api', (req, res, next) => {
   res.setHeader('Cache-Control', 'no-store, no-cache, must-revalidate, proxy-revalidate');
   res.setHeader('Pragma', 'no-cache');
@@ -398,10 +458,24 @@ app.use('/api', (req, res, next) => {
   next();
 });
 
-// 1. Obtener todos los datos del portal
+// 0. Comprobación ultra-ligera de versión (~30 bytes para ahorrar datos en Vercel)
+app.get('/api/version', (req, res) => {
+  const db = readDb();
+  res.setHeader('Cache-Control', 'no-cache, private');
+  res.json({ v: db.version || '1' });
+});
+
+// 1. Obtener todos los datos del portal (con soporte ETag y 304 Not Modified)
 app.get('/api/data', (req, res) => {
   const db = readDb();
+  const version = db.version || '1';
+  if (req.headers['if-none-match'] === `"${version}"`) {
+    return res.status(304).end();
+  }
+  res.setHeader('ETag', `"${version}"`);
+  res.setHeader('Cache-Control', 'no-cache, private');
   res.json({
+    version: version,
     navItems: db.navItems || DEFAULT_NAV_ITEMS,
     cyclesList: db.cyclesList || DEFAULT_CYCLES_LIST,
     customPages: db.customPages || DEFAULT_CUSTOM_PAGES,
@@ -435,9 +509,16 @@ app.post('/api/cycles-list', (req, res) => {
     return res.status(400).json({ error: 'Formato inválido de lista de ciclos' });
   }
   const db = readDb();
-  db.cyclesList = cyclesList;
+  const cleanedCycles = cyclesList.map(cycle => {
+    const c = { ...cycle };
+    if (c.heroBgImage && c.heroBgImage.startsWith('data:image/')) {
+      c.heroBgImage = saveBase64ToFile(c.heroBgImage, `hero_${c.key || c.slug}`);
+    }
+    return c;
+  });
+  db.cyclesList = cleanedCycles;
   saveDb(db);
-  res.json({ success: true, count: cyclesList.length });
+  res.json({ success: true, count: cleanedCycles.length });
 });
 
 // 1.3 Guardar / Actualizar Páginas Personalizadas
@@ -471,7 +552,11 @@ app.post('/api/images', (req, res) => {
     return res.status(400).json({ error: 'Formato inválido de imágenes' });
   }
   const db = readDb();
-  db.siteImages = { ...db.siteImages, ...images };
+  const cleanedImages = {};
+  for (const [k, v] of Object.entries(images)) {
+    cleanedImages[k] = saveBase64ToFile(v, `site_${k}`);
+  }
+  db.siteImages = { ...db.siteImages, ...cleanedImages };
   saveDb(db);
   res.json({ success: true, images: db.siteImages });
 });
@@ -495,9 +580,24 @@ app.post('/api/cycles', (req, res) => {
     return res.status(400).json({ error: 'Formato inválido de bloques de ciclos' });
   }
   const db = readDb();
-  db.cycleBlocks = cycleBlocks;
+  const cleanedBlocks = cycleBlocks.map(block => {
+    const b = { ...block };
+    if (b.imageUrl && b.imageUrl.startsWith('data:image/')) {
+      b.imageUrl = saveBase64ToFile(b.imageUrl, `block_${b.id || 'img'}`);
+    }
+    if (Array.isArray(b.photosList)) {
+      b.photosList = b.photosList.map((photo, i) => {
+        if (photo && photo.url && photo.url.startsWith('data:image/')) {
+          return { ...photo, url: saveBase64ToFile(photo.url, `gallery_${b.id || 'img'}_${i}`) };
+        }
+        return photo;
+      });
+    }
+    return b;
+  });
+  db.cycleBlocks = cleanedBlocks;
   saveDb(db);
-  res.json({ success: true, count: cycleBlocks.length });
+  res.json({ success: true, count: cleanedBlocks.length });
 });
 
 // 5. Agregar Sugerencia de Padres
@@ -656,15 +756,7 @@ app.get(['/admin', '/admin.html', '/admin451200', '/2610', '/:slug'], (req, res,
 
 // Ruta Keep-Alive / Anti-Inactividad para Render.com (UptimeRobot / Cron-Job)
 app.get(['/ping', '/keep-alive', '/api/ping'], (req, res) => {
-  if (req.headers.accept && req.headers.accept.includes('text/html')) {
-    return res.sendFile(path.join(__dirname, 'public', 'ping.html'));
-  }
-  res.status(200).json({
-    status: 'online',
-    message: 'Servidor de Psicoorientación activo - Keep Alive OK 🟢',
-    uptime: Math.round(process.uptime()) + 's',
-    timestamp: new Date().toISOString()
-  });
+  res.status(200).json({ status: 'ok' });
 });
 
 // Endpoint de Diagnóstico

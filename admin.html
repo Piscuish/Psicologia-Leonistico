@@ -933,6 +933,9 @@
               <button type="button" class="btn btn-secondary btn-sm" onclick="openEditActiveCycleModal()" style="font-weight: 700;">
                 <i data-lucide="edit-3"></i> ✏️ Renombrar / Editar
               </button>
+              <button type="button" class="btn btn-outline btn-sm" onclick="openHeroBgModalForActiveCycle()" style="font-weight: 700; color: #4338ca; border-color: #c7d2fe;">
+                <i data-lucide="image"></i> 🖼️ Fondo del Título
+              </button>
               <button type="button" class="btn btn-outline btn-sm" onclick="moveActiveCycleOrder(-1)" title="Mover pestaña a la izquierda" style="padding: 4px 10px;">
                 ⬅️ Izq
               </button>
@@ -1171,7 +1174,39 @@
                   <label style="font-weight: 800; color: #86198f; font-size: 0.95rem; margin-bottom: 2px; display: block;">
                     🎞️ Gestor Visual de la Galería de Fotos:
                   </label>
-                  <span style="font-size: 0.8rem; color: #475569;">Sube múltiples fotos desde tu computador o añade enlaces web</span>
+                  <span style="font-size: 0.8rem; color: #475569;">Sube múltiples fotos desde tu computador o añade enlaces web. Puedes estirarlas y ajustar su tamaño:</span>
+                </div>
+
+                <!-- Opciones de Tamaño, Distribución y Proporción de la Galería -->
+                <div style="background: white; border: 1px solid #f0abfc; border-radius: var(--radius-md); padding: 14px; margin-bottom: 14px;">
+                  <div class="form-row" style="margin-bottom: 10px;">
+                    <div class="form-group" style="flex: 1; margin-bottom: 0;">
+                      <label style="font-size: 0.82rem; font-weight: 700; color: #86198f;">📐 Acomodo / Columnas de las Fotos:</label>
+                      <select id="cycleGalleryLayout" onchange="updateCycleBlockLivePreview()" style="font-weight: 600; font-size: 0.86rem;">
+                        <option value="single_full">🖼️ 1 Foto / Ancho Completo Grande (100% Estirada)</option>
+                        <option value="cols_2">🪟 2 Columnas Grandes</option>
+                        <option value="cols_3">🎞️ 3 Columnas Medianas</option>
+                        <option value="grid">🧩 Mosaico Responsivo Automático</option>
+                      </select>
+                    </div>
+                    <div class="form-group" style="flex: 1; margin-bottom: 0;">
+                      <label style="font-size: 0.82rem; font-weight: 700; color: #86198f;">📐 Proporción / Altura de las Fotos:</label>
+                      <select id="cycleGalleryFit" onchange="updateCycleBlockLivePreview()" style="font-weight: 600; font-size: 0.86rem;">
+                        <option value="natural">Proporción Natural Completa (Sin recortar / Toda la foto)</option>
+                        <option value="wide">Panorámica Grande (16:9)</option>
+                        <option value="standard">Estándar (4:3)</option>
+                        <option value="square">Cuadrada Moderna (1:1)</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="form-group" style="margin-bottom: 0;">
+                    <label style="font-size: 0.82rem; font-weight: 700; color: #86198f;">🎯 Alineación de las Fotos:</label>
+                    <select id="cycleGalleryAlign" onchange="updateCycleBlockLivePreview()" style="font-weight: 600; font-size: 0.86rem;">
+                      <option value="center">⏺️ Centrado</option>
+                      <option value="left">⬅️ Alinear a la Izquierda</option>
+                      <option value="right">➡️ Alinear a la Derecha</option>
+                    </select>
+                  </div>
                 </div>
 
                 <div style="display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 10px;">
@@ -1200,7 +1235,7 @@
                   <i data-lucide="image"></i> Imagen o Foto del Bloque (Opcional)
                 </label>
                 <p style="font-size: 0.82rem; color: #64748b; margin-bottom: 14px;">
-                  Sube una foto desde tu computador o pega un enlace de imagen:
+                  Sube una foto desde tu computador o pega un enlace de imagen. Puedes estirarla al 100% o acomodarla a tu gusto:
                 </p>
 
                 <div class="form-row" style="margin-bottom: 12px;">
@@ -1216,15 +1251,38 @@
 
                 <input type="hidden" id="cycleBlockImageUrlHidden" value="">
 
-                <!-- Selector de Posición / Acomodo de Imagen -->
-                <div class="form-group" style="margin-top: 14px; margin-bottom: 0;">
+                <!-- Selectores de Tamaño, Ajuste y Posición de Imagen -->
+                <div class="form-row" style="margin-top: 14px; margin-bottom: 10px;">
+                  <div class="form-group" style="flex: 1; margin-bottom: 0;">
+                    <label style="font-size: 0.84rem; font-weight: 700; color: #1e293b;">
+                      📐 Tamaño / Escala de la Imagen:
+                    </label>
+                    <select id="cycleBlockImageSize" onchange="updateCycleBlockLivePreview()" style="font-weight: 600;">
+                      <option value="full">🟦 Ancho Completo / Banner Grande (100% Estirada)</option>
+                      <option value="medium">🟨 Mediana (50% / 480px)</option>
+                      <option value="small">🟩 Pequeña (33% / 260px)</option>
+                    </select>
+                  </div>
+                  <div class="form-group" style="flex: 1; margin-bottom: 0;">
+                    <label style="font-size: 0.84rem; font-weight: 700; color: #1e293b;">
+                      📐 Ajuste de la Foto:
+                    </label>
+                    <select id="cycleBlockImageFit" onchange="updateCycleBlockLivePreview()" style="font-weight: 600;">
+                      <option value="contain">Completa sin Recortar (Proporción Original)</option>
+                      <option value="cover">Recorte Panorámico Elegante (Cover)</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="form-group" style="margin-top: 0; margin-bottom: 0;">
                   <label style="font-size: 0.84rem; font-weight: 700; color: #1e293b;">
                     📐 Acomodo / Posición de la Imagen en la Tarjeta:
                   </label>
                   <select id="cycleBlockImagePos" onchange="updateCycleBlockLivePreview()" style="font-weight: 600;">
+                    <option value="banner">🖼️ Banner Panorámico Arriba (Ancho Completo)</option>
+                    <option value="bottom_banner">🖼️ Banner Panorámico Abajo (Ancho Completo)</option>
                     <option value="left">⬅️ A la izquierda del texto (Horizontal Elegante)</option>
                     <option value="right">➡️ A la derecha del texto (Horizontal Elegante)</option>
-                    <option value="banner">🖼️ Banner panorámico (Arriba ancho completo)</option>
                     <option value="top">⬆️ Arriba del texto (Estándar)</option>
                   </select>
                 </div>
@@ -1651,6 +1709,39 @@
         <div class="form-group">
           <label>Mensaje / Orientación para las Familias</label>
           <textarea id="cycleFormSubtitle" rows="3" placeholder="Breve descripción u orientación general de este ciclo escolar..."></textarea>
+        </div>
+
+        <!-- Imagen de Fondo del Encabezado (Hero Header Background) -->
+        <div style="background: #f8fafc; border: 1.5px dashed #cbd5e1; border-radius: var(--radius-md); padding: 16px; margin-top: 14px; margin-bottom: 14px;">
+          <label style="font-weight: 800; color: #1e293b; font-size: 0.88rem; display: flex; align-items: center; gap: 8px; margin-bottom: 4px;">
+            <i data-lucide="image"></i> 🖼️ Imagen de Fondo del Título / Encabezado (Opcional):
+          </label>
+          <p style="font-size: 0.78rem; color: #64748b; margin-bottom: 10px;">
+            Añade una foto de fondo institucional panorámica para que aparezca detrás del título del ciclo:
+          </p>
+
+          <div class="form-row" style="margin-bottom: 8px;">
+            <div class="form-group" style="flex: 1; margin-bottom: 0;">
+              <label style="font-size: 0.78rem; font-weight: 700;">📁 Subir Foto desde PC</label>
+              <input type="file" id="cycleFormHeroBgFile" accept="image/*" onchange="handleCycleHeroBgFileUpload(event)" style="font-size: 0.8rem;">
+            </div>
+            <div class="form-group" style="flex: 1; margin-bottom: 0;">
+              <label style="font-size: 0.78rem; font-weight: 700;">🔗 O Enlace Web (URL)</label>
+              <input type="url" id="cycleFormHeroBgUrl" placeholder="https://..." oninput="handleCycleHeroBgUrlInput()" style="font-size: 0.8rem;">
+            </div>
+          </div>
+
+          <input type="hidden" id="cycleFormHeroBgHidden" value="">
+
+          <div id="cycleHeroBgPreviewBox" style="display: none; align-items: center; justify-content: space-between; background: #ecfdf5; border: 1px solid #a7f3d0; border-radius: 6px; padding: 8px 12px; margin-top: 8px;">
+            <div style="display: flex; align-items: center; gap: 8px; font-size: 0.82rem; color: #065f46; font-weight: 700;">
+              <i data-lucide="image-check"></i>
+              <span id="cycleHeroBgPreviewText">Fondo cargado</span>
+            </div>
+            <button type="button" class="btn-table-action btn-del" onclick="removeCycleHeroBgImage()" style="padding: 3px 10px; font-size: 0.75rem; font-weight: 700;">
+              ✕ Quitar Fondo
+            </button>
+          </div>
         </div>
 
         <div style="display: flex; gap: 10px; justify-content: flex-end; margin-top: 18px;">
