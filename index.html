@@ -25,7 +25,7 @@
   <script src="https://unpkg.com/lucide@latest" defer></script>
 
   <!-- Custom Styles -->
-  <link rel="stylesheet" href="/styles.css">
+  <link rel="stylesheet" href="/styles.css?v=2.9.1">
 </head>
 <body>
 
@@ -78,6 +78,11 @@
           <i data-lucide="users"></i> Encuentros Familiares
         </a>
 
+        <!-- Promoción y Prevención -->
+        <a href="/promocion-prevencion" class="nav-btn">
+          <i data-lucide="shield-check"></i> Promoción y Prevención
+        </a>
+
         <!-- Ciclos Dropdown -->
         <div class="nav-dropdown">
           <a href="#" class="nav-dropdown-toggle" id="navCiclosBtn">
@@ -128,6 +133,9 @@
       <a href="/encuentros" class="mobile-nav-btn">
         <i data-lucide="users"></i> Encuentros Familiares
       </a>
+      <a href="/promocion-prevencion" class="mobile-nav-btn">
+        <i data-lucide="shield-check"></i> Promoción y Prevención
+      </a>
       <div style="font-size: 0.75rem; font-weight: 700; color: #64748b; text-transform: uppercase; padding: 6px 12px 2px 12px; letter-spacing: 0.5px;">
         Ciclos Escolares
       </div>
@@ -167,14 +175,6 @@
           <p class="hero-subtitle-main">
             Un espacio cálido, seguro y confidencial para orientar el corazón y la mente de nuestros estudiantes y familias leonísticas.
           </p>
-          <div class="hero-cta-group">
-            <a href="/encuentros" class="btn btn-hero-gold">
-              <i data-lucide="users"></i> Escuela de Familias & Talleres
-            </a>
-            <a href="#quienes-somos" class="btn btn-hero-blue-outline">
-              <i data-lucide="heart-handshake"></i> Conoce a las Orientadoras
-            </a>
-          </div>
         </div>
       </div>
     </section>
@@ -184,33 +184,61 @@
 
     <!-- Bienvenidos Section -->
     <section class="section-container bg-white-section" id="bienvenidos-section">
+      <div class="container" style="max-width: 980px;">
+        <div class="section-text-block text-center" style="max-width: 860px; margin: 0 auto 28px;">
+          <span class="sub-badge">🏛️ IDENTIDAD LEONÍSTICA</span>
+          <h2 style="font-size: 2.4rem; margin-top: 10px; margin-bottom: 8px;">Bienvenidos a <span class="highlight-blue">Caminando Juntos</span></h2>
+          <p class="section-tagline" style="font-size: 1.15rem; color: #0d9488; font-weight: 600; margin: 0 auto;">"Un espacio para crecer, aprender y construir bienestar."</p>
+        </div>
+        <div style="background: #f8fafc; border-radius: var(--radius-lg); padding: 36px 40px; border: 1px solid var(--border-color); box-shadow: var(--shadow-sm); line-height: 1.8; color: #334155; font-size: 1.05rem;">
+          <p style="margin-bottom: 18px;">
+            En <strong>Caminando Juntos</strong> creemos que cada etapa del desarrollo es una oportunidad para aprender, descubrir fortalezas y construir un proyecto de vida con sentido. Este blog nace como un espacio de encuentro para estudiantes, familias, docentes y toda la comunidad educativa, donde compartiremos experiencias, recursos, actividades y estrategias que fortalecen el bienestar integral.
+          </p>
+          <p style="margin-bottom: 18px;">
+            Desde el área de <strong>Psicoorientación</strong>, promovemos el desarrollo socioemocional, la Educación Sexual Integral, la orientación vocacional, la convivencia escolar y el acompañamiento a los diferentes procesos que contribuyen al crecimiento personal, académico y social de nuestros estudiantes.
+          </p>
+          <p style="margin-bottom: 0;">
+            Te invitamos a recorrer este espacio, conocer nuestras iniciativas, participar en las actividades y descubrir herramientas que nos permitan seguir caminando juntos hacia una comunidad más consciente, empática y comprometida con el bienestar de todos.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ¿Quiénes Somos? Section (Ubicado arriba de Áreas de Acompañamiento) -->
+    <section class="section-container bg-light-section content-visibility-auto" id="quienes-somos">
       <div class="container">
-        <div class="content-image-grid">
-          <div class="section-img-frame">
-            <img id="welcomeSectionImg" src="https://lh3.googleusercontent.com/sitesv/AG8ngQWOyxLk67vCI15BlZoCjOwd8xUiVdKQzLu-M2WJcEPpTf9i3QDpCzc1-5m6X-sKqpvyWPGZBwQ-rH8UhgQL7YTxjIlxDFe_bipo6xrnJX-R5AzoEojbfXeILt4DV4eHhLkoRtPmt0qDN9i4vhtAbDolgStj2fPdU9XVS2h5y405j0qv0gtNpOby2sONDNOeFMCsNGdXiYbURk_wJfVERZBegFn7tlsmLq3pjw8f=w1280" alt="Bienvenidos a Psicoorientación" loading="lazy" decoding="async">
-          </div>
+        <div class="content-image-grid reversed">
           <div class="section-text-block">
-            <span class="sub-badge">🏛️ IDENTIDAD LEONÍSTICA</span>
-            <h2>Bienvenidos a Nuestro Espacio de <span class="highlight-blue">Psicoorientación</span></h2>
-            <p class="section-tagline">"Caminando juntos hacia el desarrollo integral y el bienestar estudiantil"</p>
+            <span class="sub-badge">🦁 EQUIPO DE ORIENTACIÓN</span>
+            <h2>¿Quiénes <span class="highlight-blue">Somos?</span></h2>
+            <p class="section-tagline">Profesionales comprometidas con la formación integral leonística</p>
             <p>
-              El Departamento de Psicoorientación del <strong>Colegio Leonístico La Merced</strong> es un lugar creado para escuchar, guiar y construir caminos de esperanza y superación junto a toda nuestra comunidad educativa.
+              Somos un equipo de psicoorientadoras apasionadas por el bienestar de los niños, niñas y jóvenes. Creemos firmemente que la educación académica trasciende cuando el corazón y la mente se encuentran en equilibrio.
             </p>
             <p>
-              Brindamos acompañamiento en procesos socioemocionales, orientación vocacional, fortalecimiento del clima escolar y apoyo a las familias en la hermosa tarea de educar con amor, respeto y límites constructivos.
+              Trabajamos de la mano con las directivas, los docentes de aula y las familias para garantizar que cada estudiante cuente con las herramientas necesarias para construir un proyecto de vida feliz y exitoso.
             </p>
-            <ul class="key-points-list">
-              <li><i data-lucide="check-circle-2"></i> Atención cálida, empática y completamente confidencial.</li>
-              <li><i data-lucide="check-circle-2"></i> Articulación permanente entre docentes, estudiantes y padres de familia.</li>
-              <li><i data-lucide="check-circle-2"></i> Talleres vivenciales y estrategias de prevención escolar.</li>
-            </ul>
+          </div>
+          <div class="section-img-frame">
+            <img id="aboutSectionImg" src="https://lh3.googleusercontent.com/sitesv/AG8ngQXTnHzijkLW5x4q0oxIMOi07YzG-IBG1OfPXeoVkIVB8fjkFXyd17Exs0GpjRWuO_ve89ISCOVUerGrrxM5Btnf5tup2wv79zMnKOoluKmpvA0bbZU3sVSnjk80O_PqvnpU7L_xlejXLWd0rR4xWkxGQj7g0dTAeH3vz104NNIAC_EwotDlnekiU7aMZOxbjrQAZ56qxhieVbVysrZ75FKa5z5OY7hICFCfX1Ptwyo=w1280" alt="Equipo de Orientación Escolar" loading="lazy" decoding="async">
+          </div>
+        </div>
+
+        <div style="margin-top: 50px;">
+          <div class="section-title-wrap text-center" style="margin-bottom: 25px;">
+            <h3>Equipo de Psicoorientación Escolar</h3>
+            <p>Encuentra a la orientadora correspondiente según tu grupo o grado:</p>
+          </div>
+          
+          <div class="team-grid" id="teamCardsContainer">
+            <!-- Dynamic Psychologists Loaded via app.js -->
           </div>
         </div>
       </div>
     </section>
 
     <!-- Áreas de Acompañamiento -->
-    <section class="section-container bg-light-section content-visibility-auto">
+    <section class="section-container bg-white-section content-visibility-auto">
       <div class="container">
         <div class="section-title-wrap text-center">
           <span class="sub-badge">💛 LÍNEAS FORMATIVAS</span>
@@ -250,39 +278,6 @@
       </div>
     </section>
 
-    <!-- ¿Quiénes Somos? Section -->
-    <section class="section-container bg-white-section content-visibility-auto" id="quienes-somos">
-      <div class="container">
-        <div class="content-image-grid reversed">
-          <div class="section-text-block">
-            <span class="sub-badge">🦁 EQUIPO DE ORIENTACIÓN</span>
-            <h2>¿Quiénes <span class="highlight-blue">Somos?</span></h2>
-            <p class="section-tagline">Profesionales comprometidas con la formación integral leonística</p>
-            <p>
-              Somos un equipo de psicoorientadoras apasionadas por el bienestar de los niños, niñas y jóvenes. Creemos firmemente que la educación académica trasciende cuando el corazón y la mente se encuentran en equilibrio.
-            </p>
-            <p>
-              Trabajamos de la mano con las directivas, los docentes de aula y las familias para garantizar que cada estudiante cuente con las herramientas necesarias para construir un proyecto de vida feliz y exitoso.
-            </p>
-          </div>
-          <div class="section-img-frame">
-            <img id="aboutSectionImg" src="https://lh3.googleusercontent.com/sitesv/AG8ngQXTnHzijkLW5x4q0oxIMOi07YzG-IBG1OfPXeoVkIVB8fjkFXyd17Exs0GpjRWuO_ve89ISCOVUerGrrxM5Btnf5tup2wv79zMnKOoluKmpvA0bbZU3sVSnjk80O_PqvnpU7L_xlejXLWd0rR4xWkxGQj7g0dTAeH3vz104NNIAC_EwotDlnekiU7aMZOxbjrQAZ56qxhieVbVysrZ75FKa5z5OY7hICFCfX1Ptwyo=w1280" alt="Equipo de Orientación Escolar" loading="lazy" decoding="async">
-          </div>
-        </div>
-
-        <div style="margin-top: 50px;">
-          <div class="section-title-wrap text-center" style="margin-bottom: 25px;">
-            <h3>Equipo de Psicoorientación Escolar</h3>
-            <p>Encuentra a la orientadora correspondiente según tu grupo o grado:</p>
-          </div>
-          
-          <div class="team-grid" id="teamCardsContainer">
-            <!-- Dynamic Psychologists Loaded via app.js -->
-          </div>
-        </div>
-      </div>
-    </section>
-
   </main>
 
   <!-- Footer -->
@@ -302,7 +297,9 @@
           <h4>Navegación</h4>
           <ul>
             <li><a href="/">Inicio</a></li>
+            <li><a href="/guia-bienestar">Guía De Bienestar Emocional</a></li>
             <li><a href="/encuentros">Encuentros Familiares</a></li>
+            <li><a href="/promocion-prevencion">Promoción y Prevención</a></li>
             <li><a href="#quienes-somos">¿Quiénes Somos?</a></li>
           </ul>
         </div>
@@ -330,6 +327,6 @@
   </div>
 
   <!-- Main JavaScript Logic -->
-  <script src="/app.js" defer></script>
+  <script src="/app.js?v=2.9.2" defer></script>
 </body>
 </html>

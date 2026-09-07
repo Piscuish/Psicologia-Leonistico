@@ -35,7 +35,7 @@ app.use(express.static(path.join(__dirname, 'public'), {
     if (filePath.endsWith('.html')) {
       res.setHeader('Cache-Control', 'public, max-age=0, must-revalidate');
     } else if (filePath.endsWith('.css') || filePath.endsWith('.js')) {
-      res.setHeader('Cache-Control', 'public, max-age=86400, stale-while-revalidate=604800');
+      res.setHeader('Cache-Control', 'no-cache, must-revalidate');
     } else if (/\.(jpg|jpeg|png|gif|svg|webp|ico|woff2|woff|ttf)$/i.test(filePath)) {
       res.setHeader('Cache-Control', 'public, max-age=2592000, immutable');
     }
@@ -196,22 +196,28 @@ const DEFAULT_PSYCHOLOGISTS = [
   {
     id: 1,
     name: "Nancy Rocío Torres Silva",
-    badge: "PSICÓLOGA BACHILLERATO",
-    badgeClass: "badge-blue",
+    badge: "",
+    badgeClass: "",
     bgClass: "bg-blue",
     emoji: "👩‍💼",
-    role: "Orientación Escolar y Psicológica - Bachillerato",
+    photoZoom: 1,
+    photoPosX: 50,
+    photoPosY: 20,
+    role: "",
     desc: "Acompañamiento integral a estudiantes de grados 6° a 11°. Especialista en orientación vocacional, prevención de riesgos psicosociales, proyecto de vida y fortalecimiento de habilidades socioemocionales.",
     email: "orientacion.bachillerato@leonistico.edu.co"
   },
   {
     id: 2,
     name: "María Isabel Rodríguez",
-    badge: "PSICÓLOGA PRIMARIA",
-    badgeClass: "badge-pink",
+    badge: "",
+    badgeClass: "",
     bgClass: "bg-pink",
     emoji: "👩‍🏫",
-    role: "Orientación Escolar y Psicológica - Primaria y Preescolar",
+    photoZoom: 1,
+    photoPosX: 50,
+    photoPosY: 20,
+    role: "",
     desc: "Acompañamiento psicoeducativo y emocional a niños y familias de Jardín, Transición y grados 1° a 5°. Especialista en pautas de crianza positiva, desarrollo infantil y adaptación escolar.",
     email: "orientacion.primaria@leonistico.edu.co"
   }
@@ -234,12 +240,30 @@ const DEFAULT_NAV_ITEMS = [
     ]
   },
   {
+    id: "nav_guia_bienestar",
+    title: "Guía De Bienestar Emocional",
+    url: "/guia-bienestar",
+    icon: "heart-pulse",
+    type: "link",
+    order: 2,
+    isSystem: true
+  },
+  {
     id: "nav_encuentros",
     title: "Encuentros Familiares",
     url: "/encuentros",
     icon: "users",
     type: "link",
-    order: 2,
+    order: 3,
+    isSystem: true
+  },
+  {
+    id: "nav_promocion_prevencion",
+    title: "Promoción y Prevención",
+    url: "/promocion-prevencion",
+    icon: "shield-check",
+    type: "link",
+    order: 4,
     isSystem: true
   },
   {
@@ -248,7 +272,7 @@ const DEFAULT_NAV_ITEMS = [
     url: "#",
     icon: "layers",
     type: "dropdown",
-    order: 3,
+    order: 5,
     isSystem: true,
     isCyclesDropdown: true
   }
@@ -263,7 +287,7 @@ const DEFAULT_CYCLES_LIST = [
     "badgeText": "J y T",
     "pillClass": "pill-pink",
     "borderClass": "card-border-pink",
-    "icon": "🌸",
+    "icon": "",
     "subtitle": "Espacio formativo y de acompañamiento socioemocional para las familias y estudiantes de los primeros años escolares.",
     "order": 1,
     "pageUrl": "/ciclos/primera-infancia",
@@ -564,7 +588,14 @@ app.post('/api/psychologists', (req, res) => {
     return res.status(400).json({ error: 'Formato inválido de psicólogas' });
   }
   const db = readDb();
-  db.psychologists = psychologists;
+  const cleaned = psychologists.map(p => {
+    const cp = { ...p };
+    if (cp.emoji && cp.emoji.startsWith('data:image/')) {
+      cp.emoji = saveBase64ToFile(cp.emoji, `orientadora_${cp.id || 'hd'}`);
+    }
+    return cp;
+  });
+  db.psychologists = cleaned;
   saveDb(db);
   res.json({ success: true, psychologists: db.psychologists });
 });
@@ -704,6 +735,15 @@ app.get(['/guia-bienestar', '/guia-bienestar.html', '/bienestar', '/bienestar-em
     return res.sendFile(guidePath);
   }
   res.sendFile(path.join(__dirname, 'guia-bienestar.html'));
+});
+
+// 2.2 Página de Promoción y Prevención
+app.get(['/promocion-prevencion', '/promocion-prevencion.html', '/promocion-y-prevencion', '/promocion', '/prevencion'], (req, res) => {
+  const pagePath = path.join(__dirname, 'public', 'promocion-prevencion.html');
+  if (fs.existsSync(pagePath)) {
+    return res.sendFile(pagePath);
+  }
+  res.sendFile(path.join(__dirname, 'promocion-prevencion.html'));
 });
 
 // 3. Rutas de Ciclos Escolares (Soporta ciclos existentes y dinámicos)

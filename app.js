@@ -27,6 +27,9 @@ const DEFAULT_PSYCHOLOGISTS = [
     badgeClass: "",
     email: "nhurtadov@leonisticolamerced.edu.co",
     emoji: "👩‍🏫",
+    photoZoom: 1,
+    photoPosX: 50,
+    photoPosY: 20,
     bgClass: "avatar-female-1",
     desc: "Acompañamiento especializado a los grados y grupos A. Enfoque en desarrollo formativo, orientación vocacional y bienestar estudiantil."
   },
@@ -38,6 +41,9 @@ const DEFAULT_PSYCHOLOGISTS = [
     badgeClass: "badge-blue",
     email: "mmecheverry@leonistico.com",
     emoji: "👩‍⚕️",
+    photoZoom: 1,
+    photoPosX: 50,
+    photoPosY: 20,
     bgClass: "avatar-female-2",
     desc: "Acompañamiento integral a los grupos B. Enfoque en fortalecimiento socioemocional, proyectos de vida y sana convivencia."
   }
@@ -384,12 +390,21 @@ const DEFAULT_NAV_ITEMS = [
     "isSystem": true
   },
   {
+    "id": "nav_promocion_prevencion",
+    "title": "Promoción y Prevención",
+    "url": "/promocion-prevencion",
+    "icon": "shield-check",
+    "type": "link",
+    "order": 4,
+    "isSystem": true
+  },
+  {
     "id": "nav_ciclos",
     "title": "Ciclos",
     "url": "#",
     "icon": "layers",
     "type": "dropdown",
-    "order": 4,
+    "order": 5,
     "isSystem": true,
     "isCyclesDropdown": true
   }
@@ -404,7 +419,7 @@ const DEFAULT_CYCLES_LIST = [
     "badgeText": "J y T",
     "pillClass": "pill-pink",
     "borderClass": "card-border-pink",
-    "icon": "🌸",
+    "icon": "",
     "subtitle": "Espacio formativo y de acompañamiento socioemocional para las familias y estudiantes de los primeros años escolares.",
     "order": 1,
     "pageUrl": "/ciclos/primera-infancia",
@@ -507,7 +522,7 @@ const DEFAULT_SUGGESTIONS = [
 // APP STATE & PERSISTENCE (HYBRID LOCAL + SERVER DATABASE)
 // ============================================================
 
-const APP_BUILD_VERSION = '2.8.5-20260907';
+const APP_BUILD_VERSION = '2.9.2-20260907';
 
 function initializeAppState() {
   const currentBuild = localStorage.getItem('psicologia_app_build_version');
@@ -524,11 +539,9 @@ function initializeAppState() {
     if (!Array.isArray(nav) || nav.length === 0) {
       nav = DEFAULT_NAV_ITEMS;
     } else {
-      // Fusionar items del sistema por defecto que puedan faltar (ej. Guía De Bienestar Emocional)
-      DEFAULT_NAV_ITEMS.forEach(defaultItem => {
-        const exists = nav.some(item => item.id === defaultItem.id || (defaultItem.url && item.url === defaultItem.url));
-        if (!exists) {
-          nav.push(defaultItem);
+      DEFAULT_NAV_ITEMS.forEach(defItem => {
+        if (!nav.some(n => n.id === defItem.id || n.url === defItem.url)) {
+          nav.push(defItem);
         }
       });
       nav.sort((a, b) => (a.order || 0) - (b.order || 0));
@@ -544,12 +557,13 @@ function initializeAppState() {
       cycles = cycles.map(cycle => {
         const def = DEFAULT_CYCLES_LIST.find(d => d.key === cycle.key || d.slug === cycle.slug);
         if (def) {
+          const cleanIcon = (cycle.icon && cycle.icon !== '🌸') ? cycle.icon : (def.icon || '');
           return {
             ...cycle,
             heroBgImage: cycle.heroBgImage || def.heroBgImage || '',
             pillClass: cycle.pillClass || def.pillClass,
             borderClass: cycle.borderClass || def.borderClass,
-            icon: cycle.icon || def.icon
+            icon: cleanIcon
           };
         }
         return cycle;
@@ -581,6 +595,15 @@ let siteImages = JSON.parse(localStorage.getItem('psicologia_site_images')) || D
 let adminPassword = localStorage.getItem('psicologia_admin_password') || '123';
 let adminSlug = localStorage.getItem('psicologia_admin_slug') || 'admin451200';
 let psychologists = JSON.parse(localStorage.getItem('psicologia_psychologists')) || DEFAULT_PSYCHOLOGISTS;
+if (Array.isArray(psychologists)) {
+  psychologists = psychologists.map(p => ({
+    ...p,
+    badge: '',
+    badgeClass: '',
+    role: ''
+  }));
+  localStorage.setItem('psicologia_psychologists', JSON.stringify(psychologists));
+}
 let calendarWorkshops = JSON.parse(localStorage.getItem('psicologia_calendar_workshops')) || DEFAULT_CALENDAR_WORKSHOPS;
 let cycleBlocks = JSON.parse(localStorage.getItem('psicologia_cycle_blocks')) || DEFAULT_CYCLE_BLOCKS;
 let suggestions = JSON.parse(localStorage.getItem('psicologia_suggestions')) || DEFAULT_SUGGESTIONS;
@@ -749,11 +772,18 @@ async function syncImagesToServer() {
 async function syncPsychologistsToServer() {
   localStorage.setItem('psicologia_psychologists', JSON.stringify(psychologists));
   try {
-    await fetch('/api/psychologists', {
+    const res = await fetch('/api/psychologists', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ psychologists })
     });
+    if (res.ok) {
+      const data = await res.json();
+      if (data.psychologists && Array.isArray(data.psychologists)) {
+        psychologists = data.psychologists;
+        localStorage.setItem('psicologia_psychologists', JSON.stringify(psychologists));
+      }
+    }
   } catch (err) {
     console.error('Error sincronizando orientadoras con el servidor:', err);
   }
@@ -819,6 +849,9 @@ document.addEventListener('DOMContentLoaded', async () => {
     renderCalendar();
   } else if (path.includes('admin') || path.includes('2610') || (adminSlug && path.includes(adminSlug.toLowerCase()))) {
     initAdminPage();
+  } else if (path.includes('promocion-prevencion') || path.includes('promocion')) {
+    recordVisit('Promoción y Prevención', 'Visita a Promoción y Prevención');
+    renderCyclePublicPage('promocion-prevencion');
   } else if (path.includes('pagina') || path.includes('/p/')) {
     const slug = path.split('/').filter(Boolean).pop().replace('.html', '');
     renderCustomPublicPage(slug);
@@ -848,6 +881,8 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   if (path.includes('encuentros')) {
     renderCalendar();
+  } else if (path.includes('promocion-prevencion') || path.includes('promocion')) {
+    renderCyclePublicPage('promocion-prevencion');
   } else if (path.includes('ciclos')) {
     const matchedCycle = cyclesList.find(c => path.includes(c.slug) || path.includes(c.key));
     if (matchedCycle) {
@@ -2309,6 +2344,18 @@ function applySiteImages() {
   }
 }
 
+function isImageUrl(val) {
+  if (!val || typeof val !== 'string') return false;
+  const s = val.trim().toLowerCase();
+  return s.startsWith('http://') || 
+         s.startsWith('https://') || 
+         s.startsWith('data:image/') || 
+         s.startsWith('/uploads/') || 
+         s.startsWith('./uploads/') ||
+         s.startsWith('uploads/') ||
+         /\.(jpg|jpeg|png|webp|gif|svg|avif)(\?.*)?$/i.test(s);
+}
+
 function updateImageManagerPreviews() {
   const prevLogo = document.getElementById('previewImgLogo');
   const prevHero = document.getElementById('previewImgHero');
@@ -2324,15 +2371,15 @@ function updateImageManagerPreviews() {
 
   if (prevNancy && psychologists[0]) {
     const p = psychologists[0];
-    prevNancy.innerHTML = p.emoji.startsWith('http') || p.emoji.startsWith('data:') 
-      ? `<img src="${p.emoji}" style="width: 80px; height: 80px; border-radius: 50%; object-fit: cover;">` 
+    prevNancy.innerHTML = isImageUrl(p.emoji) 
+      ? `<img src="${p.emoji}" style="width: 100px; height: 100px; border-radius: 50%; object-fit: cover; object-position: center 20%; image-rendering: -webkit-optimize-contrast;">` 
       : `<span>${p.emoji}</span>`;
   }
 
   if (prevMaria && psychologists[1]) {
     const p = psychologists[1];
-    prevMaria.innerHTML = p.emoji.startsWith('http') || p.emoji.startsWith('data:') 
-      ? `<img src="${p.emoji}" style="width: 80px; height: 80px; border-radius: 50%; object-fit: cover;">` 
+    prevMaria.innerHTML = isImageUrl(p.emoji) 
+      ? `<img src="${p.emoji}" style="width: 100px; height: 100px; border-radius: 50%; object-fit: cover; object-position: center 20%; image-rendering: -webkit-optimize-contrast;">` 
       : `<span>${p.emoji}</span>`;
   }
 
@@ -2393,14 +2440,47 @@ function handlePsychologistPhotoUpload(index, fileInput) {
 
   const reader = new FileReader();
   reader.onload = (e) => {
-    const base64 = e.target.result;
-    psychologists[index].emoji = base64;
-    localStorage.setItem('psicologia_psychologists', JSON.stringify(psychologists));
-    syncPsychologistsToServer();
-    renderTeamCards();
-    updateImageManagerPreviews();
-    populatePsychologistEditForms();
-    showToast(`¡Foto de ${psychologists[index].name} actualizada desde tu PC!`);
+    const rawData = e.target.result;
+    const img = new Image();
+    img.onload = async () => {
+      const maxDim = 1600; // Máxima resolución HD nítida
+      let w = img.width;
+      let h = img.height;
+      if (w > maxDim || h > maxDim) {
+        if (w > h) {
+          h = Math.round((h * maxDim) / w);
+          w = maxDim;
+        } else {
+          w = Math.round((w * maxDim) / h);
+          h = maxDim;
+        }
+      }
+      
+      const canvas = document.createElement('canvas');
+      canvas.width = w;
+      canvas.height = h;
+      const ctx = canvas.getContext('2d');
+      ctx.imageSmoothingEnabled = true;
+      ctx.imageSmoothingQuality = 'high';
+      ctx.drawImage(img, 0, 0, w, h);
+      
+      const hdDataUrl = (file.type === 'image/png') 
+        ? canvas.toDataURL('image/png') 
+        : canvas.toDataURL('image/jpeg', 0.95);
+      
+      psychologists[index].emoji = hdDataUrl;
+      localStorage.setItem('psicologia_psychologists', JSON.stringify(psychologists));
+      
+      populatePsychologistEditForms();
+      renderTeamCards();
+      
+      showToast(`⏳ Guardando foto en Alta Definición (HD)...`);
+      await syncPsychologistsToServer();
+      populatePsychologistEditForms();
+      renderTeamCards();
+      showToast(`✅ ¡Foto de ${psychologists[index].name} actualizada en Alta Definición (HD)!`);
+    };
+    img.src = rawData;
   };
   reader.readAsDataURL(file);
 }
@@ -2590,17 +2670,20 @@ function renderTeamCards() {
   if (!container) return;
 
   container.innerHTML = psychologists.map((p) => {
-    const isImage = p.emoji.startsWith('http') || p.emoji.startsWith('data:');
+    const isImage = isImageUrl(p.emoji);
+    const zoom = p.photoZoom || 1;
+    const posY = (p.photoPosY !== undefined) ? p.photoPosY : 20;
+    const posX = (p.photoPosX !== undefined) ? p.photoPosX : 50;
+
     return `
       <div class="team-card">
-        <div class="team-avatar-wrapper ${p.bgClass}">
+        <div class="team-avatar-wrapper ${p.bgClass || ''}">
           ${isImage 
-            ? `<img src="${p.emoji}" alt="${p.name}" class="team-avatar-img">` 
+            ? `<img src="${p.emoji}" alt="${p.name}" class="team-avatar-img" style="transform: scale(${zoom}); object-position: ${posX}% ${posY}%;">` 
             : `<span class="avatar-emoji">${p.emoji}</span>`}
         </div>
-        <div class="team-badge ${p.badgeClass}">${p.badge}</div>
         <h3 class="team-name">${p.name}</h3>
-        <p class="team-role">${p.role}</p>
+        ${(p.role && p.role.trim()) ? `<p class="team-role">${p.role}</p>` : ''}
         <p class="team-desc">${p.desc}</p>
         <div class="team-contact-box">
           <div class="contact-item">
@@ -2614,8 +2697,61 @@ function renderTeamCards() {
 
   const footerNancy = document.getElementById('footerContactNancy');
   const footerMaria = document.getElementById('footerContactMaria');
-  if (footerNancy && psychologists[0]) footerNancy.innerHTML = `<strong>${psychologists[0].badge}:</strong> <a href="mailto:${psychologists[0].email}">${psychologists[0].email}</a>`;
-  if (footerMaria && psychologists[1]) footerMaria.innerHTML = `<strong>${psychologists[1].badge}:</strong> <a href="mailto:${psychologists[1].email}">${psychologists[1].email}</a>`;
+  if (footerNancy && psychologists[0]) {
+    const b = (psychologists[0].badge && !psychologists[0].badge.includes('PSICÓLOGA')) ? `<strong>${psychologists[0].badge}:</strong> ` : '<strong>Orientación Bachillerato:</strong> ';
+    footerNancy.innerHTML = `<i data-lucide="mail"></i> ${b}<a href="mailto:${psychologists[0].email}">${psychologists[0].email}</a>`;
+  }
+  if (footerMaria && psychologists[1]) {
+    const b = (psychologists[1].badge && !psychologists[1].badge.includes('PSICÓLOGA')) ? `<strong>${psychologists[1].badge}:</strong> ` : '<strong>Orientación Primaria:</strong> ';
+    footerMaria.innerHTML = `<i data-lucide="mail"></i> ${b}<a href="mailto:${psychologists[1].email}">${psychologists[1].email}</a>`;
+  }
+}
+
+function updatePhotoAdjustment(index) {
+  const zoomInput = document.getElementById(`photoZoom${index}`);
+  const posYInput = document.getElementById(`photoPosY${index}`);
+  const posXInput = document.getElementById(`photoPosX${index}`);
+
+  const zoom = zoomInput ? parseFloat(zoomInput.value) : 1;
+  const posY = posYInput ? parseInt(posYInput.value, 10) : 20;
+  const posX = posXInput ? parseInt(posXInput.value, 10) : 50;
+
+  const zoomVal = document.getElementById(`photoZoomVal${index}`);
+  const posYVal = document.getElementById(`photoPosYVal${index}`);
+  const posXVal = document.getElementById(`photoPosXVal${index}`);
+
+  if (zoomVal) zoomVal.textContent = `${Math.round(zoom * 100)}%`;
+  if (posYVal) posYVal.textContent = `${posY}%`;
+  if (posXVal) posXVal.textContent = `${posX}%`;
+
+  if (psychologists[index]) {
+    psychologists[index].photoZoom = zoom;
+    psychologists[index].photoPosY = posY;
+    psychologists[index].photoPosX = posX;
+  }
+
+  const previewAvatar = document.getElementById(`previewAvatar${index + 1}`);
+  if (previewAvatar) {
+    const img = previewAvatar.querySelector('img');
+    if (img) {
+      img.style.transform = `scale(${zoom})`;
+      img.style.objectPosition = `${posX}% ${posY}%`;
+    }
+  }
+
+  renderTeamCards();
+}
+
+function resetPhotoAdjustment(index) {
+  const zoomInput = document.getElementById(`photoZoom${index}`);
+  const posYInput = document.getElementById(`photoPosY${index}`);
+  const posXInput = document.getElementById(`photoPosX${index}`);
+
+  if (zoomInput) zoomInput.value = 1;
+  if (posYInput) posYInput.value = 20;
+  if (posXInput) posXInput.value = 50;
+
+  updatePhotoAdjustment(index);
 }
 
 function updateBadgeCounts() {
@@ -2634,46 +2770,114 @@ function populatePsychologistEditForms() {
     const previewName = document.getElementById(`previewName${idx + 1}`);
     const previewBadge = document.getElementById(`previewBadge${idx + 1}`);
 
-    if (nameInput) nameInput.value = p.name;
-    if (badgeInput) badgeInput.value = p.badge;
-    if (bgSelect) bgSelect.value = p.bgClass;
-    if (emailInput) emailInput.value = p.email;
-    if (descInput) descInput.value = p.desc;
+    const zoomInput = document.getElementById(`photoZoom${idx}`);
+    const posYInput = document.getElementById(`photoPosY${idx}`);
+    const posXInput = document.getElementById(`photoPosX${idx}`);
+    const zoomVal = document.getElementById(`photoZoomVal${idx}`);
+    const posYVal = document.getElementById(`photoPosYVal${idx}`);
+    const posXVal = document.getElementById(`photoPosXVal${idx}`);
+
+    const zoom = p.photoZoom || 1;
+    const posY = (p.photoPosY !== undefined) ? p.photoPosY : 20;
+    const posX = (p.photoPosX !== undefined) ? p.photoPosX : 50;
+
+    if (nameInput) nameInput.value = p.name || '';
+    if (badgeInput) badgeInput.value = p.badge || '';
+    if (bgSelect) bgSelect.value = p.bgClass || '';
+    if (emailInput) emailInput.value = p.email || '';
+    if (descInput) descInput.value = p.desc || '';
+
+    if (zoomInput) zoomInput.value = zoom;
+    if (posYInput) posYInput.value = posY;
+    if (posXInput) posXInput.value = posX;
+    if (zoomVal) zoomVal.textContent = `${Math.round(zoom * 100)}%`;
+    if (posYVal) posYVal.textContent = `${posY}%`;
+    if (posXVal) posXVal.textContent = `${posX}%`;
 
     if (previewAvatar) {
-      const isImg = p.emoji.startsWith('http') || p.emoji.startsWith('data:');
+      const isImg = isImageUrl(p.emoji);
       previewAvatar.innerHTML = isImg 
-        ? `<img src="${p.emoji}" alt="${p.name}">` 
+        ? `<img src="${p.emoji}" alt="${p.name}" style="transform: scale(${zoom}); object-position: ${posX}% ${posY}%;">` 
         : p.emoji;
-      previewAvatar.className = `avatar-preview ${p.bgClass}`;
+      previewAvatar.className = `avatar-preview ${p.bgClass || ''}`;
     }
-    if (previewName) previewName.textContent = p.name;
-    if (previewBadge) previewBadge.textContent = p.badge;
+    if (previewName) previewName.textContent = p.name || '';
+    if (previewBadge) previewBadge.textContent = p.badge || '';
   });
 }
 
-function savePsychologistProfile(event, index) {
-  event.preventDefault();
-  const name = document.getElementById(`editName${index}`).value;
-  const badge = document.getElementById(`editBadge${index}`).value;
-  const bgClass = document.getElementById(`editBgColor${index}`).value;
-  const email = document.getElementById(`editEmail${index}`).value;
-  const desc = document.getElementById(`editDesc${index}`).value;
+async function savePsychologistProfile(event, index) {
+  if (event) event.preventDefault();
+  
+  // Localizar botón que fue presionado
+  const submitBtn = (event && event.target) ? event.target.querySelector('button[type="submit"]') : null;
+  const originalBtnText = submitBtn ? submitBtn.innerHTML : '';
 
-  psychologists[index] = {
-    ...psychologists[index],
-    name,
-    badge,
-    bgClass,
-    email,
-    desc
-  };
+  try {
+    const nameInput = document.getElementById(`editName${index}`);
+    const emailInput = document.getElementById(`editEmail${index}`);
+    const descInput = document.getElementById(`editDesc${index}`);
+    const zoomInput = document.getElementById(`photoZoom${index}`);
+    const posYInput = document.getElementById(`photoPosY${index}`);
+    const posXInput = document.getElementById(`photoPosX${index}`);
 
-  localStorage.setItem('psicologia_psychologists', JSON.stringify(psychologists));
-  syncPsychologistsToServer();
-  renderTeamCards();
-  populatePsychologistEditForms();
-  showToast(`¡Perfil de ${name} actualizado!`);
+    const name = nameInput ? nameInput.value.trim() : '';
+    const email = emailInput ? emailInput.value.trim() : '';
+    const desc = descInput ? descInput.value.trim() : '';
+
+    if (!name) {
+      alert('⚠️ Por favor ingresa el nombre de la orientadora');
+      return;
+    }
+
+    if (!psychologists[index]) {
+      psychologists[index] = {};
+    }
+
+    psychologists[index].name = name;
+    psychologists[index].email = email;
+    psychologists[index].desc = desc;
+    psychologists[index].badge = '';
+    psychologists[index].badgeClass = '';
+    if (zoomInput) psychologists[index].photoZoom = parseFloat(zoomInput.value) || 1;
+    if (posYInput) psychologists[index].photoPosY = parseInt(posYInput.value, 10) ?? 20;
+    if (posXInput) psychologists[index].photoPosX = parseInt(posXInput.value, 10) ?? 50;
+
+    // Guardar inmediatamente en localStorage
+    localStorage.setItem('psicologia_psychologists', JSON.stringify(psychologists));
+
+    // Actualizar vista previa en el panel de inmediato
+    const previewNameEl = document.getElementById(`previewName${index + 1}`);
+    if (previewNameEl) previewNameEl.textContent = name;
+
+    // Sincronizar con el servidor
+    await syncPsychologistsToServer();
+
+    // Actualizar tarjetas públicas
+    renderTeamCards();
+    populatePsychologistEditForms();
+
+    // Feedback visual en el botón
+    if (submitBtn) {
+      submitBtn.innerHTML = '✅ ¡Cambios Guardados Correctamente!';
+      submitBtn.style.backgroundColor = '#16a34a';
+      submitBtn.style.borderColor = '#16a34a';
+      submitBtn.style.color = '#ffffff';
+      setTimeout(() => {
+        submitBtn.innerHTML = originalBtnText || '<i data-lucide="save"></i> Guardar Cambios en Perfil';
+        submitBtn.style.backgroundColor = '';
+        submitBtn.style.borderColor = '';
+        submitBtn.style.color = '';
+        if (window.lucide) lucide.createIcons();
+      }, 3000);
+    }
+
+    // Notificación Toast
+    showToast(`✅ ¡Perfil de ${name} guardado correctamente!`);
+  } catch (err) {
+    console.error('Error al guardar perfil de orientadora:', err);
+    alert('❌ Error al guardar perfil: ' + err.message);
+  }
 }
 
 function toggleMobileMenu() {
@@ -2715,6 +2919,7 @@ const COLOR_SCHEME_MAP = {
 const CYCLE_BLOCK_TYPES = [
   { type: 'hero_banner', name: 'Banner Principal', icon: '📰', desc: 'Encabezado con título grande, subtítulo, botón de acción y foto/banner.' },
   { type: 'slides_embed', name: 'Diapositivas / Canva / Drive', icon: '📊', desc: 'Incrusta presentaciones interactivas de Canva, Google Slides, Google Drive o Genially.' },
+  { type: 'video_embed', name: 'Video Interactivo / YouTube', icon: '🎬', desc: 'Incrusta videos de YouTube, Vimeo, Google Drive Video o tutoriales con reproductor 16:9.' },
   { type: 'resources_download', name: 'Guías y Archivos Descargables', icon: '📥', desc: 'Sube archivos PDF, Word, Excel o pega enlaces de descarga con botón.' },
   { type: 'article_blog', name: 'Artículo de Blog', icon: '📝', desc: 'Lectura amplia con autor, fecha, contenido extenso y foto de portada.' },
   { type: 'callout_tip', name: 'Consejo / Tip', icon: '💡', desc: 'Caja destacada con icono personalizado y color para consejos de orientación.' },
@@ -2735,20 +2940,42 @@ function renderAdminCycleTabs() {
     cyclesList = DEFAULT_CYCLES_LIST;
   }
 
-  if (!cyclesList.some(c => c.key === selectedAdminCycleKey)) {
+  const isPromo = selectedAdminCycleKey === 'promocion-prevencion';
+
+  if (!isPromo && !cyclesList.some(c => c.key === selectedAdminCycleKey)) {
     selectedAdminCycleKey = cyclesList[0]?.key || 'primera_infancia';
   }
 
-  container.innerHTML = sorted.map(c => {
+  let html = sorted.map(c => {
     const isActive = c.key === selectedAdminCycleKey;
+    const iconHtml = (c.icon && c.icon.trim() && c.icon !== '🌸') ? `<span>${c.icon}</span> ` : '';
     return `
       <button type="button" class="cycle-tab-btn ${isActive ? 'active' : ''}" onclick="selectAdminCycle('${c.key}', this)">
-        <span>${c.icon || '🌸'}</span> ${c.name} <small>(${c.badgeText || c.grades || ''})</small>
+        ${iconHtml}${c.name} <small>(${c.badgeText || c.grades || ''})</small>
       </button>
     `;
   }).join('');
 
-  const activeMeta = cyclesList.find(c => c.key === selectedAdminCycleKey) || cyclesList[0];
+  // Pestaña fija para Promoción y Prevención
+  html += `
+    <button type="button" class="cycle-tab-btn cycle-tab-promo ${isPromo ? 'active' : ''}" onclick="selectAdminCycle('promocion-prevencion', this)" style="border: 2px solid #0d9488; font-weight: 800; color: ${isPromo ? '#ffffff' : '#0d9488'}; background: ${isPromo ? '#0d9488' : '#f0fdfa'};">
+      <span>🛡️</span> Promoción y Prevención <small>(Programas)</small>
+    </button>
+  `;
+
+  container.innerHTML = html;
+
+  const activeMeta = isPromo ? {
+    key: 'promocion-prevencion',
+    name: 'Promoción y Prevención',
+    grades: 'Programas y Campañas Institucionales',
+    badgeText: 'PROMOCIÓN Y PREVENCIÓN',
+    pillClass: 'pill-teal',
+    borderClass: 'card-border-teal',
+    icon: '🛡️',
+    subtitle: 'Departamento de Psicoorientación Escolar • Colegio Leonístico La Merced'
+  } : (cyclesList.find(c => c.key === selectedAdminCycleKey) || cyclesList[0]);
+
   const nameEl = document.getElementById('adminCycleActiveName');
   if (nameEl && activeMeta) {
     nameEl.textContent = `${activeMeta.name} (${activeMeta.grades || ''})`;
@@ -2763,7 +2990,7 @@ function openCreateCycleModal() {
   if (form) form.reset();
   document.getElementById('cycleEditKey').value = '';
   document.getElementById('cycleModalTitle').innerHTML = `<span>➕</span> Crear Nuevo Ciclo Escolar`;
-  document.getElementById('cycleFormIcon').value = '🌟';
+  document.getElementById('cycleFormIcon').value = '';
 
   // Resetear fondo del ciclo
   const heroBgHidden = document.getElementById('cycleFormHeroBgHidden');
@@ -2786,7 +3013,7 @@ function openEditActiveCycleModal() {
 
   document.getElementById('cycleEditKey').value = meta.key;
   document.getElementById('cycleFormName').value = meta.name;
-  document.getElementById('cycleFormIcon').value = meta.icon || '🌸';
+  document.getElementById('cycleFormIcon').value = (meta.icon && meta.icon !== '🌸') ? meta.icon : '';
   document.getElementById('cycleFormGrades').value = meta.grades || '';
   document.getElementById('cycleFormBadge').value = meta.badgeText || '';
   document.getElementById('cycleFormSlug').value = meta.slug || '';
@@ -2920,7 +3147,8 @@ function handleSaveCycle(event) {
     return;
   }
 
-  const icon = document.getElementById('cycleFormIcon')?.value.trim() || '🌸';
+  const rawIcon = document.getElementById('cycleFormIcon')?.value.trim() || '';
+  const icon = rawIcon === '🌸' ? '' : rawIcon;
   const grades = document.getElementById('cycleFormGrades')?.value.trim() || name;
   let badgeText = document.getElementById('cycleFormBadge')?.value.trim() || grades;
   let slug = document.getElementById('cycleFormSlug')?.value.trim();
@@ -3056,17 +3284,45 @@ function selectAdminCycle(cycleKey, btnElement) {
   selectedAdminCycleKey = cycleKey;
   const buttons = document.querySelectorAll('.cycle-tab-btn');
   buttons.forEach(b => b.classList.remove('active'));
-  if (btnElement) btnElement.classList.add('active');
+  if (btnElement) {
+    btnElement.classList.add('active');
+  } else {
+    buttons.forEach(b => {
+      if (b.getAttribute('onclick') && b.getAttribute('onclick').includes(cycleKey)) {
+        b.classList.add('active');
+      }
+    });
+  }
 
-  const meta = cyclesList.find(c => c.key === cycleKey) || cyclesList[0];
+  const isPromo = cycleKey === 'promocion-prevencion';
+  const meta = isPromo ? {
+    key: 'promocion-prevencion',
+    name: 'Promoción y Prevención',
+    grades: 'Programas y Campañas Institucionales',
+    badgeText: 'PROMOCIÓN Y PREVENCIÓN',
+    pillClass: 'pill-teal',
+    borderClass: 'card-border-teal',
+    icon: '🛡️',
+    subtitle: 'Departamento de Psicoorientación Escolar • Colegio Leonístico La Merced'
+  } : (cyclesList.find(c => c.key === cycleKey) || cyclesList[0]);
+
   const nameEl = document.getElementById('adminCycleActiveName');
   if (nameEl && meta) nameEl.textContent = `${meta.name} (${meta.grades || ''})`;
+
+  const cycleSpecificActions = document.getElementById('adminCycleSpecificActions');
+  if (cycleSpecificActions) {
+    cycleSpecificActions.style.display = isPromo ? 'none' : 'flex';
+  }
 
   resetCycleBlockForm();
   renderAdminCycleBlocks();
 }
 
 function openActiveCyclePublicPage() {
+  if (selectedAdminCycleKey === 'promocion-prevencion') {
+    window.open('/promocion-prevencion', '_blank');
+    return;
+  }
   const meta = cyclesList.find(c => c.key === selectedAdminCycleKey);
   if (meta) {
     window.open(`/ciclos/${meta.slug}`, '_blank');
@@ -3139,6 +3395,7 @@ function setCycleBlockType(type) {
   const groupSubcards = document.getElementById('groupBlockSubcards');
   const groupResources = document.getElementById('groupBlockResources');
   const groupSlides = document.getElementById('groupBlockSlides');
+  const groupVideo = document.getElementById('groupBlockVideo');
   const groupGallery = document.getElementById('groupBlockGallery');
 
   if (groupButton) groupButton.style.display = (type === 'hero_banner') ? 'block' : 'none';
@@ -3147,6 +3404,7 @@ function setCycleBlockType(type) {
   if (groupSubcards) groupSubcards.style.display = (type === 'cards_grid') ? 'block' : 'none';
   if (groupResources) groupResources.style.display = (type === 'resources_download') ? 'block' : 'none';
   if (groupSlides) groupSlides.style.display = (type === 'slides_embed') ? 'block' : 'none';
+  if (groupVideo) groupVideo.style.display = (type === 'video_embed') ? 'block' : 'none';
   if (groupGallery) groupGallery.style.display = (type === 'photo_gallery') ? 'block' : 'none';
 
   // Renderizar constructores dinámicos
@@ -3568,13 +3826,13 @@ function removeCycleBlockImage() {
 // Vista Previa en Vivo Simulada
 function updateCycleBlockLivePreview() {
   try {
-    const meta = cyclesList.find(c => c.key === selectedAdminCycleKey) || cyclesList[0] || {
+    const meta = (selectedAdminCycleKey === 'promocion-prevencion') ? { key: 'promocion-prevencion', name: 'Promoción y Prevención', grades: 'Programas Institucionales', pillClass: 'pill-teal', borderClass: 'card-border-teal', icon: '🛡️' } : (cyclesList.find(c => c.key === selectedAdminCycleKey) || cyclesList[0] || {
       name: 'Primera Infancia',
       grades: 'J° Y T°',
       pillClass: 'pill-pink',
       borderClass: 'card-border-pink',
       icon: '🌸'
-    };
+    });
     const type = selectedBlockType || 'hero_banner';
     const size = 'full';
     const titleAlign = document.getElementById('cycleBlockTitleAlign')?.value || 'left';
@@ -3596,6 +3854,8 @@ function updateCycleBlockLivePreview() {
 
     const slidesUrl = document.getElementById('cycleSlidesUrlInput')?.value || '';
     const slidesBtnText = document.getElementById('cycleSlidesBtnTextInput')?.value || '';
+    const videoUrl = document.getElementById('cycleVideoUrlInput')?.value || '';
+    const videoBtnText = document.getElementById('cycleVideoBtnTextInput')?.value || '';
 
     const previewContainer = document.getElementById('liveCycleBlockCardWrap');
     const sizeBadge = document.getElementById('liveCycleBlockSizeBadge');
@@ -3629,6 +3889,8 @@ function updateCycleBlockLivePreview() {
       accentColor,
       slidesUrl: slidesUrl.trim(),
       slidesBtnText: slidesBtnText.trim(),
+      videoUrl: videoUrl.trim(),
+      videoBtnText: videoBtnText.trim(),
       slidesFileData: typeof currentEditingSlidesFileData !== 'undefined' ? currentEditingSlidesFileData : '',
       slidesFileName: typeof currentEditingSlidesFileName !== 'undefined' ? currentEditingSlidesFileName : '',
       itemsList: typeof currentEditingCardsList !== 'undefined' ? currentEditingCardsList : [],
@@ -3672,8 +3934,10 @@ function handleSaveCycleBlock(event) {
 
   const slidesUrl = (document.getElementById('cycleSlidesUrlInput')?.value || '').trim();
   const slidesBtnText = (document.getElementById('cycleSlidesBtnTextInput')?.value || '').trim();
+  const videoUrl = (document.getElementById('cycleVideoUrlInput')?.value || '').trim();
+  const videoBtnText = (document.getElementById('cycleVideoBtnTextInput')?.value || '').trim();
 
-  const meta = cyclesList.find(c => c.key === selectedAdminCycleKey) || cyclesList[0] || { key: 'primera_infancia', name: 'Primera Infancia' };
+  const meta = (selectedAdminCycleKey === 'promocion-prevencion') ? { key: 'promocion-prevencion', name: 'Promoción y Prevención', badgeText: 'PROMOCIÓN Y PREVENCIÓN', pillClass: 'pill-teal', borderClass: 'card-border-teal' } : (cyclesList.find(c => c.key === selectedAdminCycleKey) || cyclesList[0] || { key: 'primera_infancia', name: 'Primera Infancia' });
   const targetCycleKey = meta.key || selectedAdminCycleKey;
 
   if (!title) {
@@ -3713,6 +3977,8 @@ function handleSaveCycleBlock(event) {
         accentColor,
         slidesUrl,
         slidesBtnText,
+        videoUrl,
+        videoBtnText,
         slidesFileData: typeof currentEditingSlidesFileData !== 'undefined' ? currentEditingSlidesFileData : (cycleBlocks[index].slidesFileData || ''),
         slidesFileName: typeof currentEditingSlidesFileName !== 'undefined' ? currentEditingSlidesFileName : (cycleBlocks[index].slidesFileName || ''),
         itemsList: typeof currentEditingCardsList !== 'undefined' ? JSON.parse(JSON.stringify(currentEditingCardsList)) : [],
@@ -3745,6 +4011,8 @@ function handleSaveCycleBlock(event) {
       accentColor,
       slidesUrl,
       slidesBtnText,
+      videoUrl,
+      videoBtnText,
       slidesFileData: typeof currentEditingSlidesFileData !== 'undefined' ? currentEditingSlidesFileData : '',
       slidesFileName: typeof currentEditingSlidesFileName !== 'undefined' ? currentEditingSlidesFileName : '',
       itemsList: typeof currentEditingCardsList !== 'undefined' ? JSON.parse(JSON.stringify(currentEditingCardsList)) : [],
@@ -3806,6 +4074,13 @@ function editCycleBlock(id) {
 
   if (block.iconEmoji) setCalloutIcon(block.iconEmoji);
   if (block.accentColor) setCalloutColor(block.accentColor);
+
+  
+  // Cargar video
+  const videoInput = document.getElementById('cycleVideoUrlInput');
+  const videoBtnInput = document.getElementById('cycleVideoBtnTextInput');
+  if (videoInput) videoInput.value = block.videoUrl || '';
+  if (videoBtnInput) videoBtnInput.value = block.videoBtnText || '';
 
   // Cargar diapositivas
   const slidesInput = document.getElementById('cycleSlidesUrlInput');
@@ -4053,6 +4328,40 @@ function toggleCycleAccordion(headerElement) {
   item.classList.toggle('active');
 }
 
+
+// Conversor inteligente de URLs de Video (YouTube, Vimeo, Google Drive Video)
+function getEmbeddableVideoUrl(url) {
+  if (!url || typeof url !== 'string') return '';
+  url = url.trim();
+  if (!url) return '';
+
+  if (url.includes('youtube.com/watch?v=')) {
+    const videoId = url.split('v=')[1]?.split('&')[0];
+    return `https://www.youtube.com/embed/${videoId}?rel=0`;
+  }
+  if (url.includes('youtu.be/')) {
+    const videoId = url.split('youtu.be/')[1]?.split('?')[0];
+    return `https://www.youtube.com/embed/${videoId}?rel=0`;
+  }
+  if (url.includes('youtube.com/shorts/')) {
+    const videoId = url.split('youtube.com/shorts/')[1]?.split('?')[0];
+    return `https://www.youtube.com/embed/${videoId}?rel=0`;
+  }
+  if (url.includes('youtube.com/embed/')) {
+    return url;
+  }
+  if (url.includes('vimeo.com/')) {
+    const matches = url.match(/vimeo\.com\/(\d+)/);
+    if (matches && matches[1]) {
+      return `https://player.vimeo.com/video/${matches[1]}`;
+    }
+  }
+  if (url.includes('drive.google.com/file/d/')) {
+    return url.replace(/\/view.*$/, '/preview');
+  }
+  return url;
+}
+
 // Conversor inteligente de URLs de Diapositivas e interactivos a formato embebible (iframe)
 function getEmbeddableSlidesUrl(url) {
   if (!url || typeof url !== 'string') return '';
@@ -4224,6 +4533,47 @@ function renderCycleBlockByType(b, meta, isPublic = true) {
               </div>
             `).join('')}
           </div>
+        </div>
+      `;
+
+        case 'video_embed':
+      const rawVideoUrl = (b.videoUrl || b.slidesUrl || '').trim();
+      const embedVideoUrl = getEmbeddableVideoUrl(rawVideoUrl);
+      const videoBtnLabel = b.videoBtnText || b.buttonText || '🎬 Abrir Video en Pantalla Completa';
+
+      return `
+        <div class="cycle-block-card size-${size} type-video_embed ${meta.borderClass}">
+          <div class="title-align-${titleAlign}" style="text-align: ${titleAlign}; width: 100%;">
+            <span class="cycle-block-badge ${meta.pillClass}" style="${alignBadgeStyle}">${b.badgeText || 'Video Formativo'}</span>
+            <h3 class="cycle-block-title" style="text-align: ${titleAlign};">${b.title}</h3>
+            ${b.subtitle ? `<div class="cycle-block-subtitle" style="text-align: ${titleAlign};">${b.subtitle}</div>` : ''}
+            ${b.text ? `<div class="cycle-block-text" style="margin-bottom: 14px; text-align: ${titleAlign};">${b.text}</div>` : ''}
+          </div>
+
+          <!-- Reproductor de Video 16:9 -->
+          <div class="slides-embed-player-wrap">
+            ${embedVideoUrl ? `
+              <iframe src="${embedVideoUrl}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true" loading="lazy"></iframe>
+            ` : `
+              <div class="slides-embed-placeholder">
+                <div class="placeholder-icon">🎬</div>
+                <h5>Video Formativo Interactivo</h5>
+                <p>Pega un enlace de YouTube, Vimeo o Google Drive Video para que se reproduzca aquí directamente.</p>
+              </div>
+            `}
+          </div>
+
+          <!-- Barra de Acción y Enlace Externo -->
+          ${rawVideoUrl ? `
+            <div class="slides-action-bar" style="justify-content: ${titleAlign === 'center' ? 'center' : (titleAlign === 'right' ? 'flex-end' : 'space-between')};">
+              <div style="font-size: 0.84rem; color: #64748b; font-weight: 700;">
+                💡 Puedes reproducir el video directamente aquí
+              </div>
+              <a href="${rawVideoUrl}" target="_blank" class="btn btn-primary btn-md" style="font-weight: 800; display: inline-flex; align-items: center; gap: 8px;">
+                <i data-lucide="external-link"></i> ${videoBtnLabel}
+              </a>
+            </div>
+          ` : ''}
         </div>
       `;
 
@@ -4418,7 +4768,17 @@ function renderCycleBlockByType(b, meta, isPublic = true) {
 
 function renderAdminCycleBlocks() {
   const container = document.getElementById('adminCycleBlocksList');
-  const meta = cyclesList.find(c => c.key === selectedAdminCycleKey) || cyclesList[0];
+  const isPromo = selectedAdminCycleKey === 'promocion-prevencion';
+  const meta = isPromo ? {
+    key: 'promocion-prevencion',
+    name: 'Promoción y Prevención',
+    grades: 'Programas y Campañas Institucionales',
+    badgeText: 'PROMOCIÓN Y PREVENCIÓN',
+    pillClass: 'pill-teal',
+    borderClass: 'card-border-teal',
+    icon: '🛡️',
+    subtitle: 'Departamento de Psicoorientación Escolar • Colegio Leonístico La Merced'
+  } : (cyclesList.find(c => c.key === selectedAdminCycleKey) || cyclesList[0]);
 
   const nameEl = document.getElementById('adminCycleActiveName');
   if (nameEl && meta) nameEl.textContent = `${meta.name} (${meta.grades || ''})`;
@@ -4437,7 +4797,8 @@ function renderAdminCycleBlocks() {
 
   if (!container) return;
 
-  const list = cycleBlocks.filter(b => b.cycleId === selectedAdminCycleKey).sort((a, b) => (a.order || 0) - (b.order || 0));
+  const targetKeys = [meta.key]; if (meta.key === 'promocion-prevencion') targetKeys.push('promocion_prevencion');
+  const list = cycleBlocks.filter(b => targetKeys.includes(b.cycleId)).sort((a, b) => (a.order || 0) - (b.order || 0));
 
   if (list.length === 0) {
     container.innerHTML = `
@@ -4529,7 +4890,22 @@ function renderAdminCycleBlocks() {
 
 function renderCyclePublicPage(cycleKey) {
   const container = document.getElementById('cycleBlocksContainer');
-  const meta = cyclesList.find(c => c.key === cycleKey || c.slug === cycleKey);
+  let meta = cyclesList.find(c => c.key === cycleKey || c.slug === cycleKey);
+
+  if (!meta && (cycleKey === 'promocion-prevencion' || cycleKey === 'promocion_prevencion' || window.location.pathname.includes('promocion'))) {
+    meta = {
+      key: 'promocion-prevencion',
+      slug: 'promocion-prevencion',
+      name: 'Promoción y Prevención',
+      grades: 'Programas Institucionales',
+      badgeText: 'PROMOCIÓN Y PREVENCIÓN',
+      pillClass: 'pill-teal',
+      borderClass: 'card-border-teal',
+      icon: '🛡️',
+      subtitle: 'Departamento de Psicoorientación Escolar • Colegio Leonístico La Merced'
+    };
+  }
+
   if (!meta) return;
 
   // Actualizar encabezados dinámicos en la plantilla
@@ -4544,7 +4920,8 @@ function renderCyclePublicPage(cycleKey) {
 
   const heroTitle = document.getElementById('cycleHeroTitle');
   if (heroTitle) {
-    heroTitle.innerHTML = `<span>${meta.icon || '🌸'}</span> Acompañamiento a <span>${meta.name}</span>`;
+    const iconHtml = (meta.icon && meta.icon.trim() && meta.icon !== '🌸') ? `<span>${meta.icon}</span> ` : '';
+    heroTitle.innerHTML = `${iconHtml}<span>${meta.name}</span>`;
   }
 
   const heroSub = document.getElementById('cycleHeroSubtitle');
@@ -4573,16 +4950,30 @@ function renderCyclePublicPage(cycleKey) {
 
   if (!container) return;
 
-  const list = cycleBlocks.filter(b => b.cycleId === meta.key).sort((a, b) => (a.order || 0) - (b.order || 0));
+  const targetKeys = [meta.key, meta.slug];
+  if (meta.key === 'promocion-prevencion') targetKeys.push('promocion_prevencion');
+
+  const list = cycleBlocks.filter(b => targetKeys.includes(b.cycleId)).sort((a, b) => (a.order || 0) - (b.order || 0));
 
   if (list.length === 0) {
+    const isPromo = meta.key === 'promocion-prevencion';
+    const emptyIcon = isPromo ? '🛡️' : ((meta.icon && meta.icon.trim() && meta.icon !== '🌸') ? meta.icon : '✨');
+    const emptyTitle = isPromo ? 'Espacio de Promoción y Prevención' : 'Página en Actualización';
+    const emptyDesc = isPromo 
+      ? 'Pronto compartiremos videos, diapositivas, pautas formativas y campañas para toda la comunidad educativa.' 
+      : `Pronto compartiremos pautas, actividades y contenidos para los estudiantes y familias de ${meta.name}.`;
+
     container.innerHTML = `
-      <div style="grid-column: 1 / -1; text-align: center; padding: 48px 20px; color: #64748b; background: white; border-radius: var(--radius-lg); border: 2px dashed #cbd5e1;">
-        <div style="font-size: 2.5rem; margin-bottom: 12px;">${meta.icon || '🌸'}</div>
-        <h3 style="font-size: 1.25rem; font-weight: 800; color: #1e293b; margin-bottom: 6px;">Página en Actualización</h3>
-        <p style="font-size: 0.95rem; color: #64748b;">Pronto compartiremos pautas, actividades y contenidos para los estudiantes y familias de ${meta.name}.</p>
+      <div style="grid-column: 1 / -1; text-align: center; padding: 56px 24px; color: #64748b; background: white; border-radius: var(--radius-lg); border: 2px dashed #cbd5e1; box-shadow: var(--shadow-sm); max-width: 650px; margin: 0 auto;">
+        <div style="font-size: 3rem; margin-bottom: 12px;">${emptyIcon}</div>
+        <h3 style="font-size: 1.35rem; font-weight: 800; color: #1e293b; margin-bottom: 8px;">${emptyTitle}</h3>
+        <p style="font-size: 0.98rem; color: #64748b; line-height: 1.6; margin-bottom: 20px;">${emptyDesc}</p>
+        <a href="/" class="btn btn-outline btn-sm" style="display: inline-flex; align-items: center; gap: 8px; font-weight: 700;">
+          <i data-lucide="arrow-left"></i> Volver al Inicio
+        </a>
       </div>
     `;
+    if (window.lucide) lucide.createIcons();
     return;
   }
 

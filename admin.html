@@ -20,7 +20,7 @@
   <script src="https://unpkg.com/lucide@latest" defer></script>
 
   <!-- Custom Styles -->
-  <link rel="stylesheet" href="/styles.css">
+  <link rel="stylesheet" href="/styles.css?v=2.9.1">
 
   <style>
     body {
@@ -245,6 +245,23 @@
           </div>
           <div class="hub-module-footer">
             <span class="hub-action-link">Abrir módulo <i data-lucide="arrow-right"></i></span>
+          </div>
+        </div>
+
+        
+        <!-- 8. Promoción y Prevención -->
+        <div class="hub-module-card" onclick="openAdminModule('ciclos'); selectAdminCycle('promocion-prevencion');">
+          <div>
+            <div class="hub-module-icon" style="background: #ccfbf1; color: #0d9488;">
+              <i data-lucide="shield-check"></i>
+            </div>
+            <div class="hub-module-info">
+              <h4>Promoción y Prevención</h4>
+              <p>Crear y editar publicaciones, videos, diapositivas, campañas y guías descargables para esta sección.</p>
+            </div>
+          </div>
+          <div class="hub-module-footer">
+            <span class="hub-action-link" style="color: #0d9488;">Diseñar contenidos <i data-lucide="arrow-right"></i></span>
           </div>
         </div>
 
@@ -747,31 +764,10 @@
             </div>
           </div>
 
-          <!-- Bienvenidos -->
-          <div class="media-card-edit">
-            <div class="media-card-title">
-              <h5>3. Imagen "Bienvenidos"</h5>
-              <span class="card-tag">Sección Filosofía</span>
-            </div>
-            <div class="media-preview-box">
-              <img id="previewImgWelcome" src="" alt="Bienvenidos">
-            </div>
-            <div class="media-upload-actions">
-              <div class="file-input-wrapper">
-                <button type="button" class="btn-upload-pc"><i data-lucide="upload"></i> Subir imagen desde mi PC</button>
-                <input type="file" accept="image/*" onchange="handleImageFileUpload('welcomeImg', this)">
-              </div>
-              <div class="url-input-row">
-                <input type="text" id="urlInputWelcome" placeholder="O pega la URL de la imagen..." onchange="handleImageUrlChange('welcomeImg', this.value)">
-              </div>
-              <a class="btn-reset-img" onclick="resetImageToDefault('welcomeImg')">Restablecer imagen original</a>
-            </div>
-          </div>
-
           <!-- Quiénes somos -->
           <div class="media-card-edit">
             <div class="media-card-title">
-              <h5>4. Imagen "¿Quiénes Somos?"</h5>
+              <h5>3. Imagen "¿Quiénes Somos?"</h5>
               <span class="card-tag">Sección Equipo</span>
             </div>
             <div class="media-preview-box">
@@ -808,31 +804,54 @@
             <div class="custom-card-header">
               <div class="avatar-preview" id="previewAvatar1">👩‍🏫</div>
               <div>
-                <h5 style="font-size: 1.1rem; color: #1e293b;" id="previewName1">Nancy Hurtado Viveros</h5>
-                <span class="team-badge" id="previewBadge1">Grupos A</span>
+                <h5 style="font-size: 1.15rem; color: #1e293b; font-weight: 700;" id="previewName1">Nancy Hurtado Viveros</h5>
+                <span class="badge-hd-quality"><i data-lucide="sparkles"></i> Calidad HD Optimizada</span>
               </div>
             </div>
 
             <form onsubmit="savePsychologistProfile(event, 0)">
               <div class="form-group">
-                <label>Foto de Perfil (Subir desde PC):</label>
+                <label>Foto de Perfil en Alta Resolución (Subir desde PC):</label>
                 <div class="file-input-wrapper" style="margin-bottom: 8px;">
-                  <button type="button" class="btn-upload-pc"><i data-lucide="upload"></i> Cambiar foto desde PC</button>
+                  <button type="button" class="btn-upload-pc"><i data-lucide="upload"></i> Cambiar foto en Alta Calidad</button>
                   <input type="file" accept="image/*" onchange="handlePsychologistPhotoUpload(0, this)">
                 </div>
                 <input type="text" placeholder="O escribe un Emoji / URL de foto" onchange="handlePsychologistPhotoUrl(0, this.value)">
                 <a class="btn-reset-img" onclick="resetPsychologistPhoto(0)">Restablecer icono por defecto</a>
+                
+                <!-- Controles de Encuadre, Posición y Zoom -->
+                <div class="photo-adjustment-box">
+                  <div class="photo-adj-header">
+                    <span><i data-lucide="crop"></i> <strong>Acomodar Foto y Zoom</strong></span>
+                    <button type="button" class="btn-adj-reset" onclick="resetPhotoAdjustment(0)" title="Restablecer encuadre original">
+                      <i data-lucide="rotate-ccw"></i> Restablecer
+                    </button>
+                  </div>
+
+                  <div class="photo-adj-row">
+                    <label><i data-lucide="zoom-in"></i> Zoom:</label>
+                    <input type="range" id="photoZoom0" min="0.5" max="2.5" step="0.05" value="1" oninput="updatePhotoAdjustment(0)">
+                    <span class="photo-adj-val" id="photoZoomVal0">100%</span>
+                  </div>
+
+                  <div class="photo-adj-row">
+                    <label><i data-lucide="move-vertical"></i> Altura (Y):</label>
+                    <input type="range" id="photoPosY0" min="0" max="100" step="1" value="20" oninput="updatePhotoAdjustment(0)">
+                    <span class="photo-adj-val" id="photoPosYVal0">20%</span>
+                  </div>
+
+                  <div class="photo-adj-row">
+                    <label><i data-lucide="move-horizontal"></i> Posición (X):</label>
+                    <input type="range" id="photoPosX0" min="0" max="100" step="1" value="50" oninput="updatePhotoAdjustment(0)">
+                    <span class="photo-adj-val" id="photoPosXVal0">50%</span>
+                  </div>
+                </div>
               </div>
 
-              <div class="form-row">
-                <div class="form-group">
-                  <label>Nombre y Título:</label>
-                  <input type="text" id="editName0" required>
-                </div>
-                <div class="form-group">
-                  <label>Insignia / Grupos:</label>
-                  <input type="text" id="editBadge0" required>
-                </div>
+              <div class="form-group">
+                <label>Nombre y Título:</label>
+                <input type="text" id="editName0" required>
+                <input type="hidden" id="editBadge0" value="">
               </div>
 
               <div class="form-group">
@@ -856,31 +875,54 @@
             <div class="custom-card-header">
               <div class="avatar-preview preview-blue" id="previewAvatar2">👩‍⚕️</div>
               <div>
-                <h5 style="font-size: 1.1rem; color: #1e293b;" id="previewName2">María del Mar Echeverry</h5>
-                <span class="team-badge badge-blue" id="previewBadge2">Grupos B</span>
+                <h5 style="font-size: 1.15rem; color: #1e293b; font-weight: 700;" id="previewName2">María del Mar Echeverry</h5>
+                <span class="badge-hd-quality"><i data-lucide="sparkles"></i> Calidad HD Optimizada</span>
               </div>
             </div>
 
             <form onsubmit="savePsychologistProfile(event, 1)">
               <div class="form-group">
-                <label>Foto de Perfil (Subir desde PC):</label>
+                <label>Foto de Perfil en Alta Resolución (Subir desde PC):</label>
                 <div class="file-input-wrapper" style="margin-bottom: 8px;">
-                  <button type="button" class="btn-upload-pc"><i data-lucide="upload"></i> Cambiar foto desde PC</button>
+                  <button type="button" class="btn-upload-pc"><i data-lucide="upload"></i> Cambiar foto en Alta Calidad</button>
                   <input type="file" accept="image/*" onchange="handlePsychologistPhotoUpload(1, this)">
                 </div>
                 <input type="text" placeholder="O escribe un Emoji / URL de foto" onchange="handlePsychologistPhotoUrl(1, this.value)">
                 <a class="btn-reset-img" onclick="resetPsychologistPhoto(1)">Restablecer icono por defecto</a>
+                
+                <!-- Controles de Encuadre, Posición y Zoom -->
+                <div class="photo-adjustment-box">
+                  <div class="photo-adj-header">
+                    <span><i data-lucide="crop"></i> <strong>Acomodar Foto y Zoom</strong></span>
+                    <button type="button" class="btn-adj-reset" onclick="resetPhotoAdjustment(1)" title="Restablecer encuadre original">
+                      <i data-lucide="rotate-ccw"></i> Restablecer
+                    </button>
+                  </div>
+
+                  <div class="photo-adj-row">
+                    <label><i data-lucide="zoom-in"></i> Zoom:</label>
+                    <input type="range" id="photoZoom1" min="0.5" max="2.5" step="0.05" value="1" oninput="updatePhotoAdjustment(1)">
+                    <span class="photo-adj-val" id="photoZoomVal1">100%</span>
+                  </div>
+
+                  <div class="photo-adj-row">
+                    <label><i data-lucide="move-vertical"></i> Altura (Y):</label>
+                    <input type="range" id="photoPosY1" min="0" max="100" step="1" value="20" oninput="updatePhotoAdjustment(1)">
+                    <span class="photo-adj-val" id="photoPosYVal1">20%</span>
+                  </div>
+
+                  <div class="photo-adj-row">
+                    <label><i data-lucide="move-horizontal"></i> Posición (X):</label>
+                    <input type="range" id="photoPosX1" min="0" max="100" step="1" value="50" oninput="updatePhotoAdjustment(1)">
+                    <span class="photo-adj-val" id="photoPosXVal1">50%</span>
+                  </div>
+                </div>
               </div>
 
-              <div class="form-row">
-                <div class="form-group">
-                  <label>Nombre y Título:</label>
-                  <input type="text" id="editName1" required>
-                </div>
-                <div class="form-group">
-                  <label>Insignia / Grupos:</label>
-                  <input type="text" id="editBadge1" required>
-                </div>
+              <div class="form-group">
+                <label>Nombre y Título:</label>
+                <input type="text" id="editName1" required>
+                <input type="hidden" id="editBadge1" value="">
               </div>
 
               <div class="form-group">
@@ -926,7 +968,7 @@
             <label style="font-size: 0.92rem; font-weight: 800; color: #0f172a; margin-bottom: 0;">
               1. Pestañas de Ciclos Escolares (Toca uno para seleccionarlo):
             </label>
-            <div style="display: flex; gap: 6px; flex-wrap: wrap;">
+            <div style="display: flex; gap: 6px; flex-wrap: wrap;" id="adminCycleSpecificActions">
               <button type="button" class="btn btn-primary btn-sm" onclick="openCreateCycleModal()" style="font-weight: 700;">
                 <i data-lucide="plus"></i> ➕ Nuevo Ciclo
               </button>
@@ -1165,6 +1207,32 @@
                 <div class="form-group" style="margin-bottom: 0;">
                   <label style="font-size: 0.84rem; font-weight: 700; color: #0f172a;">Texto del Botón de Pantalla Completa / Enlace:</label>
                   <input type="text" id="cycleSlidesBtnTextInput" placeholder="Ej: 🖥️ Abrir Presentación en Pantalla Completa" oninput="updateCycleBlockLivePreview()">
+                </div>
+              </div>
+
+              
+              <!-- GRUPO DINÁMICO 4.2: Video Interactivo (YouTube / Vimeo / Google Drive Video) -->
+              <div id="groupBlockVideo" style="display: none; background: #eff6ff; border: 1.5px solid #bfdbfe; border-radius: var(--radius-lg); padding: 20px; margin-bottom: 20px;">
+                <div style="margin-bottom: 12px;">
+                  <label style="font-weight: 800; color: #1d4ed8; font-size: 0.95rem; margin-bottom: 2px; display: flex; align-items: center; gap: 8px;">
+                    <span style="font-size: 1.2rem;">🎬</span> Video Formativo / YouTube / Drive:
+                  </label>
+                  <span style="font-size: 0.8rem; color: #475569;">Incrusta videos de YouTube, Vimeo o Google Drive Video para reproducirlos en pantalla directamente</span>
+                </div>
+
+                <div style="background: white; border: 1.5px solid #dbeafe; border-radius: 8px; padding: 10px 12px; font-size: 0.78rem; color: #1e40af; line-height: 1.45; margin-bottom: 12px;">
+                  <strong style="display: block; margin-bottom: 2px;">💡 Enlaces soportados:</strong>
+                  Pega cualquier enlace de <strong>YouTube</strong> (ej: <code>https://www.youtube.com/watch?v=...</code> o <code>https://youtu.be/...</code>), <strong>Vimeo</strong> o <strong>Google Drive Video</strong>. El sistema lo adaptará automáticamente con reproductor 16:9 de alta definición.
+                </div>
+
+                <div class="form-group" style="margin-bottom: 12px;">
+                  <label style="font-size: 0.84rem; font-weight: 700; color: #0f172a;">🔗 Enlace del Video (YouTube / Vimeo / Google Drive):</label>
+                  <input type="text" id="cycleVideoUrlInput" placeholder="Ej: https://www.youtube.com/watch?v=... o https://youtu.be/..." oninput="updateCycleBlockLivePreview()" style="font-size: 0.9rem; padding: 10px 12px;">
+                </div>
+
+                <div class="form-group" style="margin-bottom: 0;">
+                  <label style="font-size: 0.84rem; font-weight: 700; color: #0f172a;">Texto del Botón Externo (Opcional):</label>
+                  <input type="text" id="cycleVideoBtnTextInput" placeholder="Ej: 🎬 Ver Video en Pantalla Completa" oninput="updateCycleBlockLivePreview()">
                 </div>
               </div>
 
@@ -1680,15 +1748,15 @@
             <input type="text" id="cycleFormName" placeholder="Ej: Ciclo Vocacional / Ciclo Pre-Infantil" required oninput="handleCycleNameAutoSlug()">
           </div>
           <div class="form-group" style="flex: 1;">
-            <label>Icono / Emoji *</label>
-            <input type="text" id="cycleFormIcon" placeholder="🌸, 🌱, 📘, 🎓" value="🌟" required>
+            <label>Icono / Emoji (Opcional)</label>
+            <input type="text" id="cycleFormIcon" placeholder="Opcional (ej: 🌱, 📘, 🎓)" value="">
           </div>
         </div>
 
         <!-- Fila de Emojis Rápidos -->
         <div style="display: flex; gap: 6px; margin-top: -8px; margin-bottom: 14px; flex-wrap: wrap;">
-          <small style="font-size: 0.75rem; color: #64748b; margin-right: 4px; display: flex; align-items: center;">Sugeridos:</small>
-          <button type="button" class="chip-btn" onclick="document.getElementById('cycleFormIcon').value='🌸'" style="padding: 2px 8px; font-size: 0.9rem; background: #fdf2f8; border: 1px solid #fbcfe8; border-radius: 6px; cursor: pointer;">🌸</button>
+          <small style="font-size: 0.75rem; color: #64748b; margin-right: 4px; display: flex; align-items: center;">Opciones:</small>
+          <button type="button" class="chip-btn" onclick="document.getElementById('cycleFormIcon').value=''" style="padding: 2px 8px; font-size: 0.8rem; background: #f1f5f9; border: 1px solid #cbd5e1; border-radius: 6px; cursor: pointer; color: #475569;">🚫 Sin icono</button>
           <button type="button" class="chip-btn" onclick="document.getElementById('cycleFormIcon').value='🌱'" style="padding: 2px 8px; font-size: 0.9rem; background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 6px; cursor: pointer;">🌱</button>
           <button type="button" class="chip-btn" onclick="document.getElementById('cycleFormIcon').value='📘'" style="padding: 2px 8px; font-size: 0.9rem; background: #fefce8; border: 1px solid #fef08a; border-radius: 6px; cursor: pointer;">📘</button>
           <button type="button" class="chip-btn" onclick="document.getElementById('cycleFormIcon').value='🔮'" style="padding: 2px 8px; font-size: 0.9rem; background: #faf5ff; border: 1px solid #e9d5ff; border-radius: 6px; cursor: pointer;">🔮</button>
@@ -1787,6 +1855,6 @@
   </div>
 
   <!-- Main JavaScript Logic -->
-  <script src="/app.js?v=2.7.0" defer></script>
+  <script src="/app.js?v=2.9.2" defer></script>
 </body>
 </html>

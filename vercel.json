@@ -39,6 +39,14 @@
       "destination": "/encuentros.html"
     },
     {
+      "source": "/promocion-prevencion",
+      "destination": "/promocion-prevencion.html"
+    },
+    {
+      "source": "/promocion-y-prevencion",
+      "destination": "/promocion-prevencion.html"
+    },
+    {
       "source": "/pagina/(.*)",
       "destination": "/pagina.html"
     },

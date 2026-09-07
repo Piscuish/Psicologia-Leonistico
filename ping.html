@@ -1,0 +1,62 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Keep-Alive • Psicoorientación Escolar</title>
+  <link rel="stylesheet" href="/styles.css">
+  <style>
+    body {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      background: #f8fafc;
+      font-family: system-ui, -apple-system, sans-serif;
+      margin: 0;
+      padding: 20px;
+    }
+    .ping-card {
+      background: white;
+      padding: 36px 30px;
+      border-radius: 18px;
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.06);
+      max-width: 440px;
+      width: 100%;
+      border: 1.5px solid #e2e8f0;
+      text-align: center;
+    }
+    .status-dot {
+      width: 14px;
+      height: 14px;
+      background: #10b981;
+      border-radius: 50%;
+      display: inline-block;
+      box-shadow: 0 0 10px #10b981;
+      animation: pulsePing 2s infinite;
+    }
+    @keyframes pulsePing {
+      0% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.4; transform: scale(1.25); }
+      100% { opacity: 1; transform: scale(1); }
+    }
+  </style>
+</head>
+<body>
+  <div class="ping-card">
+    <div style="display: flex; align-items: center; justify-content: center; gap: 10px; margin-bottom: 10px;">
+      <span class="status-dot"></span>
+      <h3 style="margin: 0; color: #0f172a; font-size: 1.25rem; font-weight: 800;">Servidor Activo (Online)</h3>
+    </div>
+    <p style="color: #64748b; font-size: 0.9rem; line-height: 1.5; margin-bottom: 18px;">
+      Esta ruta <code>/ping</code> mantiene el servidor de Render activo 24/7 sin suspensiones por inactividad cuando se conecta a UptimeRobot o Cron-Job.
+    </p>
+    <div style="background: #f1f5f9; padding: 12px; border-radius: 10px; font-family: monospace; font-size: 0.84rem; color: #334155; margin-bottom: 20px; border: 1px solid #cbd5e1;">
+      Status: 200 OK • Pong 🏓
+    </div>
+    <a href="/" class="btn btn-primary" style="display: inline-block; text-decoration: none; padding: 10px 24px; font-weight: 700; border-radius: 10px;">
+      Ir al Portal Principal
+    </a>
+  </div>
+</body>
+</html>

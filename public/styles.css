@@ -1090,15 +1090,15 @@ button {
 }
 
 .team-avatar-wrapper {
-  width: 100px;
-  height: 100px;
+  width: 140px;
+  height: 140px;
   border-radius: var(--radius-full);
-  margin: 0 auto 16px;
+  margin: 0 auto 18px;
   display: flex;
   align-items: center;
   justify-content: center;
   border: 4px solid white;
-  box-shadow: var(--shadow-md);
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.15), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
   overflow: hidden;
   background-color: #f1f5f9;
 }
@@ -1107,6 +1107,14 @@ button {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  object-position: center 20%;
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: high-quality;
+  transition: transform 0.35s ease;
+}
+
+.team-card:hover .team-avatar-img {
+  transform: scale(1.06);
 }
 
 .avatar-female-1 { background: linear-gradient(135deg, #fbcfe8, #f472b6); }
@@ -2548,17 +2556,19 @@ button {
 }
 
 .avatar-preview {
-  width: 64px;
-  height: 64px;
+  width: 115px;
+  height: 115px;
   border-radius: var(--radius-full);
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 2.2rem;
+  font-size: 3.5rem;
   background: linear-gradient(135deg, #fbcfe8, #f472b6);
-  border: 2px solid white;
-  box-shadow: var(--shadow-sm);
+  border: 4px solid #ffffff;
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.15), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
   overflow: hidden;
+  flex-shrink: 0;
+  position: relative;
 }
 
 .avatar-preview.preview-blue {
@@ -2569,6 +2579,116 @@ button {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  object-position: center 20%;
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: high-quality;
+  transition: transform 0.35s ease;
+}
+
+.avatar-preview:hover img {
+  transform: scale(1.06);
+}
+
+.badge-hd-quality {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  background: #f0fdf4;
+  color: #166534;
+  border: 1px solid #bbf7d0;
+  padding: 3px 10px;
+  border-radius: 9999px;
+  margin-top: 6px;
+  letter-spacing: 0.3px;
+}
+
+.photo-adjustment-box {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: var(--radius-md);
+  padding: 14px 16px;
+  margin-top: 12px;
+  margin-bottom: 16px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.photo-adj-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+  font-size: 0.85rem;
+  color: #334155;
+}
+
+.photo-adj-header span {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.btn-adj-reset {
+  background: transparent;
+  border: 1px solid #cbd5e1;
+  color: #64748b;
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  transition: var(--transition);
+}
+
+.btn-adj-reset:hover {
+  background: #f1f5f9;
+  color: #0f172a;
+  border-color: #94a3b8;
+}
+
+.photo-adj-row {
+  display: grid;
+  grid-template-columns: 140px 1fr 48px;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 10px;
+  font-size: 0.82rem;
+  color: #475569;
+}
+
+.photo-adj-row:last-child {
+  margin-bottom: 0;
+}
+
+.photo-adj-row label {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin: 0;
+  font-weight: 600;
+  color: #334155;
+  white-space: nowrap;
+}
+
+.photo-adj-row input[type="range"] {
+  width: 100%;
+  cursor: pointer;
+  accent-color: var(--primary);
+  height: 6px;
+  border-radius: 3px;
+  background: #e2e8f0;
+}
+
+.photo-adj-val {
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: #1e293b;
+  text-align: right;
+  font-variant-numeric: tabular-nums;
 }
 
 .suggestions-list {
@@ -4261,8 +4381,9 @@ body.admin-dark .cal-compact-date {
   flex-shrink: 0;
 }
 
-/* 7.1 Presentación / Diapositivas Interactivas (Canva / Drive / Google Slides) */
-.cycle-block-card.type-slides_embed {
+/* 7.1 Presentación / Diapositivas Interactivas y Videos (Canva / Drive / Google Slides / YouTube) */
+.cycle-block-card.type-slides_embed,
+.cycle-block-card.type-video_embed {
   background: #ffffff;
   border: 2px solid var(--border-color);
   padding: 32px 28px;

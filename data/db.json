@@ -44,12 +44,21 @@
       "isSystem": true
     },
     {
+      "id": "nav_promocion_prevencion",
+      "title": "Promoción y Prevención",
+      "url": "/promocion-prevencion",
+      "icon": "shield-check",
+      "type": "link",
+      "order": 4,
+      "isSystem": true
+    },
+    {
       "id": "nav_ciclos",
       "title": "Ciclos",
       "url": "#",
       "icon": "layers",
       "type": "dropdown",
-      "order": 4,
+      "order": 5,
       "isSystem": true,
       "isCyclesDropdown": true
     }
@@ -63,7 +72,7 @@
       "badgeText": "J y T",
       "pillClass": "pill-pink",
       "borderClass": "card-border-pink",
-      "icon": "🌸",
+      "icon": "",
       "subtitle": "Espacio formativo y de acompañamiento socioemocional para las familias y estudiantes de los primeros años escolares.",
       "order": 1,
       "pageUrl": "/ciclos/primera-infancia",
@@ -258,32 +267,35 @@
     "welcome": "https://lh3.googleusercontent.com/sitesv/AG8ngQWOyxLk67vCI15BlZoCjOwd8xUiVdKQzLu-M2WJcEPpTf9i3QDpCzc1-5m6X-sKqpvyWPGZBwQ-rH8UhgQL7YTxjIlxDFe_bipo6xrnJX-R5AzoEojbfXeILt4DV4eHhLkoRtPmt0qDN9i4vhtAbDolgStj2fPdU9XVS2h5y405j0qv0gtNpOby2sONDNOeFMCsNGdXiYbURk_wJfVERZBegFn7tlsmLq3pjw8f=w1280",
     "about": "https://lh3.googleusercontent.com/sitesv/AG8ngQXTnHzijkLW5x4q0oxIMOi07YzG-IBG1OfPXeoVkIVB8fjkFXyd17Exs0GpjRWuO_ve89ISCOVUerGrrxM5Btnf5tup2wv79zMnKOoluKmpvA0bbZU3sVSnjk80O_PqvnpU7L_xlejXLWd0rR4xWkxGQj7g0dTAeH3vz104NNIAC_EwotDlnekiU7aMZOxbjrQAZ56qxhieVbVysrZ75FKa5z5OY7hICFCfX1Ptwyo=w1280",
     "favicon": "https://lh3.googleusercontent.com/sitesv/AG8ngQWMa1kc6jVbY3mSnIQYpVjxxkhTMgHuRLzpm-o3lAMgJtWUIgekXnXlWjgQDeRwQSCOLH_U5l8ztQCfaCv7r3JjyQ0JCQn2-3saSzHRhDM5duB-idQtoKG9ZYz6BUZLMM3SJfxvtYVinOuckRqSmPIT5Am07h5B7Luapy3c76dc1lYmoUBJGB0UCr38E0u29coTDmwWwuiFH6RIlpW448k",
-    "heroBg": "https://lh3.googleusercontent.com/sitesv/AG8ngQXf5KMbSedK98LmnR8hVcZ1tQNv9JpPIYgJ_P1-N6Q5iSqACGKpSGodX_1rSgcQRceZEaHYmEwNBCUykyD4Vt8zF3dKk9QwMAvf5jqK5ubLKRI0lMQqm-mTeqlLq8tmwVFvMbK1VVJuALhgmnXCUplp-P89XqCfB8P3BbzoBi6GI6YAXc4_nlBfKojb=w16383",
+    "heroBg": "/uploads/site_heroBg_1788808026106_myuxl.png",
     "welcomeImg": "https://lh3.googleusercontent.com/sitesv/AG8ngQWOyxLk67vCI15BlZoCjOwd8xUiVdKQzLu-M2WJcEPpTf9i3QDpCzc1-5m6X-sKqpvyWPGZBwQ-rH8UhgQL7YTxjIlxDFe_bipo6xrnJX-R5AzoEojbfXeILt4DV4eHhLkoRtPmt0qDN9i4vhtAbDolgStj2fPdU9XVS2h5y405j0qv0gtNpOby2sONDNOeFMCsNGdXiYbURk_wJfVERZBegFn7tlsmLq3pjw8f=w1280",
     "aboutImg": "https://lh3.googleusercontent.com/sitesv/AG8ngQXTnHzijkLW5x4q0oxIMOi07YzG-IBG1OfPXeoVkIVB8fjkFXyd17Exs0GpjRWuO_ve89ISCOVUerGrrxM5Btnf5tup2wv79zMnKOoluKmpvA0bbZU3sVSnjk80O_PqvnpU7L_xlejXLWd0rR4xWkxGQj7g0dTAeH3vz104NNIAC_EwotDlnekiU7aMZOxbjrQAZ56qxhieVbVysrZ75FKa5z5OY7hICFCfX1Ptwyo=w1280"
   },
   "psychologists": [
     {
       "id": 1,
-      "name": "Nancy Rocío Torres Silva",
-      "badge": "PSICÓLOGA BACHILLERATO",
-      "badgeClass": "badge-blue",
+      "name": "Luisa Fernanda Avenia Medina",
+      "badge": "",
+      "badgeClass": "",
       "bgClass": "bg-blue",
-      "emoji": "👩‍💼",
-      "role": "Orientación Escolar y Psicológica - Bachillerato",
-      "desc": "Acompañamiento integral a estudiantes de grados 6° a 11°. Especialista en orientación vocacional, prevención de riesgos psicosociales, proyecto de vida y fortalecimiento de habilidades socioemocionales.",
-      "email": "orientacion.bachillerato@leonistico.edu.co"
+      "emoji": "/uploads/orientadora_1_hd.png",
+      "role": "",
+      "desc": "Acompañamiento integral a los estudiantes de los grupos A y Jardín, realizando seguimiento a sus procesos individuales y articulando las acciones necesarias con las familias, docentes y profesionales externos, de acuerdo con las necesidades identificadas.",
+      "email": "lavenia@leonisticolamerced.edu.co"
     },
     {
       "id": 2,
-      "name": "María Isabel Rodríguez",
-      "badge": "PSICÓLOGA PRIMARIA",
-      "badgeClass": "badge-pink",
+      "name": "Maria del Mar Echeverry",
+      "badge": "",
+      "badgeClass": "",
       "bgClass": "bg-pink",
-      "emoji": "👩‍🏫",
-      "role": "Orientación Escolar y Psicológica - Primaria y Preescolar",
-      "desc": "Acompañamiento psicoeducativo y emocional a niños y familias de Jardín, Transición y grados 1° a 5°. Especialista en pautas de crianza positiva, desarrollo infantil y adaptación escolar.",
-      "email": "orientacion.primaria@leonistico.edu.co"
+      "emoji": "/uploads/orientadora_2_1788807938080_do5kp.png",
+      "role": "",
+      "desc": "Acompañamiento integral a los estudiantes de los grupos B y C, realizando seguimiento a sus procesos individuales y articulando las acciones necesarias con las familias, docentes y profesionales externos, de acuerdo con las necesidades identificadas.",
+      "email": "mmecheverry@leonisticolamerced.edu.co",
+      "photoZoom": 1.05,
+      "photoPosY": 100,
+      "photoPosX": 0
     }
   ],
   "cycleBlocks": [
@@ -451,31 +463,92 @@
       ],
       "photosList": [
         {
-          "url": "/uploads/gallery_1788358207022_0_1788739866827.jpg",
+          "url": "/uploads/gallery_1788358207022_0_1788803346192_0y1r1.jpg",
+          "caption": ""
+        },
+        {
+          "url": "/uploads/gallery_1788358207022_1_1788803346195_stbad.jpg",
           "caption": ""
         }
       ],
       "order": 1,
-      "galleryLayout": "cols_3",
-      "galleryFit": "square",
+      "galleryLayout": "cols_2",
+      "galleryFit": "wide",
       "galleryAlign": "left",
       "imageSize": "full",
       "imageFit": "contain"
+    },
+    {
+      "id": 1788808426228,
+      "cycleId": "promocion-prevencion",
+      "type": "video_embed",
+      "size": "full",
+      "titleAlign": "left",
+      "title": "Septiembre mes de la prevención del suicidio",
+      "subtitle": "No estás solo. Hablar también es una forma de cuidarnos.",
+      "badgeText": "PROMOCIÓN Y PREVENCIÓN",
+      "text": "Este mes nos invita a recordar que escuchar, acompañar y hablar puede marcar la diferencia. Cuidar nuestra salud mental también significa estar atentos a quienes nos rodean, brindar apoyo y buscar ayuda cuando sea necesario.",
+      "imageUrl": "",
+      "imagePosition": "banner",
+      "imageSize": "full",
+      "imageFit": "contain",
+      "galleryLayout": "single_full",
+      "galleryFit": "natural",
+      "galleryAlign": "center",
+      "buttonText": "",
+      "buttonUrl": "",
+      "iconEmoji": "💡",
+      "accentColor": "purple",
+      "slidesUrl": "",
+      "slidesBtnText": "",
+      "videoUrl": "https://drive.google.com/file/d/1ztZW9ICNAdempPw1HEqRLZifY7kM7ytG/view?usp=sharing",
+      "videoBtnText": "",
+      "slidesFileData": "",
+      "slidesFileName": "",
+      "itemsList": [
+        {
+          "icon": "💖",
+          "title": "Afecto y Diálogo",
+          "text": "Acompañamiento cercano y validación emocional constante."
+        },
+        {
+          "icon": "⏰",
+          "title": "Rutina y Horarios",
+          "text": "Fijar horas para estudiar, descansar y compartir en familia."
+        }
+      ],
+      "resourcesList": [
+        {
+          "title": "Guía de Orientación Familiar (PDF)",
+          "desc": "Material imprimible de apoyo para el hogar.",
+          "fileUrl": "",
+          "fileName": "",
+          "fileSize": "",
+          "icon": "file-text"
+        }
+      ],
+      "photosList": [
+        {
+          "url": "https://images.unsplash.com/photo-1577896851231-70ef18881754?auto=format&fit=crop&w=600&q=80",
+          "caption": ""
+        }
+      ],
+      "order": 1
     }
   ],
   "suggestions": [],
   "analytics": {
-    "totalVisits": 97,
+    "totalVisits": 109,
     "uniqueSessions": 0,
-    "lastVisitDate": "6/9/2026 08:00 p. m.",
+    "lastVisitDate": "7/9/2026 02:09 p. m.",
     "tabs": {
-      "inicio": 35,
+      "inicio": 44,
       "encuentros": 14,
-      "ciclos": 48
+      "ciclos": 51
     },
     "cycles": {
-      "primera_infancia": 23,
-      "infantil": 6,
+      "primera_infancia": 25,
+      "infantil": 7,
       "basico": 7,
       "fundamental": 1,
       "exploratorio": 7,
@@ -484,6 +557,90 @@
       "cycle_1788358007488": 2
     },
     "logs": [
+      {
+        "id": 1788808193436,
+        "date": "7/9/2026 02:09 p. m.",
+        "section": "Inicio / Portada",
+        "action": "Ingreso a la página de Inicio",
+        "device": "Escritorio"
+      },
+      {
+        "id": 1788807221860,
+        "date": "7/9/2026 01:53 p. m.",
+        "section": "Inicio / Portada",
+        "action": "Ingreso a la página de Inicio",
+        "device": "Escritorio"
+      },
+      {
+        "id": 1788807191114,
+        "date": "7/9/2026 01:53 p. m.",
+        "section": "Inicio / Portada",
+        "action": "Ingreso a la página de Inicio",
+        "device": "Escritorio"
+      },
+      {
+        "id": 1788805929670,
+        "date": "7/9/2026 01:32 p. m.",
+        "section": "Inicio / Portada",
+        "action": "Ingreso a la página de Inicio",
+        "device": "Escritorio"
+      },
+      {
+        "id": 1788805904387,
+        "date": "7/9/2026 01:31 p. m.",
+        "section": "Inicio / Portada",
+        "action": "Ingreso a la página de Inicio",
+        "device": "Escritorio"
+      },
+      {
+        "id": 1788803736096,
+        "date": "7/9/2026 12:55 p. m.",
+        "section": "Inicio / Portada",
+        "action": "Ingreso a la página de Inicio",
+        "device": "Escritorio"
+      },
+      {
+        "id": 1788803352838,
+        "date": "7/9/2026 12:49 p. m.",
+        "section": "Ciclos: Ciclo Infantil (1°, 2° Y 3°)",
+        "action": "Visita a la página de Ciclo Infantil (1°, 2° Y 3°)",
+        "device": "Escritorio"
+      },
+      {
+        "id": 1788803273364,
+        "date": "7/9/2026 12:47 p. m.",
+        "section": "Ciclos: Primera Infancia (JARDÍN Y TRANSICIÓN)",
+        "action": "Visita a la página de Primera Infancia (JARDÍN Y TRANSICIÓN)",
+        "device": "Escritorio"
+      },
+      {
+        "id": 1788802814080,
+        "date": "7/9/2026 12:40 p. m.",
+        "section": "Inicio / Portada",
+        "action": "Ingreso a la página de Inicio",
+        "device": "Escritorio"
+      },
+      {
+        "id": 1788801667742,
+        "date": "7/9/2026 12:21 p. m.",
+        "section": "Inicio / Portada",
+        "action": "Ingreso a la página de Inicio",
+        "device": "Escritorio"
+      },
+      {
+        "id": 1788800258184,
+        "date": "7/9/2026 11:57 a. m.",
+        "section": "Ciclos: Primera Infancia (JARDÍN Y TRANSICIÓN)",
+        "action": "Visita a la página de Primera Infancia (JARDÍN Y TRANSICIÓN)",
+        "device": "Escritorio"
+      },
+      {
+        "id": 1788800257422,
+        "date": "7/9/2026 11:57 a. m.",
+        "section": "Inicio / Portada",
+        "action": "Ingreso a la página de Inicio",
+        "device": "Escritorio"
+      },
       {
         "id": 1788742810835,
         "date": "6/9/2026 08:00 p. m.",
@@ -749,94 +906,10 @@
         "section": "Inicio / Portada",
         "action": "Ingreso a la página de Inicio",
         "device": "Escritorio"
-      },
-      {
-        "id": 1788459902354,
-        "date": "3/9/2026 06:25 p. m.",
-        "section": "Ciclos: Primera Infancia (JARDÍN Y TRANSICIÓN)",
-        "action": "Visita a la página de Primera Infancia (JARDÍN Y TRANSICIÓN)",
-        "device": "Escritorio"
-      },
-      {
-        "id": 1788459900055,
-        "date": "3/9/2026 06:25 p. m.",
-        "section": "Inicio / Portada",
-        "action": "Ingreso a la página de Inicio",
-        "device": "Escritorio"
-      },
-      {
-        "id": 1788442950472,
-        "date": "3/9/2026 01:42 p. m.",
-        "section": "Ciclos: Primera Infancia (JARDÍN Y TRANSICIÓN)",
-        "action": "Visita a la página de Primera Infancia (JARDÍN Y TRANSICIÓN)",
-        "device": "Escritorio"
-      },
-      {
-        "id": 1788442944659,
-        "date": "3/9/2026 01:42 p. m.",
-        "section": "Inicio / Portada",
-        "action": "Ingreso a la página de Inicio",
-        "device": "Escritorio"
-      },
-      {
-        "id": 1788369089558,
-        "date": "2/9/2026 05:11 p. m.",
-        "section": "Inicio / Portada",
-        "action": "Ingreso a la página de Inicio",
-        "device": "Escritorio"
-      },
-      {
-        "id": 1788358346750,
-        "date": "2/9/2026 09:12 a. m.",
-        "section": "Ciclos: Ciclo Exploratorio (8° Y 9°)",
-        "action": "Visita a la página de Ciclo Exploratorio (8° Y 9°)",
-        "device": "Escritorio"
-      },
-      {
-        "id": 1788358344389,
-        "date": "2/9/2026 09:12 a. m.",
-        "section": "Ciclos: Ciclo Especializado (10° Y 11°)",
-        "action": "Visita a la página de Ciclo Especializado (10° Y 11°)",
-        "device": "Escritorio"
-      },
-      {
-        "id": 1788358341747,
-        "date": "2/9/2026 09:12 a. m.",
-        "section": "Ciclos: Ciclo Juvenil Pro (9°, 10° y 11°)",
-        "action": "Visita a la página de Ciclo Juvenil Pro (9°, 10° y 11°)",
-        "device": "Escritorio"
-      },
-      {
-        "id": 1788358337942,
-        "date": "2/9/2026 09:12 a. m.",
-        "section": "Ciclos: 1 (T)",
-        "action": "Visita a la página de 1 (T)",
-        "device": "Escritorio"
-      },
-      {
-        "id": 1788358305330,
-        "date": "2/9/2026 09:11 a. m.",
-        "section": "Ciclos: Ciclo Básico (4° Y 5°)",
-        "action": "Visita a la página de Ciclo Básico (4° Y 5°)",
-        "device": "Escritorio"
-      },
-      {
-        "id": 1788358303930,
-        "date": "2/9/2026 09:11 a. m.",
-        "section": "Ciclos: Ciclo Infantil (1°, 2° Y 3°)",
-        "action": "Visita a la página de Ciclo Infantil (1°, 2° Y 3°)",
-        "device": "Escritorio"
-      },
-      {
-        "id": 1788358302065,
-        "date": "2/9/2026 09:11 a. m.",
-        "section": "Ciclos: Primera Infancia (JARDÍN Y TRANSICIÓN)",
-        "action": "Visita a la página de Primera Infancia (JARDÍN Y TRANSICIÓN)",
-        "device": "Escritorio"
       }
     ]
   },
   "adminPassword": "123",
   "adminSlug": "2610",
-  "version": "1788742810835"
+  "version": "1788808426281"
 }

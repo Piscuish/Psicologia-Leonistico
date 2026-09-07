@@ -3,28 +3,26 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Ciclo Infantil (1, 2 y 3) | Psicoorientación Escolar</title>
+  <title>Promoción y Prevención | Psicoorientación Escolar</title>
+  <meta name="description" content="Promoción y Prevención - Departamento de Psicoorientación Escolar, Colegio Leonístico La Merced.">
+  <link rel="icon" type="image/png" href="https://lh3.googleusercontent.com/sitesv/AG8ngQXPXXrReW33dy7TVTPLbtzVRorfO3DggGyZ2zPzCU8xHZihOUZ73rOtyxtOw8W6b-Ry1dvVTRgD9cXAi1PeOeBYBjYcRYJmjkDCa-In40HLlE0ZqGMI0v8Vm30pwJNToW-SKtWmik47Pnir0VAv4VW-kkrallHR0PnYc_cPd_uIBQNvJoe1Iu6Z7ACf=w16383">
   
-  <!-- Preconnect -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="preconnect" href="https://lh3.googleusercontent.com" crossorigin>
-  <link rel="dns-prefetch" href="https://lh3.googleusercontent.com">
-  <link rel="dns-prefetch" href="https://unpkg.com">
-
-  <!-- Favicon -->
-  <link rel="icon" id="faviconTag" href="https://lh3.googleusercontent.com/sitesv/AG8ngQWMa1kc6jVbY3mSnIQYpVjxxkhTMgHuRLzpm-o3lAMgJtWUIgekXnXlWjgQDeRwQSCOLH_U5l8ztQCfaCv7r3JjyQ0JCQn2-3saSzHRhDM5duB-idQtoKG9ZYz6BUZLMM3SJfxvtYVinOuckRqSmPIT5Am07h5B7Luapy3c76dc1lYmoUBJGB0UCr38E0u29coTDmwWwuiFH6RIlpW448k" type="image/x-icon">
-
-  <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Oswald:wght@500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
-
-  <!-- Lucide Icons -->
-  <script src="https://unpkg.com/lucide@latest" defer></script>
-
-  <!-- Custom Styles -->
+  <!-- CSS Stylesheets -->
   <link rel="stylesheet" href="/styles.css">
+  
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
 </head>
 <body>
+
+  <!-- Announcement Banner -->
+  <div class="announcement-banner">
+    <div class="container banner-container">
+      <span class="badge badge-gold-pulse">🦁 COLEGIO LEONÍSTICO LA MERCED</span>
+      <span>¡Portal Oficial de <strong>Psicoorientación Escolar & Acompañamiento Familiar</strong>!</span>
+      <a href="/encuentros" class="banner-link banner-link-gold">Ver Encuentros Familiares →</a>
+    </div>
+  </div>
 
   <!-- Main Navigation Header -->
   <header class="main-header">
@@ -40,10 +38,9 @@
       </a>
 
       <!-- Desktop Nav Menu -->
-      <nav class="nav-menu">
-        <!-- Inicio Dropdown -->
+      <nav class="nav-menu" id="mainNavMenu">
         <div class="nav-dropdown">
-          <a href="/" class="nav-dropdown-toggle">
+          <a href="/" class="nav-dropdown-toggle" id="navDropdownBtn">
             <i data-lucide="home"></i> Inicio <i data-lucide="chevron-down" class="chevron-icon"></i>
           </a>
           <div class="nav-dropdown-menu">
@@ -53,36 +50,30 @@
             <a href="/#quienes-somos" class="nav-dropdown-item">
               <i data-lucide="heart-handshake"></i> ¿Quiénes Somos?
             </a>
-            
           </div>
         </div>
 
-                <!-- Guía De Bienestar Emocional -->
         <a href="/guia-bienestar" class="nav-btn">
           <i data-lucide="heart-pulse"></i> Guía De Bienestar Emocional
         </a>
 
-        <!-- Encuentros Familiares -->
         <a href="/encuentros" class="nav-btn">
           <i data-lucide="users"></i> Encuentros Familiares
-          
         </a>
 
-        <!-- Promoción y Prevención -->
-        <a href="/promocion-prevencion" class="nav-btn">
+        <a href="/promocion-prevencion" class="nav-btn active">
           <i data-lucide="shield-check"></i> Promoción y Prevención
         </a>
 
-        <!-- Ciclos Dropdown -->
         <div class="nav-dropdown">
-          <a href="#" class="nav-dropdown-toggle active" id="navCiclosBtn">
+          <a href="#" class="nav-dropdown-toggle" id="navCiclosBtn">
             <i data-lucide="layers"></i> Ciclos <i data-lucide="chevron-down" class="chevron-icon"></i>
           </a>
           <div class="nav-dropdown-menu" style="min-width: 280px;">
             <a href="/ciclos/primera-infancia" class="nav-dropdown-item">
               <span class="dropdown-pill pill-pink">J y T</span> Primera Infancia
             </a>
-            <a href="/ciclos/infantil" class="nav-dropdown-item" style="background: #eff6ff; color: var(--primary);">
+            <a href="/ciclos/infantil" class="nav-dropdown-item">
               <span class="dropdown-pill pill-teal">1, 2 y 3</span> Ciclo Infantil
             </a>
             <a href="/ciclos/basico" class="nav-dropdown-item">
@@ -101,7 +92,6 @@
         </div>
       </nav>
 
-      <!-- Action Button & Mobile Toggle -->
       <div class="header-actions">
         <button class="menu-toggle" onclick="toggleMobileMenu()" aria-label="Abrir menú">
           <i data-lucide="menu"></i>
@@ -117,14 +107,13 @@
       <a href="/#quienes-somos" class="mobile-nav-btn" style="padding-left: 28px; font-size: 0.9rem;">
         <i data-lucide="heart-handshake"></i> └ ¿Quiénes Somos?
       </a>
-      
-            <a href="/guia-bienestar" class="mobile-nav-btn">
+      <a href="/guia-bienestar" class="mobile-nav-btn">
         <i data-lucide="heart-pulse"></i> Guía De Bienestar Emocional
       </a>
       <a href="/encuentros" class="mobile-nav-btn">
         <i data-lucide="users"></i> Encuentros Familiares
       </a>
-      <a href="/promocion-prevencion" class="mobile-nav-btn">
+      <a href="/promocion-prevencion" class="mobile-nav-btn active">
         <i data-lucide="shield-check"></i> Promoción y Prevención
       </a>
       <div style="font-size: 0.75rem; font-weight: 700; color: #64748b; text-transform: uppercase; padding: 6px 12px 2px 12px; letter-spacing: 0.5px;">
@@ -133,7 +122,7 @@
       <a href="/ciclos/primera-infancia" class="mobile-nav-btn" style="padding-left: 24px; font-size: 0.9rem;">
         <span class="dropdown-pill pill-pink" style="font-size: 0.68rem; min-width: 48px;">J y T</span> Primera Infancia
       </a>
-      <a href="/ciclos/infantil" class="mobile-nav-btn active" style="padding-left: 24px; font-size: 0.9rem;">
+      <a href="/ciclos/infantil" class="mobile-nav-btn" style="padding-left: 24px; font-size: 0.9rem;">
         <span class="dropdown-pill pill-teal" style="font-size: 0.68rem; min-width: 48px;">1, 2 y 3</span> Ciclo Infantil
       </a>
       <a href="/ciclos/basico" class="mobile-nav-btn" style="padding-left: 24px; font-size: 0.9rem;">
@@ -151,44 +140,74 @@
     </div>
   </header>
 
-  <!-- Main Content -->
-  <main style="background-color: #f8fafc; padding-bottom: 60px;">
-    <!-- Cycle Hero -->
-    <section id="cycleHeroSection" class="cycle-hero-section">
+  <!-- Main Content Wrapper -->
+  <main id="main-content">
+    
+    <!-- Hero Banner -->
+    <section class="section-container" style="background: linear-gradient(135deg, #0d9488 0%, #1e3a8a 100%); color: white; padding: 70px 20px; text-align: center;">
       <div class="container" style="max-width: 800px;">
-        <span id="cycleHeroBadge" class="dropdown-pill pill-teal" style="font-size: 0.85rem; padding: 6px 16px; margin-bottom: 12px; display: inline-block;">
-          GRADOS 1°, 2° Y 3°
+        <span style="display: inline-flex; align-items: center; gap: 8px; background: rgba(255, 255, 255, 0.18); border: 1px solid rgba(255, 255, 255, 0.3); color: #fef08a; padding: 6px 18px; border-radius: 9999px; font-size: 0.85rem; font-weight: 600; margin-bottom: 16px;">
+          <i data-lucide="shield-check"></i> PROGRAMAS INSTITUCIONALES
         </span>
-        <h1 id="cycleHeroTitle" class="cycle-hero-title-text" style="font-family: var(--font-heading); font-size: 2.8rem; color: #1e293b; margin: 8px 0; letter-spacing: 0.5px;">
-          CICLO INFANTIL
+        <h1 style="font-family: var(--font-heading); font-size: 2.8rem; letter-spacing: 0.5px; margin-bottom: 12px; text-transform: uppercase;">
+          Promoción y Prevención
         </h1>
-        <p id="cycleHeroSubtitle" class="cycle-hero-subtitle-text" style="color: #64748b; font-size: 1.05rem; line-height: 1.5; margin: 0 auto; max-width: 620px;">
-          Fortalecimiento de la convivencia, empatía, hábitos formativos y desarrollo socioafectivo infantil.
+        <p style="max-width: 650px; margin: 0 auto; font-size: 1.1rem; color: #e2e8f0; line-height: 1.6;">
+          Departamento de Psicoorientación Escolar • Colegio Leonístico La Merced
         </p>
       </div>
     </section>
 
-    <!-- Dynamic Cycle Content Blocks Grid -->
-    <section class="section-container" style="padding-top: 10px;">
+    <!-- Dynamic Content Blocks Grid -->
+    <section class="section-container" style="min-height: 50vh; background-color: #f8fafc; padding: 40px 20px 70px 20px;">
       <div class="container">
         <div id="cycleBlocksContainer" class="cycle-blocks-grid">
-          <!-- Rendered dynamically by renderCyclePublicPage('infantil') in app.js -->
+          <!-- Rendered dynamically by renderCyclePublicPage('promocion-prevencion') in app.js -->
         </div>
       </div>
     </section>
+
   </main>
 
   <!-- Footer -->
   <footer class="main-footer">
     <div class="container">
-      <div class="footer-bottom text-center" style="border-top: none; padding: 20px 0;">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div class="logo-img-wrapper" style="width: 44px; height: 44px;">
+            <img id="footerBrandLogo" src="https://lh3.googleusercontent.com/sitesv/AG8ngQXPXXrReW33dy7TVTPLbtzVRorfO3DggGyZ2zPzCU8xHZihOUZ73rOtyxtOw8W6b-Ry1dvVTRgD9cXAi1PeOeBYBjYcRYJmjkDCa-In40HLlE0ZqGMI0v8Vm30pwJNToW-SKtWmik47Pnir0VAv4VW-kkrallHR0PnYc_cPd_uIBQNvJoe1Iu6Z7ACf=w16383" alt="Logo" class="logo-img">
+          </div>
+          <h3>Caminando Juntos</h3>
+          <p>Departamento de Psicoorientación Escolar</p>
+          <p class="footer-motto">"Educando con el corazón y guiando con vocación."</p>
+        </div>
+
+        <div class="footer-nav">
+          <h4>Navegación</h4>
+          <ul>
+            <li><a href="/">Inicio</a></li>
+            <li><a href="/guia-bienestar">Guía De Bienestar Emocional</a></li>
+            <li><a href="/encuentros">Encuentros Familiares</a></li>
+            <li><a href="/promocion-prevencion">Promoción y Prevención</a></li>
+            <li><a href="/#quienes-somos">¿Quiénes Somos?</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-contact">
+          <h4>Contacto Institucional</h4>
+          <p><i data-lucide="building"></i> Colegio Leonístico La Merced</p>
+          <p id="footerContactNancy"><i data-lucide="mail"></i> Orientación Grupos A: nhurtadov@leonisticolamerced.edu.co</p>
+          <p id="footerContactMaria"><i data-lucide="mail"></i> Orientación Grupos B: mmecheverry@leonistico.com</p>
+        </div>
+      </div>
+
+      <div class="footer-bottom text-center">
         <p>&copy; 2026 Colegio Leonístico La Merced • Psicoorientación Escolar. Todos los derechos reservados.</p>
       </div>
     </div>
   </footer>
 
+  <!-- Main JavaScript Logic -->
   <script src="/app.js?v=2.9.0" defer></script>
 </body>
 </html>
-
-
