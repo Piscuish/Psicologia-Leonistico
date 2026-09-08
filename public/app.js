@@ -511,6 +511,63 @@ const DEFAULT_CYCLE_BLOCKS = [
     ],
     "photosList": [],
     "order": 1
+  },
+  {
+    "id": 1788889183403,
+    "cycleId": "guia-bienestar",
+    "type": "slides_embed",
+    "size": "full",
+    "titleAlign": "left",
+    "title": "greg",
+    "subtitle": "fdgfd",
+    "badgeText": "fdg",
+    "text": "fdgd",
+    "imageUrl": "",
+    "imagePosition": "banner",
+    "imageSize": "full",
+    "imageFit": "contain",
+    "galleryLayout": "single_full",
+    "galleryFit": "natural",
+    "galleryAlign": "center",
+    "buttonText": "",
+    "buttonUrl": "",
+    "iconEmoji": "💡",
+    "accentColor": "purple",
+    "slidesUrl": "",
+    "slidesBtnText": "",
+    "videoUrl": "",
+    "videoBtnText": "",
+    "slidesFileData": "",
+    "slidesFileName": "",
+    "itemsList": [
+      {
+        "icon": "💖",
+        "title": "Afecto y Diálogo",
+        "text": "Acompañamiento cercano y validación emocional constante."
+      },
+      {
+        "icon": "⏰",
+        "title": "Rutina y Horarios",
+        "text": "Fijar horas para estudiar, descansar y compartir en familia."
+      }
+    ],
+    "resourcesList": [
+      {
+        "title": "Guía de Orientación Familiar (PDF)",
+        "desc": "Material imprimible de apoyo para el hogar.",
+        "fileUrl": "",
+        "fileName": "",
+        "fileSize": "",
+        "icon": "file-text"
+      }
+    ],
+    "photosList": [
+      {
+        "url": "https://images.unsplash.com/photo-1577896851231-70ef18881754?auto=format&fit=crop&w=600&q=80",
+        "caption": ""
+      }
+    ],
+    "order": 2
   }
 ];
 
@@ -691,7 +748,7 @@ const DEFAULT_SUGGESTIONS = [
 // APP STATE & PERSISTENCE (HYBRID LOCAL + SERVER DATABASE)
 // ============================================================
 
-const APP_BUILD_VERSION = '2.9.9-20260908';
+const APP_BUILD_VERSION = '2.9.10-20260908';
 
 function initializeAppState() {
   const currentBuild = localStorage.getItem('psicologia_app_build_version');
