@@ -1,3 +1,46 @@
+function getAdminCycleOrPageMeta(key) {
+  if (key === 'promocion-prevencion' || key === 'promocion_prevencion') {
+    return {
+      key: 'promocion-prevencion',
+      slug: 'promocion-prevencion',
+      name: 'Promoción y Prevención',
+      grades: 'Programas y Campañas Institucionales',
+      badgeText: 'PROMOCIÓN Y PREVENCIÓN',
+      pillClass: 'pill-teal',
+      borderClass: 'card-border-teal',
+      icon: '🛡️',
+      subtitle: 'Departamento de Psicoorientación Escolar • Colegio Leonístico La Merced',
+      pageUrl: '/promocion-prevencion'
+    };
+  }
+  if (key === 'guia-bienestar' || key === 'guia_bienestar' || key === 'bienestar') {
+    return {
+      key: 'guia-bienestar',
+      slug: 'guia-bienestar',
+      name: 'Guía De Bienestar Emocional Post Terremoto',
+      grades: 'Guía Formativa & Recursos',
+      badgeText: 'BIENESTAR EMOCIONAL',
+      pillClass: 'pill-blue',
+      borderClass: 'card-border-blue',
+      icon: '🌱',
+      subtitle: 'Herramientas de apoyo socioemocional, resiliencia y pautas para la comunidad educativa tras situaciones de emergencia.',
+      pageUrl: '/guia-bienestar'
+    };
+  }
+  return cyclesList.find(c => c.key === key || c.slug === key) || cyclesList[0] || {
+    key: 'primera_infancia',
+    slug: 'primera-infancia',
+    name: 'Primera Infancia',
+    grades: 'JARDÍN Y TRANSICIÓN',
+    badgeText: 'J y T',
+    pillClass: 'pill-pink',
+    borderClass: 'card-border-pink',
+    icon: '🌸',
+    subtitle: 'Espacio formativo y de acompañamiento socioemocional.',
+    pageUrl: '/ciclos/primera-infancia'
+  };
+}
+
 /**
  * Caminando Juntos - Psicoorientación Escolar
  * Colegio Leonístico La Merced
@@ -15,7 +58,7 @@ const DEFAULT_SITE_IMAGES = {
   "favicon": "https://lh3.googleusercontent.com/sitesv/AG8ngQWMa1kc6jVbY3mSnIQYpVjxxkhTMgHuRLzpm-o3lAMgJtWUIgekXnXlWjgQDeRwQSCOLH_U5l8ztQCfaCv7r3JjyQ0JCQn2-3saSzHRhDM5duB-idQtoKG9ZYz6BUZLMM3SJfxvtYVinOuckRqSmPIT5Am07h5B7Luapy3c76dc1lYmoUBJGB0UCr38E0u29coTDmwWwuiFH6RIlpW448k",
   "heroBg": "/uploads/site_heroBg_1788808026106_myuxl.png",
   "welcomeImg": "https://lh3.googleusercontent.com/sitesv/AG8ngQWOyxLk67vCI15BlZoCjOwd8xUiVdKQzLu-M2WJcEPpTf9i3QDpCzc1-5m6X-sKqpvyWPGZBwQ-rH8UhgQL7YTxjIlxDFe_bipo6xrnJX-R5AzoEojbfXeILt4DV4eHhLkoRtPmt0qDN9i4vhtAbDolgStj2fPdU9XVS2h5y405j0qv0gtNpOby2sONDNOeFMCsNGdXiYbURk_wJfVERZBegFn7tlsmLq3pjw8f=w1280",
-  "aboutImg": "/uploads/site_aboutImg_1788885696256_njld0.jpg"
+  "aboutImg": "/uploads/site_aboutImg_1788887238720_ginoz.png"
 };
 
 const DEFAULT_PSYCHOLOGISTS = [
@@ -419,6 +462,55 @@ const DEFAULT_CYCLE_BLOCKS = [
       }
     ],
     "order": 1
+  },
+  {
+    "id": 1788887600000,
+    "cycleId": "guia-bienestar",
+    "type": "hero_banner",
+    "size": "full",
+    "titleAlign": "left",
+    "title": "Acompañamiento Socioemocional y Primeros Auxilios Psicológicos",
+    "subtitle": "Estrategias de contención, tranquilidad y apoyo mutuo para toda la comunidad leonística",
+    "badgeText": "BIENESTAR EMOCIONAL POST TERREMOTO",
+    "text": "Frente a eventos inesperados o situaciones de emergencia sísmica, es natural experimentar miedo, ansiedad o preocupación. Desde el área de Psicoorientación Escolar compartimos pautas formativas, actividades de respiración, técnicas de regulación emocional y recursos prácticos para acompañar a nuestros niños, niñas y jóvenes tanto en el hogar como en las aulas.\n\nRecuerda que escuchar con empatía, mantener la calma y validar las emociones son los primeros pasos para restaurar la seguridad y el bienestar.",
+    "imageUrl": "",
+    "imagePosition": "left",
+    "imageSize": "full",
+    "imageFit": "contain",
+    "buttonText": "",
+    "buttonUrl": "",
+    "iconEmoji": "🌱",
+    "accentColor": "blue",
+    "slidesUrl": "",
+    "slidesBtnText": "",
+    "videoUrl": "",
+    "videoBtnText": "",
+    "slidesFileData": "",
+    "slidesFileName": "",
+    "itemsList": [
+      {
+        "icon": "🤝",
+        "title": "Contención Emocional",
+        "text": "Validar temores y transmitir calma y presencia constante."
+      },
+      {
+        "icon": "🌬️",
+        "title": "Técnicas de Respiración",
+        "text": "Ejercicios guiados para reducir la tensión corporal y el estrés."
+      }
+    ],
+    "resourcesList": [
+      {
+        "title": "Pautas de Apoyo Post Emergencia (PDF)",
+        "desc": "Material imprimible de orientación para el aula y el hogar.",
+        "fileUrl": "",
+        "fileName": "",
+        "fileSize": "",
+        "icon": "file-text"
+      }
+    ],
+    "photosList": [],
+    "order": 1
   }
 ];
 
@@ -450,7 +542,7 @@ const DEFAULT_NAV_ITEMS = [
   },
   {
     "id": "nav_guia_bienestar",
-    "title": "Guía De Bienestar Emocional",
+    "title": "Guía De Bienestar Emocional Post Terremoto",
     "url": "/guia-bienestar",
     "icon": "heart-pulse",
     "type": "link",
@@ -599,7 +691,7 @@ const DEFAULT_SUGGESTIONS = [
 // APP STATE & PERSISTENCE (HYBRID LOCAL + SERVER DATABASE)
 // ============================================================
 
-const APP_BUILD_VERSION = '2.9.8-20260908';
+const APP_BUILD_VERSION = '2.9.9-20260908';
 
 function initializeAppState() {
   const currentBuild = localStorage.getItem('psicologia_app_build_version');
@@ -918,6 +1010,9 @@ document.addEventListener('DOMContentLoaded', async () => {
   } else if (path.includes('promocion-prevencion') || path.includes('promocion')) {
     recordVisit('Promoción y Prevención', 'Visita a Promoción y Prevención');
     renderCyclePublicPage('promocion-prevencion');
+  } else if (path.includes('guia-bienestar') || path.includes('bienestar')) {
+    recordVisit('Guía De Bienestar Emocional Post Terremoto', 'Visita a Guía De Bienestar');
+    renderCyclePublicPage('guia-bienestar');
   } else if (path.includes('pagina') || path.includes('/p/')) {
     const slug = path.split('/').filter(Boolean).pop().replace('.html', '');
     renderCustomPublicPage(slug);
@@ -949,6 +1044,8 @@ document.addEventListener('DOMContentLoaded', async () => {
     renderCalendar();
   } else if (path.includes('promocion-prevencion') || path.includes('promocion')) {
     renderCyclePublicPage('promocion-prevencion');
+  } else if (path.includes('guia-bienestar') || path.includes('bienestar')) {
+    renderCyclePublicPage('guia-bienestar');
   } else if (path.includes('ciclos')) {
     const matchedCycle = cyclesList.find(c => path.includes(c.slug) || path.includes(c.key));
     if (matchedCycle) {
@@ -3059,8 +3156,9 @@ function renderAdminCycleTabs() {
   }
 
   const isPromo = selectedAdminCycleKey === 'promocion-prevencion';
+  const isGuia = selectedAdminCycleKey === 'guia-bienestar';
 
-  if (!isPromo && !cyclesList.some(c => c.key === selectedAdminCycleKey)) {
+  if (!isPromo && !isGuia && !cyclesList.some(c => c.key === selectedAdminCycleKey)) {
     selectedAdminCycleKey = cyclesList[0]?.key || 'primera_infancia';
   }
 
@@ -3081,19 +3179,16 @@ function renderAdminCycleTabs() {
     </button>
   `;
 
+  // Pestaña fija para Guía de Bienestar Emocional Post Terremoto
+  html += `
+    <button type="button" class="cycle-tab-btn cycle-tab-guia ${isGuia ? 'active' : ''}" onclick="selectAdminCycle('guia-bienestar', this)" style="border: 2px solid #2563eb; font-weight: 800; color: ${isGuia ? '#ffffff' : '#2563eb'}; background: ${isGuia ? '#2563eb' : '#eff6ff'};">
+      <span>🌱</span> Guía Bienestar Post Terremoto <small>(Contenido)</small>
+    </button>
+  `;
+
   container.innerHTML = html;
 
-  const activeMeta = isPromo ? {
-    key: 'promocion-prevencion',
-    name: 'Promoción y Prevención',
-    grades: 'Programas y Campañas Institucionales',
-    badgeText: 'PROMOCIÓN Y PREVENCIÓN',
-    pillClass: 'pill-teal',
-    borderClass: 'card-border-teal',
-    icon: '🛡️',
-    subtitle: 'Departamento de Psicoorientación Escolar • Colegio Leonístico La Merced'
-  } : (cyclesList.find(c => c.key === selectedAdminCycleKey) || cyclesList[0]);
-
+  const activeMeta = getAdminCycleOrPageMeta(selectedAdminCycleKey);
   const nameEl = document.getElementById('adminCycleActiveName');
   if (nameEl && activeMeta) {
     nameEl.textContent = `${activeMeta.name} (${activeMeta.grades || ''})`;
@@ -3412,24 +3507,15 @@ function selectAdminCycle(cycleKey, btnElement) {
     });
   }
 
-  const isPromo = cycleKey === 'promocion-prevencion';
-  const meta = isPromo ? {
-    key: 'promocion-prevencion',
-    name: 'Promoción y Prevención',
-    grades: 'Programas y Campañas Institucionales',
-    badgeText: 'PROMOCIÓN Y PREVENCIÓN',
-    pillClass: 'pill-teal',
-    borderClass: 'card-border-teal',
-    icon: '🛡️',
-    subtitle: 'Departamento de Psicoorientación Escolar • Colegio Leonístico La Merced'
-  } : (cyclesList.find(c => c.key === cycleKey) || cyclesList[0]);
+  const isSpecial = cycleKey === 'promocion-prevencion' || cycleKey === 'guia-bienestar';
+  const meta = getAdminCycleOrPageMeta(cycleKey);
 
   const nameEl = document.getElementById('adminCycleActiveName');
   if (nameEl && meta) nameEl.textContent = `${meta.name} (${meta.grades || ''})`;
 
   const cycleSpecificActions = document.getElementById('adminCycleSpecificActions');
   if (cycleSpecificActions) {
-    cycleSpecificActions.style.display = isPromo ? 'none' : 'flex';
+    cycleSpecificActions.style.display = isSpecial ? 'none' : 'flex';
   }
 
   resetCycleBlockForm();
@@ -3439,6 +3525,10 @@ function selectAdminCycle(cycleKey, btnElement) {
 function openActiveCyclePublicPage() {
   if (selectedAdminCycleKey === 'promocion-prevencion') {
     window.open('/promocion-prevencion', '_blank');
+    return;
+  }
+  if (selectedAdminCycleKey === 'guia-bienestar') {
+    window.open('/guia-bienestar', '_blank');
     return;
   }
   const meta = cyclesList.find(c => c.key === selectedAdminCycleKey);
@@ -3944,118 +4034,7 @@ function removeCycleBlockImage() {
 // Vista Previa en Vivo Simulada
 function updateCycleBlockLivePreview() {
   try {
-    const meta = (selectedAdminCycleKey === 'promocion-prevencion') ? { key: 'promocion-prevencion', name: 'Promoción y Prevención', grades: 'Programas Institucionales', pillClass: 'pill-teal', borderClass: 'card-border-teal', icon: '🛡️' } : (cyclesList.find(c => c.key === selectedAdminCycleKey) || cyclesList[0] || {
-      name: 'Primera Infancia',
-      grades: 'J° Y T°',
-      pillClass: 'pill-pink',
-      borderClass: 'card-border-pink',
-      icon: '🌸'
-    });
-    const type = selectedBlockType || 'hero_banner';
-    const size = 'full';
-    const titleAlign = document.getElementById('cycleBlockTitleAlign')?.value || 'left';
-    const title = document.getElementById('cycleBlockTitle')?.value || '';
-    const subtitle = document.getElementById('cycleBlockSubtitle')?.value || '';
-    const badge = document.getElementById('cycleBlockBadge')?.value || meta.badgeText || meta.name;
-    const text = document.getElementById('cycleBlockText')?.value || '';
-    const imageUrl = document.getElementById('cycleBlockImageUrlHidden')?.value || '';
-    const imagePos = document.getElementById('cycleBlockImagePos')?.value || 'left';
-    const imageSize = document.getElementById('cycleBlockImageSize')?.value || 'full';
-    const imageFit = document.getElementById('cycleBlockImageFit')?.value || 'contain';
-    const galleryLayout = document.getElementById('cycleGalleryLayout')?.value || 'single_full';
-    const galleryFit = document.getElementById('cycleGalleryFit')?.value || 'natural';
-    const galleryAlign = document.getElementById('cycleGalleryAlign')?.value || 'center';
-    const btnText = document.getElementById('cycleBlockBtnText')?.value || '';
-    const btnUrl = document.getElementById('cycleBlockBtnUrl')?.value || '#';
-    const iconEmoji = document.getElementById('cycleCalloutEmoji')?.value || '💡';
-    const accentColor = document.getElementById('cycleCalloutColor')?.value || 'purple';
-
-    const slidesUrl = document.getElementById('cycleSlidesUrlInput')?.value || '';
-    const slidesBtnText = document.getElementById('cycleSlidesBtnTextInput')?.value || '';
-    const videoUrl = document.getElementById('cycleVideoUrlInput')?.value || '';
-    const videoBtnText = document.getElementById('cycleVideoBtnTextInput')?.value || '';
-
-    const previewContainer = document.getElementById('liveCycleBlockCardWrap');
-    const sizeBadge = document.getElementById('liveCycleBlockSizeBadge');
-
-    if (sizeBadge) {
-      sizeBadge.textContent = '100% Horizontal';
-    }
-
-    if (!previewContainer) return;
-
-    const mockBlock = {
-      id: 999,
-      cycleId: meta.key || selectedAdminCycleKey,
-      type,
-      size,
-      titleAlign,
-      title: title.trim() || 'Título del Bloque',
-      subtitle: subtitle.trim(),
-      badgeText: badge.trim() || meta.name,
-      text: text.trim() || 'Aquí se mostrará la información y contenidos redactados para este ciclo.',
-      imageUrl,
-      imagePosition: imagePos,
-      imageSize,
-      imageFit,
-      galleryLayout,
-      galleryFit,
-      galleryAlign,
-      buttonText: btnText.trim(),
-      buttonUrl: btnUrl.trim() || '#',
-      iconEmoji,
-      accentColor,
-      slidesUrl: slidesUrl.trim(),
-      slidesBtnText: slidesBtnText.trim(),
-      videoUrl: videoUrl.trim(),
-      videoBtnText: videoBtnText.trim(),
-      slidesFileData: typeof currentEditingSlidesFileData !== 'undefined' ? currentEditingSlidesFileData : '',
-      slidesFileName: typeof currentEditingSlidesFileName !== 'undefined' ? currentEditingSlidesFileName : '',
-      itemsList: typeof currentEditingCardsList !== 'undefined' ? currentEditingCardsList : [],
-      resourcesList: typeof currentEditingResourcesList !== 'undefined' ? currentEditingResourcesList : [],
-      photosList: typeof currentEditingGalleryPhotos !== 'undefined' ? currentEditingGalleryPhotos : []
-    };
-
-    previewContainer.innerHTML = renderCycleBlockByType(mockBlock, meta, false);
-    if (window.lucide) lucide.createIcons();
-  } catch (err) {
-    console.error('Error actualizando vista previa en vivo:', err);
-  }
-}
-
-function startNewCycleBlockCreation() {
-  resetCycleBlockForm();
-  openBlockTypePickerModal();
-}
-
-function handleSaveCycleBlock(event) {
-  if (event) event.preventDefault();
-  const idInput = document.getElementById('cycleBlockEditId')?.value;
-  const type = selectedBlockType || 'hero_banner';
-  const size = 'full';
-  const titleAlign = document.getElementById('cycleBlockTitleAlign')?.value || 'left';
-  let title = (document.getElementById('cycleBlockTitle')?.value || '').trim();
-  const subtitle = (document.getElementById('cycleBlockSubtitle')?.value || '').trim();
-  let badgeText = (document.getElementById('cycleBlockBadge')?.value || '').trim();
-  const text = (document.getElementById('cycleBlockText')?.value || '').trim();
-  const imageUrl = (document.getElementById('cycleBlockImageUrlHidden')?.value || '').trim();
-  const imagePosition = document.getElementById('cycleBlockImagePos')?.value || 'left';
-  const imageSize = document.getElementById('cycleBlockImageSize')?.value || 'full';
-  const imageFit = document.getElementById('cycleBlockImageFit')?.value || 'contain';
-  const galleryLayout = document.getElementById('cycleGalleryLayout')?.value || 'single_full';
-  const galleryFit = document.getElementById('cycleGalleryFit')?.value || 'natural';
-  const galleryAlign = document.getElementById('cycleGalleryAlign')?.value || 'center';
-  const buttonText = (document.getElementById('cycleBlockBtnText')?.value || '').trim();
-  const buttonUrl = (document.getElementById('cycleBlockBtnUrl')?.value || '').trim();
-  const iconEmoji = document.getElementById('cycleCalloutEmoji')?.value || '💡';
-  const accentColor = document.getElementById('cycleCalloutColor')?.value || 'purple';
-
-  const slidesUrl = (document.getElementById('cycleSlidesUrlInput')?.value || '').trim();
-  const slidesBtnText = (document.getElementById('cycleSlidesBtnTextInput')?.value || '').trim();
-  const videoUrl = (document.getElementById('cycleVideoUrlInput')?.value || '').trim();
-  const videoBtnText = (document.getElementById('cycleVideoBtnTextInput')?.value || '').trim();
-
-  const meta = (selectedAdminCycleKey === 'promocion-prevencion') ? { key: 'promocion-prevencion', name: 'Promoción y Prevención', badgeText: 'PROMOCIÓN Y PREVENCIÓN', pillClass: 'pill-teal', borderClass: 'card-border-teal' } : (cyclesList.find(c => c.key === selectedAdminCycleKey) || cyclesList[0] || { key: 'primera_infancia', name: 'Primera Infancia' });
+    const meta = getAdminCycleOrPageMeta(selectedAdminCycleKey);
   const targetCycleKey = meta.key || selectedAdminCycleKey;
 
   if (!title) {
@@ -4886,17 +4865,7 @@ function renderCycleBlockByType(b, meta, isPublic = true) {
 
 function renderAdminCycleBlocks() {
   const container = document.getElementById('adminCycleBlocksList');
-  const isPromo = selectedAdminCycleKey === 'promocion-prevencion';
-  const meta = isPromo ? {
-    key: 'promocion-prevencion',
-    name: 'Promoción y Prevención',
-    grades: 'Programas y Campañas Institucionales',
-    badgeText: 'PROMOCIÓN Y PREVENCIÓN',
-    pillClass: 'pill-teal',
-    borderClass: 'card-border-teal',
-    icon: '🛡️',
-    subtitle: 'Departamento de Psicoorientación Escolar • Colegio Leonístico La Merced'
-  } : (cyclesList.find(c => c.key === selectedAdminCycleKey) || cyclesList[0]);
+  const meta = getAdminCycleOrPageMeta(selectedAdminCycleKey);
 
   const nameEl = document.getElementById('adminCycleActiveName');
   if (nameEl && meta) nameEl.textContent = `${meta.name} (${meta.grades || ''})`;
@@ -4915,7 +4884,10 @@ function renderAdminCycleBlocks() {
 
   if (!container) return;
 
-  const targetKeys = [meta.key]; if (meta.key === 'promocion-prevencion') targetKeys.push('promocion_prevencion');
+  const targetKeys = [meta.key];
+  if (meta.key === 'promocion-prevencion') targetKeys.push('promocion_prevencion');
+  if (meta.key === 'guia-bienestar') targetKeys.push('guia_bienestar', 'bienestar');
+
   const list = cycleBlocks.filter(b => targetKeys.includes(b.cycleId)).sort((a, b) => (a.order || 0) - (b.order || 0));
 
   if (list.length === 0) {
@@ -4923,7 +4895,7 @@ function renderAdminCycleBlocks() {
       <div style="grid-column: 1 / -1; color: #64748b; padding: 48px 20px; text-align: center; background: #f8fafc; border-radius: var(--radius-md); border: 2px dashed #cbd5e1;">
         <div style="font-size: 2.2rem; margin-bottom: 8px;">🎨</div>
         <h5 style="font-size: 1.15rem; font-weight: 800; color: #1e293b; margin-bottom: 4px;">No hay bloques creados para ${meta.name}</h5>
-        <p style="font-size: 0.88rem; margin-bottom: 16px;">Usa el botón "+ Agregar Bloque" para añadir banners, artículos, acordeones o consejos.</p>
+        <p style="font-size: 0.88rem; margin-bottom: 16px;">Usa el botón "+ Agregar Bloque" para añadir banners, videos, diapositivas, descargables o consejos.</p>
         <button type="button" class="btn btn-primary btn-sm" onclick="startNewCycleBlockCreation()">
           <i data-lucide="plus"></i> ➕ Agregar Primer Bloque
         </button>
@@ -4935,6 +4907,7 @@ function renderAdminCycleBlocks() {
   const typeIcons = {
     'hero_banner': '📰 Banner',
     'slides_embed': '📊 Diapositivas',
+    'video_embed': '🎬 Video Formativo',
     'resources_download': '📥 Descargables',
     'article_blog': '📝 Artículo',
     'callout_tip': '💡 Consejo',
@@ -5008,32 +4981,17 @@ function renderAdminCycleBlocks() {
 
 function renderCyclePublicPage(cycleKey) {
   const container = document.getElementById('cycleBlocksContainer');
-  let meta = cyclesList.find(c => c.key === cycleKey || c.slug === cycleKey);
-
-  if (!meta && (cycleKey === 'promocion-prevencion' || cycleKey === 'promocion_prevencion' || window.location.pathname.includes('promocion'))) {
-    meta = {
-      key: 'promocion-prevencion',
-      slug: 'promocion-prevencion',
-      name: 'Promoción y Prevención',
-      grades: 'Programas Institucionales',
-      badgeText: 'PROMOCIÓN Y PREVENCIÓN',
-      pillClass: 'pill-teal',
-      borderClass: 'card-border-teal',
-      icon: '🛡️',
-      subtitle: 'Departamento de Psicoorientación Escolar • Colegio Leonístico La Merced'
-    };
-  }
+  let meta = getAdminCycleOrPageMeta(cycleKey);
 
   if (!meta) return;
 
-  // Actualizar encabezados dinámicos en la plantilla
   const docTitle = document.getElementById('cycleDocTitle');
   if (docTitle) docTitle.textContent = `${meta.name} | Psicoorientación Escolar`;
 
   const heroBadge = document.getElementById('cycleHeroBadge');
   if (heroBadge) {
-    heroBadge.textContent = `${meta.name.toUpperCase()} (${meta.grades || ''})`;
-    heroBadge.className = `hero-badge ${meta.pillClass || 'pill-pink'}`;
+    heroBadge.textContent = `${meta.badgeText || meta.name.toUpperCase()}`;
+    heroBadge.className = `hero-badge ${meta.pillClass || 'pill-blue'}`;
   }
 
   const heroTitle = document.getElementById('cycleHeroTitle');
@@ -5047,7 +5005,6 @@ function renderCyclePublicPage(cycleKey) {
     heroSub.textContent = meta.subtitle;
   }
 
-  // Imagen de fondo del encabezado / Hero
   const heroSection = document.getElementById('cycleHeroSection') || document.querySelector('.cycle-hero-section');
   const defaultMeta = DEFAULT_CYCLES_LIST.find(c => c.key === meta.key || c.slug === meta.slug);
   const heroBg = meta.heroBgImage || defaultMeta?.heroBgImage || '';
@@ -5058,6 +5015,12 @@ function renderCyclePublicPage(cycleKey) {
       heroSection.style.backgroundImage = `linear-gradient(135deg, rgba(15, 23, 42, 0.82) 0%, rgba(30, 27, 75, 0.86) 100%), url("${heroBg}")`;
       heroSection.style.backgroundSize = 'cover';
       heroSection.style.backgroundPosition = 'center';
+    } else if (meta.key === 'guia-bienestar') {
+      heroSection.classList.remove('has-bg-img');
+      heroSection.style.backgroundImage = 'linear-gradient(135deg, #1e3a8a 0%, #0d9488 100%)';
+    } else if (meta.key === 'promocion-prevencion') {
+      heroSection.classList.remove('has-bg-img');
+      heroSection.style.backgroundImage = 'linear-gradient(135deg, #0d9488 0%, #1e3a8a 100%)';
     } else {
       heroSection.classList.remove('has-bg-img');
       heroSection.style.backgroundImage = '';
@@ -5070,16 +5033,20 @@ function renderCyclePublicPage(cycleKey) {
 
   const targetKeys = [meta.key, meta.slug];
   if (meta.key === 'promocion-prevencion') targetKeys.push('promocion_prevencion');
+  if (meta.key === 'guia-bienestar') targetKeys.push('guia_bienestar', 'bienestar');
 
   const list = cycleBlocks.filter(b => targetKeys.includes(b.cycleId)).sort((a, b) => (a.order || 0) - (b.order || 0));
 
   if (list.length === 0) {
     const isPromo = meta.key === 'promocion-prevencion';
-    const emptyIcon = isPromo ? '🛡️' : ((meta.icon && meta.icon.trim() && meta.icon !== '🌸') ? meta.icon : '✨');
-    const emptyTitle = isPromo ? 'Espacio de Promoción y Prevención' : 'Página en Actualización';
+    const isGuia = meta.key === 'guia-bienestar';
+    const emptyIcon = isPromo ? '🛡️' : (isGuia ? '🌱' : ((meta.icon && meta.icon.trim() && meta.icon !== '🌸') ? meta.icon : '✨'));
+    const emptyTitle = isPromo ? 'Espacio de Promoción y Prevención' : (isGuia ? 'Guía De Bienestar Emocional Post Terremoto' : 'Página en Actualización');
     const emptyDesc = isPromo 
       ? 'Pronto compartiremos videos, diapositivas, pautas formativas y campañas para toda la comunidad educativa.' 
-      : `Pronto compartiremos pautas, actividades y contenidos para los estudiantes y familias de ${meta.name}.`;
+      : (isGuia 
+          ? 'Pronto compartiremos pautas, recursos y actividades de bienestar emocional post terremoto.' 
+          : `Pronto compartiremos pautas, actividades y contenidos para los estudiantes y familias de ${meta.name}.`);
 
     container.innerHTML = `
       <div style="grid-column: 1 / -1; text-align: center; padding: 56px 24px; color: #64748b; background: white; border-radius: var(--radius-lg); border: 2px dashed #cbd5e1; box-shadow: var(--shadow-sm); max-width: 650px; margin: 0 auto;">

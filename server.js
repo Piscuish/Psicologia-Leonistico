@@ -459,6 +459,55 @@ const DEFAULT_CYCLE_BLOCKS = [
       }
     ],
     "order": 1
+  },
+  {
+    "id": 1788887600000,
+    "cycleId": "guia-bienestar",
+    "type": "hero_banner",
+    "size": "full",
+    "titleAlign": "left",
+    "title": "Acompañamiento Socioemocional y Primeros Auxilios Psicológicos",
+    "subtitle": "Estrategias de contención, tranquilidad y apoyo mutuo para toda la comunidad leonística",
+    "badgeText": "BIENESTAR EMOCIONAL POST TERREMOTO",
+    "text": "Frente a eventos inesperados o situaciones de emergencia sísmica, es natural experimentar miedo, ansiedad o preocupación. Desde el área de Psicoorientación Escolar compartimos pautas formativas, actividades de respiración, técnicas de regulación emocional y recursos prácticos para acompañar a nuestros niños, niñas y jóvenes tanto en el hogar como en las aulas.\n\nRecuerda que escuchar con empatía, mantener la calma y validar las emociones son los primeros pasos para restaurar la seguridad y el bienestar.",
+    "imageUrl": "",
+    "imagePosition": "left",
+    "imageSize": "full",
+    "imageFit": "contain",
+    "buttonText": "",
+    "buttonUrl": "",
+    "iconEmoji": "🌱",
+    "accentColor": "blue",
+    "slidesUrl": "",
+    "slidesBtnText": "",
+    "videoUrl": "",
+    "videoBtnText": "",
+    "slidesFileData": "",
+    "slidesFileName": "",
+    "itemsList": [
+      {
+        "icon": "🤝",
+        "title": "Contención Emocional",
+        "text": "Validar temores y transmitir calma y presencia constante."
+      },
+      {
+        "icon": "🌬️",
+        "title": "Técnicas de Respiración",
+        "text": "Ejercicios guiados para reducir la tensión corporal y el estrés."
+      }
+    ],
+    "resourcesList": [
+      {
+        "title": "Pautas de Apoyo Post Emergencia (PDF)",
+        "desc": "Material imprimible de orientación para el aula y el hogar.",
+        "fileUrl": "",
+        "fileName": "",
+        "fileSize": "",
+        "icon": "file-text"
+      }
+    ],
+    "photosList": [],
+    "order": 1
   }
 ];
 

@@ -3,9 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Guía De Bienestar Emocional | Psicoorientación Escolar</title>
-  <meta name="description" content="Guía De Bienestar Emocional - Departamento de Psicoorientación Escolar, Colegio Leonístico La Merced.">
-  <link rel="icon" type="image/png" href="https://lh3.googleusercontent.com/sitesv/AG8ngQXPXXrReW33dy7TVTPLbtzVRorfO3DggGyZ2zPzCU8xHZihOUZ73rOtyxtOw8W6b-Ry1dvVTRgD9cXAi1PeOeBYBjYcRYJmjkDCa-In40HLlE0ZqGMI0v8Vm30pwJNToW-SKtWmik47Pnir0VAv4VW-kkrallHR0PnYc_cPd_uIBQNvJoe1Iu6Z7ACf=w16383">
+  <title id="cycleDocTitle">Guía De Bienestar Emocional Post Terremoto | Psicoorientación Escolar</title>
+  <meta name="description" content="Guía De Bienestar Emocional Post Terremoto - Departamento de Psicoorientación Escolar, Colegio Leonístico La Merced.">
+  <link rel="icon" type="image/png" id="faviconTag" href="https://lh3.googleusercontent.com/sitesv/AG8ngQXPXXrReW33dy7TVTPLbtzVRorfO3DggGyZ2zPzCU8xHZihOUZ73rOtyxtOw8W6b-Ry1dvVTRgD9cXAi1PeOeBYBjYcRYJmjkDCa-In40HLlE0ZqGMI0v8Vm30pwJNToW-SKtWmik47Pnir0VAv4VW-kkrallHR0PnYc_cPd_uIBQNvJoe1Iu6Z7ACf=w16383">
   
   <!-- CSS Stylesheets -->
   <link rel="stylesheet" href="/styles.css">
@@ -30,57 +30,7 @@
 
       <!-- Desktop Nav Menu -->
       <nav class="nav-menu" id="mainNavMenu">
-        <div class="nav-dropdown">
-          <a href="/" class="nav-dropdown-toggle" id="navDropdownBtn">
-            <i data-lucide="home"></i> Inicio <i data-lucide="chevron-down" class="chevron-icon"></i>
-          </a>
-          <div class="nav-dropdown-menu">
-            <a href="/" class="nav-dropdown-item">
-              <i data-lucide="home"></i> Portada Principal
-            </a>
-            <a href="/#quienes-somos" class="nav-dropdown-item">
-              <i data-lucide="heart-handshake"></i> ¿Quiénes Somos?
-            </a>
-          </div>
-        </div>
-
-        <a href="/guia-bienestar" class="nav-btn active">
-          <i data-lucide="heart-pulse"></i> Guía De Bienestar Emocional
-        </a>
-
-        <a href="/encuentros" class="nav-btn">
-          <i data-lucide="users"></i> Encuentros Familiares
-        </a>
-
-        <a href="/promocion-prevencion" class="nav-btn">
-          <i data-lucide="shield-check"></i> Promoción y Prevención
-        </a>
-
-        <div class="nav-dropdown">
-          <a href="#" class="nav-dropdown-toggle" id="navCiclosBtn">
-            <i data-lucide="layers"></i> Ciclos <i data-lucide="chevron-down" class="chevron-icon"></i>
-          </a>
-          <div class="nav-dropdown-menu" style="min-width: 280px;">
-            <a href="/ciclos/primera-infancia" class="nav-dropdown-item">
-              <span class="dropdown-pill pill-pink">J y T</span> Primera Infancia
-            </a>
-            <a href="/ciclos/infantil" class="nav-dropdown-item">
-              <span class="dropdown-pill pill-teal">1, 2 y 3</span> Ciclo Infantil
-            </a>
-            <a href="/ciclos/basico" class="nav-dropdown-item">
-              <span class="dropdown-pill pill-yellow">4 y 5</span> Ciclo Básico
-            </a>
-            <a href="/ciclos/fundamental" class="nav-dropdown-item">
-              <span class="dropdown-pill pill-purple">6 y 7</span> Ciclo Fundamental
-            </a>
-            <a href="/ciclos/exploratorio" class="nav-dropdown-item">
-              <span class="dropdown-pill pill-blue">8 y 9</span> Ciclo Exploratorio
-            </a>
-            <a href="/ciclos/especializado" class="nav-dropdown-item">
-              <span class="dropdown-pill pill-green">10 y 11</span> Ciclo Especializado
-            </a>
-          </div>
-        </div>
+        <!-- Rendered dynamically by renderPublicNavbar() in app.js -->
       </nav>
 
       <div class="header-actions">
@@ -92,42 +42,7 @@
 
     <!-- Mobile Nav Drawer -->
     <div class="mobile-nav" id="mobileNav">
-      <a href="/" class="mobile-nav-btn">
-        <i data-lucide="home"></i> Inicio (Portada)
-      </a>
-      <a href="/#quienes-somos" class="mobile-nav-btn" style="padding-left: 28px; font-size: 0.9rem;">
-        <i data-lucide="heart-handshake"></i> └ ¿Quiénes Somos?
-      </a>
-      <a href="/guia-bienestar" class="mobile-nav-btn active">
-        <i data-lucide="heart-pulse"></i> Guía De Bienestar Emocional
-      </a>
-      <a href="/encuentros" class="mobile-nav-btn">
-        <i data-lucide="users"></i> Encuentros Familiares
-      </a>
-      <a href="/promocion-prevencion" class="mobile-nav-btn">
-        <i data-lucide="shield-check"></i> Promoción y Prevención
-      </a>
-      <div style="font-size: 0.75rem; font-weight: 700; color: #64748b; text-transform: uppercase; padding: 6px 12px 2px 12px; letter-spacing: 0.5px;">
-        Ciclos Escolares
-      </div>
-      <a href="/ciclos/primera-infancia" class="mobile-nav-btn" style="padding-left: 24px; font-size: 0.9rem;">
-        <span class="dropdown-pill pill-pink" style="font-size: 0.68rem; min-width: 48px;">J y T</span> Primera Infancia
-      </a>
-      <a href="/ciclos/infantil" class="mobile-nav-btn" style="padding-left: 24px; font-size: 0.9rem;">
-        <span class="dropdown-pill pill-teal" style="font-size: 0.68rem; min-width: 48px;">1, 2 y 3</span> Ciclo Infantil
-      </a>
-      <a href="/ciclos/basico" class="mobile-nav-btn" style="padding-left: 24px; font-size: 0.9rem;">
-        <span class="dropdown-pill pill-yellow" style="font-size: 0.68rem; min-width: 48px;">4 y 5</span> Ciclo Básico
-      </a>
-      <a href="/ciclos/fundamental" class="mobile-nav-btn" style="padding-left: 24px; font-size: 0.9rem;">
-        <span class="dropdown-pill pill-purple" style="font-size: 0.68rem; min-width: 48px;">6 y 7</span> Ciclo Fundamental
-      </a>
-      <a href="/ciclos/exploratorio" class="mobile-nav-btn" style="padding-left: 24px; font-size: 0.9rem;">
-        <span class="dropdown-pill pill-blue" style="font-size: 0.68rem; min-width: 48px;">8 y 9</span> Ciclo Exploratorio
-      </a>
-      <a href="/ciclos/especializado" class="mobile-nav-btn" style="padding-left: 24px; font-size: 0.9rem;">
-        <span class="dropdown-pill pill-green" style="font-size: 0.68rem; min-width: 48px;">10 y 11</span> Ciclo Especializado
-      </a>
+      <!-- Rendered dynamically by renderPublicNavbar() in app.js -->
     </div>
   </header>
 
@@ -135,34 +50,34 @@
   <main id="main-content">
     
     <!-- Hero Banner -->
-    <section class="section-container" style="background: linear-gradient(135deg, #1e3a8a 0%, #0d9488 100%); color: white; padding: 70px 20px; text-align: center;">
+    <section id="cycleHeroSection" class="section-container" style="background: linear-gradient(135deg, #1e3a8a 0%, #0d9488 100%); color: white; padding: 70px 20px; text-align: center;">
       <div class="container" style="max-width: 800px;">
-        <span style="display: inline-flex; align-items: center; gap: 8px; background: rgba(255, 255, 255, 0.18); border: 1px solid rgba(255, 255, 255, 0.3); color: #fef08a; padding: 6px 18px; border-radius: 9999px; font-size: 0.85rem; font-weight: 600; margin-bottom: 16px;">
-          <i data-lucide="sparkles"></i> ESPACIO FORMATIVO
+        <span id="cycleHeroBadge" style="display: inline-flex; align-items: center; gap: 8px; background: rgba(255, 255, 255, 0.18); border: 1px solid rgba(255, 255, 255, 0.3); color: #fef08a; padding: 6px 18px; border-radius: 9999px; font-size: 0.85rem; font-weight: 600; margin-bottom: 16px;">
+          <i data-lucide="sparkles"></i> RECURSOS & ORIENTACIÓN
         </span>
-        <h1 style="font-family: var(--font-heading); font-size: 2.8rem; letter-spacing: 0.5px; margin-bottom: 12px; text-transform: uppercase;">
-          Guía De Bienestar Emocional
+        <h1 id="cycleHeroTitle" style="font-family: var(--font-heading); font-size: 2.8rem; letter-spacing: 0.5px; margin-bottom: 12px; text-transform: uppercase;">
+          Guía De Bienestar Emocional Post Terremoto
         </h1>
-        <p style="max-width: 650px; margin: 0 auto; font-size: 1.1rem; color: #e2e8f0; line-height: 1.6;">
+        <p id="cycleHeroSubtitle" style="max-width: 650px; margin: 0 auto; font-size: 1.1rem; color: #e2e8f0; line-height: 1.6;">
           Departamento de Psicoorientación Escolar • Colegio Leonístico La Merced
         </p>
       </div>
     </section>
 
-    <!-- Empty/Clean Body Container -->
-    <section class="section-container" style="min-height: 45vh; display: flex; align-items: center; justify-content: center; background: #f8fafc; padding: 60px 20px;">
-      <div class="container text-center" style="max-width: 600px;">
-        <div style="background: white; border-radius: var(--radius-lg); padding: 48px 32px; border: 1px dashed #cbd5e1; box-shadow: var(--shadow-sm);">
-          <div style="font-size: 3rem; margin-bottom: 14px;">🌱</div>
-          <h2 style="font-family: var(--font-heading); font-size: 1.8rem; color: #1e293b; margin-bottom: 10px;">
-            Página en Actualización
-          </h2>
-          <p style="color: #64748b; font-size: 1.05rem; line-height: 1.6; margin-bottom: 24px;">
-            Este espacio se encuentra listo para nuevos contenidos y recursos de orientación institucional.
-          </p>
-          <a href="/" class="btn btn-primary" style="display: inline-flex; align-items: center; gap: 8px; padding: 10px 22px; border-radius: var(--radius-sm);">
-            <i data-lucide="arrow-left"></i> Volver al Inicio
-          </a>
+    <!-- Dynamic Content Blocks Grid -->
+    <section class="section-container" style="min-height: 50vh; background-color: #f8fafc; padding: 40px 20px 70px 20px;">
+      <div class="container">
+        <div id="cycleBlocksContainer" class="cycle-blocks-grid">
+          <div class="cycle-block-card size-full type-hero_banner card-border-blue">
+          <div class="title-align-left" style="text-align: left; width: 100%;">
+            <span class="cycle-block-badge pill-blue" style="margin-right: auto;">BIENESTAR EMOCIONAL POST TERREMOTO</span>
+            <h3 class="cycle-block-title" style="text-align: left;">Acompañamiento Socioemocional y Primeros Auxilios Psicológicos</h3>
+            <div class="cycle-block-subtitle" style="text-align: left;">Estrategias de contención, tranquilidad y apoyo mutuo para toda la comunidad leonística</div>
+            <div class="cycle-block-text" style="margin-bottom: 16px; text-align: left; white-space: pre-wrap;">Frente a eventos inesperados o situaciones de emergencia sísmica, es natural experimentar miedo, ansiedad o preocupación. Desde el área de Psicoorientación Escolar compartimos pautas formativas, actividades de respiración, técnicas de regulación emocional y recursos prácticos para acompañar a nuestros niños, niñas y jóvenes tanto en el hogar como en las aulas.
+
+Recuerda que escuchar con empatía, mantener la calma y validar las emociones son los primeros pasos para restaurar la seguridad y el bienestar.</div>
+          </div>
+        </div>
         </div>
       </div>
     </section>
@@ -186,7 +101,7 @@
           <h4>Navegación</h4>
           <ul>
             <li><a href="/">Inicio</a></li>
-            <li><a href="/guia-bienestar">Guía De Bienestar Emocional</a></li>
+            <li><a href="/guia-bienestar">Guía De Bienestar Emocional Post Terremoto</a></li>
             <li><a href="/encuentros">Encuentros Familiares</a></li>
             <li><a href="/promocion-prevencion">Promoción y Prevención</a></li>
             <li><a href="/#quienes-somos">¿Quiénes Somos?</a></li>
@@ -201,6 +116,6 @@
   </footer>
 
   <!-- Main JavaScript Logic -->
-  <script src="/app.js?v=2.9.8" defer></script>
+  <script src="/app.js?v=2.9.9" defer></script>
 </body>
 </html>
