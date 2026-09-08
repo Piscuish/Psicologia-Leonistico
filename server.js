@@ -291,7 +291,7 @@ const DEFAULT_CYCLES_LIST = [
     "subtitle": "Espacio formativo y de acompañamiento socioemocional para las familias y estudiantes de los primeros años escolares.",
     "order": 1,
     "pageUrl": "/ciclos/primera-infancia",
-    "heroBgImage": "/uploads/hero_primera_infancia_1788740308704_gb5dj.jpg"
+    "heroBgImage": "/uploads/hero_primera_infancia_1788873112142_kh55a.jpg"
   },
   {
     "key": "infantil",

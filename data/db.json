@@ -76,7 +76,7 @@
       "subtitle": "Espacio formativo y de acompañamiento socioemocional para las familias y estudiantes de los primeros años escolares.",
       "order": 1,
       "pageUrl": "/ciclos/primera-infancia",
-      "heroBgImage": "/uploads/hero_primera_infancia_1788740308704_gb5dj.jpg"
+      "heroBgImage": "/uploads/hero_primera_infancia_1788873112142_kh55a.jpg"
     },
     {
       "key": "infantil",
@@ -538,16 +538,16 @@
   ],
   "suggestions": [],
   "analytics": {
-    "totalVisits": 109,
+    "totalVisits": 114,
     "uniqueSessions": 0,
-    "lastVisitDate": "7/9/2026 02:09 p. m.",
+    "lastVisitDate": "8/9/2026 08:11 a. m.",
     "tabs": {
-      "inicio": 44,
-      "encuentros": 14,
-      "ciclos": 51
+      "inicio": 46,
+      "encuentros": 15,
+      "ciclos": 53
     },
     "cycles": {
-      "primera_infancia": 25,
+      "primera_infancia": 27,
       "infantil": 7,
       "basico": 7,
       "fundamental": 1,
@@ -557,6 +557,41 @@
       "cycle_1788358007488": 2
     },
     "logs": [
+      {
+        "id": 1788873116383,
+        "date": "8/9/2026 08:11 a. m.",
+        "section": "Ciclos: Primera Infancia (JARDÍN Y TRANSICIÓN)",
+        "action": "Visita a la página de Primera Infancia (JARDÍN Y TRANSICIÓN)",
+        "device": "Escritorio"
+      },
+      {
+        "id": 1788873114983,
+        "date": "8/9/2026 08:11 a. m.",
+        "section": "Inicio / Portada",
+        "action": "Ingreso a la página de Inicio",
+        "device": "Escritorio"
+      },
+      {
+        "id": 1788873074016,
+        "date": "8/9/2026 08:11 a. m.",
+        "section": "Ciclos: Primera Infancia (JARDÍN Y TRANSICIÓN)",
+        "action": "Visita a la página de Primera Infancia (JARDÍN Y TRANSICIÓN)",
+        "device": "Escritorio"
+      },
+      {
+        "id": 1788873070389,
+        "date": "8/9/2026 08:11 a. m.",
+        "section": "Encuentros Familiares",
+        "action": "Consulta de Calendario de Encuentros",
+        "device": "Escritorio"
+      },
+      {
+        "id": 1788873069380,
+        "date": "8/9/2026 08:11 a. m.",
+        "section": "Inicio / Portada",
+        "action": "Ingreso a la página de Inicio",
+        "device": "Escritorio"
+      },
       {
         "id": 1788808193436,
         "date": "7/9/2026 02:09 p. m.",
@@ -871,45 +906,10 @@
         "section": "Inicio / Portada",
         "action": "Ingreso a la página de Inicio",
         "device": "Escritorio"
-      },
-      {
-        "id": 1788461501257,
-        "date": "3/9/2026 01:51 p. m.",
-        "section": "Ciclos: Primera Infancia (JARDÍN Y TRANSICIÓN)",
-        "action": "Visita a la página de Primera Infancia (JARDÍN Y TRANSICIÓN)",
-        "device": "Escritorio"
-      },
-      {
-        "id": 1788461005883,
-        "date": "3/9/2026 01:43 p. m.",
-        "section": "Inicio / Portada",
-        "action": "Ingreso a la página de Inicio",
-        "device": "Escritorio"
-      },
-      {
-        "id": 1788460153135,
-        "date": "3/9/2026 01:29 p. m.",
-        "section": "Ciclos: Primera Infancia (JARDÍN Y TRANSICIÓN)",
-        "action": "Visita a la página de Primera Infancia (JARDÍN Y TRANSICIÓN)",
-        "device": "Escritorio"
-      },
-      {
-        "id": 1788460151632,
-        "date": "3/9/2026 01:29 p. m.",
-        "section": "Inicio / Portada",
-        "action": "Ingreso a la página de Inicio",
-        "device": "Escritorio"
-      },
-      {
-        "id": 1788460072955,
-        "date": "3/9/2026 06:27 p. m.",
-        "section": "Inicio / Portada",
-        "action": "Ingreso a la página de Inicio",
-        "device": "Escritorio"
       }
     ]
   },
   "adminPassword": "123",
   "adminSlug": "2610",
-  "version": "1788808426281"
+  "version": "1788873116383"
 }
