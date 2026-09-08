@@ -541,12 +541,12 @@
   ],
   "suggestions": [],
   "analytics": {
-    "totalVisits": 119,
+    "totalVisits": 120,
     "uniqueSessions": 0,
-    "lastVisitDate": "8/9/2026 11:04 a. m.",
+    "lastVisitDate": "8/9/2026 12:23 p. m.",
     "tabs": {
       "inicio": 47,
-      "encuentros": 16,
+      "encuentros": 17,
       "ciclos": 56
     },
     "cycles": {
@@ -560,6 +560,13 @@
       "cycle_1788358007488": 2
     },
     "logs": [
+      {
+        "id": 1788888207963,
+        "date": "8/9/2026 12:23 p. m.",
+        "section": "Encuentros Familiares",
+        "action": "Consulta de Calendario de Encuentros",
+        "device": "Escritorio"
+      },
       {
         "id": 1788883467175,
         "date": "8/9/2026 11:04 a. m.",
@@ -902,17 +909,10 @@
         "section": "Inicio / Portada",
         "action": "Ingreso a la página de Inicio",
         "device": "Escritorio"
-      },
-      {
-        "id": 1788462055361,
-        "date": "3/9/2026 02:00 p. m.",
-        "section": "Encuentros Familiares",
-        "action": "Consulta de Calendario de Encuentros",
-        "device": "Escritorio"
       }
     ]
   },
   "adminPassword": "123",
   "adminSlug": "2610",
-  "version": "1788887238731"
+  "version": "1788888207963"
 }
