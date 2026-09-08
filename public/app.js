@@ -4034,7 +4034,112 @@ function removeCycleBlockImage() {
 // Vista Previa en Vivo Simulada
 function updateCycleBlockLivePreview() {
   try {
+    const wrap = document.getElementById('liveCycleBlockCardWrap');
+    if (!wrap) return;
+
+    const type = document.getElementById('cycleBlockType')?.value || 'hero_banner';
+    const size = document.getElementById('cycleBlockSize')?.value || 'full';
+    const titleAlign = document.getElementById('cycleBlockTitleAlign')?.value || 'left';
+    let title = (document.getElementById('cycleBlockTitle')?.value || '').trim();
+    const subtitle = (document.getElementById('cycleBlockSubtitle')?.value || '').trim();
+    let badgeText = (document.getElementById('cycleBlockBadge')?.value || '').trim();
+    const text = (document.getElementById('cycleBlockText')?.value || '').trim();
+    const imageUrl = (document.getElementById('cycleBlockImageUrlHidden')?.value || '').trim();
+    const imagePosition = document.getElementById('cycleBlockImagePos')?.value || 'left';
+    const imageSize = document.getElementById('cycleBlockImageSize')?.value || 'full';
+    const imageFit = document.getElementById('cycleBlockImageFit')?.value || 'contain';
+    const galleryLayout = document.getElementById('cycleGalleryLayout')?.value || 'single_full';
+    const galleryFit = document.getElementById('cycleGalleryFit')?.value || 'natural';
+    const galleryAlign = document.getElementById('cycleGalleryAlign')?.value || 'center';
+    const buttonText = (document.getElementById('cycleBlockBtnText')?.value || '').trim();
+    const buttonUrl = (document.getElementById('cycleBlockBtnUrl')?.value || '').trim();
+    const iconEmoji = document.getElementById('cycleCalloutEmoji')?.value || '💡';
+    const accentColor = document.getElementById('cycleCalloutColor')?.value || 'purple';
+
+    const slidesUrl = (document.getElementById('cycleSlidesUrlInput')?.value || '').trim();
+    const slidesBtnText = (document.getElementById('cycleSlidesBtnTextInput')?.value || '').trim();
+    const videoUrl = (document.getElementById('cycleVideoUrlInput')?.value || '').trim();
+    const videoBtnText = (document.getElementById('cycleVideoBtnTextInput')?.value || '').trim();
+
     const meta = getAdminCycleOrPageMeta(selectedAdminCycleKey);
+
+    if (!title) {
+      const typeInfo = CYCLE_BLOCK_TYPES.find(t => t.type === type);
+      title = typeInfo ? typeInfo.name : 'Contenido del Ciclo';
+    }
+
+    if (!badgeText) {
+      badgeText = meta.badgeText || meta.name || 'Orientación Escolar';
+    }
+
+    const mockBlock = {
+      id: 999999,
+      cycleId: selectedAdminCycleKey,
+      type,
+      size,
+      titleAlign,
+      title,
+      subtitle,
+      badgeText,
+      text: text || 'Aquí se mostrará el texto explicativo, las orientaciones o las reflexiones que redactes para este bloque.',
+      imageUrl: imageUrl,
+      imagePosition,
+      imageSize,
+      imageFit,
+      galleryLayout,
+      galleryFit,
+      galleryAlign,
+      buttonText,
+      buttonUrl,
+      iconEmoji,
+      accentColor,
+      slidesUrl,
+      slidesBtnText,
+      videoUrl,
+      videoBtnText,
+      slidesFileData: typeof currentEditingSlidesFileData !== 'undefined' ? currentEditingSlidesFileData : '',
+      slidesFileName: typeof currentEditingSlidesFileName !== 'undefined' ? currentEditingSlidesFileName : '',
+      itemsList: typeof currentEditingCardsList !== 'undefined' ? currentEditingCardsList : [],
+      resourcesList: typeof currentEditingResourcesList !== 'undefined' ? currentEditingResourcesList : [],
+      photosList: typeof currentEditingGalleryPhotos !== 'undefined' ? currentEditingGalleryPhotos : []
+    };
+
+    wrap.innerHTML = renderCycleBlockByType(mockBlock, meta, false);
+    if (window.lucide) lucide.createIcons();
+  } catch (err) {
+    console.error('Error actualizando vista previa en vivo:', err);
+  }
+}
+
+function handleSaveCycleBlock(event) {
+  if (event) event.preventDefault();
+
+  const idInput = document.getElementById('cycleBlockEditId')?.value;
+  const type = document.getElementById('cycleBlockType')?.value || 'hero_banner';
+  const size = document.getElementById('cycleBlockSize')?.value || 'full';
+  const titleAlign = document.getElementById('cycleBlockTitleAlign')?.value || 'left';
+  let title = (document.getElementById('cycleBlockTitle')?.value || '').trim();
+  const subtitle = (document.getElementById('cycleBlockSubtitle')?.value || '').trim();
+  let badgeText = (document.getElementById('cycleBlockBadge')?.value || '').trim();
+  const text = (document.getElementById('cycleBlockText')?.value || '').trim();
+  const imageUrl = (document.getElementById('cycleBlockImageUrlHidden')?.value || '').trim();
+  const imagePosition = document.getElementById('cycleBlockImagePos')?.value || 'left';
+  const imageSize = document.getElementById('cycleBlockImageSize')?.value || 'full';
+  const imageFit = document.getElementById('cycleBlockImageFit')?.value || 'contain';
+  const galleryLayout = document.getElementById('cycleGalleryLayout')?.value || 'single_full';
+  const galleryFit = document.getElementById('cycleGalleryFit')?.value || 'natural';
+  const galleryAlign = document.getElementById('cycleGalleryAlign')?.value || 'center';
+  const buttonText = (document.getElementById('cycleBlockBtnText')?.value || '').trim();
+  const buttonUrl = (document.getElementById('cycleBlockBtnUrl')?.value || '').trim();
+  const iconEmoji = document.getElementById('cycleCalloutEmoji')?.value || '💡';
+  const accentColor = document.getElementById('cycleCalloutColor')?.value || 'purple';
+
+  const slidesUrl = (document.getElementById('cycleSlidesUrlInput')?.value || '').trim();
+  const slidesBtnText = (document.getElementById('cycleSlidesBtnTextInput')?.value || '').trim();
+  const videoUrl = (document.getElementById('cycleVideoUrlInput')?.value || '').trim();
+  const videoBtnText = (document.getElementById('cycleVideoBtnTextInput')?.value || '').trim();
+
+  const meta = getAdminCycleOrPageMeta(selectedAdminCycleKey);
   const targetCycleKey = meta.key || selectedAdminCycleKey;
 
   if (!title) {
@@ -4118,7 +4223,7 @@ function updateCycleBlockLivePreview() {
       order: currentCycleBlocks.length + 1
     };
     cycleBlocks.push(newBlock);
-    showToast('✅ ¡Nuevo bloque agregado al ciclo!');
+    showToast('✅ ¡Nuevo bloque agregado!');
   }
 
   localStorage.setItem('psicologia_cycle_blocks', JSON.stringify(cycleBlocks));
