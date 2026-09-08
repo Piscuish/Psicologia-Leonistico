@@ -748,7 +748,7 @@ const DEFAULT_SUGGESTIONS = [
 // APP STATE & PERSISTENCE (HYBRID LOCAL + SERVER DATABASE)
 // ============================================================
 
-const APP_BUILD_VERSION = '2.9.10-20260908';
+const APP_BUILD_VERSION = '2.9.11-20260908';
 
 function initializeAppState() {
   const currentBuild = localStorage.getItem('psicologia_app_build_version');
@@ -5526,6 +5526,49 @@ function resetNavItemForm() {
   document.getElementById('navItemCancelBtn').style.display = 'none';
   handleNavTypeChange();
   if (window.lucide) lucide.createIcons();
+}
+
+
+// Handlers for slides file upload and block creation
+function handleCycleSlidesFileUpload(event) {
+  const file = event.target.files && event.target.files[0];
+  if (!file) return;
+  const statusEl = document.getElementById('cycleSlidesFileStatus');
+  if (statusEl) {
+    statusEl.textContent = 'Cargando ' + file.name + '...';
+    statusEl.style.display = 'block';
+  }
+  const reader = new FileReader();
+  reader.onload = function(e) {
+    currentEditingSlidesFileData = e.target.result;
+    currentEditingSlidesFileName = file.name;
+    if (statusEl) {
+      statusEl.textContent = '✓ Archivo cargado: ' + file.name;
+      statusEl.style.display = 'block';
+    }
+    updateCycleBlockLivePreview();
+  };
+  reader.readAsDataURL(file);
+}
+
+function removeCycleSlidesAttachedFile() {
+  currentEditingSlidesFileData = '';
+  currentEditingSlidesFileName = '';
+  const fileInput = document.getElementById('cycleSlidesFileInput');
+  if (fileInput) fileInput.value = '';
+  const statusEl = document.getElementById('cycleSlidesFileStatus');
+  if (statusEl) {
+    statusEl.textContent = '';
+    statusEl.style.display = 'none';
+  }
+  updateCycleBlockLivePreview();
+}
+
+function startNewCycleBlockCreation() {
+  resetCycleBlockForm();
+  if (typeof openBlockTypePickerModal === 'function') {
+    openBlockTypePickerModal();
+  }
 }
 
 // Global function bindings for inline HTML onclick attributes
