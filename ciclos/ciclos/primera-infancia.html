@@ -53,16 +53,24 @@
             <a href="/#quienes-somos" class="nav-dropdown-item">
               <i data-lucide="heart-handshake"></i> ¿Quiénes Somos?
             </a>
-            <a href="/#recursos-comunidad" class="nav-dropdown-item">
-              <i data-lucide="book-open"></i> Recursos & Enlaces
-            </a>
+            
           </div>
         </div>
+
+                <!-- Guía De Bienestar Emocional -->
+        <a href="/guia-bienestar" class="nav-btn">
+          <i data-lucide="heart-pulse"></i> Guía De Bienestar Emocional
+        </a>
 
         <!-- Encuentros Familiares -->
         <a href="/encuentros" class="nav-btn">
           <i data-lucide="users"></i> Encuentros Familiares
-          <span class="nav-badge">Talleres</span>
+          
+        </a>
+
+        <!-- Promoción y Prevención -->
+        <a href="/promocion-prevencion" class="nav-btn">
+          <i data-lucide="shield-check"></i> Promoción y Prevención
         </a>
 
         <!-- Ciclos Dropdown -->
@@ -109,11 +117,15 @@
       <a href="/#quienes-somos" class="mobile-nav-btn" style="padding-left: 28px; font-size: 0.9rem;">
         <i data-lucide="heart-handshake"></i> └ ¿Quiénes Somos?
       </a>
-      <a href="/#recursos-comunidad" class="mobile-nav-btn" style="padding-left: 28px; font-size: 0.9rem;">
-        <i data-lucide="book-open"></i> └ Recursos & Enlaces
+      
+            <a href="/guia-bienestar" class="mobile-nav-btn">
+        <i data-lucide="heart-pulse"></i> Guía De Bienestar Emocional
       </a>
       <a href="/encuentros" class="mobile-nav-btn">
         <i data-lucide="users"></i> Encuentros Familiares
+      </a>
+      <a href="/promocion-prevencion" class="mobile-nav-btn">
+        <i data-lucide="shield-check"></i> Promoción y Prevención
       </a>
       <div style="font-size: 0.75rem; font-weight: 700; color: #64748b; text-transform: uppercase; padding: 6px 12px 2px 12px; letter-spacing: 0.5px;">
         Ciclos Escolares
@@ -139,19 +151,51 @@
     </div>
   </header>
 
-  <!-- Clean Blank Content -->
-  <main style="min-height: 65vh; display: flex; align-items: center; justify-content: center; padding: 60px 20px; background-color: #f8fafc;">
-    <div class="container text-center" style="max-width: 700px;">
-      <span class="dropdown-pill pill-pink" style="font-size: 0.9rem; padding: 6px 16px; margin-bottom: 16px;">
-        GRADOS JARDÍN Y TRANSICIÓN
-      </span>
-      <h1 style="font-family: var(--font-heading); font-size: 3rem; color: #1e293b; margin: 12px 0; letter-spacing: 1px;">
-        PRIMERA INFANCIA
-      </h1>
-      <p style="color: #64748b; font-size: 1.1rem; line-height: 1.6; margin-bottom: 24px;">
-        Página en construcción para la información, actividades y contenidos de Primera Infancia.
-      </p>
-    </div>
+  <!-- Main Content -->
+  <main style="background-color: #f8fafc; padding-bottom: 60px;">
+    <!-- Cycle Hero -->
+    <section id="cycleHeroSection" class="cycle-hero-section has-bg-img" style="background-image: linear-gradient(135deg, rgba(15, 23, 42, 0.82) 0%, rgba(30, 27, 75, 0.86) 100%), url('/uploads/hero_primera_infancia_1788873112142_kh55a.jpg'); background-size: cover; background-position: center;">
+      <div class="container" style="max-width: 800px;">
+        <span id="cycleHeroBadge" class="dropdown-pill pill-pink" style="font-size: 0.85rem; padding: 6px 16px; margin-bottom: 12px; display: inline-block;">
+          GRADOS JARDÍN Y TRANSICIÓN
+        </span>
+        <h1 id="cycleHeroTitle" class="cycle-hero-title-text" style="font-family: var(--font-heading); font-size: 2.8rem; color: #1e293b; margin: 8px 0; letter-spacing: 0.5px;">
+          PRIMERA INFANCIA
+        </h1>
+        <p id="cycleHeroSubtitle" class="cycle-hero-subtitle-text" style="color: #64748b; font-size: 1.05rem; line-height: 1.5; margin: 0 auto; max-width: 620px;">
+          Espacio formativo y de acompañamiento socioemocional para las familias y estudiantes de los primeros años escolares.
+        </p>
+      </div>
+    </section>
+
+    <!-- Dynamic Cycle Content Blocks Grid -->
+    <section class="section-container" style="padding-top: 10px;">
+      <div class="container">
+        <div id="cycleBlocksContainer" class="cycle-blocks-grid">
+          <div class="cycle-block-card size-full type-photo_gallery card-border-pink">
+          <div class="title-align-center" style="text-align: center; width: 100%;">
+            <span class="cycle-block-badge pill-pink" style="margin-left: auto; margin-right: auto;">Jardín y transición</span>
+            <h3 class="cycle-block-title" style="text-align: center;">Bienvenidos</h3>
+            <div class="cycle-block-subtitle" style="text-align: center;">Caminemos juntos en la construcción de entornos seguros, amorosos y respetuosos para nuestros niños y niñas.</div>
+            <div class="cycle-block-text" style="margin-bottom: 16px; text-align: center; white-space: pre-wrap;">En este espacio encontrarás herramientas, estrategias y recursos para acompañar el desarrollo integral de la primera infancia desde el área de Psicoorientación.
+
+Nuestro propósito es brindar orientaciones prácticas que permitan a familias, docentes y comunidad educativa acompañar a los niños y niñas en sus procesos emocionales, sociales, cognitivos y educativos, fortaleciendo su bienestar y desarrollo.</div>
+          </div>
+          <div class="cycle-photo-gallery-grid layout-cols_2 fit-wide align-left">
+            
+              <div class="gallery-photo-item">
+                <img src="/uploads/gallery_1788358207022_0_1788803346192_0y1r1.jpg" alt="Fotografía 1" loading="lazy">
+              </div>
+            
+              <div class="gallery-photo-item">
+                <img src="/uploads/gallery_1788358207022_1_1788803346195_stbad.jpg" alt="Fotografía 2" loading="lazy">
+              </div>
+            
+          </div>
+        </div>
+        </div>
+      </div>
+    </section>
   </main>
 
   <!-- Footer -->
@@ -163,6 +207,8 @@
     </div>
   </footer>
 
-  <script src="/app.js?v=2.9.7" defer></script>
+  <script src="/app.js?v=2.9.8" defer></script>
 </body>
 </html>
+
+

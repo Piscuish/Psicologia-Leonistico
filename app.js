@@ -596,7 +596,7 @@ const DEFAULT_SUGGESTIONS = [
 // APP STATE & PERSISTENCE (HYBRID LOCAL + SERVER DATABASE)
 // ============================================================
 
-const APP_BUILD_VERSION = '2.9.7-20260908b';
+const APP_BUILD_VERSION = '2.9.8-20260908';
 
 function initializeAppState() {
   const currentBuild = localStorage.getItem('psicologia_app_build_version');
@@ -685,12 +685,16 @@ async function loadServerData() {
     } catch (_) {}
 
     if (!data) {
-      try {
-        const staticRes = await fetch('/data/db.json?v=' + Date.now());
-        if (staticRes.ok) {
-          data = await staticRes.json();
-        }
-      } catch (_) {}
+      const paths = ['./data/db.json', '../data/db.json', '/data/db.json', 'data/db.json'];
+      for (const candidate of paths) {
+        try {
+          const staticRes = await fetch(candidate + '?v=' + Date.now());
+          if (staticRes.ok) {
+            data = await staticRes.json();
+            break;
+          }
+        } catch (_) {}
+      }
     }
 
     if (data) {
