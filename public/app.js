@@ -13,123 +13,136 @@ const DEFAULT_SITE_IMAGES = {
   "welcome": "https://lh3.googleusercontent.com/sitesv/AG8ngQWOyxLk67vCI15BlZoCjOwd8xUiVdKQzLu-M2WJcEPpTf9i3QDpCzc1-5m6X-sKqpvyWPGZBwQ-rH8UhgQL7YTxjIlxDFe_bipo6xrnJX-R5AzoEojbfXeILt4DV4eHhLkoRtPmt0qDN9i4vhtAbDolgStj2fPdU9XVS2h5y405j0qv0gtNpOby2sONDNOeFMCsNGdXiYbURk_wJfVERZBegFn7tlsmLq3pjw8f=w1280",
   "about": "https://lh3.googleusercontent.com/sitesv/AG8ngQXTnHzijkLW5x4q0oxIMOi07YzG-IBG1OfPXeoVkIVB8fjkFXyd17Exs0GpjRWuO_ve89ISCOVUerGrrxM5Btnf5tup2wv79zMnKOoluKmpvA0bbZU3sVSnjk80O_PqvnpU7L_xlejXLWd0rR4xWkxGQj7g0dTAeH3vz104NNIAC_EwotDlnekiU7aMZOxbjrQAZ56qxhieVbVysrZ75FKa5z5OY7hICFCfX1Ptwyo=w1280",
   "favicon": "https://lh3.googleusercontent.com/sitesv/AG8ngQWMa1kc6jVbY3mSnIQYpVjxxkhTMgHuRLzpm-o3lAMgJtWUIgekXnXlWjgQDeRwQSCOLH_U5l8ztQCfaCv7r3JjyQ0JCQn2-3saSzHRhDM5duB-idQtoKG9ZYz6BUZLMM3SJfxvtYVinOuckRqSmPIT5Am07h5B7Luapy3c76dc1lYmoUBJGB0UCr38E0u29coTDmwWwuiFH6RIlpW448k",
-  "heroBg": "https://lh3.googleusercontent.com/sitesv/AG8ngQXf5KMbSedK98LmnR8hVcZ1tQNv9JpPIYgJ_P1-N6Q5iSqACGKpSGodX_1rSgcQRceZEaHYmEwNBCUykyD4Vt8zF3dKk9QwMAvf5jqK5ubLKRI0lMQqm-mTeqlLq8tmwVFvMbK1VVJuALhgmnXCUplp-P89XqCfB8P3BbzoBi6GI6YAXc4_nlBfKojb=w16383",
+  "heroBg": "/uploads/site_heroBg_1788808026106_myuxl.png",
   "welcomeImg": "https://lh3.googleusercontent.com/sitesv/AG8ngQWOyxLk67vCI15BlZoCjOwd8xUiVdKQzLu-M2WJcEPpTf9i3QDpCzc1-5m6X-sKqpvyWPGZBwQ-rH8UhgQL7YTxjIlxDFe_bipo6xrnJX-R5AzoEojbfXeILt4DV4eHhLkoRtPmt0qDN9i4vhtAbDolgStj2fPdU9XVS2h5y405j0qv0gtNpOby2sONDNOeFMCsNGdXiYbURk_wJfVERZBegFn7tlsmLq3pjw8f=w1280",
   "aboutImg": "https://lh3.googleusercontent.com/sitesv/AG8ngQXTnHzijkLW5x4q0oxIMOi07YzG-IBG1OfPXeoVkIVB8fjkFXyd17Exs0GpjRWuO_ve89ISCOVUerGrrxM5Btnf5tup2wv79zMnKOoluKmpvA0bbZU3sVSnjk80O_PqvnpU7L_xlejXLWd0rR4xWkxGQj7g0dTAeH3vz104NNIAC_EwotDlnekiU7aMZOxbjrQAZ56qxhieVbVysrZ75FKa5z5OY7hICFCfX1Ptwyo=w1280"
 };
 
 const DEFAULT_PSYCHOLOGISTS = [
   {
-    id: 0,
-    name: "Nancy Hurtado Viveros",
-    role: "Psicoorientadora Institucional",
-    badge: "Grupos A",
-    badgeClass: "",
-    email: "nhurtadov@leonisticolamerced.edu.co",
-    emoji: "👩‍🏫",
-    photoZoom: 1,
-    photoPosX: 50,
-    photoPosY: 20,
-    bgClass: "avatar-female-1",
-    desc: "Acompañamiento especializado a los grados y grupos A. Enfoque en desarrollo formativo, orientación vocacional y bienestar estudiantil."
+    "id": 1,
+    "name": "Luisa Fernanda Avenia Medina",
+    "badge": "",
+    "badgeClass": "",
+    "bgClass": "bg-blue",
+    "emoji": "/uploads/orientadora_1_hd.png",
+    "role": "",
+    "desc": "Acompañamiento integral a los estudiantes de los grupos A y Jardín, realizando seguimiento a sus procesos individuales y articulando las acciones necesarias con las familias, docentes y profesionales externos, de acuerdo con las necesidades identificadas.",
+    "email": "lavenia@leonisticolamerced.edu.co"
   },
   {
-    id: 1,
-    name: "María del Mar Echeverry López",
-    role: "Psicoorientadora Institucional",
-    badge: "Grupos B",
-    badgeClass: "badge-blue",
-    email: "mmecheverry@leonistico.com",
-    emoji: "👩‍⚕️",
-    photoZoom: 1,
-    photoPosX: 50,
-    photoPosY: 20,
-    bgClass: "avatar-female-2",
-    desc: "Acompañamiento integral a los grupos B. Enfoque en fortalecimiento socioemocional, proyectos de vida y sana convivencia."
+    "id": 2,
+    "name": "Maria del Mar Echeverry",
+    "badge": "",
+    "badgeClass": "",
+    "bgClass": "bg-pink",
+    "emoji": "/uploads/orientadora_2_1788807938080_do5kp.png",
+    "role": "",
+    "desc": "Acompañamiento integral a los estudiantes de los grupos B y C, realizando seguimiento a sus procesos individuales y articulando las acciones necesarias con las familias, docentes y profesionales externos, de acuerdo con las necesidades identificadas.",
+    "email": "mmecheverry@leonisticolamerced.edu.co",
+    "photoZoom": 1.05,
+    "photoPosY": 100,
+    "photoPosX": 0
   }
 ];
 
 // Official Calendar 2026-2027 from institutional image
 const DEFAULT_CALENDAR_WORKSHOPS = [
   {
-    id: 1,
-    month: "SEPTIEMBRE",
-    monthPillClass: "pill-pink",
-    borderClass: "card-border-pink",
-    date: "25 DE SEPTIEMBRE",
-    grades: "J° Y T°",
-    title: "ACOMPAÑO A MI HIJO A DESCUBRIR QUIEN ES",
-    description: "Espacio formativo para familias de Jardín y Transición: pautas para el reconocimiento de la identidad infantil, desarrollo del autoconcepto, estímulo de la curiosidad y acompañamiento afectivo en los primeros años escolares."
+    "id": 1,
+    "month": "SEPTIEMBRE",
+    "monthPillClass": "pill-pink",
+    "borderClass": "card-border-pink",
+    "date": "25 DE SEPTIEMBRE",
+    "grades": "J° Y T°",
+    "title": "ACOMPAÑO A MI HIJO A DESCUBRIR QUIEN ES",
+    "description": "Espacio formativo para familias de Jardín y Transición: pautas para el reconocimiento de la identidad infantil, desarrollo del autoconcepto, estímulo de la curiosidad y acompañamiento afectivo en los primeros años escolares.",
+    "slidesUrl": "",
+    "slidesName": ""
   },
   {
-    id: 2,
-    month: "OCTUBRE",
-    monthPillClass: "pill-teal",
-    borderClass: "card-border-teal",
-    date: "23 DE OCTUBRE",
-    grades: "4°",
-    title: "FORTALECIENDO LA AUTOESTIMA Y EL AUTOCONCEPTO",
-    description: "Estrategias para que los estudiantes de 4° grado desarrollen seguridad emocional, valoración positiva de sus capacidades, tolerancia a la frustración y confianza en su entorno familiar."
+    "id": 2,
+    "month": "OCTUBRE",
+    "monthPillClass": "pill-teal",
+    "borderClass": "card-border-teal",
+    "date": "23 DE OCTUBRE",
+    "grades": "4°",
+    "title": "FORTALECIENDO LA AUTOESTIMA Y EL AUTOCONCEPTO",
+    "description": "Estrategias para que los estudiantes de 4° grado desarrollen seguridad emocional, valoración positiva de sus capacidades, tolerancia a la frustración y confianza en su entorno familiar.",
+    "slidesUrl": "",
+    "slidesName": ""
   },
   {
-    id: 3,
-    month: "OCTUBRE",
-    monthPillClass: "pill-teal",
-    borderClass: "card-border-teal",
-    date: "27 DE OCTUBRE",
-    grades: "1°-2°",
-    title: "ACOMPAÑO A MI HIJO A CRECER JUNTO A LOS DEMÁS",
-    description: "Taller enfocado en habilidades sociales para 1° y 2°: empatía, convivencia sana, resolución pacífica de desacuerdos cotidianos y fortalecimiento de lazos de amistad en el aula."
+    "id": 3,
+    "month": "OCTUBRE",
+    "monthPillClass": "pill-teal",
+    "borderClass": "card-border-teal",
+    "date": "27 DE OCTUBRE",
+    "grades": "1°-2°",
+    "title": "ACOMPAÑO A MI HIJO A CRECER JUNTO A LOS DEMÁS",
+    "description": "Taller enfocado en habilidades sociales para 1° y 2°: empatía, convivencia sana, resolución pacífica de desacuerdos cotidianos y fortalecimiento de lazos de amistad en el aula.",
+    "slidesUrl": "",
+    "slidesName": ""
   },
   {
-    id: 4,
-    month: "NOVIEMBRE",
-    monthPillClass: "pill-purple",
-    borderClass: "card-border-purple",
-    date: "13 DE NOVIEMBRE",
-    grades: "3°",
-    title: "LO QUE HAGO TAMBIÉN EDUCA",
-    description: "El poder del ejemplo y el modelamiento en casa: cómo las acciones, hábitos de comunicación y respuestas emocionales de los padres educan y guían el comportamiento de los niños de 3° grado."
+    "id": 4,
+    "month": "NOVIEMBRE",
+    "monthPillClass": "pill-purple",
+    "borderClass": "card-border-purple",
+    "date": "13 DE NOVIEMBRE",
+    "grades": "3°",
+    "title": "LO QUE HAGO TAMBIÉN EDUCA",
+    "description": "El poder del ejemplo y el modelamiento en casa: cómo las acciones, hábitos de comunicación y respuestas emocionales de los padres educan y guían el comportamiento de los niños de 3° grado.",
+    "slidesUrl": "",
+    "slidesName": ""
   },
   {
-    id: 5,
-    month: "NOVIEMBRE",
-    monthPillClass: "pill-purple",
-    borderClass: "card-border-purple",
-    date: "18 DE NOVIEMBRE",
-    grades: "5° Y 6°",
-    title: "CUANDO CREEMOS EN ELLOS, ELLOS APRENDEN A CREER EN SÍ MISMOS",
-    description: "Acompañamiento en la transición de primaria a secundaria: fortalecimiento de la autonomía, seguridad personal, adaptación a nuevos retos académicos y gestión del cambio en la preadolescencia."
+    "id": 5,
+    "month": "NOVIEMBRE",
+    "monthPillClass": "pill-purple",
+    "borderClass": "card-border-purple",
+    "date": "18 DE NOVIEMBRE",
+    "grades": "5° Y 6°",
+    "title": "CUANDO CREEMOS EN ELLOS, ELLOS APRENDEN A CREER EN SÍ MISMOS",
+    "description": "Acompañamiento en la transición de primaria a secundaria: fortalecimiento de la autonomía, seguridad personal, adaptación a nuevos retos académicos y gestión del cambio en la preadolescencia.",
+    "slidesUrl": "",
+    "slidesName": ""
   },
   {
-    id: 6,
-    month: "ENERO",
-    monthPillClass: "pill-orange",
-    borderClass: "card-border-orange",
-    date: "29 DE ENERO",
-    grades: "8° Y 7°",
-    title: "CUANDO HABLAR TAMBIÉN ES CUIDAR",
-    description: "Comunicación asertiva con adolescentes de 7° y 8°: escucha activa sin juzgar, apertura de canales de confianza en el hogar y prevención ante situaciones de riesgo y presión social."
+    "id": 6,
+    "month": "ENERO",
+    "monthPillClass": "pill-orange",
+    "borderClass": "card-border-orange",
+    "date": "29 DE ENERO",
+    "grades": "8° Y 7°",
+    "title": "CUANDO HABLAR TAMBIÉN ES CUIDAR",
+    "description": "Comunicación asertiva con adolescentes de 7° y 8°: escucha activa sin juzgar, apertura de canales de confianza en el hogar y prevención ante situaciones de riesgo y presión social.",
+    "slidesUrl": "https://docs.google.com/presentation/d/15LPq2WWVMnf3CMEzvoSotdZFFwVtAnYU/edit?usp=sharing&ouid=101001022292947763200&rtpof=true&sd=true",
+    "slidesName": "Google Slides"
   },
   {
-    id: 7,
-    month: "ENERO",
-    monthPillClass: "pill-orange",
-    borderClass: "card-border-orange",
-    date: "19 DE ENERO",
-    grades: "9° Y 10°",
-    title: "LÍMITES QUE CUIDAN, PALABRAS QUE CONECTAN",
-    description: "Pautas de crianza positiva en la adolescencia media: establecimiento de acuerdos y límites claros con respeto y afecto, equilibrio en el uso de tecnología y fortalecimiento de vínculos familiares."
+    "id": 7,
+    "month": "ENERO",
+    "monthPillClass": "pill-orange",
+    "borderClass": "card-border-orange",
+    "date": "30 DE ENERO",
+    "grades": "9°",
+    "title": "VINCULO CONFIANZA Y PREVENCIÓN",
+    "description": "Prevención en el hogar para 9° grado: detección temprana de factores de riesgo psicoactivos y emocionales, redes de apoyo familiar y construcción de límites claros con afecto.",
+    "slidesUrl": "",
+    "slidesName": ""
   },
   {
-    id: 8,
-    month: "FEBRERO",
-    monthPillClass: "pill-green",
-    borderClass: "card-border-green",
-    date: "11 DE FEBRERO",
-    grades: "11°",
-    title: "CERRAR ETAPAS, ABRIR CAMINOS",
-    description: "Acompañamiento a los jóvenes de grado 11° y sus familias en el cierre del ciclo escolar: orientación vocacional, manejo de la incertidumbre y construcción de su proyecto de vida hacia el futuro."
+    "id": 8,
+    "month": "FEBRERO",
+    "monthPillClass": "pill-blue",
+    "borderClass": "card-border-blue",
+    "date": "12 DE FEBRERO",
+    "grades": "10° Y 11°",
+    "title": "CONSTRUYENDO MI PROYECTO DE VIDA",
+    "description": "Orientación vocacional y toma de decisiones para los grados 10° y 11°: clarificación de metas profesionales, manejo de la ansiedad vocacional y apoyo de los padres en la etapa preuniversitaria.",
+    "slidesUrl": "",
+    "slidesName": ""
   }
 ];
 
@@ -332,16 +345,77 @@ const DEFAULT_CYCLE_BLOCKS = [
     ],
     "photosList": [
       {
-        "url": "/uploads/gallery_1788358207022_0_1788739866827.jpg",
+        "url": "/uploads/gallery_1788358207022_0_1788803346192_0y1r1.jpg",
+        "caption": ""
+      },
+      {
+        "url": "/uploads/gallery_1788358207022_1_1788803346195_stbad.jpg",
         "caption": ""
       }
     ],
     "order": 1,
-    "galleryLayout": "cols_3",
-    "galleryFit": "square",
+    "galleryLayout": "cols_2",
+    "galleryFit": "wide",
     "galleryAlign": "left",
     "imageSize": "full",
     "imageFit": "contain"
+  },
+  {
+    "id": 1788808426228,
+    "cycleId": "promocion-prevencion",
+    "type": "video_embed",
+    "size": "full",
+    "titleAlign": "left",
+    "title": "Septiembre mes de la prevención del suicidio",
+    "subtitle": "No estás solo. Hablar también es una forma de cuidarnos.",
+    "badgeText": "PROMOCIÓN Y PREVENCIÓN",
+    "text": "Este mes nos invita a recordar que escuchar, acompañar y hablar puede marcar la diferencia. Cuidar nuestra salud mental también significa estar atentos a quienes nos rodean, brindar apoyo y buscar ayuda cuando sea necesario.",
+    "imageUrl": "",
+    "imagePosition": "banner",
+    "imageSize": "full",
+    "imageFit": "contain",
+    "galleryLayout": "single_full",
+    "galleryFit": "natural",
+    "galleryAlign": "center",
+    "buttonText": "",
+    "buttonUrl": "",
+    "iconEmoji": "💡",
+    "accentColor": "purple",
+    "slidesUrl": "",
+    "slidesBtnText": "",
+    "videoUrl": "https://drive.google.com/file/d/1ztZW9ICNAdempPw1HEqRLZifY7kM7ytG/view?usp=sharing",
+    "videoBtnText": "",
+    "slidesFileData": "",
+    "slidesFileName": "",
+    "itemsList": [
+      {
+        "icon": "💖",
+        "title": "Afecto y Diálogo",
+        "text": "Acompañamiento cercano y validación emocional constante."
+      },
+      {
+        "icon": "⏰",
+        "title": "Rutina y Horarios",
+        "text": "Fijar horas para estudiar, descansar y compartir en familia."
+      }
+    ],
+    "resourcesList": [
+      {
+        "title": "Guía de Orientación Familiar (PDF)",
+        "desc": "Material imprimible de apoyo para el hogar.",
+        "fileUrl": "",
+        "fileName": "",
+        "fileSize": "",
+        "icon": "file-text"
+      }
+    ],
+    "photosList": [
+      {
+        "url": "https://images.unsplash.com/photo-1577896851231-70ef18881754?auto=format&fit=crop&w=600&q=80",
+        "caption": ""
+      }
+    ],
+    "order": 1
   }
 ];
 
@@ -522,90 +596,64 @@ const DEFAULT_SUGGESTIONS = [
 // APP STATE & PERSISTENCE (HYBRID LOCAL + SERVER DATABASE)
 // ============================================================
 
-const APP_BUILD_VERSION = '2.9.6-20260908';
+const APP_BUILD_VERSION = '2.9.7-20260908b';
 
 function initializeAppState() {
   const currentBuild = localStorage.getItem('psicologia_app_build_version');
   let nav = null;
   let cycles = null;
   let pages = null;
+  let images = null;
+  let psychs = null;
+  let blocks = null;
+  let workshops = null;
 
-  try { nav = JSON.parse(localStorage.getItem('psicologia_nav_items')); } catch (_) {}
-  try { cycles = JSON.parse(localStorage.getItem('psicologia_cycles_list')); } catch (_) {}
-  try { pages = JSON.parse(localStorage.getItem('psicologia_custom_pages')); } catch (_) {}
-
-  // Si no hay datos guardados o la versión de la aplicación se actualizó en el código
-  if (!Array.isArray(nav) || currentBuild !== APP_BUILD_VERSION) {
-    if (!Array.isArray(nav) || nav.length === 0) {
-      nav = DEFAULT_NAV_ITEMS;
-    } else {
-      DEFAULT_NAV_ITEMS.forEach(defItem => {
-        if (!nav.some(n => n.id === defItem.id || n.url === defItem.url)) {
-          nav.push(defItem);
-        }
-      });
-      nav.sort((a, b) => (a.order || 0) - (b.order || 0));
-    }
-    localStorage.setItem('psicologia_nav_items', JSON.stringify(nav));
-  }
-
-  if (!Array.isArray(cycles) || currentBuild !== APP_BUILD_VERSION) {
-    if (!Array.isArray(cycles) || cycles.length === 0) {
-      cycles = DEFAULT_CYCLES_LIST;
-    } else {
-      // Asegurar que las imágenes de fondo (heroBgImage) y atributos actualizados se sincronicen
-      cycles = cycles.map(cycle => {
-        const def = DEFAULT_CYCLES_LIST.find(d => d.key === cycle.key || d.slug === cycle.slug);
-        if (def) {
-          const cleanIcon = (cycle.icon && cycle.icon !== '🌸') ? cycle.icon : (def.icon || '');
-          return {
-            ...cycle,
-            heroBgImage: cycle.heroBgImage || def.heroBgImage || '',
-            pillClass: cycle.pillClass || def.pillClass,
-            borderClass: cycle.borderClass || def.borderClass,
-            icon: cleanIcon
-          };
-        }
-        return cycle;
-      });
-      DEFAULT_CYCLES_LIST.forEach(defCycle => {
-        if (!cycles.some(c => c.key === defCycle.key || c.slug === defCycle.slug)) {
-          cycles.push(defCycle);
-        }
-      });
-    }
-    localStorage.setItem('psicologia_cycles_list', JSON.stringify(cycles));
-  }
-
-  if (!Array.isArray(pages)) {
+  if (currentBuild !== APP_BUILD_VERSION) {
+    nav = DEFAULT_NAV_ITEMS;
+    cycles = DEFAULT_CYCLES_LIST;
     pages = DEFAULT_CUSTOM_PAGES;
+    images = DEFAULT_SITE_IMAGES;
+    psychs = DEFAULT_PSYCHOLOGISTS;
+    blocks = DEFAULT_CYCLE_BLOCKS;
+    workshops = DEFAULT_CALENDAR_WORKSHOPS;
+
+    localStorage.setItem('psicologia_nav_items', JSON.stringify(nav));
+    localStorage.setItem('psicologia_cycles_list', JSON.stringify(cycles));
     localStorage.setItem('psicologia_custom_pages', JSON.stringify(pages));
+    localStorage.setItem('psicologia_site_images', JSON.stringify(images));
+    localStorage.setItem('psicologia_psychologists', JSON.stringify(psychs));
+    localStorage.setItem('psicologia_cycle_blocks', JSON.stringify(blocks));
+    localStorage.setItem('psicologia_calendar_workshops', JSON.stringify(workshops));
+    localStorage.setItem('psicologia_app_build_version', APP_BUILD_VERSION);
+  } else {
+    try { nav = JSON.parse(localStorage.getItem('psicologia_nav_items')); } catch (_) {}
+    try { cycles = JSON.parse(localStorage.getItem('psicologia_cycles_list')); } catch (_) {}
+    try { pages = JSON.parse(localStorage.getItem('psicologia_custom_pages')); } catch (_) {}
+    try { images = JSON.parse(localStorage.getItem('psicologia_site_images')); } catch (_) {}
+    try { psychs = JSON.parse(localStorage.getItem('psicologia_psychologists')); } catch (_) {}
+    try { blocks = JSON.parse(localStorage.getItem('psicologia_cycle_blocks')); } catch (_) {}
+    try { workshops = JSON.parse(localStorage.getItem('psicologia_calendar_workshops')); } catch (_) {}
+
+    if (!Array.isArray(nav) || nav.length === 0) nav = DEFAULT_NAV_ITEMS;
+    if (!Array.isArray(cycles) || cycles.length === 0) cycles = DEFAULT_CYCLES_LIST;
+    if (!Array.isArray(pages)) pages = DEFAULT_CUSTOM_PAGES;
+    if (!images || typeof images !== 'object') images = DEFAULT_SITE_IMAGES;
+    if (!Array.isArray(psychs) || psychs.length === 0) psychs = DEFAULT_PSYCHOLOGISTS;
+    if (!Array.isArray(blocks) || blocks.length === 0) blocks = DEFAULT_CYCLE_BLOCKS;
+    if (!Array.isArray(workshops) || workshops.length === 0) workshops = DEFAULT_CALENDAR_WORKSHOPS;
   }
 
-  localStorage.setItem('psicologia_app_build_version', APP_BUILD_VERSION);
-  return { nav, cycles, pages };
+  return { nav, cycles, pages, images, psychs, blocks, workshops };
 }
 
-const { nav: initialNav, cycles: initialCycles, pages: initialPages } = initializeAppState();
+const { nav: initialNav, cycles: initialCycles, pages: initialPages, images: initialImages, psychs: initialPsychs, blocks: initialBlocks, workshops: initialWorkshops } = initializeAppState();
 let navItems = initialNav;
 let cyclesList = initialCycles;
 let customPages = initialPages;
-
-let siteImages = JSON.parse(localStorage.getItem('psicologia_site_images')) || DEFAULT_SITE_IMAGES;
-let adminPassword = localStorage.getItem('psicologia_admin_password') || '123';
-let adminSlug = localStorage.getItem('psicologia_admin_slug') || 'admin451200';
-let psychologists = JSON.parse(localStorage.getItem('psicologia_psychologists')) || DEFAULT_PSYCHOLOGISTS;
-if (Array.isArray(psychologists)) {
-  psychologists = psychologists.map(p => ({
-    ...p,
-    badge: '',
-    badgeClass: '',
-    role: ''
-  }));
-  localStorage.setItem('psicologia_psychologists', JSON.stringify(psychologists));
-}
-let calendarWorkshops = JSON.parse(localStorage.getItem('psicologia_calendar_workshops')) || DEFAULT_CALENDAR_WORKSHOPS;
-let cycleBlocks = JSON.parse(localStorage.getItem('psicologia_cycle_blocks')) || DEFAULT_CYCLE_BLOCKS;
+let siteImages = initialImages;
+let psychologists = initialPsychs;
+let calendarWorkshops = initialWorkshops;
+let cycleBlocks = initialBlocks;
 let suggestions = JSON.parse(localStorage.getItem('psicologia_suggestions')) || DEFAULT_SUGGESTIONS;
 let analytics = JSON.parse(localStorage.getItem('psicologia_analytics')) || DEFAULT_ANALYTICS;
 let isAdminLoggedIn = sessionStorage.getItem('psicologia_admin_logged') === 'true';
@@ -619,9 +667,9 @@ const TAB_VISIT_COOLDOWN_MS = 15 * 60 * 1000;
 
 async function loadServerData() {
   try {
-    // Optimización Vercel: Comprobar versión ligera (~40 bytes)
-    // Si la versión local en localStorage coincide con la del servidor, no gastamos datos descargando la base de datos completa.
     const localVersion = localStorage.getItem('psicologia_db_version');
+    let data = null;
+
     try {
       const vRes = await fetch('/api/version');
       if (vRes.ok) {
@@ -630,11 +678,22 @@ async function loadServerData() {
           return;
         }
       }
+      const res = await fetch('/api/data');
+      if (res.ok) {
+        data = await res.json();
+      }
     } catch (_) {}
 
-    const res = await fetch('/api/data');
-    if (res.ok) {
-      const data = await res.json();
+    if (!data) {
+      try {
+        const staticRes = await fetch('/data/db.json?v=' + Date.now());
+        if (staticRes.ok) {
+          data = await staticRes.json();
+        }
+      } catch (_) {}
+    }
+
+    if (data) {
       if (data.version) {
         localStorage.setItem('psicologia_db_version', data.version);
       }
@@ -658,11 +717,11 @@ async function loadServerData() {
         siteImages = { ...DEFAULT_SITE_IMAGES, ...data.siteImages };
         localStorage.setItem('psicologia_site_images', JSON.stringify(siteImages));
       }
-      if (data.psychologists && Array.isArray(data.psychologists)) {
+      if (data.psychologists && Array.isArray(data.psychologists) && data.psychologists.length > 0) {
         psychologists = data.psychologists;
         localStorage.setItem('psicologia_psychologists', JSON.stringify(psychologists));
       }
-      if (data.cycleBlocks && Array.isArray(data.cycleBlocks)) {
+      if (data.cycleBlocks && Array.isArray(data.cycleBlocks) && data.cycleBlocks.length > 0) {
         cycleBlocks = data.cycleBlocks;
         localStorage.setItem('psicologia_cycle_blocks', JSON.stringify(cycleBlocks));
       }

@@ -538,16 +538,16 @@
   ],
   "suggestions": [],
   "analytics": {
-    "totalVisits": 114,
+    "totalVisits": 118,
     "uniqueSessions": 0,
-    "lastVisitDate": "8/9/2026 08:11 a. m.",
+    "lastVisitDate": "8/9/2026 10:57 a. m.",
     "tabs": {
-      "inicio": 46,
-      "encuentros": 15,
-      "ciclos": 53
+      "inicio": 47,
+      "encuentros": 16,
+      "ciclos": 55
     },
     "cycles": {
-      "primera_infancia": 27,
+      "primera_infancia": 29,
       "infantil": 7,
       "basico": 7,
       "fundamental": 1,
@@ -557,6 +557,34 @@
       "cycle_1788358007488": 2
     },
     "logs": [
+      {
+        "id": 1788883077756,
+        "date": "8/9/2026 10:57 a. m.",
+        "section": "Ciclos: Primera Infancia (JARDÍN Y TRANSICIÓN)",
+        "action": "Visita a la página de Primera Infancia (JARDÍN Y TRANSICIÓN)",
+        "device": "Escritorio"
+      },
+      {
+        "id": 1788883034944,
+        "date": "8/9/2026 10:57 a. m.",
+        "section": "Encuentros Familiares",
+        "action": "Consulta de Calendario de Encuentros",
+        "device": "Escritorio"
+      },
+      {
+        "id": 1788882872374,
+        "date": "8/9/2026 10:54 a. m.",
+        "section": "Inicio / Portada",
+        "action": "Ingreso a la página de Inicio",
+        "device": "Escritorio"
+      },
+      {
+        "id": 1788881897833,
+        "date": "8/9/2026 10:38 a. m.",
+        "section": "Ciclos: Primera Infancia (JARDÍN Y TRANSICIÓN)",
+        "action": "Visita a la página de Primera Infancia (JARDÍN Y TRANSICIÓN)",
+        "device": "Escritorio"
+      },
       {
         "id": 1788873116383,
         "date": "8/9/2026 08:11 a. m.",
@@ -878,38 +906,10 @@
         "section": "Ciclos: Primera Infancia (JARDÍN Y TRANSICIÓN)",
         "action": "Visita a la página de Primera Infancia (JARDÍN Y TRANSICIÓN)",
         "device": "Escritorio"
-      },
-      {
-        "id": 1788462009867,
-        "date": "3/9/2026 02:00 p. m.",
-        "section": "Inicio / Portada",
-        "action": "Ingreso a la página de Inicio",
-        "device": "Escritorio"
-      },
-      {
-        "id": 1788461646380,
-        "date": "3/9/2026 01:54 p. m.",
-        "section": "Ciclos: Primera Infancia (JARDÍN Y TRANSICIÓN)",
-        "action": "Visita a la página de Primera Infancia (JARDÍN Y TRANSICIÓN)",
-        "device": "Escritorio"
-      },
-      {
-        "id": 1788461623244,
-        "date": "3/9/2026 01:53 p. m.",
-        "section": "Encuentros Familiares",
-        "action": "Consulta de Calendario de Encuentros",
-        "device": "Escritorio"
-      },
-      {
-        "id": 1788461506272,
-        "date": "3/9/2026 01:51 p. m.",
-        "section": "Inicio / Portada",
-        "action": "Ingreso a la página de Inicio",
-        "device": "Escritorio"
       }
     ]
   },
   "adminPassword": "123",
   "adminSlug": "2610",
-  "version": "1788873116383"
+  "version": "1788883077756"
 }
