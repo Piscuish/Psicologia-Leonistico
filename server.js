@@ -199,10 +199,13 @@ const DEFAULT_PSYCHOLOGISTS = [
     "badge": "",
     "badgeClass": "",
     "bgClass": "bg-blue",
-    "emoji": "/uploads/orientadora_1_hd.png",
+    "emoji": "/uploads/orientadora_1_1788885666601_hfdae.png",
     "role": "",
     "desc": "Acompañamiento integral a los estudiantes de los grupos A y Jardín, realizando seguimiento a sus procesos individuales y articulando las acciones necesarias con las familias, docentes y profesionales externos, de acuerdo con las necesidades identificadas.",
-    "email": "lavenia@leonisticolamerced.edu.co"
+    "email": "lavenia@leonisticolamerced.edu.co",
+    "photoZoom": 1,
+    "photoPosY": 20,
+    "photoPosX": 50
   },
   {
     "id": 2,

@@ -15,7 +15,7 @@ const DEFAULT_SITE_IMAGES = {
   "favicon": "https://lh3.googleusercontent.com/sitesv/AG8ngQWMa1kc6jVbY3mSnIQYpVjxxkhTMgHuRLzpm-o3lAMgJtWUIgekXnXlWjgQDeRwQSCOLH_U5l8ztQCfaCv7r3JjyQ0JCQn2-3saSzHRhDM5duB-idQtoKG9ZYz6BUZLMM3SJfxvtYVinOuckRqSmPIT5Am07h5B7Luapy3c76dc1lYmoUBJGB0UCr38E0u29coTDmwWwuiFH6RIlpW448k",
   "heroBg": "/uploads/site_heroBg_1788808026106_myuxl.png",
   "welcomeImg": "https://lh3.googleusercontent.com/sitesv/AG8ngQWOyxLk67vCI15BlZoCjOwd8xUiVdKQzLu-M2WJcEPpTf9i3QDpCzc1-5m6X-sKqpvyWPGZBwQ-rH8UhgQL7YTxjIlxDFe_bipo6xrnJX-R5AzoEojbfXeILt4DV4eHhLkoRtPmt0qDN9i4vhtAbDolgStj2fPdU9XVS2h5y405j0qv0gtNpOby2sONDNOeFMCsNGdXiYbURk_wJfVERZBegFn7tlsmLq3pjw8f=w1280",
-  "aboutImg": "https://lh3.googleusercontent.com/sitesv/AG8ngQXTnHzijkLW5x4q0oxIMOi07YzG-IBG1OfPXeoVkIVB8fjkFXyd17Exs0GpjRWuO_ve89ISCOVUerGrrxM5Btnf5tup2wv79zMnKOoluKmpvA0bbZU3sVSnjk80O_PqvnpU7L_xlejXLWd0rR4xWkxGQj7g0dTAeH3vz104NNIAC_EwotDlnekiU7aMZOxbjrQAZ56qxhieVbVysrZ75FKa5z5OY7hICFCfX1Ptwyo=w1280"
+  "aboutImg": "/uploads/site_aboutImg_1788885696256_njld0.jpg"
 };
 
 const DEFAULT_PSYCHOLOGISTS = [
@@ -25,10 +25,13 @@ const DEFAULT_PSYCHOLOGISTS = [
     "badge": "",
     "badgeClass": "",
     "bgClass": "bg-blue",
-    "emoji": "/uploads/orientadora_1_hd.png",
+    "emoji": "/uploads/orientadora_1_1788885666601_hfdae.png",
     "role": "",
     "desc": "Acompañamiento integral a los estudiantes de los grupos A y Jardín, realizando seguimiento a sus procesos individuales y articulando las acciones necesarias con las familias, docentes y profesionales externos, de acuerdo con las necesidades identificadas.",
-    "email": "lavenia@leonisticolamerced.edu.co"
+    "email": "lavenia@leonisticolamerced.edu.co",
+    "photoZoom": 1,
+    "photoPosY": 20,
+    "photoPosX": 50
   },
   {
     "id": 2,
@@ -2501,12 +2504,19 @@ function handlePsychologistPhotoUpload(index, fileInput) {
   const file = fileInput.files[0];
   if (!file || !psychologists[index]) return;
 
+  const statusEl = document.getElementById(`photoUploadStatus${index}`);
+  if (statusEl) {
+    statusEl.innerHTML = `<span style="color: #2563eb;">⏳ Procesando imagen "${file.name}"...</span>`;
+    statusEl.style.display = 'block';
+  }
+
   const reader = new FileReader();
   reader.onload = (e) => {
     const rawData = e.target.result;
     const img = new Image();
     img.onload = async () => {
-      const maxDim = 1600; // Máxima resolución HD nítida
+      // Usar max 1200px con excelente compresión para no saturar LocalStorage (máx ~150-250KB)
+      const maxDim = 1200;
       let w = img.width;
       let h = img.height;
       if (w > maxDim || h > maxDim) {
@@ -2518,7 +2528,7 @@ function handlePsychologistPhotoUpload(index, fileInput) {
           h = maxDim;
         }
       }
-      
+
       const canvas = document.createElement('canvas');
       canvas.width = w;
       canvas.height = h;
@@ -2526,22 +2536,38 @@ function handlePsychologistPhotoUpload(index, fileInput) {
       ctx.imageSmoothingEnabled = true;
       ctx.imageSmoothingQuality = 'high';
       ctx.drawImage(img, 0, 0, w, h);
-      
-      const hdDataUrl = (file.type === 'image/png') 
+
+      const isPng = file.type === 'image/png';
+      const hdDataUrl = isPng 
         ? canvas.toDataURL('image/png') 
-        : canvas.toDataURL('image/jpeg', 0.95);
-      
+        : canvas.toDataURL('image/jpeg', 0.90);
+
       psychologists[index].emoji = hdDataUrl;
-      localStorage.setItem('psicologia_psychologists', JSON.stringify(psychologists));
-      
+      try {
+        localStorage.setItem('psicologia_psychologists', JSON.stringify(psychologists));
+      } catch (e) {
+        console.warn('LocalStorage temporalmente lleno con Base64, enviando directo a servidor:', e);
+      }
+
       populatePsychologistEditForms();
       renderTeamCards();
-      
-      showToast(`⏳ Guardando foto en Alta Definición (HD)...`);
+      updateImageManagerPreviews();
+
+      if (statusEl) {
+        statusEl.innerHTML = `<span style="color: #16a34a;">✓ Imagen "${file.name}" cargada. Guardando en servidor...</span>`;
+      }
+
+      showToast(`⏳ Guardando foto de ${psychologists[index].name}...`);
       await syncPsychologistsToServer();
+
       populatePsychologistEditForms();
       renderTeamCards();
-      showToast(`✅ ¡Foto de ${psychologists[index].name} actualizada en Alta Definición (HD)!`);
+      updateImageManagerPreviews();
+
+      if (statusEl) {
+        statusEl.innerHTML = `<span style="color: #16a34a;">✓ Foto guardada y optimizada en el servidor</span>`;
+      }
+      showToast(`✅ ¡Foto de ${psychologists[index].name} guardada con éxito!`);
     };
     img.src = rawData;
   };
@@ -2553,7 +2579,10 @@ function handlePsychologistPhotoUrl(index, value) {
   if (!trimmed || !psychologists[index]) return;
 
   psychologists[index].emoji = trimmed;
-  localStorage.setItem('psicologia_psychologists', JSON.stringify(psychologists));
+  try {
+    localStorage.setItem('psicologia_psychologists', JSON.stringify(psychologists));
+  } catch (_) {}
+  
   syncPsychologistsToServer();
   renderTeamCards();
   updateImageManagerPreviews();
@@ -2564,7 +2593,12 @@ function handlePsychologistPhotoUrl(index, value) {
 function resetPsychologistPhoto(index) {
   if (DEFAULT_PSYCHOLOGISTS[index]) {
     psychologists[index].emoji = DEFAULT_PSYCHOLOGISTS[index].emoji;
-    localStorage.setItem('psicologia_psychologists', JSON.stringify(psychologists));
+    psychologists[index].photoZoom = DEFAULT_PSYCHOLOGISTS[index].photoZoom || 1;
+    psychologists[index].photoPosY = DEFAULT_PSYCHOLOGISTS[index].photoPosY !== undefined ? DEFAULT_PSYCHOLOGISTS[index].photoPosY : 20;
+    psychologists[index].photoPosX = DEFAULT_PSYCHOLOGISTS[index].photoPosX !== undefined ? DEFAULT_PSYCHOLOGISTS[index].photoPosX : 50;
+    try {
+      localStorage.setItem('psicologia_psychologists', JSON.stringify(psychologists));
+    } catch (_) {}
     syncPsychologistsToServer();
     renderTeamCards();
     updateImageManagerPreviews();
@@ -2829,6 +2863,8 @@ function populatePsychologistEditForms() {
     const bgSelect = document.getElementById(`editBgColor${idx}`);
     const emailInput = document.getElementById(`editEmail${idx}`);
     const descInput = document.getElementById(`editDesc${idx}`);
+    const emojiInput = document.getElementById(`editEmoji${idx}`);
+    const photoStatus = document.getElementById(`photoUploadStatus${idx}`);
     const previewAvatar = document.getElementById(`previewAvatar${idx + 1}`);
     const previewName = document.getElementById(`previewName${idx + 1}`);
     const previewBadge = document.getElementById(`previewBadge${idx + 1}`);
@@ -2849,6 +2885,23 @@ function populatePsychologistEditForms() {
     if (bgSelect) bgSelect.value = p.bgClass || '';
     if (emailInput) emailInput.value = p.email || '';
     if (descInput) descInput.value = p.desc || '';
+    if (emojiInput) {
+      if (p.emoji && !p.emoji.startsWith('data:')) {
+        emojiInput.value = p.emoji;
+      } else {
+        emojiInput.value = '';
+      }
+    }
+
+    if (photoStatus && p.emoji) {
+      if (p.emoji.startsWith('/uploads/')) {
+        photoStatus.innerHTML = `<span style="color: #15803d; font-weight: 700;">✓ Foto en Servidor: <code>${p.emoji.split('/').pop()}</code></span>`;
+        photoStatus.style.display = 'block';
+      } else if (p.emoji.startsWith('http')) {
+        photoStatus.innerHTML = `<span style="color: #15803d; font-weight: 700;">✓ Imagen Web vinculada</span>`;
+        photoStatus.style.display = 'block';
+      }
+    }
 
     if (zoomInput) zoomInput.value = zoom;
     if (posYInput) posYInput.value = posY;
@@ -2871,8 +2924,7 @@ function populatePsychologistEditForms() {
 
 async function savePsychologistProfile(event, index) {
   if (event) event.preventDefault();
-  
-  // Localizar botón que fue presionado
+
   const submitBtn = (event && event.target) ? event.target.querySelector('button[type="submit"]') : null;
   const originalBtnText = submitBtn ? submitBtn.innerHTML : '';
 
@@ -2880,6 +2932,7 @@ async function savePsychologistProfile(event, index) {
     const nameInput = document.getElementById(`editName${index}`);
     const emailInput = document.getElementById(`editEmail${index}`);
     const descInput = document.getElementById(`editDesc${index}`);
+    const emojiInput = document.getElementById(`editEmoji${index}`);
     const zoomInput = document.getElementById(`photoZoom${index}`);
     const posYInput = document.getElementById(`photoPosY${index}`);
     const posXInput = document.getElementById(`photoPosX${index}`);
@@ -2887,6 +2940,7 @@ async function savePsychologistProfile(event, index) {
     const name = nameInput ? nameInput.value.trim() : '';
     const email = emailInput ? emailInput.value.trim() : '';
     const desc = descInput ? descInput.value.trim() : '';
+    const customEmoji = emojiInput ? emojiInput.value.trim() : '';
 
     if (!name) {
       alert('⚠️ Por favor ingresa el nombre de la orientadora');
@@ -2895,6 +2949,10 @@ async function savePsychologistProfile(event, index) {
 
     if (!psychologists[index]) {
       psychologists[index] = {};
+    }
+
+    if (customEmoji && customEmoji !== psychologists[index].emoji) {
+      psychologists[index].emoji = customEmoji;
     }
 
     psychologists[index].name = name;
@@ -2906,21 +2964,19 @@ async function savePsychologistProfile(event, index) {
     if (posYInput) psychologists[index].photoPosY = parseInt(posYInput.value, 10) ?? 20;
     if (posXInput) psychologists[index].photoPosX = parseInt(posXInput.value, 10) ?? 50;
 
-    // Guardar inmediatamente en localStorage
-    localStorage.setItem('psicologia_psychologists', JSON.stringify(psychologists));
+    try {
+      localStorage.setItem('psicologia_psychologists', JSON.stringify(psychologists));
+    } catch (_) {}
 
-    // Actualizar vista previa en el panel de inmediato
     const previewNameEl = document.getElementById(`previewName${index + 1}`);
     if (previewNameEl) previewNameEl.textContent = name;
 
-    // Sincronizar con el servidor
     await syncPsychologistsToServer();
 
-    // Actualizar tarjetas públicas
     renderTeamCards();
+    updateImageManagerPreviews();
     populatePsychologistEditForms();
 
-    // Feedback visual en el botón
     if (submitBtn) {
       submitBtn.innerHTML = '✅ ¡Cambios Guardados Correctamente!';
       submitBtn.style.backgroundColor = '#16a34a';
@@ -2935,11 +2991,10 @@ async function savePsychologistProfile(event, index) {
       }, 3000);
     }
 
-    // Notificación Toast
     showToast(`✅ ¡Perfil de ${name} guardado correctamente!`);
   } catch (err) {
     console.error('Error al guardar perfil de orientadora:', err);
-    alert('❌ Error al guardar perfil: ' + err.message);
+    showToast('⚠️ Hubo un detalle al guardar. Inténtalo nuevamente.');
   }
 }
 

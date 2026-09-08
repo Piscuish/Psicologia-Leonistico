@@ -269,7 +269,7 @@
     "favicon": "https://lh3.googleusercontent.com/sitesv/AG8ngQWMa1kc6jVbY3mSnIQYpVjxxkhTMgHuRLzpm-o3lAMgJtWUIgekXnXlWjgQDeRwQSCOLH_U5l8ztQCfaCv7r3JjyQ0JCQn2-3saSzHRhDM5duB-idQtoKG9ZYz6BUZLMM3SJfxvtYVinOuckRqSmPIT5Am07h5B7Luapy3c76dc1lYmoUBJGB0UCr38E0u29coTDmwWwuiFH6RIlpW448k",
     "heroBg": "/uploads/site_heroBg_1788808026106_myuxl.png",
     "welcomeImg": "https://lh3.googleusercontent.com/sitesv/AG8ngQWOyxLk67vCI15BlZoCjOwd8xUiVdKQzLu-M2WJcEPpTf9i3QDpCzc1-5m6X-sKqpvyWPGZBwQ-rH8UhgQL7YTxjIlxDFe_bipo6xrnJX-R5AzoEojbfXeILt4DV4eHhLkoRtPmt0qDN9i4vhtAbDolgStj2fPdU9XVS2h5y405j0qv0gtNpOby2sONDNOeFMCsNGdXiYbURk_wJfVERZBegFn7tlsmLq3pjw8f=w1280",
-    "aboutImg": "https://lh3.googleusercontent.com/sitesv/AG8ngQXTnHzijkLW5x4q0oxIMOi07YzG-IBG1OfPXeoVkIVB8fjkFXyd17Exs0GpjRWuO_ve89ISCOVUerGrrxM5Btnf5tup2wv79zMnKOoluKmpvA0bbZU3sVSnjk80O_PqvnpU7L_xlejXLWd0rR4xWkxGQj7g0dTAeH3vz104NNIAC_EwotDlnekiU7aMZOxbjrQAZ56qxhieVbVysrZ75FKa5z5OY7hICFCfX1Ptwyo=w1280"
+    "aboutImg": "/uploads/site_aboutImg_1788885696256_njld0.jpg"
   },
   "psychologists": [
     {
@@ -278,10 +278,13 @@
       "badge": "",
       "badgeClass": "",
       "bgClass": "bg-blue",
-      "emoji": "/uploads/orientadora_1_hd.png",
+      "emoji": "/uploads/orientadora_1_1788885666601_hfdae.png",
       "role": "",
       "desc": "Acompañamiento integral a los estudiantes de los grupos A y Jardín, realizando seguimiento a sus procesos individuales y articulando las acciones necesarias con las familias, docentes y profesionales externos, de acuerdo con las necesidades identificadas.",
-      "email": "lavenia@leonisticolamerced.edu.co"
+      "email": "lavenia@leonisticolamerced.edu.co",
+      "photoZoom": 1,
+      "photoPosY": 20,
+      "photoPosX": 50
     },
     {
       "id": 2,
@@ -911,5 +914,5 @@
   },
   "adminPassword": "123",
   "adminSlug": "2610",
-  "version": "1788883467175"
+  "version": "1788885696261"
 }

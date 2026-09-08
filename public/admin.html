@@ -809,14 +809,15 @@
               </div>
             </div>
 
-            <form onsubmit="savePsychologistProfile(event, 0)">
+                        <form onsubmit="savePsychologistProfile(event, 0)">
               <div class="form-group">
                 <label>Foto de Perfil en Alta Resolución (Subir desde PC):</label>
                 <div class="file-input-wrapper" style="margin-bottom: 8px;">
                   <button type="button" class="btn-upload-pc"><i data-lucide="upload"></i> Cambiar foto en Alta Calidad</button>
-                  <input type="file" accept="image/*" onchange="handlePsychologistPhotoUpload(0, this)">
+                  <input type="file" id="editPhotoFile0" accept="image/*" onchange="handlePsychologistPhotoUpload(0, this)">
                 </div>
-                <input type="text" placeholder="O escribe un Emoji / URL de foto" onchange="handlePsychologistPhotoUrl(0, this.value)">
+                <div id="photoUploadStatus0" style="display: none; font-size: 0.8rem; color: #15803d; font-weight: 700; margin-bottom: 6px;"></div>
+                <input type="text" id="editEmoji0" placeholder="O escribe un Emoji / URL de foto" oninput="handlePsychologistPhotoUrl(0, this.value)">
                 <a class="btn-reset-img" onclick="resetPsychologistPhoto(0)">Restablecer icono por defecto</a>
                 
                 <!-- Controles de Encuadre, Posición y Zoom -->
@@ -880,14 +881,15 @@
               </div>
             </div>
 
-            <form onsubmit="savePsychologistProfile(event, 1)">
+                        <form onsubmit="savePsychologistProfile(event, 1)">
               <div class="form-group">
                 <label>Foto de Perfil en Alta Resolución (Subir desde PC):</label>
                 <div class="file-input-wrapper" style="margin-bottom: 8px;">
                   <button type="button" class="btn-upload-pc"><i data-lucide="upload"></i> Cambiar foto en Alta Calidad</button>
-                  <input type="file" accept="image/*" onchange="handlePsychologistPhotoUpload(1, this)">
+                  <input type="file" id="editPhotoFile1" accept="image/*" onchange="handlePsychologistPhotoUpload(1, this)">
                 </div>
-                <input type="text" placeholder="O escribe un Emoji / URL de foto" onchange="handlePsychologistPhotoUrl(1, this.value)">
+                <div id="photoUploadStatus1" style="display: none; font-size: 0.8rem; color: #15803d; font-weight: 700; margin-bottom: 6px;"></div>
+                <input type="text" id="editEmoji1" placeholder="O escribe un Emoji / URL de foto" oninput="handlePsychologistPhotoUrl(1, this.value)">
                 <a class="btn-reset-img" onclick="resetPsychologistPhoto(1)">Restablecer icono por defecto</a>
                 
                 <!-- Controles de Encuadre, Posición y Zoom -->
