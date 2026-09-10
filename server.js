@@ -647,6 +647,58 @@ function getInitialDb() {
   };
 }
 
+// ============================================================
+// MOTOR DE ALMACENAMIENTO MULTICAPA & PERSISTENCIA NUBE
+// ============================================================
+
+function getUpstashConfig() {
+  const url = (process.env.KV_REST_API_URL || process.env.UPSTASH_REDIS_REST_URL || '').replace(/\/+$/, '');
+  const token = process.env.KV_REST_API_TOKEN || process.env.UPSTASH_REDIS_REST_TOKEN || '';
+  return { url, token, enabled: Boolean(url && token) };
+}
+
+let inMemoryDb = null;
+let lastCloudSyncTime = 0;
+const CLOUD_CACHE_TTL_MS = 1500; // 1.5s cache en memoria para rendimiento ultra-rápido
+
+async function fetchFromUpstash() {
+  const { url, token, enabled } = getUpstashConfig();
+  if (!enabled) return null;
+  try {
+    const res = await fetch(`${url}/get/psicologia_db`, {
+      headers: { Authorization: `Bearer ${token}` },
+      cache: 'no-store'
+    });
+    if (!res.ok) return null;
+    const data = await res.json();
+    if (!data || !data.result) return null;
+    return typeof data.result === 'string' ? JSON.parse(data.result) : data.result;
+  } catch (err) {
+    console.warn('Advertencia leyendo desde Upstash Redis:', err.message);
+    return null;
+  }
+}
+
+async function saveToUpstash(data) {
+  const { url, token, enabled } = getUpstashConfig();
+  if (!enabled) return false;
+  try {
+    const serialized = JSON.stringify(data);
+    const res = await fetch(url, {
+      method: 'POST',
+      headers: {
+        Authorization: `Bearer ${token}`,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(['SET', 'psicologia_db', serialized])
+    });
+    return res.ok;
+  } catch (err) {
+    console.warn('Advertencia guardando en Upstash Redis:', err.message);
+    return false;
+  }
+}
+
 function initDb() {
   if (!fs.existsSync(DATA_DIR)) {
     fs.mkdirSync(DATA_DIR, { recursive: true });
@@ -680,10 +732,67 @@ function readDb() {
       fs.writeFileSync(DB_FILE, JSON.stringify(db, null, 2), 'utf-8');
     }
 
+    inMemoryDb = db;
     return db;
   } catch (err) {
     console.error('Error leyendo base de datos JSON:', err);
-    return getInitialDb();
+    const initial = getInitialDb();
+    inMemoryDb = initial;
+    return initial;
+  }
+}
+
+async function getDbAsync() {
+  const { enabled } = getUpstashConfig();
+  if (enabled) {
+    const now = Date.now();
+    if (inMemoryDb && (now - lastCloudSyncTime < CLOUD_CACHE_TTL_MS)) {
+      return inMemoryDb;
+    }
+    const cloudDb = await fetchFromUpstash();
+    if (cloudDb && typeof cloudDb === 'object') {
+      inMemoryDb = cloudDb;
+      lastCloudSyncTime = now;
+      try {
+        fs.writeFileSync(DB_FILE, JSON.stringify(inMemoryDb, null, 2), 'utf-8');
+      } catch (_) {}
+      return inMemoryDb;
+    } else if (inMemoryDb) {
+      return inMemoryDb;
+    }
+  }
+
+  if (!inMemoryDb) {
+    inMemoryDb = readDb();
+  }
+  return inMemoryDb;
+}
+
+async function saveDbAsync(data) {
+  try {
+    initDb();
+    data.version = Date.now().toString();
+    inMemoryDb = data;
+    lastCloudSyncTime = Date.now();
+
+    try {
+      fs.writeFileSync(DB_FILE, JSON.stringify(data, null, 2), 'utf-8');
+      const publicDb = path.join(__dirname, 'public', 'data', 'db.json');
+      if (fs.existsSync(publicDb) && !isVercel) {
+        fs.writeFileSync(publicDb, JSON.stringify(data, null, 2), 'utf-8');
+      }
+    } catch (e) {
+      console.warn('Aviso escribiendo db.json:', e.message);
+    }
+
+    const { enabled } = getUpstashConfig();
+    if (enabled) {
+      await saveToUpstash(data);
+    }
+    return true;
+  } catch (err) {
+    console.error('Error guardando base de datos:', err);
+    return false;
   }
 }
 
@@ -691,7 +800,13 @@ function saveDb(data) {
   try {
     initDb();
     data.version = Date.now().toString();
+    inMemoryDb = data;
+    lastCloudSyncTime = Date.now();
     fs.writeFileSync(DB_FILE, JSON.stringify(data, null, 2), 'utf-8');
+    const { enabled } = getUpstashConfig();
+    if (enabled) {
+      saveToUpstash(data).catch(() => {});
+    }
     return true;
   } catch (err) {
     console.error('Error guardando base de datos JSON:', err);
@@ -703,33 +818,33 @@ function saveDb(data) {
 readDb();
 
 // ============================================================
-// API REST CENTRALIZADA PARA SINCRONIZACIÓN EN TIEMPO REAL
+// API REST CENTRALIZADA Y UNIVERSAL (Express Router)
 // ============================================================
 
-// Middleware para evitar que los navegadores guarden en caché datos de API desactualizados
-app.use('/api', (req, res, next) => {
-  res.setHeader('Cache-Control', 'no-store, no-cache, must-revalidate, proxy-revalidate');
+const apiRouter = express.Router();
+
+// Middleware anti-caché para todas las peticiones API
+apiRouter.use((req, res, next) => {
+  res.setHeader('Cache-Control', 'no-store, no-cache, must-revalidate, proxy-revalidate, max-age=0');
   res.setHeader('Pragma', 'no-cache');
   res.setHeader('Expires', '0');
   next();
 });
 
-// 0. Comprobación ultra-ligera de versión (~30 bytes para ahorrar datos en Vercel)
-app.get('/api/version', (req, res) => {
-  const db = readDb();
-  res.setHeader('Cache-Control', 'no-cache, private');
+// 0. Versión ultra-ligera (~30 bytes para chequeos constantes)
+apiRouter.get('/version', async (req, res) => {
+  const db = await getDbAsync();
   res.json({ v: db.version || '1' });
 });
 
-// 1. Obtener todos los datos del portal (con soporte ETag y 304 Not Modified)
-app.get('/api/data', (req, res) => {
-  const db = readDb();
+// 1. Obtener todos los datos del portal
+apiRouter.get('/data', async (req, res) => {
+  const db = await getDbAsync();
   const version = db.version || '1';
   if (req.headers['if-none-match'] === `"${version}"`) {
     return res.status(304).end();
   }
   res.setHeader('ETag', `"${version}"`);
-  res.setHeader('Cache-Control', 'no-cache, private');
   res.json({
     version: version,
     navItems: db.navItems || DEFAULT_NAV_ITEMS,
@@ -746,25 +861,25 @@ app.get('/api/data', (req, res) => {
   });
 });
 
-// 1.1 Guardar / Actualizar Elementos del Menú de Navegación
-app.post('/api/navigation', (req, res) => {
+// 1.1 Elementos del Menú de Navegación
+apiRouter.post('/navigation', async (req, res) => {
   const { navItems } = req.body;
   if (!Array.isArray(navItems)) {
     return res.status(400).json({ error: 'Formato inválido de elementos de navegación' });
   }
-  const db = readDb();
+  const db = await getDbAsync();
   db.navItems = navItems;
-  saveDb(db);
-  res.json({ success: true, count: navItems.length });
+  await saveDbAsync(db);
+  res.json({ success: true, version: db.version, count: navItems.length });
 });
 
-// 1.2 Guardar / Actualizar Lista de Ciclos Escolares
-app.post('/api/cycles-list', (req, res) => {
+// 1.2 Lista de Ciclos Escolares
+apiRouter.post('/cycles-list', async (req, res) => {
   const { cyclesList } = req.body;
   if (!Array.isArray(cyclesList)) {
     return res.status(400).json({ error: 'Formato inválido de lista de ciclos' });
   }
-  const db = readDb();
+  const db = await getDbAsync();
   const cleanedCycles = cyclesList.map(cycle => {
     const c = { ...cycle };
     if (c.heroBgImage && c.heroBgImage.startsWith('data:image/')) {
@@ -773,57 +888,57 @@ app.post('/api/cycles-list', (req, res) => {
     return c;
   });
   db.cyclesList = cleanedCycles;
-  saveDb(db);
-  res.json({ success: true, count: cleanedCycles.length });
+  await saveDbAsync(db);
+  res.json({ success: true, version: db.version, count: cleanedCycles.length });
 });
 
-// 1.3 Guardar / Actualizar Páginas Personalizadas
-app.post('/api/custom-pages', (req, res) => {
+// 1.3 Páginas Personalizadas
+apiRouter.post('/custom-pages', async (req, res) => {
   const { customPages } = req.body;
   if (!Array.isArray(customPages)) {
     return res.status(400).json({ error: 'Formato inválido de páginas personalizadas' });
   }
-  const db = readDb();
+  const db = await getDbAsync();
   db.customPages = customPages;
-  saveDb(db);
-  res.json({ success: true, count: customPages.length });
+  await saveDbAsync(db);
+  res.json({ success: true, version: db.version, count: customPages.length });
 });
 
-// 2. Guardar / Actualizar Calendario de Encuentros
-app.post('/api/calendar', (req, res) => {
+// 2. Calendario de Encuentros
+apiRouter.post('/calendar', async (req, res) => {
   const { workshops } = req.body;
   if (!Array.isArray(workshops)) {
     return res.status(400).json({ error: 'Formato inválido de encuentros' });
   }
-  const db = readDb();
+  const db = await getDbAsync();
   db.calendarWorkshops = workshops;
-  saveDb(db);
-  res.json({ success: true, count: workshops.length });
+  await saveDbAsync(db);
+  res.json({ success: true, version: db.version, count: workshops.length });
 });
 
-// 3. Guardar / Actualizar Imágenes del Sitio
-app.post('/api/images', (req, res) => {
+// 3. Imágenes del Sitio
+apiRouter.post('/images', async (req, res) => {
   const { images } = req.body;
   if (!images || typeof images !== 'object') {
     return res.status(400).json({ error: 'Formato inválido de imágenes' });
   }
-  const db = readDb();
+  const db = await getDbAsync();
   const cleanedImages = {};
   for (const [k, v] of Object.entries(images)) {
     cleanedImages[k] = saveBase64ToFile(v, `site_${k}`);
   }
   db.siteImages = { ...db.siteImages, ...cleanedImages };
-  saveDb(db);
-  res.json({ success: true, images: db.siteImages });
+  await saveDbAsync(db);
+  res.json({ success: true, version: db.version, images: db.siteImages });
 });
 
-// 4. Guardar / Actualizar Orientadoras / Psicólogas
-app.post('/api/psychologists', (req, res) => {
+// 4. Orientadoras / Psicólogas
+apiRouter.post('/psychologists', async (req, res) => {
   const { psychologists } = req.body;
   if (!Array.isArray(psychologists)) {
     return res.status(400).json({ error: 'Formato inválido de psicólogas' });
   }
-  const db = readDb();
+  const db = await getDbAsync();
   const cleaned = psychologists.map(p => {
     const cp = { ...p };
     if (cp.emoji && cp.emoji.startsWith('data:image/')) {
@@ -832,17 +947,17 @@ app.post('/api/psychologists', (req, res) => {
     return cp;
   });
   db.psychologists = cleaned;
-  saveDb(db);
-  res.json({ success: true, psychologists: db.psychologists });
+  await saveDbAsync(db);
+  res.json({ success: true, version: db.version, psychologists: db.psychologists });
 });
 
-// 4.1 Guardar / Actualizar Bloques de Contenido de Ciclos Escolares
-app.post('/api/cycles', (req, res) => {
+// 4.1 Bloques de Contenido de Ciclos Escolares
+apiRouter.post('/cycles', async (req, res) => {
   const { cycleBlocks } = req.body;
   if (!Array.isArray(cycleBlocks)) {
     return res.status(400).json({ error: 'Formato inválido de bloques de ciclos' });
   }
-  const db = readDb();
+  const db = await getDbAsync();
   const cleanedBlocks = cycleBlocks.map(block => {
     const b = { ...block };
     if (b.imageUrl && b.imageUrl.startsWith('data:image/')) {
@@ -859,17 +974,17 @@ app.post('/api/cycles', (req, res) => {
     return b;
   });
   db.cycleBlocks = cleanedBlocks;
-  saveDb(db);
-  res.json({ success: true, count: cleanedBlocks.length });
+  await saveDbAsync(db);
+  res.json({ success: true, version: db.version, count: cleanedBlocks.length });
 });
 
-// 5. Agregar Sugerencia de Padres
-app.post('/api/suggestions', (req, res) => {
+// 5. Sugerencias
+apiRouter.post('/suggestions', async (req, res) => {
   const { text, date } = req.body;
   if (!text) {
     return res.status(400).json({ error: 'Texto de sugerencia requerido' });
   }
-  const db = readDb();
+  const db = await getDbAsync();
   if (!db.suggestions) db.suggestions = [];
   const newSugg = {
     id: Date.now(),
@@ -877,25 +992,25 @@ app.post('/api/suggestions', (req, res) => {
     date: date || new Date().toLocaleDateString('es-CO')
   };
   db.suggestions.unshift(newSugg);
-  saveDb(db);
-  res.json({ success: true, suggestion: newSugg });
+  await saveDbAsync(db);
+  res.json({ success: true, version: db.version, suggestion: newSugg });
 });
 
 // 6. Eliminar Sugerencia
-app.delete('/api/suggestions/:id', (req, res) => {
+apiRouter.delete('/suggestions/:id', async (req, res) => {
   const id = parseInt(req.params.id);
-  const db = readDb();
+  const db = await getDbAsync();
   if (db.suggestions) {
     db.suggestions = db.suggestions.filter(s => s.id !== id);
-    saveDb(db);
+    await saveDbAsync(db);
   }
-  res.json({ success: true });
+  res.json({ success: true, version: db.version });
 });
 
-// 7. Registrar Visita Centralizada (Páginas y Ciclos)
-app.post('/api/analytics/visit', (req, res) => {
+// 7. Analíticas
+apiRouter.post('/analytics/visit', async (req, res) => {
   const { section, action, device, tabKey, cycleKey } = req.body;
-  const db = readDb();
+  const db = await getDbAsync();
   if (!db.analytics) {
     db.analytics = {
       totalVisits: 0,
@@ -936,19 +1051,43 @@ app.post('/api/analytics/visit', (req, res) => {
     db.analytics.logs = db.analytics.logs.slice(0, 50);
   }
 
-  saveDb(db);
-  res.json({ success: true, totalVisits: db.analytics.totalVisits });
+  await saveDbAsync(db);
+  res.json({ success: true, version: db.version, totalVisits: db.analytics.totalVisits });
 });
 
-// 8. Actualizar Credenciales de Seguridad
-app.post('/api/security', (req, res) => {
+// 8. Seguridad
+apiRouter.post('/security', async (req, res) => {
   const { adminPassword, adminSlug } = req.body;
-  const db = readDb();
+  const db = await getDbAsync();
   if (adminPassword) db.adminPassword = adminPassword;
   if (adminSlug) db.adminSlug = adminSlug;
-  saveDb(db);
-  res.json({ success: true });
+  await saveDbAsync(db);
+  res.json({ success: true, version: db.version });
 });
+
+// 9. Estado y Diagnóstico
+apiRouter.get('/status', async (req, res) => {
+  const db = await getDbAsync();
+  const { enabled } = getUpstashConfig();
+  res.json({
+    status: 'ok',
+    app: 'Psicoorientación Colegio Leonístico La Merced',
+    version: '2.6.0 (Unified Serverless & Multi-Device Sync)',
+    dbVersion: db.version || '1',
+    storageMode: enabled ? 'Upstash Redis / Vercel KV (Cloud Synced)' : (isVercel ? 'Vercel Serverless (/tmp fallback)' : 'Local File System (data/db.json)'),
+    uptime: process.uptime(),
+    timestamp: new Date().toISOString()
+  });
+});
+
+// 10. Keep-Alive Ping
+apiRouter.get('/ping', (req, res) => {
+  res.status(200).json({ status: 'ok' });
+});
+
+// Montar el Router API tanto en /api como en la raíz / para compatibilidad universal con Vercel
+app.use('/api', apiRouter);
+app.use('/', apiRouter);
 
 // ============================================================
 // RUTAS PRINCIPALES DEL SITIO WEB
@@ -1026,29 +1165,13 @@ app.get(['/admin', '/admin.html', '/admin451200', '/2610', '/:slug'], (req, res,
   next();
 });
 
-// Ruta Keep-Alive / Anti-Inactividad para Render.com (UptimeRobot / Cron-Job)
-app.get(['/ping', '/keep-alive', '/api/ping'], (req, res) => {
-  res.status(200).json({ status: 'ok' });
-});
-
-// Endpoint de Diagnóstico
-app.get('/api/status', (req, res) => {
-  res.json({
-    status: 'ok',
-    app: 'Psicoorientación Colegio Leonístico La Merced',
-    version: '2.5.0 (Dynamic Pages & Cycles Sync)',
-    uptime: process.uptime(),
-    timestamp: new Date()
-  });
-});
-
 // Manejador para cualquier otra ruta no encontrada (404 -> Redirigir a inicio)
 app.use((req, res) => {
   res.status(404).sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
-// Iniciar Servidor
-if (process.env.NODE_ENV !== 'production' || !process.env.VERCEL) {
+// Iniciar Servidor solo si se ejecuta directamente con `node server.js`
+if (require.main === module) {
   app.listen(PORT, () => {
     console.log('====================================================');
     console.log(`🚀 Servidor de Psicoorientación activo en el puerto ${PORT}`);

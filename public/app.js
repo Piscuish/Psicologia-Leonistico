@@ -827,14 +827,14 @@ async function loadServerData() {
     let data = null;
 
     try {
-      const vRes = await fetch('/api/version');
+      const vRes = await fetch('/api/version?t=' + Date.now(), { cache: 'no-store' });
       if (vRes.ok) {
         const vData = await vRes.json();
         if (vData.v && localVersion && vData.v === localVersion) {
           return;
         }
       }
-      const res = await fetch('/api/data');
+      const res = await fetch('/api/data?t=' + Date.now(), { cache: 'no-store' });
       if (res.ok) {
         data = await res.json();
       }
@@ -915,9 +915,13 @@ async function syncNavigationToServer() {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ navItems })
     });
-    return await res.json();
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    const data = await res.json();
+    if (data && data.version) localStorage.setItem('psicologia_db_version', data.version);
+    return data;
   } catch (err) {
     console.error('Error sincronizando navegación con el servidor:', err);
+    throw err;
   }
 }
 
@@ -929,9 +933,13 @@ async function syncCyclesListToServer() {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ cyclesList })
     });
-    return await res.json();
+    if (!res.ok) throw new Error(`HTTP ${res.status}: ${res.statusText || 'Error guardando ciclos'}`);
+    const data = await res.json();
+    if (data && data.version) localStorage.setItem('psicologia_db_version', data.version);
+    return data;
   } catch (err) {
     console.error('Error sincronizando lista de ciclos con el servidor:', err);
+    throw err;
   }
 }
 
@@ -943,22 +951,31 @@ async function syncCustomPagesToServer() {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ customPages })
     });
-    return await res.json();
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    const data = await res.json();
+    if (data && data.version) localStorage.setItem('psicologia_db_version', data.version);
+    return data;
   } catch (err) {
     console.error('Error sincronizando páginas personalizadas con el servidor:', err);
+    throw err;
   }
 }
 
 async function syncCyclesToServer() {
   localStorage.setItem('psicologia_cycle_blocks', JSON.stringify(cycleBlocks));
   try {
-    await fetch('/api/cycles', {
+    const res = await fetch('/api/cycles', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ cycleBlocks })
     });
+    if (!res.ok) throw new Error(`HTTP ${res.status}: ${res.statusText || 'Error guardando bloques'}`);
+    const data = await res.json();
+    if (data && data.version) localStorage.setItem('psicologia_db_version', data.version);
+    return data;
   } catch (err) {
     console.error('Error sincronizando bloques de ciclos con el servidor:', err);
+    throw err;
   }
 }
 
@@ -1107,10 +1124,16 @@ document.addEventListener('DOMContentLoaded', async () => {
     renderCyclePublicPage('promocion-prevencion');
   } else if (path.includes('guia-bienestar') || path.includes('bienestar')) {
     renderCyclePublicPage('guia-bienestar');
-  } else if (path.includes('ciclos')) {
+  } else if (path.includes('ciclos') || cyclesList.some(c => path.includes(c.slug) || path.includes(c.key))) {
     const matchedCycle = cyclesList.find(c => path.includes(c.slug) || path.includes(c.key));
     if (matchedCycle) {
       renderCyclePublicPage(matchedCycle.key);
+    }
+  } else if (path.includes('admin') || path.includes('2610') || (adminSlug && path.includes(adminSlug.toLowerCase()))) {
+    if (isAdminLoggedIn) {
+      renderAdminCycleTabs();
+      renderAdminCycleBlocks();
+      renderAdminNavList();
     }
   }
 
@@ -3412,7 +3435,7 @@ function handleCycleGradesAutoBadge() {
   }
 }
 
-function handleSaveCycle(event) {
+async function handleSaveCycle(event) {
   if (event) event.preventDefault();
   const editKey = document.getElementById('cycleEditKey')?.value;
   const name = document.getElementById('cycleFormName')?.value.trim();
@@ -3438,6 +3461,17 @@ function handleSaveCycle(event) {
   }
 
   const scheme = COLOR_SCHEME_MAP[colorKey] || COLOR_SCHEME_MAP['pink'];
+  const submitBtn = document.getElementById('btnSaveCycleModal');
+  const originalBtnContent = submitBtn ? submitBtn.innerHTML : '';
+  if (submitBtn) {
+    submitBtn.disabled = true;
+    submitBtn.innerHTML = '<i data-lucide="loader-2"></i> Guardando...';
+    if (window.lucide) lucide.createIcons();
+  }
+
+  const previousCyclesList = JSON.parse(JSON.stringify(cyclesList));
+  let isNew = false;
+  let newKey = null;
 
   if (editKey) {
     const idx = cyclesList.findIndex(c => c.key === editKey);
@@ -3455,10 +3489,10 @@ function handleSaveCycle(event) {
         borderClass: scheme.border,
         pageUrl: `/ciclos/${slug}`
       };
-      showToast(`✅ Ciclo "${name}" actualizado con éxito.`);
     }
   } else {
-    const newKey = 'cycle_' + Date.now();
+    isNew = true;
+    newKey = 'cycle_' + Date.now();
     const newCycle = {
       key: newKey,
       slug,
@@ -3474,22 +3508,33 @@ function handleSaveCycle(event) {
       pageUrl: `/ciclos/${slug}`
     };
     cyclesList.push(newCycle);
-    selectedAdminCycleKey = newKey;
-    showToast(`✅ ¡Nuevo ciclo "${name}" creado exitosamente!`);
   }
 
-  localStorage.setItem('psicologia_cycles_list', JSON.stringify(cyclesList));
-  syncCyclesListToServer();
-  closeCycleModal();
-  renderAdminCycleTabs();
-  renderAdminCycleBlocks();
-  renderAdminNavList();
-  renderAdminCycleTabs();
-  renderAdminCycleBlocks();
-  renderPublicNavbar();
+  try {
+    await syncCyclesListToServer();
+    if (isNew && newKey) {
+      selectedAdminCycleKey = newKey;
+    }
+    closeCycleModal();
+    renderAdminCycleTabs();
+    renderAdminCycleBlocks();
+    renderAdminNavList();
+    renderPublicNavbar();
+    showToast(isNew ? `✅ ¡Nuevo ciclo "${name}" creado exitosamente!` : `✅ Ciclo "${name}" actualizado con éxito.`);
+  } catch (err) {
+    cyclesList = previousCyclesList;
+    localStorage.setItem('psicologia_cycles_list', JSON.stringify(cyclesList));
+    showToast(`❌ Error al guardar en el servidor: ${err.message || 'Intente nuevamente'}`);
+  } finally {
+    if (submitBtn) {
+      submitBtn.disabled = false;
+      submitBtn.innerHTML = originalBtnContent;
+      if (window.lucide) lucide.createIcons();
+    }
+  }
 }
 
-function moveActiveCycleOrder(direction) {
+async function moveActiveCycleOrder(direction) {
   const sorted = [...cyclesList].sort((a, b) => (a.order || 0) - (b.order || 0));
   const idx = sorted.findIndex(c => c.key === selectedAdminCycleKey);
   if (idx === -1) return;
@@ -3500,17 +3545,23 @@ function moveActiveCycleOrder(direction) {
   const current = sorted[idx];
   const target = sorted[targetIdx];
 
+  const previousCycles = JSON.parse(JSON.stringify(cyclesList));
   const tempOrder = current.order || (idx + 1);
   current.order = target.order || (targetIdx + 1);
   target.order = tempOrder;
 
   sorted.sort((a, b) => (a.order || 0) - (b.order || 0)).forEach((c, i) => { c.order = i + 1; });
 
-  localStorage.setItem('psicologia_cycles_list', JSON.stringify(cyclesList));
-  syncCyclesListToServer();
-  renderAdminCycleTabs();
-  renderPublicNavbar();
-  showToast('✅ Orden de ciclos actualizado.');
+  try {
+    await syncCyclesListToServer();
+    renderAdminCycleTabs();
+    renderPublicNavbar();
+    showToast('✅ Orden de ciclos actualizado.');
+  } catch (err) {
+    cyclesList = previousCycles;
+    localStorage.setItem('psicologia_cycles_list', JSON.stringify(cyclesList));
+    showToast(`❌ Error al reordenar ciclos: ${err.message || 'Intente nuevamente'}`);
+  }
 }
 
 function promptDeleteActiveCycle() {
@@ -3540,24 +3591,30 @@ function promptDeleteActiveCycle() {
   if (modal) modal.classList.add('active');
 }
 
-function executeDeleteActiveCycle() {
+async function executeDeleteActiveCycle() {
+  const previousCycles = JSON.parse(JSON.stringify(cyclesList));
+  const previousBlocks = JSON.parse(JSON.stringify(cycleBlocks));
+
   cyclesList = cyclesList.filter(c => c.key !== selectedAdminCycleKey);
   cycleBlocks = cycleBlocks.filter(b => b.cycleId !== selectedAdminCycleKey);
 
   selectedAdminCycleKey = cyclesList[0]?.key || 'primera_infancia';
 
-  localStorage.setItem('psicologia_cycles_list', JSON.stringify(cyclesList));
-  localStorage.setItem('psicologia_cycle_blocks', JSON.stringify(cycleBlocks));
-  syncCyclesListToServer();
-  syncCyclesToServer();
-
-  renderAdminCycleTabs();
-  renderAdminCycleBlocks();
-  renderAdminNavList();
-  renderAdminCycleTabs();
-  renderAdminCycleBlocks();
-  renderPublicNavbar();
-  showToast('✅ Ciclo escolar eliminado.');
+  try {
+    await syncCyclesListToServer();
+    await syncCyclesToServer();
+    renderAdminCycleTabs();
+    renderAdminCycleBlocks();
+    renderAdminNavList();
+    renderPublicNavbar();
+    showToast('✅ Ciclo escolar eliminado.');
+  } catch (err) {
+    cyclesList = previousCycles;
+    cycleBlocks = previousBlocks;
+    localStorage.setItem('psicologia_cycles_list', JSON.stringify(cyclesList));
+    localStorage.setItem('psicologia_cycle_blocks', JSON.stringify(cycleBlocks));
+    showToast(`❌ Error al eliminar ciclo: ${err.message || 'Intente nuevamente'}`);
+  }
 }
 
 function selectAdminCycle(cycleKey, btnElement) {
@@ -4178,7 +4235,7 @@ function updateCycleBlockLivePreview() {
   }
 }
 
-function handleSaveCycleBlock(event) {
+async function handleSaveCycleBlock(event) {
   if (event) event.preventDefault();
 
   const idInput = document.getElementById('cycleBlockEditId')?.value;
@@ -4218,9 +4275,19 @@ function handleSaveCycleBlock(event) {
     badgeText = meta.badgeText || meta.name || 'Orientación Escolar';
   }
 
-  const currentCycleBlocks = cycleBlocks.filter(b => b.cycleId === targetCycleKey);
+  const submitBtn = document.getElementById('cycleBlockSubmitBtn');
+  const originalBtnContent = submitBtn ? submitBtn.innerHTML : '';
+  if (submitBtn) {
+    submitBtn.disabled = true;
+    submitBtn.innerHTML = '<i data-lucide="loader-2"></i> Guardando...';
+    if (window.lucide) lucide.createIcons();
+  }
 
-  if (idInput) {
+  const previousCycleBlocks = JSON.parse(JSON.stringify(cycleBlocks));
+  const currentCycleBlocks = cycleBlocks.filter(b => b.cycleId === targetCycleKey);
+  const isEditing = Boolean(idInput);
+
+  if (isEditing) {
     const id = parseInt(idInput);
     const index = cycleBlocks.findIndex(b => b.id === id);
     if (index !== -1) {
@@ -4254,7 +4321,6 @@ function handleSaveCycleBlock(event) {
         resourcesList: typeof currentEditingResourcesList !== 'undefined' ? JSON.parse(JSON.stringify(currentEditingResourcesList)) : [],
         photosList: typeof currentEditingGalleryPhotos !== 'undefined' ? JSON.parse(JSON.stringify(currentEditingGalleryPhotos)) : []
       };
-      showToast('✅ ¡Bloque actualizado con éxito!');
     }
   } else {
     const newBlock = {
@@ -4290,16 +4356,27 @@ function handleSaveCycleBlock(event) {
       order: currentCycleBlocks.length + 1
     };
     cycleBlocks.push(newBlock);
-    showToast('✅ ¡Nuevo bloque agregado!');
   }
 
-  localStorage.setItem('psicologia_cycle_blocks', JSON.stringify(cycleBlocks));
-  syncCyclesToServer();
-  renderAdminCycleBlocks();
-  resetCycleBlockForm();
+  try {
+    await syncCyclesToServer();
+    renderAdminCycleBlocks();
+    resetCycleBlockForm();
+    showToast(isEditing ? '✅ ¡Bloque actualizado con éxito!' : '✅ ¡Nuevo bloque agregado con éxito!');
+  } catch (err) {
+    cycleBlocks = previousCycleBlocks;
+    localStorage.setItem('psicologia_cycle_blocks', JSON.stringify(cycleBlocks));
+    showToast(`❌ Error al guardar en el servidor: ${err.message || 'Intente nuevamente'}`);
+  } finally {
+    if (submitBtn) {
+      submitBtn.disabled = false;
+      submitBtn.innerHTML = originalBtnContent;
+      if (window.lucide) lucide.createIcons();
+    }
+  }
 }
 
-function duplicateCycleBlock(id) {
+async function duplicateCycleBlock(id) {
   const block = cycleBlocks.find(b => b.id === id);
   if (!block) return;
 
@@ -4311,11 +4388,18 @@ function duplicateCycleBlock(id) {
     order: currentCycleBlocks.length + 1
   };
 
+  const previousBlocks = JSON.parse(JSON.stringify(cycleBlocks));
   cycleBlocks.push(newBlock);
-  localStorage.setItem('psicologia_cycle_blocks', JSON.stringify(cycleBlocks));
-  syncCyclesToServer();
-  renderAdminCycleBlocks();
-  showToast('📋 ¡Bloque duplicado con éxito!');
+
+  try {
+    await syncCyclesToServer();
+    renderAdminCycleBlocks();
+    showToast('📋 ¡Bloque duplicado con éxito!');
+  } catch (err) {
+    cycleBlocks = previousBlocks;
+    localStorage.setItem('psicologia_cycle_blocks', JSON.stringify(cycleBlocks));
+    showToast(`❌ Error al duplicar bloque: ${err.message || 'Intente nuevamente'}`);
+  }
 }
 
 function editCycleBlock(id) {
@@ -4476,7 +4560,7 @@ function resetCycleBlockForm() {
   if (window.lucide) lucide.createIcons();
 }
 
-function moveCycleBlockOrder(id, direction) {
+async function moveCycleBlockOrder(id, direction) {
   const currentList = cycleBlocks.filter(b => b.cycleId === selectedAdminCycleKey).sort((a, b) => (a.order || 0) - (b.order || 0));
   const idx = currentList.findIndex(b => b.id === id);
   if (idx === -1) return;
@@ -4487,14 +4571,20 @@ function moveCycleBlockOrder(id, direction) {
   const currentItem = currentList[idx];
   const targetItem = currentList[targetIdx];
 
+  const previousBlocks = JSON.parse(JSON.stringify(cycleBlocks));
   const tempOrder = currentItem.order || idx + 1;
   currentItem.order = targetItem.order || targetIdx + 1;
   targetItem.order = tempOrder;
 
-  localStorage.setItem('psicologia_cycle_blocks', JSON.stringify(cycleBlocks));
-  syncCyclesToServer();
-  renderAdminCycleBlocks();
-  showToast('✓ ¡Orden reacomodado con éxito!');
+  try {
+    await syncCyclesToServer();
+    renderAdminCycleBlocks();
+    showToast('✓ ¡Orden reacomodado con éxito!');
+  } catch (err) {
+    cycleBlocks = previousBlocks;
+    localStorage.setItem('psicologia_cycle_blocks', JSON.stringify(cycleBlocks));
+    showToast(`❌ Error al reordenar bloque: ${err.message || 'Intente nuevamente'}`);
+  }
 }
 
 function promptDeleteCycleBlock(id) {
@@ -4520,13 +4610,20 @@ function promptDeleteCycleBlock(id) {
   if (modal) modal.classList.add('active');
 }
 
-function executeDeleteCycleBlock(id) {
+async function executeDeleteCycleBlock(id) {
   if (!id) return;
+  const previousBlocks = JSON.parse(JSON.stringify(cycleBlocks));
   cycleBlocks = cycleBlocks.filter(b => b.id !== id);
-  localStorage.setItem('psicologia_cycle_blocks', JSON.stringify(cycleBlocks));
-  syncCyclesToServer();
-  renderAdminCycleBlocks();
-  showToast('✅ Bloque eliminado con éxito.');
+
+  try {
+    await syncCyclesToServer();
+    renderAdminCycleBlocks();
+    showToast('✅ Bloque eliminado con éxito.');
+  } catch (err) {
+    cycleBlocks = previousBlocks;
+    localStorage.setItem('psicologia_cycle_blocks', JSON.stringify(cycleBlocks));
+    showToast(`❌ Error al eliminar bloque: ${err.message || 'Intente nuevamente'}`);
+  }
 }
 
 function deleteCycleBlock(id) {
