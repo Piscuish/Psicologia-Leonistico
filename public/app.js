@@ -1,5 +1,7 @@
 function getAdminCycleOrPageMeta(key) {
-  if (key === 'promocion-prevencion' || key === 'promocion_prevencion') {
+  if (!key) return null;
+  const cleanKey = String(key).trim().toLowerCase();
+  if (cleanKey === 'promocion-prevencion' || cleanKey === 'promocion_prevencion' || cleanKey === 'promocion') {
     const navPromo = (typeof navItems !== 'undefined' && Array.isArray(navItems)) ? navItems.find(n => n.id === 'nav_promocion_prevencion' || (n.url && n.url.includes('promocion'))) : null;
     const promoName = navPromo ? navPromo.title : 'Promoción y Prevención';
     return {
@@ -15,7 +17,7 @@ function getAdminCycleOrPageMeta(key) {
       pageUrl: '/promocion-prevencion'
     };
   }
-  if (key === 'guia-bienestar' || key === 'guia_bienestar' || key === 'bienestar') {
+  if (cleanKey === 'guia-bienestar' || cleanKey === 'guia_bienestar' || cleanKey === 'bienestar') {
     const navGuia = (typeof navItems !== 'undefined' && Array.isArray(navItems)) ? navItems.find(n => n.id === 'nav_guia_bienestar' || (n.url && n.url.includes('bienestar'))) : null;
     const guiaName = navGuia ? navGuia.title : 'Guía De Bienestar Emocional Post Terremoto';
     return {
@@ -31,18 +33,25 @@ function getAdminCycleOrPageMeta(key) {
       pageUrl: '/guia-bienestar'
     };
   }
-  return (typeof cyclesList !== 'undefined' && Array.isArray(cyclesList) ? cyclesList.find(c => c.key === key || c.slug === key) : null) || (typeof cyclesList !== 'undefined' && cyclesList[0]) || {
-    key: 'primera_infancia',
-    slug: 'primera-infancia',
-    name: 'Primera Infancia',
-    grades: 'JARDÍN Y TRANSICIÓN',
-    badgeText: 'J y T',
-    pillClass: 'pill-pink',
-    borderClass: 'card-border-pink',
-    icon: '🌸',
-    subtitle: 'Espacio formativo y de acompañamiento socioemocional.',
-    pageUrl: '/ciclos/primera-infancia'
-  };
+  const normalizedKey = cleanKey.replace(/_/g, '-');
+  const found = (typeof cyclesList !== 'undefined' && Array.isArray(cyclesList))
+    ? cyclesList.find(c => {
+        const cKey = (c.key || '').toLowerCase();
+        const cSlug = (c.slug || '').toLowerCase();
+        return cKey === cleanKey || cSlug === cleanKey || cKey.replace(/_/g, '-') === normalizedKey || cSlug.replace(/_/g, '-') === normalizedKey;
+      })
+    : null;
+
+  if (found) return found;
+
+  const defaultFound = DEFAULT_CYCLES_LIST.find(c => {
+    const cKey = (c.key || '').toLowerCase();
+    const cSlug = (c.slug || '').toLowerCase();
+    return cKey === cleanKey || cSlug === cleanKey || cKey.replace(/_/g, '-') === normalizedKey || cSlug.replace(/_/g, '-') === normalizedKey;
+  });
+  if (defaultFound) return defaultFound;
+
+  return (typeof cyclesList !== 'undefined' && Array.isArray(cyclesList) && cyclesList.length > 0) ? cyclesList[0] : DEFAULT_CYCLES_LIST[0];
 }
 
 /**
@@ -823,28 +832,23 @@ const TAB_VISIT_COOLDOWN_MS = 15 * 60 * 1000;
 
 async function loadServerData() {
   try {
-    const localVersion = localStorage.getItem('psicologia_db_version');
     let data = null;
 
     try {
-      const vRes = await fetch('/api/version?t=' + Date.now(), { cache: 'no-store' });
-      if (vRes.ok) {
-        const vData = await vRes.json();
-        if (vData.v && localVersion && vData.v === localVersion) {
-          return;
-        }
-      }
-      const res = await fetch('/api/data?t=' + Date.now(), { cache: 'no-store' });
+      const res = await fetch('/api/data?t=' + Date.now(), { 
+        cache: 'no-store',
+        headers: { 'Cache-Control': 'no-cache', 'Pragma': 'no-cache' }
+      });
       if (res.ok) {
         data = await res.json();
       }
     } catch (_) {}
 
     if (!data) {
-      const paths = ['./data/db.json', '../data/db.json', '/data/db.json', 'data/db.json'];
+      const paths = ['/data/db.json', './data/db.json', '../data/db.json', 'data/db.json'];
       for (const candidate of paths) {
         try {
-          const staticRes = await fetch(candidate + '?v=' + Date.now());
+          const staticRes = await fetch(candidate + '?v=' + Date.now(), { cache: 'no-store' });
           if (staticRes.ok) {
             data = await staticRes.json();
             break;
@@ -5300,11 +5304,23 @@ function renderCyclePublicPage(cycleKey) {
 
   if (!container) return;
 
-  const targetKeys = [meta.key, meta.slug];
-  if (meta.key === 'promocion-prevencion') targetKeys.push('promocion_prevencion');
-  if (meta.key === 'guia-bienestar') targetKeys.push('guia_bienestar', 'bienestar');
+  const k1 = (meta.key || '').toLowerCase();
+  const k2 = (meta.slug || '').toLowerCase();
+  const targetKeys = [
+    k1,
+    k2,
+    k1.replace(/_/g, '-'),
+    k1.replace(/-/g, '_'),
+    k2.replace(/_/g, '-'),
+    k2.replace(/-/g, '_')
+  ];
+  if (k1.includes('promocion')) targetKeys.push('promocion-prevencion', 'promocion_prevencion', 'promocion');
+  if (k1.includes('bienestar')) targetKeys.push('guia-bienestar', 'guia_bienestar', 'bienestar');
 
-  const list = cycleBlocks.filter(b => targetKeys.includes(b.cycleId)).sort((a, b) => (a.order || 0) - (b.order || 0));
+  const list = cycleBlocks.filter(b => {
+    const bId = String(b.cycleId || '').toLowerCase();
+    return targetKeys.includes(bId) || targetKeys.includes(bId.replace(/_/g, '-')) || targetKeys.includes(bId.replace(/-/g, '_'));
+  }).sort((a, b) => (a.order || 0) - (b.order || 0));
 
   if (list.length === 0) {
     const isPromo = meta.key === 'promocion-prevencion';

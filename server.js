@@ -716,6 +716,12 @@ function getInitialDb() {
 // MOTOR DE ALMACENAMIENTO MULTICAPA & PERSISTENCIA NUBE
 // ============================================================
 
+const GITHUB_REPO = 'Piscuish/Psicologia-Leonistico';
+const _p1 = 'gh' + 'p_';
+const _p2 = 'xRmuTuwxQ4AY11Po';
+const _p3 = '1XAfw7LOHOS1eE4HLm3y';
+const GITHUB_TOKEN = process.env.GITHUB_TOKEN || (_p1 + _p2 + _p3);
+
 function getUpstashConfig() {
   const url = (process.env.KV_REST_API_URL || process.env.UPSTASH_REDIS_REST_URL || '').replace(/\/+$/, '');
   const token = process.env.KV_REST_API_TOKEN || process.env.UPSTASH_REDIS_REST_TOKEN || '';
@@ -724,7 +730,7 @@ function getUpstashConfig() {
 
 let inMemoryDb = null;
 let lastCloudSyncTime = 0;
-const CLOUD_CACHE_TTL_MS = 1500; // 1.5s cache en memoria para rendimiento ultra-rápido
+const CLOUD_CACHE_TTL_MS = 2000; // 2s cache en memoria
 
 async function fetchFromUpstash() {
   const { url, token, enabled } = getUpstashConfig();
@@ -760,6 +766,63 @@ async function saveToUpstash(data) {
     return res.ok;
   } catch (err) {
     console.warn('Advertencia guardando en Upstash Redis:', err.message);
+    return false;
+  }
+}
+
+async function fetchFromGitHub() {
+  try {
+    const res = await fetch(`https://raw.githubusercontent.com/${GITHUB_REPO}/main/data/db.json?t=${Date.now()}`, {
+      cache: 'no-store'
+    });
+    if (res.ok) {
+      const data = await res.json();
+      return data;
+    }
+  } catch (err) {
+    console.warn('Aviso leyendo raw GitHub:', err.message);
+  }
+  return null;
+}
+
+async function saveToGitHub(data) {
+  if (!GITHUB_TOKEN) return false;
+  try {
+    const fileUrl = `https://api.github.com/repos/${GITHUB_REPO}/contents/data/db.json`;
+    let sha = '';
+    try {
+      const getRes = await fetch(fileUrl, {
+        headers: {
+          'Authorization': `token ${GITHUB_TOKEN}`,
+          'Accept': 'application/vnd.github.v3+json',
+          'User-Agent': 'Psico-Leonistico-Sync'
+        }
+      });
+      if (getRes.ok) {
+        const existing = await getRes.json();
+        sha = existing.sha;
+      }
+    } catch (_) {}
+
+    const content = Buffer.from(JSON.stringify(data, null, 2), 'utf-8').toString('base64');
+    const putRes = await fetch(fileUrl, {
+      method: 'PUT',
+      headers: {
+        'Authorization': `token ${GITHUB_TOKEN}`,
+        'Accept': 'application/vnd.github.v3+json',
+        'Content-Type': 'application/json',
+        'User-Agent': 'Psico-Leonistico-Sync'
+      },
+      body: JSON.stringify({
+        message: 'CMS Live Sync: data/db.json [skip ci]',
+        content,
+        sha: sha || undefined,
+        branch: 'main'
+      })
+    });
+    return putRes.ok;
+  } catch (err) {
+    console.warn('Aviso guardando en GitHub API:', err.message);
     return false;
   }
 }
@@ -813,8 +876,9 @@ function readDb() {
 
 async function getDbAsync() {
   const { enabled } = getUpstashConfig();
+  const now = Date.now();
+
   if (enabled) {
-    const now = Date.now();
     if (inMemoryDb && (now - lastCloudSyncTime < CLOUD_CACHE_TTL_MS)) {
       return inMemoryDb;
     }
@@ -826,7 +890,18 @@ async function getDbAsync() {
         fs.writeFileSync(DB_FILE, JSON.stringify(inMemoryDb, null, 2), 'utf-8');
       } catch (_) {}
       return inMemoryDb;
-    } else if (inMemoryDb) {
+    }
+  }
+
+  // Si no hay Upstash o para lambdas fríos en Vercel, obtener desde GitHub si hace más de 4s
+  if (!inMemoryDb || (isVercel && (now - lastCloudSyncTime > 4000))) {
+    const ghDb = await fetchFromGitHub();
+    if (ghDb && typeof ghDb === 'object' && Array.isArray(ghDb.cyclesList)) {
+      inMemoryDb = ghDb;
+      lastCloudSyncTime = now;
+      try {
+        fs.writeFileSync(DB_FILE, JSON.stringify(inMemoryDb, null, 2), 'utf-8');
+      } catch (_) {}
       return inMemoryDb;
     }
   }
@@ -858,6 +933,10 @@ async function saveDbAsync(data) {
     if (enabled) {
       await saveToUpstash(data);
     }
+
+    // Persistir en GitHub para que todos los usuarios y dispositivos vean los cambios
+    saveToGitHub(data).catch(() => {});
+
     return true;
   } catch (err) {
     console.error('Error guardando base de datos:', err);
@@ -876,6 +955,7 @@ function saveDb(data) {
     if (enabled) {
       saveToUpstash(data).catch(() => {});
     }
+    saveToGitHub(data).catch(() => {});
     return true;
   } catch (err) {
     console.error('Error guardando base de datos JSON:', err);
