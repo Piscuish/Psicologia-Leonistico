@@ -18,10 +18,13 @@ app.use(express.urlencoded({ extended: true, limit: '25mb' }));
 
 
 // Servir uploads con cache inmutable de 30 días
-const UPLOADS_DIR = path.join(__dirname, 'public', 'uploads');
-if (!fs.existsSync(UPLOADS_DIR)) {
-  fs.mkdirSync(UPLOADS_DIR, { recursive: true });
-}
+const isVercel = Boolean(process.env.VERCEL || process.env.AWS_LAMBDA_FUNCTION_NAME);
+const UPLOADS_DIR = isVercel ? path.join('/tmp', 'uploads') : path.join(__dirname, 'public', 'uploads');
+try {
+  if (!fs.existsSync(UPLOADS_DIR)) {
+    fs.mkdirSync(UPLOADS_DIR, { recursive: true });
+  }
+} catch (_) {}
 app.use('/uploads', express.static(UPLOADS_DIR, {
   maxAge: '30d',
   immutable: true
@@ -71,7 +74,7 @@ function saveBase64ToFile(base64Str, prefix = 'img') {
 // BASE DE DATOS CENTRALIZADA EN ARCHIVO JSON (data/db.json)
 // ============================================================
 
-const isVercel = Boolean(process.env.VERCEL || process.env.AWS_LAMBDA_FUNCTION_NAME);
+// const isVercel = Boolean(process.env.VERCEL || process.env.AWS_LAMBDA_FUNCTION_NAME);
 const DATA_DIR = isVercel ? '/tmp' : path.join(__dirname, 'data');
 const DB_FILE = path.join(DATA_DIR, 'db.json');
 

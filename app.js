@@ -1,9 +1,11 @@
 function getAdminCycleOrPageMeta(key) {
   if (key === 'promocion-prevencion' || key === 'promocion_prevencion') {
+    const navPromo = (typeof navItems !== 'undefined' && Array.isArray(navItems)) ? navItems.find(n => n.id === 'nav_promocion_prevencion' || (n.url && n.url.includes('promocion'))) : null;
+    const promoName = navPromo ? navPromo.title : 'Promoción y Prevención';
     return {
       key: 'promocion-prevencion',
       slug: 'promocion-prevencion',
-      name: 'Promoción y Prevención',
+      name: promoName,
       grades: 'Programas y Campañas Institucionales',
       badgeText: 'PROMOCIÓN Y PREVENCIÓN',
       pillClass: 'pill-teal',
@@ -14,10 +16,12 @@ function getAdminCycleOrPageMeta(key) {
     };
   }
   if (key === 'guia-bienestar' || key === 'guia_bienestar' || key === 'bienestar') {
+    const navGuia = (typeof navItems !== 'undefined' && Array.isArray(navItems)) ? navItems.find(n => n.id === 'nav_guia_bienestar' || (n.url && n.url.includes('bienestar'))) : null;
+    const guiaName = navGuia ? navGuia.title : 'Guía De Bienestar Emocional Post Terremoto';
     return {
       key: 'guia-bienestar',
       slug: 'guia-bienestar',
-      name: 'Guía De Bienestar Emocional Post Terremoto',
+      name: guiaName,
       grades: 'Guía Formativa & Recursos',
       badgeText: 'BIENESTAR EMOCIONAL',
       pillClass: 'pill-blue',
@@ -27,7 +31,7 @@ function getAdminCycleOrPageMeta(key) {
       pageUrl: '/guia-bienestar'
     };
   }
-  return cyclesList.find(c => c.key === key || c.slug === key) || cyclesList[0] || {
+  return (typeof cyclesList !== 'undefined' && Array.isArray(cyclesList) ? cyclesList.find(c => c.key === key || c.slug === key) : null) || (typeof cyclesList !== 'undefined' && cyclesList[0]) || {
     key: 'primera_infancia',
     slug: 'primera-infancia',
     name: 'Primera Infancia',
@@ -748,7 +752,7 @@ const DEFAULT_SUGGESTIONS = [
 // APP STATE & PERSISTENCE (HYBRID LOCAL + SERVER DATABASE)
 // ============================================================
 
-const APP_BUILD_VERSION = '2.9.11-20260908';
+const APP_BUILD_VERSION = '2.9.12-20260910';
 
 function initializeAppState() {
   const currentBuild = localStorage.getItem('psicologia_app_build_version');
@@ -3232,14 +3236,14 @@ function renderAdminCycleTabs() {
   // Pestaña fija para Promoción y Prevención
   html += `
     <button type="button" class="cycle-tab-btn cycle-tab-promo ${isPromo ? 'active' : ''}" onclick="selectAdminCycle('promocion-prevencion', this)" style="border: 2px solid #0d9488; font-weight: 800; color: ${isPromo ? '#ffffff' : '#0d9488'}; background: ${isPromo ? '#0d9488' : '#f0fdfa'};">
-      <span>🛡️</span> Promoción y Prevención <small>(Programas)</small>
+      <span>🛡️</span> ${(getAdminCycleOrPageMeta('promocion-prevencion') || {}).name || 'Promoción y Prevención'} <small>(Programas)</small>
     </button>
   `;
 
   // Pestaña fija para Guía de Bienestar Emocional Post Terremoto
   html += `
     <button type="button" class="cycle-tab-btn cycle-tab-guia ${isGuia ? 'active' : ''}" onclick="selectAdminCycle('guia-bienestar', this)" style="border: 2px solid #2563eb; font-weight: 800; color: ${isGuia ? '#ffffff' : '#2563eb'}; background: ${isGuia ? '#2563eb' : '#eff6ff'};">
-      <span>🌱</span> Guía Bienestar Post Terremoto <small>(Contenido)</small>
+      <span>🌱</span> ${(getAdminCycleOrPageMeta('guia-bienestar') || {}).name || 'Guía Bienestar Post Terremoto'} <small>(Contenido)</small>
     </button>
   `;
 
@@ -3479,6 +3483,9 @@ function handleSaveCycle(event) {
   closeCycleModal();
   renderAdminCycleTabs();
   renderAdminCycleBlocks();
+  renderAdminNavList();
+  renderAdminCycleTabs();
+  renderAdminCycleBlocks();
   renderPublicNavbar();
 }
 
@@ -3544,6 +3551,9 @@ function executeDeleteActiveCycle() {
   syncCyclesListToServer();
   syncCyclesToServer();
 
+  renderAdminCycleTabs();
+  renderAdminCycleBlocks();
+  renderAdminNavList();
   renderAdminCycleTabs();
   renderAdminCycleBlocks();
   renderPublicNavbar();
@@ -5435,6 +5445,8 @@ function handleSaveNavItem(event) {
 
   resetNavItemForm();
   renderAdminNavList();
+  renderAdminCycleTabs();
+  renderAdminCycleBlocks();
   renderPublicNavbar();
 }
 
@@ -5488,7 +5500,9 @@ function deleteNavItem(id) {
     syncCustomPagesToServer();
 
     renderAdminNavList();
-    renderPublicNavbar();
+  renderAdminCycleTabs();
+  renderAdminCycleBlocks();
+  renderPublicNavbar();
     showToast(`✅ "${item.title}" eliminado del menú.`);
   }
 }
@@ -5513,6 +5527,8 @@ function moveNavItemOrder(id, direction) {
   localStorage.setItem('psicologia_nav_items', JSON.stringify(navItems));
   syncNavigationToServer();
   renderAdminNavList();
+  renderAdminCycleTabs();
+  renderAdminCycleBlocks();
   renderPublicNavbar();
   showToast('✅ Orden del menú actualizado.');
 }
