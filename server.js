@@ -615,6 +615,71 @@ const DEFAULT_CYCLES_LIST = [
   }
 ];
 
+const DEFAULT_NAV_ITEMS = [
+  {
+    "id": "nav_inicio",
+    "title": "Inicio",
+    "url": "/",
+    "icon": "home",
+    "type": "dropdown",
+    "order": 1,
+    "isSystem": true,
+    "children": [
+      {
+        "id": "sub_portada",
+        "title": "Portada Principal",
+        "url": "/",
+        "icon": "home",
+        "order": 1
+      },
+      {
+        "id": "sub_quienes_somos",
+        "title": "¿Quiénes Somos?",
+        "url": "/#quienes-somos",
+        "icon": "heart-handshake",
+        "order": 2
+      }
+    ]
+  },
+  {
+    "id": "nav_guia_bienestar",
+    "title": "Guía De Bienestar Emocional Post Terremoto",
+    "url": "/guia-bienestar",
+    "icon": "heart-pulse",
+    "type": "link",
+    "order": 2,
+    "isSystem": true
+  },
+  {
+    "id": "nav_encuentros",
+    "title": "Encuentros Familiares",
+    "url": "/encuentros",
+    "icon": "users",
+    "type": "link",
+    "order": 3,
+    "isSystem": true
+  },
+  {
+    "id": "nav_promocion_prevencion",
+    "title": "Promoción y Prevención",
+    "url": "/promocion-prevencion",
+    "icon": "shield-check",
+    "type": "link",
+    "order": 4,
+    "isSystem": true
+  },
+  {
+    "id": "nav_ciclos",
+    "title": "Ciclos",
+    "url": "#",
+    "icon": "layers",
+    "type": "dropdown",
+    "order": 5,
+    "isSystem": true,
+    "isCyclesDropdown": true
+  }
+];
+
 const DEFAULT_CUSTOM_PAGES = [];
 
 function getInitialDb() {
@@ -625,7 +690,7 @@ function getInitialDb() {
     calendarWorkshops: DEFAULT_CALENDAR_WORKSHOPS,
     siteImages: DEFAULT_IMAGES,
     psychologists: DEFAULT_PSYCHOLOGISTS,
-    cycleBlocks: [],
+    cycleBlocks: DEFAULT_CYCLE_BLOCKS,
     suggestions: [],
     analytics: {
       totalVisits: 0,
@@ -725,6 +790,10 @@ function readDb() {
     }
     if (!db.customPages || !Array.isArray(db.customPages)) {
       db.customPages = DEFAULT_CUSTOM_PAGES;
+      modified = true;
+    }
+    if (!db.cycleBlocks || !Array.isArray(db.cycleBlocks) || db.cycleBlocks.length === 0) {
+      db.cycleBlocks = DEFAULT_CYCLE_BLOCKS;
       modified = true;
     }
 

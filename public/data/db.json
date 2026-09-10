@@ -265,11 +265,7 @@
   "siteImages": {
     "logo": "/uploads/site_logo_1788739866816.png",
     "welcome": "https://lh3.googleusercontent.com/sitesv/AG8ngQWOyxLk67vCI15BlZoCjOwd8xUiVdKQzLu-M2WJcEPpTf9i3QDpCzc1-5m6X-sKqpvyWPGZBwQ-rH8UhgQL7YTxjIlxDFe_bipo6xrnJX-R5AzoEojbfXeILt4DV4eHhLkoRtPmt0qDN9i4vhtAbDolgStj2fPdU9XVS2h5y405j0qv0gtNpOby2sONDNOeFMCsNGdXiYbURk_wJfVERZBegFn7tlsmLq3pjw8f=w1280",
-    "about": "https://lh3.googleusercontent.com/sitesv/AG8ngQXTnHzijkLW5x4q0oxIMOi07YzG-IBG1OfPXeoVkIVB8fjkFXyd17Exs0GpjRWuO_ve89ISCOVUerGrrxM5Btnf5tup2wv79zMnKOoluKmpvA0bbZU3sVSnjk80O_PqvnpU7L_xlejXLWd0rR4xWkxGQj7g0dTAeH3vz104NNIAC_EwotDlnekiU7aMZOxbjrQAZ56qxhieVbVysrZ75FKa5z5OY7hICFCfX1Ptwyo=w1280",
-    "favicon": "https://lh3.googleusercontent.com/sitesv/AG8ngQWMa1kc6jVbY3mSnIQYpVjxxkhTMgHuRLzpm-o3lAMgJtWUIgekXnXlWjgQDeRwQSCOLH_U5l8ztQCfaCv7r3JjyQ0JCQn2-3saSzHRhDM5duB-idQtoKG9ZYz6BUZLMM3SJfxvtYVinOuckRqSmPIT5Am07h5B7Luapy3c76dc1lYmoUBJGB0UCr38E0u29coTDmwWwuiFH6RIlpW448k",
-    "heroBg": "/uploads/site_heroBg_1788808026106_myuxl.png",
-    "welcomeImg": "https://lh3.googleusercontent.com/sitesv/AG8ngQWOyxLk67vCI15BlZoCjOwd8xUiVdKQzLu-M2WJcEPpTf9i3QDpCzc1-5m6X-sKqpvyWPGZBwQ-rH8UhgQL7YTxjIlxDFe_bipo6xrnJX-R5AzoEojbfXeILt4DV4eHhLkoRtPmt0qDN9i4vhtAbDolgStj2fPdU9XVS2h5y405j0qv0gtNpOby2sONDNOeFMCsNGdXiYbURk_wJfVERZBegFn7tlsmLq3pjw8f=w1280",
-    "aboutImg": "/uploads/site_aboutImg_1788887238720_ginoz.png"
+    "about": "https://lh3.googleusercontent.com/sitesv/AG8ngQXTnHzijkLW5x4q0oxIMOi07YzG-IBG1OfPXeoVkIVB8fjkFXyd17Exs0GpjRWuO_ve89ISCOVUerGrrxM5Btnf5tup2wv79zMnKOoluKmpvA0bbZU3sVSnjk80O_PqvnpU7L_xlejXLWd0rR4xWkxGQj7g0dTAeH3vz104NNIAC_EwotDlnekiU7aMZOxbjrQAZ56qxhieVbVysrZ75FKa5z5OY7hICFCfX1Ptwyo=w1280"
   },
   "psychologists": [
     {
@@ -303,385 +299,311 @@
   ],
   "cycleBlocks": [
     {
-      "id": 98765,
-      "title": "Cloud Block Verified",
-      "cycleId": "primera_infancia"
+      "id": 3,
+      "cycleId": "infantil",
+      "title": "Empatía, Convivencia y Amistad",
+      "subtitle": "Grados 1°, 2° y 3°",
+      "text": "Fortalecemos la convivencia escolar en el Ciclo Infantil guiando a los estudiantes en la empatía, el trabajo en equipo, la resolución pacífica de conflictos y el respeto mutuo en el aula de clase.",
+      "imageUrl": "",
+      "imagePosition": "top",
+      "badgeText": "1°, 2° y 3°",
+      "order": 1,
+      "type": "hero_banner",
+      "titleAlign": "left",
+      "size": "full",
+      "imageSize": "full",
+      "imageFit": "contain"
+    },
+    {
+      "id": 4,
+      "cycleId": "basico",
+      "title": "Hábitos de Estudio y Gestión del Tiempo",
+      "subtitle": "Grados 4° y 5°",
+      "text": "Estrategias para que los estudiantes de Ciclo Básico organicen su tiempo de estudio, fortalezcan su concentración y asuman con motivación y responsabilidad sus compromisos académicos.",
+      "imageUrl": "",
+      "imagePosition": "top",
+      "badgeText": "4° y 5°",
+      "order": 1,
+      "type": "hero_banner",
+      "titleAlign": "left",
+      "size": "full",
+      "imageSize": "full",
+      "imageFit": "contain"
+    },
+    {
+      "id": 5,
+      "cycleId": "fundamental",
+      "title": "Transición a la Secundaria y Autonomía",
+      "subtitle": "Grados 6° y 7°",
+      "text": "Acompañamiento integral en los cambios socioemocionales de la preadolescencia, promoviendo el pensamiento crítico, la autoestima y la adaptación positiva a la vida en secundaria.",
+      "imageUrl": "",
+      "imagePosition": "top",
+      "badgeText": "6° y 7°",
+      "order": 1,
+      "type": "hero_banner",
+      "titleAlign": "left",
+      "size": "full",
+      "imageSize": "full",
+      "imageFit": "contain"
+    },
+    {
+      "id": 7,
+      "cycleId": "especializado",
+      "title": "Orientación Vocacional y Proyecto de Vida",
+      "subtitle": "Grados 10° y 11°",
+      "text": "Asesoría y acompañamiento para la clarificación de intereses vocacionales, toma informada de decisiones profesionales, preparación para las Pruebas Saber y proyección al futuro universitario.",
+      "imageUrl": "",
+      "imagePosition": "top",
+      "badgeText": "10° y 11°",
+      "order": 1,
+      "type": "hero_banner",
+      "titleAlign": "left",
+      "size": "full",
+      "imageSize": "full",
+      "imageFit": "contain"
+    },
+    {
+      "id": 1788358008335,
+      "cycleId": "cycle_1788358007488",
+      "type": "hero_banner",
+      "size": "full",
+      "titleAlign": "left",
+      "title": "Liderazgo y Orientación Vocacional 2026",
+      "subtitle": "Taller formativo para estudiantes de media académica",
+      "badgeText": "DESTACADO",
+      "text": "Este espacio formativo brinda herramientas para la elección de carrera y vida profesional.",
+      "imageUrl": "",
+      "imagePosition": "left",
+      "buttonText": "",
+      "buttonUrl": "",
+      "iconEmoji": "💡",
+      "accentColor": "purple",
+      "slidesUrl": "",
+      "slidesBtnText": "",
+      "slidesFileData": "",
+      "slidesFileName": "",
+      "itemsList": [
+        {
+          "icon": "💖",
+          "title": "Afecto y Diálogo",
+          "text": "Acompañamiento cercano y validación emocional constante."
+        },
+        {
+          "icon": "⏰",
+          "title": "Rutina y Horarios",
+          "text": "Fijar horas para estudiar, descansar y compartir en familia."
+        }
+      ],
+      "resourcesList": [
+        {
+          "title": "Guía de Orientación Familiar (PDF)",
+          "desc": "Material imprimible de apoyo para el hogar.",
+          "fileUrl": "",
+          "fileName": "",
+          "fileSize": "",
+          "icon": "file-text"
+        }
+      ],
+      "photosList": [
+        {
+          "url": "https://images.unsplash.com/photo-1577896851231-70ef18881754?auto=format&fit=crop&w=600&q=80",
+          "caption": "Talleres y actividades del ciclo"
+        },
+        {
+          "url": "https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&w=600&q=80",
+          "caption": "Encuentros formativos"
+        }
+      ],
+      "order": 1,
+      "imageSize": "full",
+      "imageFit": "contain"
+    },
+    {
+      "id": 1788358207022,
+      "cycleId": "primera_infancia",
+      "type": "photo_gallery",
+      "size": "full",
+      "titleAlign": "center",
+      "title": "Bienvenidos",
+      "subtitle": "Caminemos juntos en la construcción de entornos seguros, amorosos y respetuosos para nuestros niños y niñas.",
+      "badgeText": "Jardín y transición",
+      "text": "En este espacio encontrarás herramientas, estrategias y recursos para acompañar el desarrollo integral de la primera infancia desde el área de Psicoorientación.\n\nNuestro propósito es brindar orientaciones prácticas que permitan a familias, docentes y comunidad educativa acompañar a los niños y niñas en sus procesos emocionales, sociales, cognitivos y educativos, fortaleciendo su bienestar y desarrollo.",
+      "imageUrl": "",
+      "imagePosition": "left",
+      "buttonText": "",
+      "buttonUrl": "",
+      "iconEmoji": "💡",
+      "accentColor": "purple",
+      "slidesUrl": "",
+      "slidesBtnText": "",
+      "slidesFileData": "",
+      "slidesFileName": "",
+      "itemsList": [
+        {
+          "icon": "💖",
+          "title": "Afecto y Diálogo",
+          "text": "Acompañamiento cercano y validación emocional constante."
+        },
+        {
+          "icon": "⏰",
+          "title": "Rutina y Horarios",
+          "text": "Fijar horas para estudiar, descansar y compartir en familia."
+        }
+      ],
+      "resourcesList": [
+        {
+          "title": "Guía de Orientación Familiar (PDF)",
+          "desc": "Material imprimible de apoyo para el hogar.",
+          "fileUrl": "",
+          "fileName": "",
+          "fileSize": "",
+          "icon": "file-text"
+        }
+      ],
+      "photosList": [
+        {
+          "url": "/uploads/gallery_1788358207022_0_1788803346192_0y1r1.jpg",
+          "caption": ""
+        },
+        {
+          "url": "/uploads/gallery_1788358207022_1_1788803346195_stbad.jpg",
+          "caption": ""
+        }
+      ],
+      "order": 1,
+      "galleryLayout": "cols_2",
+      "galleryFit": "wide",
+      "galleryAlign": "left",
+      "imageSize": "full",
+      "imageFit": "contain"
+    },
+    {
+      "id": 1788808426228,
+      "cycleId": "promocion-prevencion",
+      "type": "video_embed",
+      "size": "full",
+      "titleAlign": "left",
+      "title": "Septiembre mes de la prevención del suicidio",
+      "subtitle": "No estás solo. Hablar también es una forma de cuidarnos.",
+      "badgeText": "PROMOCIÓN Y PREVENCIÓN",
+      "text": "Este mes nos invita a recordar que escuchar, acompañar y hablar puede marcar la diferencia. Cuidar nuestra salud mental también significa estar atentos a quienes nos rodean, brindar apoyo y buscar ayuda cuando sea necesario.",
+      "imageUrl": "",
+      "imagePosition": "banner",
+      "imageSize": "full",
+      "imageFit": "contain",
+      "galleryLayout": "single_full",
+      "galleryFit": "natural",
+      "galleryAlign": "center",
+      "buttonText": "",
+      "buttonUrl": "",
+      "iconEmoji": "💡",
+      "accentColor": "purple",
+      "slidesUrl": "",
+      "slidesBtnText": "",
+      "videoUrl": "https://drive.google.com/file/d/1ztZW9ICNAdempPw1HEqRLZifY7kM7ytG/view?usp=sharing",
+      "videoBtnText": "",
+      "slidesFileData": "",
+      "slidesFileName": "",
+      "itemsList": [
+        {
+          "icon": "💖",
+          "title": "Afecto y Diálogo",
+          "text": "Acompañamiento cercano y validación emocional constante."
+        },
+        {
+          "icon": "⏰",
+          "title": "Rutina y Horarios",
+          "text": "Fijar horas para estudiar, descansar y compartir en familia."
+        }
+      ],
+      "resourcesList": [
+        {
+          "title": "Guía de Orientación Familiar (PDF)",
+          "desc": "Material imprimible de apoyo para el hogar.",
+          "fileUrl": "",
+          "fileName": "",
+          "fileSize": "",
+          "icon": "file-text"
+        }
+      ],
+      "photosList": [
+        {
+          "url": "https://images.unsplash.com/photo-1577896851231-70ef18881754?auto=format&fit=crop&w=600&q=80",
+          "caption": ""
+        }
+      ],
+      "order": 1
+    },
+    {
+      "id": 1788887600000,
+      "cycleId": "guia-bienestar",
+      "type": "hero_banner",
+      "size": "full",
+      "titleAlign": "left",
+      "title": "Acompañamiento Socioemocional y Primeros Auxilios Psicológicos",
+      "subtitle": "Estrategias de contención, tranquilidad y apoyo mutuo para toda la comunidad leonística",
+      "badgeText": "BIENESTAR EMOCIONAL POST TERREMOTO",
+      "text": "Frente a eventos inesperados o situaciones de emergencia sísmica, es natural experimentar miedo, ansiedad o preocupación. Desde el área de Psicoorientación Escolar compartimos pautas formativas, actividades de respiración, técnicas de regulación emocional y recursos prácticos para acompañar a nuestros niños, niñas y jóvenes tanto en el hogar como en las aulas.\n\nRecuerda que escuchar con empatía, mantener la calma y validar las emociones son los primeros pasos para restaurar la seguridad y el bienestar.",
+      "imageUrl": "",
+      "imagePosition": "left",
+      "imageSize": "full",
+      "imageFit": "contain",
+      "buttonText": "",
+      "buttonUrl": "",
+      "iconEmoji": "🌱",
+      "accentColor": "blue",
+      "slidesUrl": "",
+      "slidesBtnText": "",
+      "videoUrl": "",
+      "videoBtnText": "",
+      "slidesFileData": "",
+      "slidesFileName": "",
+      "itemsList": [
+        {
+          "icon": "🤝",
+          "title": "Contención Emocional",
+          "text": "Validar temores y transmitir calma y presencia constante."
+        },
+        {
+          "icon": "🌬️",
+          "title": "Técnicas de Respiración",
+          "text": "Ejercicios guiados para reducir la tensión corporal y el estrés."
+        }
+      ],
+      "resourcesList": [
+        {
+          "title": "Pautas de Apoyo Post Emergencia (PDF)",
+          "desc": "Material imprimible de orientación para el aula y el hogar.",
+          "fileUrl": "",
+          "fileName": "",
+          "fileSize": "",
+          "icon": "file-text"
+        }
+      ],
+      "photosList": [],
+      "order": 1
     }
   ],
   "suggestions": [],
   "analytics": {
-    "totalVisits": 120,
+    "totalVisits": 0,
     "uniqueSessions": 0,
-    "lastVisitDate": "8/9/2026 12:23 p. m.",
+    "lastVisitDate": "10/9/2026",
     "tabs": {
-      "inicio": 47,
-      "encuentros": 17,
-      "ciclos": 56
+      "inicio": 0,
+      "encuentros": 0,
+      "ciclos": 0
     },
     "cycles": {
-      "primera_infancia": 30,
-      "infantil": 7,
-      "basico": 7,
-      "fundamental": 1,
-      "exploratorio": 7,
-      "especializado": 1,
-      "cycle_1788358317660": 1,
-      "cycle_1788358007488": 2
+      "primera_infancia": 0,
+      "infantil": 0,
+      "basico": 0,
+      "fundamental": 0,
+      "exploratorio": 0,
+      "especializado": 0
     },
-    "logs": [
-      {
-        "id": 1788888207963,
-        "date": "8/9/2026 12:23 p. m.",
-        "section": "Encuentros Familiares",
-        "action": "Consulta de Calendario de Encuentros",
-        "device": "Escritorio"
-      },
-      {
-        "id": 1788883467175,
-        "date": "8/9/2026 11:04 a. m.",
-        "section": "Ciclos: Primera Infancia (JARDÍN Y TRANSICIÓN)",
-        "action": "Visita a la página de Primera Infancia (JARDÍN Y TRANSICIÓN)",
-        "device": "Escritorio"
-      },
-      {
-        "id": 1788883077756,
-        "date": "8/9/2026 10:57 a. m.",
-        "section": "Ciclos: Primera Infancia (JARDÍN Y TRANSICIÓN)",
-        "action": "Visita a la página de Primera Infancia (JARDÍN Y TRANSICIÓN)",
-        "device": "Escritorio"
-      },
-      {
-        "id": 1788883034944,
-        "date": "8/9/2026 10:57 a. m.",
-        "section": "Encuentros Familiares",
-        "action": "Consulta de Calendario de Encuentros",
-        "device": "Escritorio"
-      },
-      {
-        "id": 1788882872374,
-        "date": "8/9/2026 10:54 a. m.",
-        "section": "Inicio / Portada",
-        "action": "Ingreso a la página de Inicio",
-        "device": "Escritorio"
-      },
-      {
-        "id": 1788881897833,
-        "date": "8/9/2026 10:38 a. m.",
-        "section": "Ciclos: Primera Infancia (JARDÍN Y TRANSICIÓN)",
-        "action": "Visita a la página de Primera Infancia (JARDÍN Y TRANSICIÓN)",
-        "device": "Escritorio"
-      },
-      {
-        "id": 1788873116383,
-        "date": "8/9/2026 08:11 a. m.",
-        "section": "Ciclos: Primera Infancia (JARDÍN Y TRANSICIÓN)",
-        "action": "Visita a la página de Primera Infancia (JARDÍN Y TRANSICIÓN)",
-        "device": "Escritorio"
-      },
-      {
-        "id": 1788873114983,
-        "date": "8/9/2026 08:11 a. m.",
-        "section": "Inicio / Portada",
-        "action": "Ingreso a la página de Inicio",
-        "device": "Escritorio"
-      },
-      {
-        "id": 1788873074016,
-        "date": "8/9/2026 08:11 a. m.",
-        "section": "Ciclos: Primera Infancia (JARDÍN Y TRANSICIÓN)",
-        "action": "Visita a la página de Primera Infancia (JARDÍN Y TRANSICIÓN)",
-        "device": "Escritorio"
-      },
-      {
-        "id": 1788873070389,
-        "date": "8/9/2026 08:11 a. m.",
-        "section": "Encuentros Familiares",
-        "action": "Consulta de Calendario de Encuentros",
-        "device": "Escritorio"
-      },
-      {
-        "id": 1788873069380,
-        "date": "8/9/2026 08:11 a. m.",
-        "section": "Inicio / Portada",
-        "action": "Ingreso a la página de Inicio",
-        "device": "Escritorio"
-      },
-      {
-        "id": 1788808193436,
-        "date": "7/9/2026 02:09 p. m.",
-        "section": "Inicio / Portada",
-        "action": "Ingreso a la página de Inicio",
-        "device": "Escritorio"
-      },
-      {
-        "id": 1788807221860,
-        "date": "7/9/2026 01:53 p. m.",
-        "section": "Inicio / Portada",
-        "action": "Ingreso a la página de Inicio",
-        "device": "Escritorio"
-      },
-      {
-        "id": 1788807191114,
-        "date": "7/9/2026 01:53 p. m.",
-        "section": "Inicio / Portada",
-        "action": "Ingreso a la página de Inicio",
-        "device": "Escritorio"
-      },
-      {
-        "id": 1788805929670,
-        "date": "7/9/2026 01:32 p. m.",
-        "section": "Inicio / Portada",
-        "action": "Ingreso a la página de Inicio",
-        "device": "Escritorio"
-      },
-      {
-        "id": 1788805904387,
-        "date": "7/9/2026 01:31 p. m.",
-        "section": "Inicio / Portada",
-        "action": "Ingreso a la página de Inicio",
-        "device": "Escritorio"
-      },
-      {
-        "id": 1788803736096,
-        "date": "7/9/2026 12:55 p. m.",
-        "section": "Inicio / Portada",
-        "action": "Ingreso a la página de Inicio",
-        "device": "Escritorio"
-      },
-      {
-        "id": 1788803352838,
-        "date": "7/9/2026 12:49 p. m.",
-        "section": "Ciclos: Ciclo Infantil (1°, 2° Y 3°)",
-        "action": "Visita a la página de Ciclo Infantil (1°, 2° Y 3°)",
-        "device": "Escritorio"
-      },
-      {
-        "id": 1788803273364,
-        "date": "7/9/2026 12:47 p. m.",
-        "section": "Ciclos: Primera Infancia (JARDÍN Y TRANSICIÓN)",
-        "action": "Visita a la página de Primera Infancia (JARDÍN Y TRANSICIÓN)",
-        "device": "Escritorio"
-      },
-      {
-        "id": 1788802814080,
-        "date": "7/9/2026 12:40 p. m.",
-        "section": "Inicio / Portada",
-        "action": "Ingreso a la página de Inicio",
-        "device": "Escritorio"
-      },
-      {
-        "id": 1788801667742,
-        "date": "7/9/2026 12:21 p. m.",
-        "section": "Inicio / Portada",
-        "action": "Ingreso a la página de Inicio",
-        "device": "Escritorio"
-      },
-      {
-        "id": 1788800258184,
-        "date": "7/9/2026 11:57 a. m.",
-        "section": "Ciclos: Primera Infancia (JARDÍN Y TRANSICIÓN)",
-        "action": "Visita a la página de Primera Infancia (JARDÍN Y TRANSICIÓN)",
-        "device": "Escritorio"
-      },
-      {
-        "id": 1788800257422,
-        "date": "7/9/2026 11:57 a. m.",
-        "section": "Inicio / Portada",
-        "action": "Ingreso a la página de Inicio",
-        "device": "Escritorio"
-      },
-      {
-        "id": 1788742810835,
-        "date": "6/9/2026 08:00 p. m.",
-        "section": "Ciclos: Primera Infancia (JARDÍN Y TRANSICIÓN)",
-        "action": "Visita a la página de Primera Infancia (JARDÍN Y TRANSICIÓN)",
-        "device": "Escritorio"
-      },
-      {
-        "id": 1788742809715,
-        "date": "6/9/2026 08:00 p. m.",
-        "section": "Ciclos: Ciclo Infantil (1°, 2° Y 3°)",
-        "action": "Visita a la página de Ciclo Infantil (1°, 2° Y 3°)",
-        "device": "Escritorio"
-      },
-      {
-        "id": 1788740639128,
-        "date": "6/9/2026 07:23 p. m.",
-        "section": "Encuentros Familiares",
-        "action": "Consulta de Calendario de Encuentros",
-        "device": "Escritorio"
-      },
-      {
-        "id": 1788740240368,
-        "date": "6/9/2026 07:17 p. m.",
-        "section": "Ciclos: Ciclo Juvenil Pro (9°, 10° y 11°)",
-        "action": "Visita a la página de Ciclo Juvenil Pro (9°, 10° y 11°)",
-        "device": "Escritorio"
-      },
-      {
-        "id": 1788740211728,
-        "date": "6/9/2026 07:16 p. m.",
-        "section": "Ciclos: Ciclo Fundamental (6° Y 7°)",
-        "action": "Visita a la página de Ciclo Fundamental (6° Y 7°)",
-        "device": "Escritorio"
-      },
-      {
-        "id": 1788740207716,
-        "date": "6/9/2026 07:16 p. m.",
-        "section": "Ciclos: Primera Infancia (JARDÍN Y TRANSICIÓN)",
-        "action": "Visita a la página de Primera Infancia (JARDÍN Y TRANSICIÓN)",
-        "device": "Escritorio"
-      },
-      {
-        "id": 1788739882460,
-        "date": "6/9/2026 07:11 p. m.",
-        "section": "Ciclos: Ciclo Exploratorio (8° Y 9°)",
-        "action": "Visita a la página de Ciclo Exploratorio (8° Y 9°)",
-        "device": "Escritorio"
-      },
-      {
-        "id": 1788739880240,
-        "date": "6/9/2026 07:11 p. m.",
-        "section": "Ciclos: Ciclo Básico (4° Y 5°)",
-        "action": "Visita a la página de Ciclo Básico (4° Y 5°)",
-        "device": "Escritorio"
-      },
-      {
-        "id": 1788739879212,
-        "date": "6/9/2026 07:11 p. m.",
-        "section": "Ciclos: Ciclo Infantil (1°, 2° Y 3°)",
-        "action": "Visita a la página de Ciclo Infantil (1°, 2° Y 3°)",
-        "device": "Escritorio"
-      },
-      {
-        "id": 1788739874919,
-        "date": "6/9/2026 07:11 p. m.",
-        "section": "Inicio / Portada",
-        "action": "Ingreso a la página de Inicio",
-        "device": "Escritorio"
-      },
-      {
-        "id": 1788739151010,
-        "date": "6/9/2026 06:59 p. m.",
-        "section": "Ciclos: Primera Infancia (JARDÍN Y TRANSICIÓN)",
-        "action": "Visita a la página de Primera Infancia (JARDÍN Y TRANSICIÓN)",
-        "device": "Escritorio"
-      },
-      {
-        "id": 1788739030682,
-        "date": "6/9/2026 06:57 p. m.",
-        "section": "Inicio / Portada",
-        "action": "Ingreso a la página de Inicio",
-        "device": "Escritorio"
-      },
-      {
-        "id": 1788738198392,
-        "date": "6/9/2026 06:43 p. m.",
-        "section": "Ciclos: Primera Infancia (JARDÍN Y TRANSICIÓN)",
-        "action": "Visita a la página de Primera Infancia (JARDÍN Y TRANSICIÓN)",
-        "device": "Escritorio"
-      },
-      {
-        "id": 1788738187273,
-        "date": "6/9/2026 06:43 p. m.",
-        "section": "Inicio / Portada",
-        "action": "Ingreso a la página de Inicio",
-        "device": "Escritorio"
-      },
-      {
-        "id": 1788737967876,
-        "date": "6/9/2026 06:39 p. m.",
-        "section": "Ciclos: Primera Infancia (JARDÍN Y TRANSICIÓN)",
-        "action": "Visita a la página de Primera Infancia (JARDÍN Y TRANSICIÓN)",
-        "device": "Escritorio"
-      },
-      {
-        "id": 1788737958762,
-        "date": "6/9/2026 06:39 p. m.",
-        "section": "Inicio / Portada",
-        "action": "Ingreso a la página de Inicio",
-        "device": "Escritorio"
-      },
-      {
-        "id": 1788526195619,
-        "date": "4/9/2026 07:49 a. m.",
-        "section": "Inicio / Portada",
-        "action": "Ingreso a la página de Inicio",
-        "device": "Escritorio"
-      },
-      {
-        "id": 1788526107506,
-        "date": "4/9/2026 07:48 a. m.",
-        "section": "Inicio / Portada",
-        "action": "Ingreso a la página de Inicio",
-        "device": "Escritorio"
-      },
-      {
-        "id": 1788526086339,
-        "date": "4/9/2026 07:48 a. m.",
-        "section": "Inicio / Portada",
-        "action": "Ingreso a la página de Inicio",
-        "device": "Escritorio"
-      },
-      {
-        "id": 1788526044743,
-        "date": "4/9/2026 07:47 a. m.",
-        "section": "Ciclos: Ciclo Básico (4° Y 5°)",
-        "action": "Visita a la página de Ciclo Básico (4° Y 5°)",
-        "device": "Escritorio"
-      },
-      {
-        "id": 1788526041548,
-        "date": "4/9/2026 07:47 a. m.",
-        "section": "Ciclos: Ciclo Infantil (1°, 2° Y 3°)",
-        "action": "Visita a la página de Ciclo Infantil (1°, 2° Y 3°)",
-        "device": "Escritorio"
-      },
-      {
-        "id": 1788526039594,
-        "date": "4/9/2026 07:47 a. m.",
-        "section": "Ciclos: Primera Infancia (JARDÍN Y TRANSICIÓN)",
-        "action": "Visita a la página de Primera Infancia (JARDÍN Y TRANSICIÓN)",
-        "device": "Escritorio"
-      },
-      {
-        "id": 1788526038175,
-        "date": "4/9/2026 07:47 a. m.",
-        "section": "Encuentros Familiares",
-        "action": "Consulta de Calendario de Encuentros",
-        "device": "Escritorio"
-      },
-      {
-        "id": 1788526029625,
-        "date": "4/9/2026 07:47 a. m.",
-        "section": "Inicio / Portada",
-        "action": "Ingreso a la página de Inicio",
-        "device": "Escritorio"
-      },
-      {
-        "id": 1788525557546,
-        "date": "4/9/2026 07:39 a. m.",
-        "section": "Inicio / Portada",
-        "action": "Ingreso a la página de Inicio",
-        "device": "Escritorio"
-      },
-      {
-        "id": 1788525554196,
-        "date": "4/9/2026 07:39 a. m.",
-        "section": "Inicio / Portada",
-        "action": "Ingreso a la página de Inicio",
-        "device": "Escritorio"
-      },
-      {
-        "id": 1788462075000,
-        "date": "3/9/2026 02:01 p. m.",
-        "section": "Inicio / Portada",
-        "action": "Ingreso a la página de Inicio",
-        "device": "Escritorio"
-      }
-    ]
+    "logs": []
   },
   "adminPassword": "123",
-  "adminSlug": "2610",
-  "version": "1789069761041"
+  "adminSlug": "admin451200"
 }
