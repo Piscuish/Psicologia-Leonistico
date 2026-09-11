@@ -464,10 +464,6 @@
         {
           "url": "/uploads/gallery_1788358207022_0_1788803346192_0y1r1.jpg",
           "caption": ""
-        },
-        {
-          "url": "/uploads/gallery_1788358207022_1_1788803346195_stbad.jpg",
-          "caption": ""
         }
       ],
       "order": 1,
@@ -475,7 +471,9 @@
       "galleryFit": "wide",
       "galleryAlign": "left",
       "imageSize": "full",
-      "imageFit": "contain"
+      "imageFit": "contain",
+      "videoUrl": "",
+      "videoBtnText": ""
     },
     {
       "id": 1788808426228,
@@ -605,5 +603,6 @@
     "logs": []
   },
   "adminPassword": "123",
-  "adminSlug": "admin451200"
+  "adminSlug": "admin451200",
+  "version": "1789132692785"
 }
