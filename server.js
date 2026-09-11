@@ -959,8 +959,22 @@ function saveDb(data) {
   }
 }
 
-// Inicializar DB al arrancar
+// Inicializar DB al arrancar y generar nueva versión para forzar re-sync en browsers
 readDb();
+(function bumpStartupVersion() {
+  try {
+    if (inMemoryDb) {
+      inMemoryDb.version = Date.now().toString();
+      const dbStr = JSON.stringify(inMemoryDb, null, 2);
+      fs.writeFileSync(DB_FILE, dbStr, 'utf-8');
+      const publicDb = path.join(__dirname, 'public', 'data', 'db.json');
+      if (fs.existsSync(publicDb) && !isVercel) {
+        fs.writeFileSync(publicDb, dbStr, 'utf-8');
+      }
+      console.log('✅ DB iniciada. Versión:', inMemoryDb.version, '| Bloques:', (inMemoryDb.cycleBlocks || []).length);
+    }
+  } catch (_) {}
+})();
 
 // ============================================================
 // API REST CENTRALIZADA Y UNIVERSAL (Express Router)

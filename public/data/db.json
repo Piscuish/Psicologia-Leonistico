@@ -462,145 +462,74 @@
       ],
       "photosList": [
         {
-          "url": "/uploads/gallery_1788358207022_0_1788803346192_0y1r1.jpg",
+          "url": "https://images.unsplash.com/photo-1577896851231-70ef18881754?auto=format&fit=crop&w=600&q=80",
+          "caption": ""
+        },
+        {
+          "url": "/uploads/gallery_1788358207022_1_1789141383569_to6wj.png",
           "caption": ""
         }
       ],
       "order": 1,
-      "galleryLayout": "single_full",
-      "galleryFit": "wide",
+      "galleryLayout": "cols_3",
+      "galleryFit": "square",
       "galleryAlign": "left",
       "imageSize": "full",
-      "imageFit": "contain"
-    },
-    {
-      "id": 1788808426228,
-      "cycleId": "promocion-prevencion",
-      "type": "video_embed",
-      "size": "full",
-      "titleAlign": "left",
-      "title": "Septiembre mes de la prevención del suicidio",
-      "subtitle": "No estás solo. Hablar también es una forma de cuidarnos.",
-      "badgeText": "PROMOCIÓN Y PREVENCIÓN",
-      "text": "Este mes nos invita a recordar que escuchar, acompañar y hablar puede marcar la diferencia. Cuidar nuestra salud mental también significa estar atentos a quienes nos rodean, brindar apoyo y buscar ayuda cuando sea necesario.",
-      "imageUrl": "",
-      "imagePosition": "banner",
-      "imageSize": "full",
       "imageFit": "contain",
-      "galleryLayout": "single_full",
-      "galleryFit": "natural",
-      "galleryAlign": "center",
-      "buttonText": "",
-      "buttonUrl": "",
-      "iconEmoji": "💡",
-      "accentColor": "purple",
-      "slidesUrl": "",
-      "slidesBtnText": "",
-      "videoUrl": "https://drive.google.com/file/d/1ztZW9ICNAdempPw1HEqRLZifY7kM7ytG/view?usp=sharing",
-      "videoBtnText": "",
-      "slidesFileData": "",
-      "slidesFileName": "",
-      "itemsList": [
-        {
-          "icon": "💖",
-          "title": "Afecto y Diálogo",
-          "text": "Acompañamiento cercano y validación emocional constante."
-        },
-        {
-          "icon": "⏰",
-          "title": "Rutina y Horarios",
-          "text": "Fijar horas para estudiar, descansar y compartir en familia."
-        }
-      ],
-      "resourcesList": [
-        {
-          "title": "Guía de Orientación Familiar (PDF)",
-          "desc": "Material imprimible de apoyo para el hogar.",
-          "fileUrl": "",
-          "fileName": "",
-          "fileSize": "",
-          "icon": "file-text"
-        }
-      ],
-      "photosList": [
-        {
-          "url": "https://images.unsplash.com/photo-1577896851231-70ef18881754?auto=format&fit=crop&w=600&q=80",
-          "caption": ""
-        }
-      ],
-      "order": 1
-    },
-    {
-      "id": 1788887600000,
-      "cycleId": "guia-bienestar",
-      "type": "hero_banner",
-      "size": "full",
-      "titleAlign": "left",
-      "title": "Acompañamiento Socioemocional y Primeros Auxilios Psicológicos",
-      "subtitle": "Estrategias de contención, tranquilidad y apoyo mutuo para toda la comunidad leonística",
-      "badgeText": "BIENESTAR EMOCIONAL POST TERREMOTO",
-      "text": "Frente a eventos inesperados o situaciones de emergencia sísmica, es natural experimentar miedo, ansiedad o preocupación. Desde el área de Psicoorientación Escolar compartimos pautas formativas, actividades de respiración, técnicas de regulación emocional y recursos prácticos para acompañar a nuestros niños, niñas y jóvenes tanto en el hogar como en las aulas.\n\nRecuerda que escuchar con empatía, mantener la calma y validar las emociones son los primeros pasos para restaurar la seguridad y el bienestar.",
-      "imageUrl": "",
-      "imagePosition": "left",
-      "imageSize": "full",
-      "imageFit": "contain",
-      "buttonText": "",
-      "buttonUrl": "",
-      "iconEmoji": "🌱",
-      "accentColor": "blue",
-      "slidesUrl": "",
-      "slidesBtnText": "",
       "videoUrl": "",
-      "videoBtnText": "",
-      "slidesFileData": "",
-      "slidesFileName": "",
-      "itemsList": [
-        {
-          "icon": "🤝",
-          "title": "Contención Emocional",
-          "text": "Validar temores y transmitir calma y presencia constante."
-        },
-        {
-          "icon": "🌬️",
-          "title": "Técnicas de Respiración",
-          "text": "Ejercicios guiados para reducir la tensión corporal y el estrés."
-        }
-      ],
-      "resourcesList": [
-        {
-          "title": "Pautas de Apoyo Post Emergencia (PDF)",
-          "desc": "Material imprimible de orientación para el aula y el hogar.",
-          "fileUrl": "",
-          "fileName": "",
-          "fileSize": "",
-          "icon": "file-text"
-        }
-      ],
-      "photosList": [],
-      "order": 1
+      "videoBtnText": ""
     }
   ],
   "suggestions": [],
   "analytics": {
-    "totalVisits": 0,
+    "totalVisits": 4,
     "uniqueSessions": 0,
-    "lastVisitDate": "10/9/2026",
+    "lastVisitDate": "11/9/2026 10:42 a. m.",
     "tabs": {
       "inicio": 0,
       "encuentros": 0,
-      "ciclos": 0
+      "ciclos": 4
     },
     "cycles": {
-      "primera_infancia": 0,
+      "primera_infancia": 4,
       "infantil": 0,
       "basico": 0,
       "fundamental": 0,
       "exploratorio": 0,
       "especializado": 0
     },
-    "logs": []
+    "logs": [
+      {
+        "id": 1789141364477,
+        "date": "11/9/2026 10:42 a. m.",
+        "section": "Ciclos: Primera Infancia (JARDÍN Y TRANSICIÓN)",
+        "action": "Visita a la página de Primera Infancia (JARDÍN Y TRANSICIÓN)",
+        "device": "Escritorio"
+      },
+      {
+        "id": 1789141335203,
+        "date": "11/9/2026 10:42 a. m.",
+        "section": "Ciclos: Primera Infancia (JARDÍN Y TRANSICIÓN)",
+        "action": "Visita a la página de Primera Infancia (JARDÍN Y TRANSICIÓN)",
+        "device": "Escritorio"
+      },
+      {
+        "id": 1789141286913,
+        "date": "11/9/2026 10:41 a. m.",
+        "section": "Ciclos: Primera Infancia (JARDÍN Y TRANSICIÓN)",
+        "action": "Visita a la página de Primera Infancia (JARDÍN Y TRANSICIÓN)",
+        "device": "Escritorio"
+      },
+      {
+        "id": 1789141252154,
+        "date": "11/9/2026 10:40 a. m.",
+        "section": "Ciclos: Primera Infancia (JARDÍN Y TRANSICIÓN)",
+        "action": "Visita a la página de Primera Infancia (JARDÍN Y TRANSICIÓN)",
+        "device": "Escritorio"
+      }
+    ]
   },
   "adminPassword": "123",
   "adminSlug": "admin451200",
-  "version": "1789134161147"
+  "version": "1789141383579"
 }

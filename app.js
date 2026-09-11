@@ -819,6 +819,10 @@ let suggestions = JSON.parse(localStorage.getItem('psicologia_suggestions')) || 
 let analytics = JSON.parse(localStorage.getItem('psicologia_analytics')) || DEFAULT_ANALYTICS;
 let isAdminLoggedIn = sessionStorage.getItem('psicologia_admin_logged') === 'true';
 let currentAdminTab = 'estadisticas';
+let adminPassword = localStorage.getItem('psicologia_admin_password') || '123';
+let adminSlug = localStorage.getItem('psicologia_admin_slug') || 'admin451200';
+let currentEditingSlidesFileData = '';
+let currentEditingSlidesFileName = '';
 
 const TAB_VISIT_COOLDOWN_MS = 15 * 60 * 1000;
 
@@ -881,7 +885,7 @@ async function loadServerData() {
         psychologists = data.psychologists;
         localStorage.setItem('psicologia_psychologists', JSON.stringify(psychologists));
       }
-      if (data.cycleBlocks && Array.isArray(data.cycleBlocks) && data.cycleBlocks.length > 0) {
+      if (data.cycleBlocks && Array.isArray(data.cycleBlocks)) {
         cycleBlocks = data.cycleBlocks;
         localStorage.setItem('psicologia_cycle_blocks', JSON.stringify(cycleBlocks));
       }
@@ -935,6 +939,7 @@ async function syncCyclesListToServer() {
     });
     if (!res.ok) throw new Error(`HTTP ${res.status}: ${res.statusText || 'Error guardando ciclos'}`);
     const data = await res.json();
+    if (!data || !data.success) throw new Error(data?.error || 'El servidor no confirmó el guardado');
     if (data && data.version) localStorage.setItem('psicologia_db_version', data.version);
     return data;
   } catch (err) {
@@ -971,6 +976,7 @@ async function syncCyclesToServer() {
     });
     if (!res.ok) throw new Error(`HTTP ${res.status}: ${res.statusText || 'Error guardando bloques'}`);
     const data = await res.json();
+    if (!data || !data.success) throw new Error(data?.error || 'El servidor no confirmó el guardado');
     if (data && data.version) localStorage.setItem('psicologia_db_version', data.version);
     return data;
   } catch (err) {
