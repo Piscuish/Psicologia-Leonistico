@@ -421,14 +421,14 @@
     {
       "id": 1788358207022,
       "cycleId": "primera_infancia",
-      "type": "photo_gallery",
+      "type": "hero_banner",
       "size": "full",
       "titleAlign": "center",
       "title": "Bienvenidos",
       "subtitle": "Caminemos juntos en la construcción de entornos seguros, amorosos y respetuosos para nuestros niños y niñas.",
       "badgeText": "Jardín y transición",
       "text": "En este espacio encontrarás herramientas, estrategias y recursos para acompañar el desarrollo integral de la primera infancia desde el área de Psicoorientación.\n\nNuestro propósito es brindar orientaciones prácticas que permitan a familias, docentes y comunidad educativa acompañar a los niños y niñas en sus procesos emocionales, sociales, cognitivos y educativos, fortaleciendo su bienestar y desarrollo.",
-      "imageUrl": "",
+      "imageUrl": "https://res.cloudinary.com/demo/image/upload/sample.jpg",
       "imagePosition": "left",
       "buttonText": "",
       "buttonUrl": "",
@@ -478,17 +478,17 @@
   ],
   "suggestions": [],
   "analytics": {
-    "totalVisits": 17,
+    "totalVisits": 15,
     "uniqueSessions": 0,
-    "lastVisitDate": "11/9/2026 06:17 p. m.",
+    "lastVisitDate": "11/9/2026 01:17 p. m.",
     "tabs": {
-      "inicio": 1,
+      "inicio": 0,
       "encuentros": 0,
-      "ciclos": 16
+      "ciclos": 15
     },
     "cycles": {
       "primera_infancia": 15,
-      "infantil": 1,
+      "infantil": 0,
       "basico": 0,
       "fundamental": 0,
       "exploratorio": 0,
@@ -496,24 +496,10 @@
     },
     "logs": [
       {
-        "id": 1789150627459,
-        "date": "11/9/2026 06:17 p. m.",
-        "section": "Ciclos: Ciclo Infantil (1°, 2° Y 3°)",
-        "action": "Visita a la página de Ciclo Infantil (1°, 2° Y 3°)",
-        "device": "Escritorio"
-      },
-      {
-        "id": 1789150620435,
-        "date": "11/9/2026 06:17 p. m.",
+        "id": 1789150630249,
+        "date": "11/9/2026 01:17 p. m.",
         "section": "Ciclos: Primera Infancia (JARDÍN Y TRANSICIÓN)",
         "action": "Visita a la página de Primera Infancia (JARDÍN Y TRANSICIÓN)",
-        "device": "Escritorio"
-      },
-      {
-        "id": 1789148764889,
-        "date": "11/9/2026 05:46 p. m.",
-        "section": "Promoción y Prevención",
-        "action": "Visita a Promoción y Prevención",
         "device": "Escritorio"
       },
       {
@@ -618,5 +604,5 @@
   },
   "adminPassword": "123",
   "adminSlug": "admin451200",
-  "version": "1789150627459"
+  "version": "1789151606546"
 }
