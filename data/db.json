@@ -468,10 +468,6 @@
         {
           "url": "/uploads/gallery_1788358207022_1_1789141383569_to6wj.png",
           "caption": ""
-        },
-        {
-          "url": "/uploads/gallery_1788358207022_2_1789142647250_ej3ei.png",
-          "caption": "Nueva imagen de prueba persistente"
         }
       ],
       "order": 1,
@@ -535,5 +531,5 @@
   },
   "adminPassword": "123",
   "adminSlug": "admin451200",
-  "version": "1789142649212"
+  "version": "1789142656658"
 }
