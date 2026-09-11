@@ -421,14 +421,14 @@
     {
       "id": 1788358207022,
       "cycleId": "primera_infancia",
-      "type": "hero_banner",
+      "type": "photo_gallery",
       "size": "full",
       "titleAlign": "center",
       "title": "Bienvenidos",
       "subtitle": "Caminemos juntos en la construcción de entornos seguros, amorosos y respetuosos para nuestros niños y niñas.",
       "badgeText": "Jardín y transición",
       "text": "En este espacio encontrarás herramientas, estrategias y recursos para acompañar el desarrollo integral de la primera infancia desde el área de Psicoorientación.\n\nNuestro propósito es brindar orientaciones prácticas que permitan a familias, docentes y comunidad educativa acompañar a los niños y niñas en sus procesos emocionales, sociales, cognitivos y educativos, fortaleciendo su bienestar y desarrollo.",
-      "imageUrl": "https://res.cloudinary.com/demo/image/upload/sample.jpg",
+      "imageUrl": "",
       "imagePosition": "left",
       "buttonText": "",
       "buttonUrl": "",
@@ -597,5 +597,5 @@
   },
   "adminPassword": "123",
   "adminSlug": "admin451200",
-  "version": "1789145820522"
+  "version": "1789145834332"
 }
