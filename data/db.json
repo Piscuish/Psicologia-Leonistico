@@ -474,6 +474,63 @@
       "imageFit": "contain",
       "videoUrl": "",
       "videoBtnText": ""
+    },
+    {
+      "id": 1789144006153,
+      "cycleId": "primera_infancia",
+      "type": "photo_gallery",
+      "size": "full",
+      "titleAlign": "left",
+      "title": "a",
+      "subtitle": "d",
+      "badgeText": "d",
+      "text": "d",
+      "imageUrl": "/uploads/block_1789144006153_1789144008281_sq6yb.png",
+      "imagePosition": "banner",
+      "imageSize": "small",
+      "imageFit": "contain",
+      "galleryLayout": "single_full",
+      "galleryFit": "natural",
+      "galleryAlign": "center",
+      "buttonText": "",
+      "buttonUrl": "",
+      "iconEmoji": "💡",
+      "accentColor": "purple",
+      "slidesUrl": "",
+      "slidesBtnText": "",
+      "videoUrl": "",
+      "videoBtnText": "",
+      "slidesFileData": "",
+      "slidesFileName": "",
+      "itemsList": [
+        {
+          "icon": "💖",
+          "title": "Afecto y Diálogo",
+          "text": "Acompañamiento cercano y validación emocional constante."
+        },
+        {
+          "icon": "⏰",
+          "title": "Rutina y Horarios",
+          "text": "Fijar horas para estudiar, descansar y compartir en familia."
+        }
+      ],
+      "resourcesList": [
+        {
+          "title": "Guía de Orientación Familiar (PDF)",
+          "desc": "Material imprimible de apoyo para el hogar.",
+          "fileUrl": "",
+          "fileName": "",
+          "fileSize": "",
+          "icon": "file-text"
+        }
+      ],
+      "photosList": [
+        {
+          "url": "/uploads/gallery_1789144006153_0_1789144008288_qokk6.png",
+          "caption": ""
+        }
+      ],
+      "order": 2
     }
   ],
   "suggestions": [],
@@ -527,5 +584,5 @@
   },
   "adminPassword": "123",
   "adminSlug": "admin451200",
-  "version": "1789143947013"
+  "version": "1789144009668"
 }
