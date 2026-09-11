@@ -1090,7 +1090,9 @@ function startRealTimeSync() {
       if (vRes.ok) {
         const vData = await vRes.json();
         const currentLocalVersion = localStorage.getItem('psicologia_db_version');
-        if (vData.v && vData.v !== currentLocalVersion) {
+        const currentVerNum = Number(currentLocalVersion || 0);
+        const incomingVerNum = Number(vData.v || 0);
+        if (vData.v && (incomingVerNum > currentVerNum || (currentVerNum === 0 && vData.v !== currentLocalVersion))) {
           console.log('🔄 Sincronizando cambios en vivo desde el servidor...');
           await loadServerData();
           renderPublicNavbar();
@@ -4164,6 +4166,123 @@ function setCalloutColor(color) {
   updateCycleBlockLivePreview();
 }
 
+function toggleCycleBlockImgMode(mode) {
+  const uploadWrap = document.getElementById('cycleBlockUploadModeWrap');
+  const urlWrap = document.getElementById('cycleBlockUrlModeWrap');
+  const radioUpload = document.getElementById('cycleBlockImgModeUpload');
+  const radioUrl = document.getElementById('cycleBlockImgModeUrl');
+  const urlError = document.getElementById('cycleBlockUrlError');
+
+  if (urlError) {
+    urlError.style.display = 'none';
+    urlError.textContent = '';
+  }
+
+  if (mode === 'url') {
+    if (uploadWrap) uploadWrap.style.display = 'none';
+    if (urlWrap) urlWrap.style.display = 'block';
+    if (radioUrl) radioUrl.checked = true;
+    if (radioUpload) radioUpload.checked = false;
+  } else {
+    if (uploadWrap) uploadWrap.style.display = 'block';
+    if (urlWrap) urlWrap.style.display = 'none';
+    if (radioUpload) radioUpload.checked = true;
+    if (radioUrl) radioUrl.checked = false;
+  }
+}
+
+async function previewCycleBlockExternalUrl() {
+  const urlInput = document.getElementById('cycleBlockImageUrlInput');
+  const urlError = document.getElementById('cycleBlockUrlError');
+  const hiddenUrl = document.getElementById('cycleBlockImageUrlHidden');
+  const previewBox = document.getElementById('cycleBlockImagePreviewBox');
+  const previewText = document.getElementById('cycleBlockImagePreviewText');
+
+  if (urlError) {
+    urlError.style.display = 'none';
+    urlError.textContent = '';
+  }
+
+  const rawUrl = (urlInput?.value || '').trim();
+
+  if (!rawUrl) {
+    if (urlError) {
+      urlError.textContent = 'No se pudo cargar la imagen desde esta URL.';
+      urlError.style.display = 'block';
+    }
+    return false;
+  }
+
+  // Validación de seguridad y esquema (Solo http: o https:)
+  let parsed;
+  try {
+    parsed = new URL(rawUrl);
+  } catch (_) {
+    if (urlError) {
+      urlError.textContent = 'No se pudo cargar la imagen desde esta URL.';
+      urlError.style.display = 'block';
+    }
+    return false;
+  }
+
+  if (parsed.protocol !== 'http:' && parsed.protocol !== 'https:') {
+    if (urlError) {
+      urlError.textContent = 'No se pudo cargar la imagen desde esta URL.';
+      urlError.style.display = 'block';
+    }
+    return false;
+  }
+
+  if (previewText) previewText.textContent = 'Verificando imagen externa...';
+  if (previewBox) previewBox.style.display = 'flex';
+
+  const loadsOk = await new Promise((resolve) => {
+    let finished = false;
+    const img = new Image();
+    const timer = setTimeout(() => {
+      if (!finished) {
+        finished = true;
+        resolve(false);
+      }
+    }, 7000);
+
+    img.onload = () => {
+      if (!finished) {
+        finished = true;
+        clearTimeout(timer);
+        resolve(true);
+      }
+    };
+    img.onerror = () => {
+      if (!finished) {
+        finished = true;
+        clearTimeout(timer);
+        resolve(false);
+      }
+    };
+    img.src = parsed.href;
+  });
+
+  if (!loadsOk) {
+    if (urlError) {
+      urlError.textContent = 'No se pudo cargar la imagen desde esta URL.';
+      urlError.style.display = 'block';
+    }
+    if (previewBox) previewBox.style.display = 'none';
+    return false;
+  }
+
+  const safeUrl = parsed.href;
+  if (hiddenUrl) hiddenUrl.value = safeUrl;
+  if (urlError) urlError.style.display = 'none';
+  if (previewBox && previewText) {
+    previewText.textContent = '✓ Imagen externa validada y lista';
+    previewBox.style.display = 'flex';
+  }
+  updateCycleBlockLivePreview();
+  return true;
+}
+
 function handleCycleBlockPhotoUpload(event) {
   const file = event.target.files[0];
   if (!file) return;
@@ -4172,7 +4291,13 @@ function handleCycleBlockPhotoUpload(event) {
   reader.onload = function(e) {
     const dataUrl = e.target.result;
     document.getElementById('cycleBlockImageUrlHidden').value = dataUrl;
-    document.getElementById('cycleBlockImageUrlInput').value = '';
+    const urlInput = document.getElementById('cycleBlockImageUrlInput');
+    if (urlInput) urlInput.value = '';
+    const urlError = document.getElementById('cycleBlockUrlError');
+    if (urlError) {
+      urlError.style.display = 'none';
+      urlError.textContent = '';
+    }
 
     const previewBox = document.getElementById('cycleBlockImagePreviewBox');
     const previewText = document.getElementById('cycleBlockImagePreviewText');
@@ -4209,10 +4334,15 @@ function removeCycleBlockImage() {
   const urlInput = document.getElementById('cycleBlockImageUrlInput');
   const fileInput = document.getElementById('cycleBlockFileInput');
   const previewBox = document.getElementById('cycleBlockImagePreviewBox');
+  const urlError = document.getElementById('cycleBlockUrlError');
 
   if (hiddenUrl) hiddenUrl.value = '';
   if (urlInput) urlInput.value = '';
   if (fileInput) fileInput.value = '';
+  if (urlError) {
+    urlError.style.display = 'none';
+    urlError.textContent = '';
+  }
   if (previewBox) previewBox.style.display = 'none';
   updateCycleBlockLivePreview();
   showToast('Imagen del bloque retirada.');
@@ -4309,7 +4439,38 @@ async function handleSaveCycleBlock(event) {
   const subtitle = (document.getElementById('cycleBlockSubtitle')?.value || '').trim();
   let badgeText = (document.getElementById('cycleBlockBadge')?.value || '').trim();
   const text = (document.getElementById('cycleBlockText')?.value || '').trim();
-  const imageUrl = (document.getElementById('cycleBlockImageUrlHidden')?.value || '').trim();
+  const isUrlMode = document.getElementById('cycleBlockImgModeUrl')?.checked;
+  const rawUrlInput = (document.getElementById('cycleBlockImageUrlInput')?.value || '').trim();
+  const hiddenImgVal = (document.getElementById('cycleBlockImageUrlHidden')?.value || '').trim();
+
+  if (isUrlMode) {
+    if (rawUrlInput) {
+      if (rawUrlInput !== hiddenImgVal) {
+        const ok = await previewCycleBlockExternalUrl();
+        if (!ok) {
+          return;
+        }
+      }
+    } else {
+      if (document.getElementById('cycleBlockImageUrlHidden')) {
+        document.getElementById('cycleBlockImageUrlHidden').value = '';
+      }
+    }
+  }
+
+  let imageUrl = (document.getElementById('cycleBlockImageUrlHidden')?.value || '').trim();
+  if (imageUrl && !imageUrl.startsWith('data:') && !imageUrl.startsWith('/')) {
+    try {
+      const checkUrl = new URL(imageUrl);
+      if (checkUrl.protocol !== 'http:' && checkUrl.protocol !== 'https:') {
+        showToast('URL de imagen inválida o esquema no permitido.');
+        return;
+      }
+    } catch (_) {
+      showToast('URL de imagen inválida.');
+      return;
+    }
+  }
   const imagePosition = document.getElementById('cycleBlockImagePos')?.value || 'left';
   const imageSize = document.getElementById('cycleBlockImageSize')?.value || 'full';
   const imageFit = document.getElementById('cycleBlockImageFit')?.value || 'contain';
@@ -4555,11 +4716,19 @@ function editCycleBlock(id) {
   const headerTitle = document.getElementById('cycleBlockFormHeader');
 
   if (hiddenUrl) hiddenUrl.value = block.imageUrl || '';
-  if (urlInput) urlInput.value = (block.imageUrl && !block.imageUrl.startsWith('data:')) ? block.imageUrl : '';
   if (fileInput) fileInput.value = '';
 
+  const isExternalUrl = block.imageUrl && (block.imageUrl.startsWith('http://') || block.imageUrl.startsWith('https://'));
+  if (isExternalUrl) {
+    if (urlInput) urlInput.value = block.imageUrl;
+    toggleCycleBlockImgMode('url');
+  } else {
+    if (urlInput) urlInput.value = '';
+    toggleCycleBlockImgMode('upload');
+  }
+
   if (block.imageUrl && previewBox && previewText) {
-    previewText.textContent = '✓ Imagen adjunta cargada';
+    previewText.textContent = isExternalUrl ? '✓ Imagen externa configurada' : '✓ Imagen adjunta cargada';
     previewBox.style.display = 'flex';
   } else if (previewBox) {
     previewBox.style.display = 'none';
@@ -4577,6 +4746,12 @@ function editCycleBlock(id) {
 function resetCycleBlockForm() {
   document.getElementById('cycleBlockForm').reset();
   document.getElementById('cycleBlockEditId').value = '';
+  toggleCycleBlockImgMode('upload');
+  const urlError = document.getElementById('cycleBlockUrlError');
+  if (urlError) {
+    urlError.style.display = 'none';
+    urlError.textContent = '';
+  }
   setCycleBlockType('hero_banner');
   setCycleBlockSize('full');
   setCycleBlockTitleAlign('left');
@@ -5805,6 +5980,8 @@ window.removeGalleryPhoto = removeGalleryPhoto;
 window.updateGalleryCaption = updateGalleryCaption;
 window.handleCycleBlockPhotoUpload = handleCycleBlockPhotoUpload;
 window.handleCycleBlockUrlInput = handleCycleBlockUrlInput;
+window.toggleCycleBlockImgMode = toggleCycleBlockImgMode;
+window.previewCycleBlockExternalUrl = previewCycleBlockExternalUrl;
 window.removeCycleBlockImage = removeCycleBlockImage;
 window.handleCycleSlidesFileUpload = handleCycleSlidesFileUpload;
 window.removeCycleSlidesAttachedFile = removeCycleSlidesAttachedFile;

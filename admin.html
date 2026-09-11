@@ -1304,17 +1304,40 @@
                   <i data-lucide="image"></i> Imagen o Foto del Bloque (Opcional)
                 </label>
                 <p style="font-size: 0.82rem; color: #64748b; margin-bottom: 14px;">
-                  Sube una foto desde tu computador o pega un enlace de imagen. Puedes estirarla al 100% o acomodarla a tu gusto:
+                  Elige cómo deseas adjuntar la imagen del bloque:
                 </p>
 
-                <div class="form-row" style="margin-bottom: 12px;">
-                  <div class="form-group" style="flex: 1; margin-bottom: 0;">
-                    <label style="font-size: 0.82rem; font-weight: 700;">📁 Subir Foto desde PC</label>
+                <!-- Selector de Modo de Imagen: Subir vs URL Externa -->
+                <div style="display: flex; gap: 20px; align-items: center; background: #ffffff; border: 1px solid #e2e8f0; border-radius: var(--radius-md); padding: 12px 16px; margin-bottom: 14px;">
+                  <label style="display: flex; align-items: center; gap: 8px; cursor: pointer; font-size: 0.88rem; font-weight: 700; color: #1e293b; margin: 0;">
+                    <input type="radio" name="cycleBlockImgMode" id="cycleBlockImgModeUpload" value="upload" checked onchange="toggleCycleBlockImgMode('upload')">
+                    📁 Subir imagen
+                  </label>
+                  <label style="display: flex; align-items: center; gap: 8px; cursor: pointer; font-size: 0.88rem; font-weight: 700; color: #1e293b; margin: 0;">
+                    <input type="radio" name="cycleBlockImgMode" id="cycleBlockImgModeUrl" value="url" onchange="toggleCycleBlockImgMode('url')">
+                    🔗 Usar URL externa
+                  </label>
+                </div>
+
+                <!-- Opción 1: Subir imagen desde PC (Sistema actual idéntico) -->
+                <div id="cycleBlockUploadModeWrap" style="margin-bottom: 12px;">
+                  <div class="form-group" style="margin-bottom: 0;">
+                    <label style="font-size: 0.82rem; font-weight: 700; color: #475569;">📁 Seleccionar foto desde tu dispositivo:</label>
                     <input type="file" id="cycleBlockFileInput" accept="image/*" onchange="handleCycleBlockPhotoUpload(event)">
                   </div>
-                  <div class="form-group" style="flex: 1; margin-bottom: 0;">
-                    <label style="font-size: 0.82rem; font-weight: 700;">🔗 O pegar Enlace Web (URL)</label>
-                    <input type="url" id="cycleBlockImageUrlInput" placeholder="https://..." oninput="handleCycleBlockUrlInput()">
+                </div>
+
+                <!-- Opción 2: Usar URL externa -->
+                <div id="cycleBlockUrlModeWrap" style="display: none; margin-bottom: 12px;">
+                  <div class="form-group" style="margin-bottom: 0;">
+                    <label style="font-size: 0.82rem; font-weight: 700; color: #475569;">URL de la imagen:</label>
+                    <div style="display: flex; gap: 10px; align-items: center; margin-top: 4px;">
+                      <input type="url" id="cycleBlockImageUrlInput" placeholder="https://..." style="flex: 1;" onkeydown="if(event.key==='Enter'){event.preventDefault();previewCycleBlockExternalUrl();}">
+                      <button type="button" class="btn btn-secondary" onclick="previewCycleBlockExternalUrl()" style="white-space: nowrap; font-weight: 700; padding: 10px 18px; border-radius: var(--radius-md);">
+                        Previsualizar
+                      </button>
+                    </div>
+                    <div id="cycleBlockUrlError" style="display: none; color: #dc2626; font-size: 0.84rem; font-weight: 700; margin-top: 6px;"></div>
                   </div>
                 </div>
 

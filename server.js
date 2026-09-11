@@ -874,6 +874,30 @@ async function saveToUpstash(data) {
 }
 
 async function fetchFromGitHub() {
+  if (GITHUB_TOKEN) {
+    try {
+      const apiUrl = `https://api.github.com/repos/${GITHUB_REPO}/contents/data/db.json`;
+      const res = await fetch(apiUrl, {
+        headers: {
+          'Authorization': `token ${GITHUB_TOKEN}`,
+          'Accept': 'application/vnd.github.v3+json',
+          'User-Agent': 'Psico-Leonistico-Sync'
+        },
+        cache: 'no-store'
+      });
+      if (res.ok) {
+        const fileInfo = await res.json();
+        if (fileInfo && fileInfo.content) {
+          const raw = Buffer.from(fileInfo.content, 'base64').toString('utf-8');
+          const data = JSON.parse(raw);
+          return data;
+        }
+      }
+    } catch (apiErr) {
+      console.warn('Aviso leyendo API GitHub:', apiErr.message);
+    }
+  }
+
   try {
     const res = await fetch(`https://raw.githubusercontent.com/${GITHUB_REPO}/main/data/db.json?t=${Date.now()}`, {
       cache: 'no-store'
@@ -987,11 +1011,15 @@ async function getDbAsync() {
     }
     const cloudDb = await fetchFromUpstash();
     if (cloudDb && typeof cloudDb === 'object') {
-      inMemoryDb = cloudDb;
-      lastCloudSyncTime = now;
-      try {
-        fs.writeFileSync(DB_FILE, JSON.stringify(inMemoryDb, null, 2), 'utf-8');
-      } catch (_) {}
+      const memVer = inMemoryDb && inMemoryDb.version ? Number(inMemoryDb.version) : 0;
+      const cloudVer = cloudDb.version ? Number(cloudDb.version) : 0;
+      if (!inMemoryDb || cloudVer >= memVer) {
+        inMemoryDb = cloudDb;
+        lastCloudSyncTime = now;
+        try {
+          fs.writeFileSync(DB_FILE, JSON.stringify(inMemoryDb, null, 2), 'utf-8');
+        } catch (_) {}
+      }
       return inMemoryDb;
     }
   }
@@ -1000,11 +1028,17 @@ async function getDbAsync() {
   if (!inMemoryDb || (isVercel && (now - lastCloudSyncTime > 4000))) {
     const ghDb = await fetchFromGitHub();
     if (ghDb && typeof ghDb === 'object' && Array.isArray(ghDb.cyclesList)) {
-      inMemoryDb = ghDb;
-      lastCloudSyncTime = now;
-      try {
-        fs.writeFileSync(DB_FILE, JSON.stringify(inMemoryDb, null, 2), 'utf-8');
-      } catch (_) {}
+      const memVer = inMemoryDb && inMemoryDb.version ? Number(inMemoryDb.version) : 0;
+      const ghVer = ghDb.version ? Number(ghDb.version) : 0;
+      if (!inMemoryDb || ghVer >= memVer) {
+        inMemoryDb = ghDb;
+        lastCloudSyncTime = now;
+        try {
+          fs.writeFileSync(DB_FILE, JSON.stringify(inMemoryDb, null, 2), 'utf-8');
+        } catch (_) {}
+      } else {
+        lastCloudSyncTime = now;
+      }
       return inMemoryDb;
     }
   }
