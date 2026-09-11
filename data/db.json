@@ -312,18 +312,7 @@
       "titleAlign": "left",
       "size": "full",
       "imageSize": "full",
-      "imageFit": "contain",
-      "iconEmoji": "💡",
-      "accentColor": "teal",
-      "slidesUrl": "",
-      "slidesBtnText": "",
-      "slidesFileData": "",
-      "slidesFileName": "",
-      "buttonText": "",
-      "buttonUrl": "",
-      "itemsList": [],
-      "resourcesList": [],
-      "photosList": []
+      "imageFit": "contain"
     },
     {
       "id": 4,
@@ -339,18 +328,7 @@
       "titleAlign": "left",
       "size": "full",
       "imageSize": "full",
-      "imageFit": "contain",
-      "iconEmoji": "💡",
-      "accentColor": "yellow",
-      "slidesUrl": "",
-      "slidesBtnText": "",
-      "slidesFileData": "",
-      "slidesFileName": "",
-      "buttonText": "",
-      "buttonUrl": "",
-      "itemsList": [],
-      "resourcesList": [],
-      "photosList": []
+      "imageFit": "contain"
     },
     {
       "id": 5,
@@ -366,18 +344,7 @@
       "titleAlign": "left",
       "size": "full",
       "imageSize": "full",
-      "imageFit": "contain",
-      "iconEmoji": "💡",
-      "accentColor": "purple",
-      "slidesUrl": "",
-      "slidesBtnText": "",
-      "slidesFileData": "",
-      "slidesFileName": "",
-      "buttonText": "",
-      "buttonUrl": "",
-      "itemsList": [],
-      "resourcesList": [],
-      "photosList": []
+      "imageFit": "contain"
     },
     {
       "id": 7,
@@ -393,18 +360,7 @@
       "titleAlign": "left",
       "size": "full",
       "imageSize": "full",
-      "imageFit": "contain",
-      "iconEmoji": "💡",
-      "accentColor": "green",
-      "slidesUrl": "",
-      "slidesBtnText": "",
-      "slidesFileData": "",
-      "slidesFileName": "",
-      "buttonText": "",
-      "buttonUrl": "",
-      "itemsList": [],
-      "resourcesList": [],
-      "photosList": []
+      "imageFit": "contain"
     },
     {
       "id": 1788358008335,
@@ -504,99 +460,15 @@
           "icon": "file-text"
         }
       ],
-      "photosList": [
-        {
-          "url": "/uploads/gallery_1788358207022_0_1788803346192_0y1r1.jpg",
-          "caption": ""
-        }
-      ],
+      "photosList": [],
       "order": 1,
-      "galleryLayout": "single_full",
-      "galleryFit": "wide",
+      "galleryLayout": "cols_3",
+      "galleryFit": "square",
       "galleryAlign": "left",
       "imageSize": "full",
-      "imageFit": "contain"
-    },
-    {
-      "id": 1788808426228,
-      "cycleId": "promocion-prevencion",
-      "type": "video_embed",
-      "size": "full",
-      "titleAlign": "left",
-      "title": "Septiembre mes de la prevención del suicidio",
-      "subtitle": "No estás solo. Hablar también es una forma de cuidarnos.",
-      "badgeText": "PROMOCIÓN Y PREVENCIÓN",
-      "text": "Este mes nos invita a recordar que escuchar, acompañar y hablar puede marcar la diferencia. Cuidar nuestra salud mental también significa estar atentos a quienes nos rodean, brindar apoyo y buscar ayuda cuando sea necesario.",
-      "imageUrl": "",
-      "imagePosition": "banner",
-      "imageSize": "full",
       "imageFit": "contain",
-      "galleryLayout": "single_full",
-      "galleryFit": "natural",
-      "galleryAlign": "center",
-      "buttonText": "",
-      "buttonUrl": "",
-      "iconEmoji": "💡",
-      "accentColor": "purple",
-      "slidesUrl": "",
-      "slidesBtnText": "",
-      "videoUrl": "https://drive.google.com/file/d/1ztZW9ICNAdempPw1HEqRLZifY7kM7ytG/view?usp=sharing",
-      "videoBtnText": "",
-      "slidesFileData": "",
-      "slidesFileName": "",
-      "itemsList": [],
-      "resourcesList": [],
-      "photosList": [],
-      "order": 1
-    },
-    {
-      "id": 1788887600000,
-      "cycleId": "guia-bienestar",
-      "type": "hero_banner",
-      "size": "full",
-      "titleAlign": "left",
-      "title": "Acompañamiento Socioemocional y Primeros Auxilios Psicológicos",
-      "subtitle": "Estrategias de contención, tranquilidad y apoyo mutuo para toda la comunidad leonística",
-      "badgeText": "BIENESTAR EMOCIONAL POST TERREMOTO",
-      "text": "Frente a eventos inesperados o situaciones de emergencia sísmica, es natural experimentar miedo, ansiedad o preocupación. Desde el área de Psicoorientación Escolar compartimos pautas formativas, actividades de respiración, técnicas de regulación emocional y recursos prácticos para acompañar a nuestros niños, niñas y jóvenes tanto en el hogar como en las aulas.\n\nRecuerda que escuchar con empatía, mantener la calma y validar las emociones son los primeros pasos para restaurar la seguridad y el bienestar.",
-      "imageUrl": "",
-      "imagePosition": "left",
-      "imageSize": "full",
-      "imageFit": "contain",
-      "buttonText": "",
-      "buttonUrl": "",
-      "iconEmoji": "🌱",
-      "accentColor": "blue",
-      "slidesUrl": "",
-      "slidesBtnText": "",
       "videoUrl": "",
-      "videoBtnText": "",
-      "slidesFileData": "",
-      "slidesFileName": "",
-      "itemsList": [
-        {
-          "icon": "🤝",
-          "title": "Contención Emocional",
-          "text": "Validar temores y transmitir calma y presencia constante."
-        },
-        {
-          "icon": "🌬️",
-          "title": "Técnicas de Respiración",
-          "text": "Ejercicios guiados para reducir la tensión corporal y el estrés."
-        }
-      ],
-      "resourcesList": [
-        {
-          "title": "Pautas de Apoyo Post Emergencia (PDF)",
-          "desc": "Material imprimible de orientación para el aula y el hogar.",
-          "fileUrl": "",
-          "fileName": "",
-          "fileSize": "",
-          "icon": "file-text"
-        }
-      ],
-      "photosList": [],
-      "order": 1
+      "videoBtnText": ""
     }
   ],
   "suggestions": [],
@@ -621,5 +493,5 @@
   },
   "adminPassword": "123",
   "adminSlug": "admin451200",
-  "version": "1789139735508"
+  "version": "1789140192002"
 }
