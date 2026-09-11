@@ -478,11 +478,11 @@
   ],
   "suggestions": [],
   "analytics": {
-    "totalVisits": 14,
+    "totalVisits": 15,
     "uniqueSessions": 0,
-    "lastVisitDate": "11/9/2026 11:57 a. m.",
+    "lastVisitDate": "11/9/2026 05:46 p. m.",
     "tabs": {
-      "inicio": 0,
+      "inicio": 1,
       "encuentros": 0,
       "ciclos": 14
     },
@@ -495,6 +495,13 @@
       "especializado": 0
     },
     "logs": [
+      {
+        "id": 1789148764889,
+        "date": "11/9/2026 05:46 p. m.",
+        "section": "Promoción y Prevención",
+        "action": "Visita a Promoción y Prevención",
+        "device": "Escritorio"
+      },
       {
         "id": 1789145820521,
         "date": "11/9/2026 11:57 a. m.",
@@ -597,5 +604,5 @@
   },
   "adminPassword": "123",
   "adminSlug": "admin451200",
-  "version": "1789145834332"
+  "version": "1789148764889"
 }
