@@ -5103,3 +5103,152 @@ body.admin-dark .cycle-block-admin-actions {
   color: #fef08a;
   font-style: italic;
 }
+
+
+/* ============================================================
+   CICLOS HUB & ENHANCED MODULAR CARDS ("CUADROS")
+   ============================================================ */
+.cycle-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 28px;
+  margin-top: 24px;
+}
+
+.cycle-card {
+  background: #ffffff;
+  border: 2px solid #e2e8f0;
+  border-radius: var(--radius-lg);
+  padding: 30px 28px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: relative;
+  overflow: hidden;
+}
+
+.cycle-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 20px -3px rgba(0, 0, 0, 0.08), 0 4px 6px -2px rgba(0, 0, 0, 0.04);
+}
+
+.cycle-card-top-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 18px;
+}
+
+.cycle-card-icon-wrap {
+  width: 52px;
+  height: 52px;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.6rem;
+}
+
+.cycle-card-heading {
+  font-family: var(--font-heading);
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #1e293b;
+  margin-bottom: 6px;
+  line-height: 1.25;
+}
+
+.cycle-card-grades-tag {
+  font-size: 0.8rem;
+  font-weight: 800;
+  color: #64748b;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  margin-bottom: 14px;
+}
+
+.cycle-card-desc {
+  color: #475569;
+  font-size: 0.95rem;
+  line-height: 1.65;
+  margin-bottom: 24px;
+}
+
+.cycle-card-action-wrap {
+  margin-top: auto;
+  padding-top: 14px;
+  border-top: 1px solid #f1f5f9;
+}
+
+.btn-block {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  text-align: center;
+}
+
+.bg-pink-light { background-color: #fdf2f8; border: 1px solid #fce7f3; }
+.bg-teal-light { background-color: #f0fdfa; border: 1px solid #ccfbf1; }
+.bg-yellow-light { background-color: #fefce8; border: 1px solid #fef08a; }
+.bg-purple-light { background-color: #faf5ff; border: 1px solid #f3e8ff; }
+.bg-blue-light { background-color: #eff6ff; border: 1px solid #dbeafe; }
+.bg-green-light { background-color: #f0fdf4; border: 1px solid #dcfce7; }
+
+/* Distinct Themed Card Borders */
+.cycle-card.card-border-pink,
+.cycle-block-card.card-border-pink {
+  border-color: #fbcfe8 !important;
+  border-top: 4px solid #e11d48 !important;
+}
+.cycle-card.card-border-pink:hover {
+  border-color: #f472b6 !important;
+}
+
+.cycle-card.card-border-teal,
+.cycle-block-card.card-border-teal {
+  border-color: #ccfbf1 !important;
+  border-top: 4px solid #0d9488 !important;
+}
+.cycle-card.card-border-teal:hover {
+  border-color: #5eead4 !important;
+}
+
+.cycle-card.card-border-yellow,
+.cycle-block-card.card-border-yellow {
+  border-color: #fef08a !important;
+  border-top: 4px solid #d97706 !important;
+}
+.cycle-card.card-border-yellow:hover {
+  border-color: #fde047 !important;
+}
+
+.cycle-card.card-border-purple,
+.cycle-block-card.card-border-purple {
+  border-color: #f3e8ff !important;
+  border-top: 4px solid #9333ea !important;
+}
+.cycle-card.card-border-purple:hover {
+  border-color: #d8b4fe !important;
+}
+
+.cycle-card.card-border-blue,
+.cycle-block-card.card-border-blue {
+  border-color: #dbeafe !important;
+  border-top: 4px solid #2563eb !important;
+}
+.cycle-card.card-border-blue:hover {
+  border-color: #93c5fd !important;
+}
+
+.cycle-card.card-border-green,
+.cycle-block-card.card-border-green {
+  border-color: #dcfce7 !important;
+  border-top: 4px solid #16a34a !important;
+}
+.cycle-card.card-border-green:hover {
+  border-color: #86efac !important;
+}

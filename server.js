@@ -1266,6 +1266,15 @@ app.get(['/promocion-prevencion', '/promocion-prevencion.html', '/promocion-y-pr
   res.sendFile(path.join(__dirname, 'promocion-prevencion.html'));
 });
 
+// 3.0 Hub Principal de Ciclos Escolares (/ciclos, /ciclos/)
+app.get(['/ciclos', '/ciclos/', '/ciclos/index.html'], (req, res) => {
+  const hubPath = path.join(__dirname, 'public', 'ciclos', 'index.html');
+  if (fs.existsSync(hubPath)) {
+    return res.sendFile(hubPath);
+  }
+  res.sendFile(path.join(__dirname, 'ciclos', 'index.html'));
+});
+
 // 3. Rutas de Ciclos Escolares (Soporta ciclos existentes y dinámicos)
 app.get(['/ciclos/:slug', '/ciclos/:slug.html'], (req, res, next) => {
   const rawSlug = req.params.slug.toLowerCase().replace('.html', '');

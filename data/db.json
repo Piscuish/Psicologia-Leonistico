@@ -55,7 +55,7 @@
     {
       "id": "nav_ciclos",
       "title": "Ciclos",
-      "url": "#",
+      "url": "/ciclos",
       "icon": "layers",
       "type": "dropdown",
       "order": 5,
@@ -602,5 +602,5 @@
   },
   "adminPassword": "123",
   "adminSlug": "admin451200",
-  "version": "1789132982252"
+  "version": "1789134161144"
 }

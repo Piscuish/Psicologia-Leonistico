@@ -1099,6 +1099,8 @@ function startRealTimeSync() {
             renderCyclePublicPage('promocion-prevencion');
           } else if (path.includes('guia-bienestar') || path.includes('bienestar')) {
             renderCyclePublicPage('guia-bienestar');
+          } else if (path === '/ciclos' || path === '/ciclos/' || path.endsWith('/ciclos') || path.endsWith('/ciclos/') || path.includes('/ciclos/index')) {
+            renderCiclosHub();
           } else if (path.includes('ciclos') || cyclesList.some(c => path.includes(c.slug) || path.includes(c.key))) {
             const matchedCycle = cyclesList.find(c => path.includes(c.slug) || path.includes(c.key));
             if (matchedCycle) {
@@ -1138,6 +1140,9 @@ document.addEventListener('DOMContentLoaded', async () => {
   } else if (path.includes('guia-bienestar') || path.includes('bienestar')) {
     recordVisit('Guía De Bienestar Emocional Post Terremoto', 'Visita a Guía De Bienestar');
     renderCyclePublicPage('guia-bienestar');
+  } else if (path === '/ciclos' || path === '/ciclos/' || path.endsWith('/ciclos') || path.endsWith('/ciclos/') || path.includes('/ciclos/index')) {
+    recordVisit('Ciclos Escolares', 'Consulta del Hub de Ciclos');
+    renderCiclosHub();
   } else if (path.includes('pagina') || path.includes('/p/')) {
     const slug = path.split('/').filter(Boolean).pop().replace('.html', '');
     renderCustomPublicPage(slug);
@@ -1171,6 +1176,8 @@ document.addEventListener('DOMContentLoaded', async () => {
     renderCyclePublicPage('promocion-prevencion');
   } else if (path.includes('guia-bienestar') || path.includes('bienestar')) {
     renderCyclePublicPage('guia-bienestar');
+  } else if (path === '/ciclos' || path === '/ciclos/' || path.endsWith('/ciclos') || path.endsWith('/ciclos/') || path.includes('/ciclos/index')) {
+    renderCiclosHub();
   } else if (path.includes('ciclos') || cyclesList.some(c => path.includes(c.slug) || path.includes(c.key))) {
     const matchedCycle = cyclesList.find(c => path.includes(c.slug) || path.includes(c.key));
     if (matchedCycle) {
@@ -5803,3 +5810,73 @@ window.removeResourceAttachedFile = removeResourceAttachedFile;
 window.addCardItemToBuilder = addCardItemToBuilder;
 window.removeCardItemFromBuilder = removeCardItemFromBuilder;
 window.updateCardItemField = updateCardItemField;
+
+
+// Renderizado Dinámico del Hub de Ciclos Escolares (/ciclos/)
+function renderCiclosHub() {
+  const container = document.getElementById('ciclosHubContainer');
+  if (!container) return;
+
+  const cycles = (typeof cyclesList !== 'undefined' && Array.isArray(cyclesList) && cyclesList.length > 0)
+    ? cyclesList
+    : DEFAULT_CYCLES_LIST;
+
+  const defaultIcons = {
+    'primera_infancia': '🧸',
+    'infantil': '🌱',
+    'basico': '📘',
+    'fundamental': '🔮',
+    'exploratorio': '🧭',
+    'especializado': '🎓'
+  };
+
+  const bgClasses = {
+    'pill-pink': 'bg-pink-light',
+    'pill-teal': 'bg-teal-light',
+    'pill-yellow': 'bg-yellow-light',
+    'pill-purple': 'bg-purple-light',
+    'pill-blue': 'bg-blue-light',
+    'pill-green': 'bg-green-light'
+  };
+
+  container.innerHTML = [...cycles].sort((a, b) => (a.order || 0) - (b.order || 0)).map(cycle => {
+    const icon = cycle.icon || defaultIcons[cycle.key] || '📚';
+    const pillClass = cycle.pillClass || 'pill-blue';
+    const borderClass = cycle.borderClass || 'card-border-blue';
+    const bgLightClass = bgClasses[pillClass] || 'bg-blue-light';
+    const url = cycle.pageUrl || `/ciclos/${cycle.slug || cycle.key}`;
+
+    return `
+      <div class="cycle-card ${borderClass}">
+        <div>
+          <div class="cycle-card-top-bar">
+            <div class="cycle-card-icon-wrap ${bgLightClass}">
+              <span class="cycle-card-emoji">${icon}</span>
+            </div>
+            <span class="dropdown-pill ${pillClass}">
+              ${cycle.badgeText || cycle.grades || 'Ciclo'}
+            </span>
+          </div>
+          <h3 class="cycle-card-heading">
+            ${cycle.name}
+          </h3>
+          <div class="cycle-card-grades-tag">
+            ${cycle.grades || ''}
+          </div>
+          <p class="cycle-card-desc">
+            ${cycle.subtitle || 'Espacio formativo y de acompañamiento socioemocional.'}
+          </p>
+        </div>
+        <div class="cycle-card-action-wrap">
+          <a href="${url}" class="btn btn-primary btn-md btn-block">
+            Explorar Ciclo <i data-lucide="arrow-right"></i>
+          </a>
+        </div>
+      </div>
+    `;
+  }).join('');
+
+  if (typeof lucide !== 'undefined' && lucide.createIcons) {
+    lucide.createIcons();
+  }
+}

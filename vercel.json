@@ -73,6 +73,14 @@
       "destination": "/pagina.html"
     },
     {
+      "source": "/ciclos",
+      "destination": "/ciclos/index.html"
+    },
+    {
+      "source": "/ciclos/",
+      "destination": "/ciclos/index.html"
+    },
+    {
       "source": "/ciclos/(.*)",
       "destination": "/ciclos/template.html"
     }
