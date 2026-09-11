@@ -482,9 +482,9 @@
   ],
   "suggestions": [],
   "analytics": {
-    "totalVisits": 4,
+    "totalVisits": 5,
     "uniqueSessions": 0,
-    "lastVisitDate": "11/9/2026 10:42 a. m.",
+    "lastVisitDate": "11/9/2026 04:07 p. m.",
     "tabs": {
       "inicio": 0,
       "encuentros": 0,
@@ -499,6 +499,13 @@
       "especializado": 0
     },
     "logs": [
+      {
+        "id": 1789142869756,
+        "date": "11/9/2026 04:07 p. m.",
+        "section": "test",
+        "action": "test",
+        "device": "Web"
+      },
       {
         "id": 1789141364477,
         "date": "11/9/2026 10:42 a. m.",
@@ -531,5 +538,5 @@
   },
   "adminPassword": "123",
   "adminSlug": "admin451200",
-  "version": "1789142656658"
+  "version": "1789142869757"
 }
