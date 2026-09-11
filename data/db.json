@@ -478,23 +478,30 @@
   ],
   "suggestions": [],
   "analytics": {
-    "totalVisits": 16,
+    "totalVisits": 17,
     "uniqueSessions": 0,
     "lastVisitDate": "11/9/2026 06:17 p. m.",
     "tabs": {
       "inicio": 1,
       "encuentros": 0,
-      "ciclos": 15
+      "ciclos": 16
     },
     "cycles": {
       "primera_infancia": 15,
-      "infantil": 0,
+      "infantil": 1,
       "basico": 0,
       "fundamental": 0,
       "exploratorio": 0,
       "especializado": 0
     },
     "logs": [
+      {
+        "id": 1789150627459,
+        "date": "11/9/2026 06:17 p. m.",
+        "section": "Ciclos: Ciclo Infantil (1°, 2° Y 3°)",
+        "action": "Visita a la página de Ciclo Infantil (1°, 2° Y 3°)",
+        "device": "Escritorio"
+      },
       {
         "id": 1789150620435,
         "date": "11/9/2026 06:17 p. m.",
@@ -611,5 +618,5 @@
   },
   "adminPassword": "123",
   "adminSlug": "admin451200",
-  "version": "1789150620435"
+  "version": "1789150627459"
 }
