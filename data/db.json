@@ -467,13 +467,11 @@
         }
       ],
       "order": 1,
-      "galleryLayout": "cols_2",
+      "galleryLayout": "single_full",
       "galleryFit": "wide",
       "galleryAlign": "left",
       "imageSize": "full",
-      "imageFit": "contain",
-      "videoUrl": "",
-      "videoBtnText": ""
+      "imageFit": "contain"
     },
     {
       "id": 1788808426228,
@@ -604,5 +602,5 @@
   },
   "adminPassword": "123",
   "adminSlug": "admin451200",
-  "version": "1789132692785"
+  "version": "1789132982252"
 }

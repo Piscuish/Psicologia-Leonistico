@@ -393,14 +393,10 @@ const DEFAULT_CYCLE_BLOCKS = [
       {
         "url": "/uploads/gallery_1788358207022_0_1788803346192_0y1r1.jpg",
         "caption": ""
-      },
-      {
-        "url": "/uploads/gallery_1788358207022_1_1788803346195_stbad.jpg",
-        "caption": ""
       }
     ],
     "order": 1,
-    "galleryLayout": "cols_2",
+    "galleryLayout": "single_full",
     "galleryFit": "wide",
     "galleryAlign": "left",
     "imageSize": "full",

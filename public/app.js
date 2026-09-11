@@ -406,14 +406,10 @@ const DEFAULT_CYCLE_BLOCKS = [
       {
         "url": "/uploads/gallery_1788358207022_0_1788803346192_0y1r1.jpg",
         "caption": ""
-      },
-      {
-        "url": "/uploads/gallery_1788358207022_1_1788803346195_stbad.jpg",
-        "caption": ""
       }
     ],
     "order": 1,
-    "galleryLayout": "cols_2",
+    "galleryLayout": "single_full",
     "galleryFit": "wide",
     "galleryAlign": "left",
     "imageSize": "full",
@@ -761,7 +757,7 @@ const DEFAULT_SUGGESTIONS = [
 // APP STATE & PERSISTENCE (HYBRID LOCAL + SERVER DATABASE)
 // ============================================================
 
-const APP_BUILD_VERSION = '2.9.12-20260910';
+const APP_BUILD_VERSION = '3.2.0-20260911';
 
 function initializeAppState() {
   const currentBuild = localStorage.getItem('psicologia_app_build_version');
@@ -1074,8 +1070,55 @@ async function syncSecurityToServer(adminPassword, adminSlug) {
 }
 
 // ============================================================
-// INITIALIZATION ON DOM CONTENT LOADED
+// INITIALIZATION ON DOM CONTENT LOADED & REAL-TIME SYNC
 // ============================================================
+
+let isCheckingServerUpdates = false;
+
+function startRealTimeSync() {
+  setInterval(async () => {
+    if (isCheckingServerUpdates || document.hidden) return;
+    try {
+      isCheckingServerUpdates = true;
+      const vRes = await fetch('/api/version?t=' + Date.now(), { cache: 'no-store' });
+      if (vRes.ok) {
+        const vData = await vRes.json();
+        const currentLocalVersion = localStorage.getItem('psicologia_db_version');
+        if (vData.v && vData.v !== currentLocalVersion) {
+          console.log('🔄 Sincronizando cambios en vivo desde el servidor...');
+          await loadServerData();
+          renderPublicNavbar();
+          applySiteImages();
+          renderTeamCards();
+          updateBadgeCounts();
+
+          const path = window.location.pathname.toLowerCase();
+          if (path.includes('encuentros')) {
+            renderCalendar();
+          } else if (path.includes('promocion-prevencion') || path.includes('promocion')) {
+            renderCyclePublicPage('promocion-prevencion');
+          } else if (path.includes('guia-bienestar') || path.includes('bienestar')) {
+            renderCyclePublicPage('guia-bienestar');
+          } else if (path.includes('ciclos') || cyclesList.some(c => path.includes(c.slug) || path.includes(c.key))) {
+            const matchedCycle = cyclesList.find(c => path.includes(c.slug) || path.includes(c.key));
+            if (matchedCycle) {
+              renderCyclePublicPage(matchedCycle.key);
+            }
+          } else if (path.includes('admin') || path.includes('2610') || (adminSlug && path.includes(adminSlug.toLowerCase()))) {
+            if (isAdminLoggedIn) {
+              renderAdminCycleTabs();
+              renderAdminCycleBlocks();
+              renderAdminNavList();
+            }
+          }
+        }
+      }
+    } catch (_) {
+    } finally {
+      isCheckingServerUpdates = false;
+    }
+  }, 4000);
+}
 
 document.addEventListener('DOMContentLoaded', async () => {
   // 1. Renderizado INMEDIATO instantáneo con datos locales (0 milisegundos de espera)
@@ -1140,6 +1183,9 @@ document.addEventListener('DOMContentLoaded', async () => {
       renderAdminNavList();
     }
   }
+
+  // Activar sincronización en vivo cada 4 segundos
+  startRealTimeSync();
 
   // Secret keyboard shortcut (Ctrl + Alt + A)
   document.addEventListener('keydown', (e) => {
@@ -5041,11 +5087,10 @@ function renderCycleBlockByType(b, meta, isPublic = true) {
       `;
 
     case 'photo_gallery':
-      const photos = b.photosList && b.photosList.length ? b.photosList : [
-        { url: b.imageUrl || 'https://images.unsplash.com/photo-1577896851231-70ef18881754?auto=format&fit=crop&w=600&q=80', caption: '' },
-        { url: 'https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&w=600&q=80', caption: '' }
-      ];
-      const galleryLayout = b.galleryLayout || (photos.length === 1 ? 'single_full' : 'cols_2');
+      const photos = (b.photosList && Array.isArray(b.photosList) && b.photosList.length > 0)
+        ? b.photosList
+        : (b.imageUrl ? [{ url: b.imageUrl, caption: '' }] : []);
+      const galleryLayout = b.galleryLayout || (photos.length <= 1 ? 'single_full' : 'cols_2');
       const galleryFit = b.galleryFit || 'natural';
       const galleryAlign = b.galleryAlign || 'center';
 
