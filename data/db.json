@@ -424,8 +424,8 @@
       "type": "photo_gallery",
       "size": "full",
       "titleAlign": "center",
-      "title": "Bienvenidos",
-      "subtitle": "Caminemos juntos en la construcción de entornos seguros, amorosos y respetuosos para nuestros niños y niñas.",
+      "title": "Bienvenidos a Primera Infancia - Test Persistencia 2026",
+      "subtitle": "Nuevo subtítulo verificado para probar guardado real",
       "badgeText": "Jardín y transición",
       "text": "En este espacio encontrarás herramientas, estrategias y recursos para acompañar el desarrollo integral de la primera infancia desde el área de Psicoorientación.\n\nNuestro propósito es brindar orientaciones prácticas que permitan a familias, docentes y comunidad educativa acompañar a los niños y niñas en sus procesos emocionales, sociales, cognitivos y educativos, fortaleciendo su bienestar y desarrollo.",
       "imageUrl": "",
@@ -460,7 +460,12 @@
           "icon": "file-text"
         }
       ],
-      "photosList": [],
+      "photosList": [
+        {
+          "url": "https://images.unsplash.com/photo-1577896851231-70ef18881754?auto=format&fit=crop&w=600&q=80",
+          "caption": ""
+        }
+      ],
       "order": 1,
       "galleryLayout": "cols_3",
       "galleryFit": "square",
@@ -508,5 +513,5 @@
   },
   "adminPassword": "123",
   "adminSlug": "admin451200",
-  "version": "1789141286914"
+  "version": "1789141313000"
 }
