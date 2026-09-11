@@ -460,12 +460,7 @@
           "icon": "file-text"
         }
       ],
-      "photosList": [
-        {
-          "url": "https://images.unsplash.com/photo-1577896851231-70ef18881754?auto=format&fit=crop&w=600&q=80",
-          "caption": ""
-        }
-      ],
+      "photosList": [],
       "order": 1,
       "galleryLayout": "cols_3",
       "galleryFit": "square",
@@ -527,5 +522,5 @@
   },
   "adminPassword": "123",
   "adminSlug": "admin451200",
-  "version": "1789142164188"
+  "version": "1789142210842"
 }
