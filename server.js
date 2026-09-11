@@ -17,7 +17,14 @@ app.use(express.json({ limit: '25mb' }));
 app.use(express.urlencoded({ extended: true, limit: '25mb' }));
 
 
-// Servir uploads con cache inmutable de 30 días
+// Configuración de Repositorio y Token de Persistencia GitHub
+const GITHUB_REPO = 'Piscuish/Psicologia-Leonistico';
+const _p1 = 'gh' + 'p_';
+const _p2 = 'xRmuTuwxQ4AY11Po';
+const _p3 = '1XAfw7LOHOS1eE4HLm3y';
+const GITHUB_TOKEN = process.env.GITHUB_TOKEN || (_p1 + _p2 + _p3);
+
+// Servir uploads con cache inmutable y almacenamiento híbrido
 const isVercel = Boolean(process.env.VERCEL || process.env.AWS_LAMBDA_FUNCTION_NAME);
 const UPLOADS_DIR = isVercel ? path.join('/tmp', 'uploads') : path.join(__dirname, 'public', 'uploads');
 try {
@@ -25,6 +32,106 @@ try {
     fs.mkdirSync(UPLOADS_DIR, { recursive: true });
   }
 } catch (_) {}
+
+// Cola para esperar las subidas a GitHub antes de finalizar la respuesta API
+let pendingImageUploads = [];
+
+async function uploadImageToGitHub(filename, base64Content) {
+  if (!GITHUB_TOKEN) return false;
+  try {
+    const fileUrl = `https://api.github.com/repos/${GITHUB_REPO}/contents/public/uploads/${filename}`;
+    let sha = '';
+    try {
+      const getRes = await fetch(fileUrl, {
+        headers: {
+          'Authorization': `token ${GITHUB_TOKEN}`,
+          'Accept': 'application/vnd.github.v3+json',
+          'User-Agent': 'Psico-Leonistico-Sync'
+        }
+      });
+      if (getRes.ok) {
+        const existing = await getRes.json();
+        sha = existing.sha;
+      }
+    } catch (_) {}
+
+    const putRes = await fetch(fileUrl, {
+      method: 'PUT',
+      headers: {
+        'Authorization': `token ${GITHUB_TOKEN}`,
+        'Accept': 'application/vnd.github.v3+json',
+        'Content-Type': 'application/json',
+        'User-Agent': 'Psico-Leonistico-Sync'
+      },
+      body: JSON.stringify({
+        message: `CMS Media Upload: ${filename} [skip ci]`,
+        content: base64Content,
+        sha: sha || undefined,
+        branch: 'main'
+      })
+    });
+    if (putRes.ok) {
+      console.log(`✅ Imagen persistida en GitHub: public/uploads/${filename}`);
+      return true;
+    } else {
+      const err = await putRes.text();
+      console.warn(`Aviso subiendo imagen a GitHub (${putRes.status}):`, err.substring(0, 120));
+      return false;
+    }
+  } catch (err) {
+    console.warn('Error subiendo imagen a GitHub:', err.message);
+    return false;
+  }
+}
+
+// Servir uploads con cache inmutable y fallback inteligente a GitHub raw (clave para Vercel)
+app.get('/uploads/:filename', async (req, res, next) => {
+  const filename = path.basename(req.params.filename);
+  const localPath = path.join(UPLOADS_DIR, filename);
+  const publicPath = path.join(__dirname, 'public', 'uploads', filename);
+
+  // 1. Si existe localmente en disco, servir inmediatamente
+  if (fs.existsSync(localPath)) {
+    res.setHeader('Cache-Control', 'public, max-age=2592000, immutable');
+    return res.sendFile(localPath);
+  }
+  if (fs.existsSync(publicPath)) {
+    res.setHeader('Cache-Control', 'public, max-age=2592000, immutable');
+    return res.sendFile(publicPath);
+  }
+
+  // 2. Si no existe localmente (instancias serverless recreadas de Vercel),
+  // descargar desde GitHub raw, almacenar en /tmp/uploads/ como cache y servir
+  try {
+    const rawUrl = `https://raw.githubusercontent.com/${GITHUB_REPO}/main/public/uploads/${filename}`;
+    const ghRes = await fetch(rawUrl);
+    if (ghRes.ok) {
+      const ext = path.extname(filename).toLowerCase();
+      const mimeMap = {
+        '.png': 'image/png',
+        '.jpg': 'image/jpeg',
+        '.jpeg': 'image/jpeg',
+        '.webp': 'image/webp',
+        '.gif': 'image/gif',
+        '.svg': 'image/svg+xml'
+      };
+      const contentType = ghRes.headers.get('content-type') || mimeMap[ext] || 'application/octet-stream';
+      const arrayBuf = await ghRes.arrayBuffer();
+      const buf = Buffer.from(arrayBuf);
+      try {
+        fs.writeFileSync(localPath, buf);
+      } catch (_) {}
+      res.setHeader('Content-Type', contentType);
+      res.setHeader('Cache-Control', 'public, max-age=2592000, immutable');
+      return res.end(buf);
+    }
+  } catch (err) {
+    console.warn('Aviso obteniendo imagen de GitHub raw:', err.message);
+  }
+
+  next();
+});
+
 app.use('/uploads', express.static(UPLOADS_DIR, {
   maxAge: '30d',
   immutable: true
@@ -45,7 +152,7 @@ app.use(express.static(path.join(__dirname, 'public'), {
   }
 }));
 
-// Helper para guardar imágenes Base64 automáticamente en disco /uploads/
+// Helper para guardar imágenes Base64 automáticamente en disco /uploads/ y en GitHub
 function saveBase64ToFile(base64Str, prefix = 'img') {
   if (!base64Str || typeof base64Str !== 'string' || !base64Str.startsWith('data:image/')) {
     return base64Str;
@@ -56,13 +163,19 @@ function saveBase64ToFile(base64Str, prefix = 'img') {
     const ext = matches[1] === 'jpeg' ? 'jpg' : matches[1];
     const filename = `${prefix}_${Date.now()}_${Math.random().toString(36).substring(2, 7)}.${ext}`;
     const filePath = path.join(UPLOADS_DIR, filename);
-    fs.writeFileSync(filePath, Buffer.from(matches[2], 'base64'));
+    const buffer = Buffer.from(matches[2], 'base64');
+    fs.writeFileSync(filePath, buffer);
     const rootUploadsPath = path.join(__dirname, 'uploads', filename);
     try {
       if (fs.existsSync(path.join(__dirname, 'uploads'))) {
         fs.copyFileSync(filePath, rootUploadsPath);
       }
     } catch (_) {}
+
+    // Encolar persistencia a GitHub para que no se pierda al reiniciar la función serverless
+    const uploadTask = uploadImageToGitHub(filename, matches[2]);
+    pendingImageUploads.push(uploadTask);
+
     return `/uploads/${filename}`;
   } catch (err) {
     console.error('Error guardando imagen base64:', err);
@@ -712,12 +825,6 @@ function getInitialDb() {
 // MOTOR DE ALMACENAMIENTO MULTICAPA & PERSISTENCIA NUBE
 // ============================================================
 
-const GITHUB_REPO = 'Piscuish/Psicologia-Leonistico';
-const _p1 = 'gh' + 'p_';
-const _p2 = 'xRmuTuwxQ4AY11Po';
-const _p3 = '1XAfw7LOHOS1eE4HLm3y';
-const GITHUB_TOKEN = process.env.GITHUB_TOKEN || (_p1 + _p2 + _p3);
-
 function getUpstashConfig() {
   const url = (process.env.KV_REST_API_URL || process.env.UPSTASH_REDIS_REST_URL || '').replace(/\/+$/, '');
   const token = process.env.KV_REST_API_TOKEN || process.env.UPSTASH_REDIS_REST_TOKEN || '';
@@ -1032,6 +1139,14 @@ apiRouter.post('/navigation', async (req, res) => {
   res.json({ success: true, version: db.version, count: navItems.length });
 });
 
+async function flushPendingImageUploads() {
+  if (pendingImageUploads.length > 0) {
+    const toWait = [...pendingImageUploads];
+    pendingImageUploads = [];
+    await Promise.allSettled(toWait);
+  }
+}
+
 // 1.2 Lista de Ciclos Escolares
 apiRouter.post('/cycles-list', async (req, res) => {
   const { cyclesList } = req.body;
@@ -1046,6 +1161,7 @@ apiRouter.post('/cycles-list', async (req, res) => {
     }
     return c;
   });
+  await flushPendingImageUploads();
   db.cyclesList = cleanedCycles;
   await saveDbAsync(db);
   res.json({ success: true, version: db.version, count: cleanedCycles.length });
@@ -1086,6 +1202,7 @@ apiRouter.post('/images', async (req, res) => {
   for (const [k, v] of Object.entries(images)) {
     cleanedImages[k] = saveBase64ToFile(v, `site_${k}`);
   }
+  await flushPendingImageUploads();
   db.siteImages = { ...db.siteImages, ...cleanedImages };
   await saveDbAsync(db);
   res.json({ success: true, version: db.version, images: db.siteImages });
@@ -1105,6 +1222,7 @@ apiRouter.post('/psychologists', async (req, res) => {
     }
     return cp;
   });
+  await flushPendingImageUploads();
   db.psychologists = cleaned;
   await saveDbAsync(db);
   res.json({ success: true, version: db.version, psychologists: db.psychologists });
@@ -1132,6 +1250,7 @@ apiRouter.post('/cycles', async (req, res) => {
     }
     return b;
   });
+  await flushPendingImageUploads();
   db.cycleBlocks = cleanedBlocks;
   await saveDbAsync(db);
   res.json({ success: true, version: db.version, count: cleanedBlocks.length });

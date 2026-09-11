@@ -83,6 +83,10 @@
     {
       "source": "/ciclos/(.*)",
       "destination": "/ciclos/template.html"
+    },
+    {
+      "source": "/uploads/(.*)",
+      "destination": "/api/index.js"
     }
   ]
 }
