@@ -478,16 +478,16 @@
   ],
   "suggestions": [],
   "analytics": {
-    "totalVisits": 15,
+    "totalVisits": 16,
     "uniqueSessions": 0,
-    "lastVisitDate": "11/9/2026 01:17 p. m.",
+    "lastVisitDate": "12/9/2026 12:16 a. m.",
     "tabs": {
       "inicio": 0,
       "encuentros": 0,
-      "ciclos": 15
+      "ciclos": 16
     },
     "cycles": {
-      "primera_infancia": 15,
+      "primera_infancia": 16,
       "infantil": 0,
       "basico": 0,
       "fundamental": 0,
@@ -495,6 +495,13 @@
       "especializado": 0
     },
     "logs": [
+      {
+        "id": 1789172217240,
+        "date": "12/9/2026 12:16 a. m.",
+        "section": "Ciclos: Primera Infancia (JARDÍN Y TRANSICIÓN)",
+        "action": "Visita a la página de Primera Infancia (JARDÍN Y TRANSICIÓN)",
+        "device": "Escritorio"
+      },
       {
         "id": 1789150630249,
         "date": "11/9/2026 01:17 p. m.",
@@ -604,5 +611,5 @@
   },
   "adminPassword": "123",
   "adminSlug": "admin451200",
-  "version": "1789151606546"
+  "version": "1789172217241"
 }
