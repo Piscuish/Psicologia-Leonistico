@@ -421,7 +421,7 @@
     {
       "id": 1788358207022,
       "cycleId": "primera_infancia",
-      "type": "hero_banner",
+      "type": "photo_gallery",
       "size": "full",
       "titleAlign": "center",
       "title": "Bienvenidos",
@@ -611,5 +611,5 @@
   },
   "adminPassword": "123",
   "adminSlug": "admin451200",
-  "version": "1789172217241"
+  "version": "1789172240106"
 }
