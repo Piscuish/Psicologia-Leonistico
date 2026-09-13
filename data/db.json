@@ -478,12 +478,12 @@
   ],
   "suggestions": [],
   "analytics": {
-    "totalVisits": 17,
+    "totalVisits": 18,
     "uniqueSessions": 0,
     "lastVisitDate": "13/9/2026 09:57 p. m.",
     "tabs": {
       "inicio": 1,
-      "encuentros": 0,
+      "encuentros": 1,
       "ciclos": 16
     },
     "cycles": {
@@ -495,6 +495,13 @@
       "especializado": 0
     },
     "logs": [
+      {
+        "id": 1789336671658,
+        "date": "13/9/2026 09:57 p. m.",
+        "section": "Encuentros Familiares",
+        "action": "Consulta de Calendario de Encuentros",
+        "device": "Escritorio"
+      },
       {
         "id": 1789336645454,
         "date": "13/9/2026 09:57 p. m.",
@@ -618,5 +625,5 @@
   },
   "adminPassword": "123",
   "adminSlug": "admin451200",
-  "version": "1789336645454"
+  "version": "1789336671658"
 }
