@@ -474,15 +474,72 @@
       "imageFit": "contain",
       "videoUrl": "",
       "videoBtnText": ""
+    },
+    {
+      "id": 1789392104084,
+      "cycleId": "promocion-prevencion",
+      "type": "hero_banner",
+      "size": "full",
+      "titleAlign": "left",
+      "title": "d",
+      "subtitle": "d",
+      "badgeText": "d",
+      "text": "d",
+      "imageUrl": "",
+      "imagePosition": "banner",
+      "imageSize": "full",
+      "imageFit": "contain",
+      "galleryLayout": "single_full",
+      "galleryFit": "natural",
+      "galleryAlign": "center",
+      "buttonText": "",
+      "buttonUrl": "",
+      "iconEmoji": "💡",
+      "accentColor": "purple",
+      "slidesUrl": "",
+      "slidesBtnText": "",
+      "videoUrl": "",
+      "videoBtnText": "",
+      "slidesFileData": "",
+      "slidesFileName": "",
+      "itemsList": [
+        {
+          "icon": "💖",
+          "title": "Afecto y Diálogo",
+          "text": "Acompañamiento cercano y validación emocional constante."
+        },
+        {
+          "icon": "⏰",
+          "title": "Rutina y Horarios",
+          "text": "Fijar horas para estudiar, descansar y compartir en familia."
+        }
+      ],
+      "resourcesList": [
+        {
+          "title": "Guía de Orientación Familiar (PDF)",
+          "desc": "Material imprimible de apoyo para el hogar.",
+          "fileUrl": "",
+          "fileName": "",
+          "fileSize": "",
+          "icon": "file-text"
+        }
+      ],
+      "photosList": [
+        {
+          "url": "https://images.unsplash.com/photo-1577896851231-70ef18881754?auto=format&fit=crop&w=600&q=80",
+          "caption": ""
+        }
+      ],
+      "order": 1
     }
   ],
   "suggestions": [],
   "analytics": {
-    "totalVisits": 20,
+    "totalVisits": 23,
     "uniqueSessions": 0,
-    "lastVisitDate": "14/9/2026 08:10 a. m.",
+    "lastVisitDate": "14/9/2026 01:21 p. m.",
     "tabs": {
-      "inicio": 5,
+      "inicio": 8,
       "encuentros": 0,
       "ciclos": 15
     },
@@ -495,6 +552,27 @@
       "especializado": 0
     },
     "logs": [
+      {
+        "id": 1789392071500,
+        "date": "14/9/2026 01:21 p. m.",
+        "section": "Inicio / Portada",
+        "action": "Ingreso a la página de Inicio",
+        "device": "Escritorio"
+      },
+      {
+        "id": 1789392066513,
+        "date": "14/9/2026 01:21 p. m.",
+        "section": "Inicio / Portada",
+        "action": "Ingreso a la página de Inicio",
+        "device": "Escritorio"
+      },
+      {
+        "id": 1789391913879,
+        "date": "14/9/2026 01:18 p. m.",
+        "section": "Promoción y Prevención",
+        "action": "Visita a Promoción y Prevención",
+        "device": "Escritorio"
+      },
       {
         "id": 1789391414147,
         "date": "14/9/2026 08:10 a. m.",
@@ -639,5 +717,5 @@
   },
   "adminPassword": "123",
   "adminSlug": "admin451200",
-  "version": "1789391418466"
+  "version": "1789392104313"
 }
