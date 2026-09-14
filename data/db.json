@@ -414,7 +414,7 @@
       "subtitle": "Caminemos juntos en la construcción de entornos seguros, amorosos y respetuosos para nuestros niños y niñas.",
       "badgeText": "Jardín y transición",
       "text": "En este espacio encontrarás herramientas, estrategias y recursos para acompañar el desarrollo integral de la primera infancia desde el área de Psicoorientación.\n\nNuestro propósito es brindar orientaciones prácticas que permitan a familias, docentes y comunidad educativa acompañar a los niños y niñas en sus procesos emocionales, sociales, cognitivos y educativos, fortaleciendo su bienestar y desarrollo.",
-      "imageUrl": "/uploads/block_1788358207022_1789414725735_b90nq.png",
+      "imageUrl": "/uploads/block_1788358207022_1789414754894_2q3ax.png",
       "imagePosition": "left",
       "buttonText": "",
       "buttonUrl": "",
@@ -560,7 +560,7 @@
       "cycleId": "exploratorio",
       "type": "hero_banner",
       "size": "full",
-      "titleAlign": "left",
+      "titleAlign": "center",
       "title": "¡Bienvenidos al Ciclo Exploratorio!",
       "subtitle": "Un espacio para explorar, descubrir y darle sentido a tu camino!",
       "badgeText": "8 y 9",
@@ -622,7 +622,7 @@
       "subtitle": "",
       "badgeText": "PROMOCIÓN Y PREVENCIÓN",
       "text": "Este espacio está dedicado a la promoción del bienestar y la prevención en salud mental dentro de nuestra comunidad educativa. Aquí podrán conocer y evidenciar las diferentes actividades, campañas, talleres y experiencias que se han desarrollado en el colegio, orientadas a fortalecer el bienestar emocional y las habilidades para la vida. Además, encontrarán estrategias, recomendaciones y recursos que pueden ser de utilidad para acompañar el cuidado de la salud mental de nuestros estudiantes, familias y demás miembros de la comunidad educativa. Un espacio para aprender, reflexionar, compartir y construir juntos una comunidad que cuida el bienestar emocional.",
-      "imageUrl": "/uploads/block_1789414523980_1789414725753_j1uhi.jpg",
+      "imageUrl": "/uploads/block_1789414523980_1789414754905_louy0.jpg",
       "imagePosition": "bottom_banner",
       "imageSize": "medium",
       "imageFit": "contain",
@@ -667,23 +667,44 @@
   ],
   "suggestions": [],
   "analytics": {
-    "totalVisits": 34,
+    "totalVisits": 37,
     "uniqueSessions": 0,
-    "lastVisitDate": "14/9/2026 02:36 p. m.",
+    "lastVisitDate": "14/9/2026 02:39 p. m.",
     "tabs": {
       "inicio": 9,
       "encuentros": 0,
-      "ciclos": 25
+      "ciclos": 28
     },
     "cycles": {
       "primera_infancia": 18,
       "infantil": 3,
       "basico": 2,
-      "fundamental": 0,
-      "exploratorio": 1,
-      "especializado": 0
+      "fundamental": 1,
+      "exploratorio": 2,
+      "especializado": 1
     },
     "logs": [
+      {
+        "id": 1789414757855,
+        "date": "14/9/2026 02:39 p. m.",
+        "section": "Ciclos: Ciclo Especializado (10° Y 11°)",
+        "action": "Visita a la página de Ciclo Especializado (10° Y 11°)",
+        "device": "Escritorio"
+      },
+      {
+        "id": 1789414741478,
+        "date": "14/9/2026 02:39 p. m.",
+        "section": "Ciclos: Ciclo Exploratorio (8° Y 9°)",
+        "action": "Visita a la página de Ciclo Exploratorio (8° Y 9°)",
+        "device": "Escritorio"
+      },
+      {
+        "id": 1789414739677,
+        "date": "14/9/2026 02:38 p. m.",
+        "section": "Ciclos: Ciclo Fundamental (6° Y 7°)",
+        "action": "Visita a la página de Ciclo Fundamental (6° Y 7°)",
+        "device": "Escritorio"
+      },
       {
         "id": 1789414599319,
         "date": "14/9/2026 02:36 p. m.",
@@ -926,7 +947,7 @@
   },
   "adminPassword": "123",
   "adminSlug": "admin451200",
-  "version": "1789414729622",
+  "version": "1789414758632",
   "homeContent": {
     "identityBadge": "🏛️ IDENTIDAD LEONÍSTICA",
     "mainTitle": "Bienvenidos a Caminando Juntos",
