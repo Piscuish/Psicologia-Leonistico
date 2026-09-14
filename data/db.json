@@ -621,27 +621,126 @@
       ],
       "photosList": [],
       "order": 3
+    },
+    {
+      "id": 1789416313077,
+      "cycleId": "guia-bienestar",
+      "type": "slides_embed",
+      "size": "full",
+      "titleAlign": "center",
+      "title": "Cuento de acompañamiento emocional post terremoto",
+      "subtitle": "",
+      "badgeText": "BIENESTAR EMOCIONAL",
+      "text": "El Colegio Leonístico La Merced está comprometido con el bienestar integral y emocional de su comunidad educativa. Por ello, desde el área de Psicoorientación se elaboraron las siguientes guías de acompañamiento emocional, con el propósito de brindar orientaciones para abordar las emociones que pueden surgir después de un evento sísmico, tanto en el contexto escolar como en el hogar.\n\nEstas guías fueron trabajadas en el colegio como parte del acompañamiento a los estudiantes, brindando orientaciones que permitieran reconocer y gestionar las diferentes emociones que pueden surgir después de una situación de este tipo. Asimismo, permitieron identificar posibles afectaciones emocionales que requirieran un acompañamiento más especializado, realizando la remisión a Psicología cuando fue necesario, con el fin de brindar el apoyo correspondiente.",
+      "imageUrl": "",
+      "imagePosition": "banner",
+      "imageSize": "full",
+      "imageFit": "contain",
+      "galleryLayout": "single_full",
+      "galleryFit": "natural",
+      "galleryAlign": "center",
+      "buttonText": "",
+      "buttonUrl": "",
+      "iconEmoji": "💡",
+      "accentColor": "purple",
+      "slidesUrl": "https://drive.google.com/file/d/16ILTQguHWEY5Cuoa6qGE_CFpcw0gLYly/view",
+      "slidesBtnText": "",
+      "videoUrl": "",
+      "videoBtnText": "",
+      "slidesFileData": "",
+      "slidesFileName": "",
+      "itemsList": [
+        {
+          "icon": "💖",
+          "title": "Afecto y Diálogo",
+          "text": "Acompañamiento cercano y validación emocional constante."
+        },
+        {
+          "icon": "⏰",
+          "title": "Rutina y Horarios",
+          "text": "Fijar horas para estudiar, descansar y compartir en familia."
+        }
+      ],
+      "resourcesList": [
+        {
+          "title": "Guía de Orientación Familiar (PDF)",
+          "desc": "Material imprimible de apoyo para el hogar.",
+          "fileUrl": "",
+          "fileName": "",
+          "fileSize": "",
+          "icon": "file-text"
+        }
+      ],
+      "photosList": [
+        {
+          "url": "https://images.unsplash.com/photo-1577896851231-70ef18881754?auto=format&fit=crop&w=600&q=80",
+          "caption": ""
+        }
+      ],
+      "order": 1
     }
   ],
   "suggestions": [],
   "analytics": {
-    "totalVisits": 44,
+    "totalVisits": 50,
     "uniqueSessions": 0,
-    "lastVisitDate": "14/9/2026 02:45 p. m.",
+    "lastVisitDate": "14/9/2026 08:04 p. m.",
     "tabs": {
-      "inicio": 9,
+      "inicio": 11,
       "encuentros": 1,
-      "ciclos": 34
+      "ciclos": 38
     },
     "cycles": {
-      "primera_infancia": 19,
+      "primera_infancia": 20,
       "infantil": 4,
-      "basico": 3,
-      "fundamental": 2,
-      "exploratorio": 3,
+      "basico": 4,
+      "fundamental": 3,
+      "exploratorio": 4,
       "especializado": 2
     },
     "logs": [
+      {
+        "id": 1789416254424,
+        "date": "14/9/2026 08:04 p. m.",
+        "section": "Inicio / Portada",
+        "action": "Ingreso a la página de Inicio",
+        "device": "Escritorio"
+      },
+      {
+        "id": 1789416135408,
+        "date": "14/9/2026 08:02 p. m.",
+        "section": "Ciclos: Ciclo Exploratorio (8° Y 9°)",
+        "action": "Visita a la página de Ciclo Exploratorio (8° Y 9°)",
+        "device": "Escritorio"
+      },
+      {
+        "id": 1789416131872,
+        "date": "14/9/2026 08:02 p. m.",
+        "section": "Ciclos: Ciclo Fundamental (6° Y 7°)",
+        "action": "Visita a la página de Ciclo Fundamental (6° Y 7°)",
+        "device": "Escritorio"
+      },
+      {
+        "id": 1789416128613,
+        "date": "14/9/2026 08:02 p. m.",
+        "section": "Ciclos: Ciclo Básico (4° Y 5°)",
+        "action": "Visita a la página de Ciclo Básico (4° Y 5°)",
+        "device": "Escritorio"
+      },
+      {
+        "id": 1789416126893,
+        "date": "14/9/2026 08:02 p. m.",
+        "section": "Ciclos: Primera Infancia (JARDÍN Y TRANSICIÓN)",
+        "action": "Visita a la página de Primera Infancia (JARDÍN Y TRANSICIÓN)",
+        "device": "Escritorio"
+      },
+      {
+        "id": 1789416126269,
+        "date": "14/9/2026 08:02 p. m.",
+        "section": "Inicio / Portada",
+        "action": "Ingreso a la página de Inicio",
+        "device": "Escritorio"
+      },
       {
         "id": 1789415131344,
         "date": "14/9/2026 02:45 p. m.",
@@ -954,7 +1053,7 @@
   },
   "adminPassword": "123",
   "adminSlug": "admin451200",
-  "version": "1789415654098",
+  "version": "1789416335141",
   "homeContent": {
     "identityBadge": "🏛️ IDENTIDAD LEONÍSTICA",
     "mainTitle": "Bienvenidos a Caminando Juntos",
