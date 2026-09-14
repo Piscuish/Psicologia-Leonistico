@@ -622,27 +622,119 @@
         }
       ],
       "order": 2
+    },
+    {
+      "id": 1789414284003,
+      "cycleId": "exploratorio",
+      "type": "hero_banner",
+      "size": "full",
+      "titleAlign": "left",
+      "title": "¡Bienvenidos al Ciclo Exploratorio!",
+      "subtitle": "Un espacio para explorar, descubrir y darle sentido a tu camino!",
+      "badgeText": "8 y 9",
+      "text": "Explorar quiénes somos también significa descubrir nuestros intereses, talentos, emociones, sueños y posibilidades. Este espacio ha sido creado para acompañarte en una etapa llena de preguntas y decisiones, brindándote herramientas para conocerte mejor, fortalecer tus habilidades y comenzar a pensar en el futuro que quieres construir.",
+      "imageUrl": "",
+      "imagePosition": "banner",
+      "imageSize": "full",
+      "imageFit": "contain",
+      "galleryLayout": "single_full",
+      "galleryFit": "natural",
+      "galleryAlign": "center",
+      "buttonText": "",
+      "buttonUrl": "",
+      "iconEmoji": "💡",
+      "accentColor": "purple",
+      "slidesUrl": "",
+      "slidesBtnText": "",
+      "videoUrl": "",
+      "videoBtnText": "",
+      "slidesFileData": "",
+      "slidesFileName": "",
+      "itemsList": [
+        {
+          "icon": "💖",
+          "title": "Afecto y Diálogo",
+          "text": "Acompañamiento cercano y validación emocional constante."
+        },
+        {
+          "icon": "⏰",
+          "title": "Rutina y Horarios",
+          "text": "Fijar horas para estudiar, descansar y compartir en familia."
+        }
+      ],
+      "resourcesList": [
+        {
+          "title": "Guía de Orientación Familiar (PDF)",
+          "desc": "Material imprimible de apoyo para el hogar.",
+          "fileUrl": "",
+          "fileName": "",
+          "fileSize": "",
+          "icon": "file-text"
+        }
+      ],
+      "photosList": [
+        {
+          "url": "https://images.unsplash.com/photo-1577896851231-70ef18881754?auto=format&fit=crop&w=600&q=80",
+          "caption": ""
+        }
+      ],
+      "order": 1
     }
   ],
   "suggestions": [],
   "analytics": {
-    "totalVisits": 23,
+    "totalVisits": 28,
     "uniqueSessions": 0,
-    "lastVisitDate": "14/9/2026 02:13 p. m.",
+    "lastVisitDate": "14/9/2026 02:31 p. m.",
     "tabs": {
-      "inicio": 6,
+      "inicio": 7,
       "encuentros": 0,
-      "ciclos": 17
+      "ciclos": 21
     },
     "cycles": {
-      "primera_infancia": 16,
-      "infantil": 1,
-      "basico": 0,
+      "primera_infancia": 17,
+      "infantil": 2,
+      "basico": 1,
       "fundamental": 0,
-      "exploratorio": 0,
+      "exploratorio": 1,
       "especializado": 0
     },
     "logs": [
+      {
+        "id": 1789414263545,
+        "date": "14/9/2026 02:31 p. m.",
+        "section": "Ciclos: Ciclo Exploratorio (8° Y 9°)",
+        "action": "Visita a la página de Ciclo Exploratorio (8° Y 9°)",
+        "device": "Escritorio"
+      },
+      {
+        "id": 1789414208764,
+        "date": "14/9/2026 02:30 p. m.",
+        "section": "Ciclos: Ciclo Básico (4° Y 5°)",
+        "action": "Visita a la página de Ciclo Básico (4° Y 5°)",
+        "device": "Escritorio"
+      },
+      {
+        "id": 1789414206427,
+        "date": "14/9/2026 02:30 p. m.",
+        "section": "Ciclos: Ciclo Infantil (1°, 2° Y 3°)",
+        "action": "Visita a la página de Ciclo Infantil (1°, 2° Y 3°)",
+        "device": "Escritorio"
+      },
+      {
+        "id": 1789414204775,
+        "date": "14/9/2026 02:30 p. m.",
+        "section": "Ciclos: Primera Infancia (JARDÍN Y TRANSICIÓN)",
+        "action": "Visita a la página de Primera Infancia (JARDÍN Y TRANSICIÓN)",
+        "device": "Escritorio"
+      },
+      {
+        "id": 1789414203333,
+        "date": "14/9/2026 02:30 p. m.",
+        "section": "Inicio / Portada",
+        "action": "Ingreso a la página de Inicio",
+        "device": "Escritorio"
+      },
       {
         "id": 1789413198111,
         "date": "14/9/2026 02:13 p. m.",
@@ -808,7 +900,7 @@
   },
   "adminPassword": "123",
   "adminSlug": "admin451200",
-  "version": "1789414200167",
+  "version": "1789414284006",
   "homeContent": {
     "identityBadge": "🏛️ IDENTIDAD LEONÍSTICA",
     "mainTitle": "Bienvenidos a Caminando Juntos",
