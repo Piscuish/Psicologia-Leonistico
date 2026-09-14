@@ -74,6 +74,54 @@ const DEFAULT_SITE_IMAGES = {
   "aboutImg": "/uploads/site_aboutImg_1788887238720_ginoz.png"
 };
 
+let homeContent = null;
+const DEFAULT_HOME_CONTENT = {
+  identityBadge: "🏛️ IDENTIDAD LEONÍSTICA",
+  mainTitle: "Bienvenidos a Caminando Juntos",
+  tagline: "\"Un espacio para crecer, aprender y construir bienestar.\"",
+  paragraph1: "En Caminando Juntos creemos que cada etapa del desarrollo es una oportunidad para aprender, descubrir fortalezas y construir un proyecto de vida con sentido. Este blog nace como un espacio de encuentro para estudiantes, familias, docentes y toda la comunidad educativa, donde compartiremos experiencias, recursos, actividades y estrategias que fortalecen el bienestar integral.",
+  paragraph2: "Desde el área de Psicoorientación, promovemos el desarrollo socioemocional, la Educación Sexual Integral, la orientación vocacional, la convivencia escolar y el acompañamiento a los diferentes procesos que contribuyen al crecimiento personal, académico y social de nuestros estudiantes.",
+  paragraph3: "Te invitamos a recorrer este espacio, conocer nuestras iniciativas, participar en las actividades y descubrir herramientas que nos permitan seguir caminando juntos hacia una comunidad más consciente, empática y comprometida con el bienestar de todos.",
+  aboutBadge: "🦁 EQUIPO DE ORIENTACIÓN",
+  aboutTitle: "¿Quiénes Somos?",
+  aboutSubtitle: "Profesionales comprometidas con la formación integral leonística",
+  aboutParagraph1: "Somos un equipo de psicoorientadoras apasionadas por el bienestar de los niños, niñas y jóvenes. Creemos firmemente que la educación académica trasciende cuando el corazón y la mente se encuentran en equilibrio.",
+  aboutParagraph2: "Trabajamos de la mano con las directivas, los docentes de aula y las familias para garantizar que cada estudiante cuente con las herramientas necesarias para construir un proyecto de vida feliz y exitoso.",
+  areasTitle: "Áreas de Acompañamiento Institucional",
+  areasSubtitle: "Líneas de trabajo diseñadas para respaldar cada etapa de tu vida escolar y familiar.",
+  areas: [
+    {
+      id: 1,
+      title: "Bienestar Emocional",
+      tag: "Apoyo Personal",
+      desc: "Estrategias para la gestión de emociones, manejo del estrés escolar, resolución asertiva de conflictos y autoestima."
+    },
+    {
+      id: 2,
+      title: "Orientación Vocacional",
+      tag: "Grados Superiores",
+      desc: "Descubrimiento de talentos, pasiones y orientación para la toma de decisiones profesionales hacia el futuro."
+    },
+    {
+      id: 3,
+      title: "Convivencia Escolar",
+      tag: "Comunidad",
+      desc: "Promoción de relaciones basadas en el respeto, empatía, prevención del acoso escolar y cultura de paz en las aulas."
+    },
+    {
+      id: 4,
+      title: "Escuela de Familias",
+      tag: "Padres y Cuidadores",
+      desc: "Espacios de formación y diálogo sobre pautas de crianza, límites afectivos y comunicación positiva en el hogar."
+    }
+  ]
+};
+try {
+  const cachedHome = localStorage.getItem('psicologia_home_content');
+  if (cachedHome) homeContent = JSON.parse(cachedHome);
+} catch (_) {}
+if (!homeContent) homeContent = { ...DEFAULT_HOME_CONTENT };
+
 const DEFAULT_PSYCHOLOGISTS = [
   {
     "id": 1,
@@ -901,6 +949,10 @@ async function loadServerData() {
         adminPassword = data.adminPassword;
         localStorage.setItem('psicologia_admin_password', adminPassword);
       }
+      if (data.homeContent && typeof data.homeContent === 'object') {
+        homeContent = { ...DEFAULT_HOME_CONTENT, ...data.homeContent };
+        localStorage.setItem('psicologia_home_content', JSON.stringify(homeContent));
+      }
       if (data.adminSlug) {
         adminSlug = data.adminSlug;
         localStorage.setItem('psicologia_admin_slug', adminSlug);
@@ -908,6 +960,24 @@ async function loadServerData() {
     }
   } catch (err) {
     console.log('Modo local activo:', err);
+  }
+}
+
+async function syncHomeContentToServer() {
+  localStorage.setItem('psicologia_home_content', JSON.stringify(homeContent));
+  try {
+    const res = await fetch('/api/home-content', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ homeContent })
+    });
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    const data = await res.json();
+    if (data && data.version) localStorage.setItem('psicologia_db_version', data.version);
+    return data;
+  } catch (err) {
+    console.error('Error sincronizando contenido de inicio con el servidor:', err);
+    throw err;
   }
 }
 
@@ -1097,6 +1167,7 @@ function startRealTimeSync() {
           await loadServerData();
           renderPublicNavbar();
           applySiteImages();
+          renderHomeContent();
           renderTeamCards();
           updateBadgeCounts();
 
@@ -1116,6 +1187,7 @@ function startRealTimeSync() {
             }
           } else if (path.includes('admin') || path.includes('2610') || (adminSlug && path.includes(adminSlug.toLowerCase()))) {
             if (isAdminLoggedIn) {
+              if (currentAdminTab === 'inicio') renderAdminInicio();
               renderAdminCycleTabs();
               renderAdminCycleBlocks();
               renderAdminNavList();
@@ -1134,6 +1206,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   // 1. Renderizado INMEDIATO instantáneo con datos locales (0 milisegundos de espera)
   renderPublicNavbar();
   applySiteImages();
+  renderHomeContent();
 
   const path = window.location.pathname.toLowerCase();
   
@@ -1175,6 +1248,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   // 3. Re-renderizar si hubo actualización desde el servidor
   renderPublicNavbar();
   applySiteImages();
+  renderHomeContent();
   renderTeamCards();
   updateBadgeCounts();
 
@@ -1193,6 +1267,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
   } else if (path.includes('admin') || path.includes('2610') || (adminSlug && path.includes(adminSlug.toLowerCase()))) {
     if (isAdminLoggedIn) {
+      if (currentAdminTab === 'inicio') renderAdminInicio();
       renderAdminCycleTabs();
       renderAdminCycleBlocks();
       renderAdminNavList();
@@ -1731,6 +1806,7 @@ function getTabKey(sectionName) {
 // ============================================================
 
 const MODULE_TITLES = {
+  'inicio': '🏠 Editar Contenido del Inicio',
   'estadisticas': '📊 Estadísticas & Métricas de Visitas',
   'calendario': '📅 Gestión del Calendario de Encuentros',
   'imagenes': '🖼️ Gestor de Imágenes del Sitio',
@@ -1886,6 +1962,9 @@ function switchAdminTab(tabName) {
 
 function renderActiveAdminTab() {
   switch (currentAdminTab) {
+    case 'inicio':
+      renderAdminInicio();
+      break;
     case 'estadisticas':
       renderAnalyticsDashboard();
       break;
@@ -4799,12 +4878,7 @@ function resetCycleBlockForm() {
 }
 
 async function moveCycleBlockOrder(id, direction) {
-  const meta = getAdminCycleOrPageMeta(selectedAdminCycleKey);
-  const targetKeys = [selectedAdminCycleKey];
-  if (meta && meta.key) targetKeys.push(meta.key);
-  if (selectedAdminCycleKey === 'promocion-prevencion') targetKeys.push('promocion_prevencion', 'promocion');
-  if (selectedAdminCycleKey === 'guia-bienestar') targetKeys.push('guia_bienestar', 'bienestar');
-  const currentList = cycleBlocks.filter(b => targetKeys.includes(b.cycleId)).sort((a, b) => (a.order || 0) - (b.order || 0));
+  const currentList = cycleBlocks.filter(b => b.cycleId === selectedAdminCycleKey).sort((a, b) => (a.order || 0) - (b.order || 0));
   const idx = currentList.findIndex(b => b.id === id);
   if (idx === -1) return;
 
@@ -4909,12 +4983,7 @@ function setupCycleBlockDragAndDrop() {
       const targetId = parseInt(card.getAttribute('data-block-id'));
       if (!draggedBlockId || draggedBlockId === targetId) return;
 
-      const meta = getAdminCycleOrPageMeta(selectedAdminCycleKey);
-      const targetKeys = [selectedAdminCycleKey];
-      if (meta && meta.key) targetKeys.push(meta.key);
-      if (selectedAdminCycleKey === 'promocion-prevencion') targetKeys.push('promocion_prevencion', 'promocion');
-      if (selectedAdminCycleKey === 'guia-bienestar') targetKeys.push('guia_bienestar', 'bienestar');
-      const currentList = cycleBlocks.filter(b => targetKeys.includes(b.cycleId)).sort((a, b) => (a.order || 0) - (b.order || 0));
+      const currentList = cycleBlocks.filter(b => b.cycleId === selectedAdminCycleKey).sort((a, b) => (a.order || 0) - (b.order || 0));
       const fromIndex = currentList.findIndex(b => b.id === draggedBlockId);
       const toIndex = currentList.findIndex(b => b.id === targetId);
 
@@ -5401,8 +5470,9 @@ function renderAdminCycleBlocks() {
   if (!container) return;
 
   const targetKeys = [meta.key];
-  if (meta.key === 'promocion-prevencion') targetKeys.push('promocion_prevencion', 'promocion');
+  if (meta.key === 'promocion-prevencion') targetKeys.push('promocion_prevencion');
   if (meta.key === 'guia-bienestar') targetKeys.push('guia_bienestar', 'bienestar');
+
   const list = cycleBlocks.filter(b => targetKeys.includes(b.cycleId)).sort((a, b) => (a.order || 0) - (b.order || 0));
 
   if (list.length === 0) {
@@ -6072,3 +6142,247 @@ function renderCiclosHub() {
     lucide.createIcons();
   }
 }
+
+// ============================================================
+// GESTIÓN DE CONTENIDO DEL INICIO (HOME EDIT MODULE)
+// ============================================================
+
+function renderHomeContent() {
+  const c = homeContent || DEFAULT_HOME_CONTENT;
+  if (!c) return;
+
+  const elIdentity = document.getElementById('homeIdentityBadge');
+  if (elIdentity && c.identityBadge !== undefined) elIdentity.textContent = c.identityBadge;
+
+  const elTitle = document.getElementById('homeMainTitle');
+  if (elTitle && c.mainTitle !== undefined) elTitle.textContent = c.mainTitle;
+
+  const elTagline = document.getElementById('homeTagline');
+  if (elTagline && c.tagline !== undefined) elTagline.textContent = c.tagline;
+
+  const elP1 = document.getElementById('homeParagraph1');
+  if (elP1 && c.paragraph1 !== undefined) elP1.textContent = c.paragraph1;
+
+  const elP2 = document.getElementById('homeParagraph2');
+  if (elP2 && c.paragraph2 !== undefined) elP2.textContent = c.paragraph2;
+
+  const elP3 = document.getElementById('homeParagraph3');
+  if (elP3 && c.paragraph3 !== undefined) elP3.textContent = c.paragraph3;
+
+  const elAboutBadge = document.getElementById('homeAboutBadge');
+  if (elAboutBadge && c.aboutBadge !== undefined) elAboutBadge.textContent = c.aboutBadge;
+
+  const elAboutTitle = document.getElementById('homeAboutTitle');
+  if (elAboutTitle && c.aboutTitle !== undefined) elAboutTitle.textContent = c.aboutTitle;
+
+  const elAboutSub = document.getElementById('homeAboutSubtitle');
+  if (elAboutSub && c.aboutSubtitle !== undefined) elAboutSub.textContent = c.aboutSubtitle;
+
+  const elAboutP1 = document.getElementById('homeAboutParagraph1');
+  if (elAboutP1 && c.aboutParagraph1 !== undefined) elAboutP1.textContent = c.aboutParagraph1;
+
+  const elAboutP2 = document.getElementById('homeAboutParagraph2');
+  if (elAboutP2 && c.aboutParagraph2 !== undefined) elAboutP2.textContent = c.aboutParagraph2;
+
+  const elAreasTitle = document.getElementById('homeAreasTitle');
+  if (elAreasTitle && c.areasTitle !== undefined) elAreasTitle.textContent = c.areasTitle;
+
+  const elAreasSubtitle = document.getElementById('homeAreasSubtitle');
+  if (elAreasSubtitle && c.areasSubtitle !== undefined) elAreasSubtitle.textContent = c.areasSubtitle;
+
+  if (Array.isArray(c.areas)) {
+    c.areas.forEach((area, idx) => {
+      const num = idx + 1;
+      const elAreaTitle = document.getElementById(`homeAreaTitle${num}`);
+      if (elAreaTitle && area.title !== undefined) elAreaTitle.textContent = area.title;
+
+      const elAreaTag = document.getElementById(`homeAreaTag${num}`);
+      if (elAreaTag && area.tag !== undefined) elAreaTag.textContent = area.tag;
+
+      const elAreaDesc = document.getElementById(`homeAreaDesc${num}`);
+      if (elAreaDesc && area.desc !== undefined) elAreaDesc.textContent = area.desc;
+    });
+  }
+}
+
+function renderAdminInicio() {
+  const c = homeContent || DEFAULT_HOME_CONTENT;
+  if (!c) return;
+
+  const setVal = (id, val) => {
+    const el = document.getElementById(id);
+    if (el) el.value = val !== undefined ? val : '';
+  };
+
+  setVal('adminHomeIdentityBadge', c.identityBadge);
+  setVal('adminHomeMainTitle', c.mainTitle);
+  setVal('adminHomeTagline', c.tagline);
+  setVal('adminHomeParagraph1', c.paragraph1);
+  setVal('adminHomeParagraph2', c.paragraph2);
+  setVal('adminHomeParagraph3', c.paragraph3);
+
+  setVal('adminHomeAboutBadge', c.aboutBadge);
+  setVal('adminHomeAboutTitle', c.aboutTitle);
+  setVal('adminHomeAboutSubtitle', c.aboutSubtitle);
+  setVal('adminHomeAboutParagraph1', c.aboutParagraph1);
+  setVal('adminHomeAboutParagraph2', c.aboutParagraph2);
+
+  setVal('adminHomeAreasTitle', c.areasTitle);
+  setVal('adminHomeAreasSubtitle', c.areasSubtitle);
+
+  if (Array.isArray(c.areas)) {
+    c.areas.forEach((area, idx) => {
+      const num = idx + 1;
+      setVal(`adminHomeAreaTitle${num}`, area.title);
+      setVal(`adminHomeAreaTag${num}`, area.tag);
+      setVal(`adminHomeAreaDesc${num}`, area.desc);
+    });
+  }
+}
+
+function collectHomeContentFromForm() {
+  const getVal = (id, fallback = '') => {
+    const el = document.getElementById(id);
+    return el ? el.value.trim() : fallback;
+  };
+
+  const areas = [];
+  for (let i = 1; i <= 4; i++) {
+    areas.push({
+      title: getVal(`adminHomeAreaTitle${i}`),
+      tag: getVal(`adminHomeAreaTag${i}`),
+      desc: getVal(`adminHomeAreaDesc${i}`)
+    });
+  }
+
+  return {
+    identityBadge: getVal('adminHomeIdentityBadge', DEFAULT_HOME_CONTENT.identityBadge),
+    mainTitle: getVal('adminHomeMainTitle', DEFAULT_HOME_CONTENT.mainTitle),
+    tagline: getVal('adminHomeTagline', DEFAULT_HOME_CONTENT.tagline),
+    paragraph1: getVal('adminHomeParagraph1', DEFAULT_HOME_CONTENT.paragraph1),
+    paragraph2: getVal('adminHomeParagraph2', DEFAULT_HOME_CONTENT.paragraph2),
+    paragraph3: getVal('adminHomeParagraph3', DEFAULT_HOME_CONTENT.paragraph3),
+    aboutBadge: getVal('adminHomeAboutBadge', DEFAULT_HOME_CONTENT.aboutBadge),
+    aboutTitle: getVal('adminHomeAboutTitle', DEFAULT_HOME_CONTENT.aboutTitle),
+    aboutSubtitle: getVal('adminHomeAboutSubtitle', DEFAULT_HOME_CONTENT.aboutSubtitle),
+    aboutParagraph1: getVal('adminHomeAboutParagraph1', DEFAULT_HOME_CONTENT.aboutParagraph1),
+    aboutParagraph2: getVal('adminHomeAboutParagraph2', DEFAULT_HOME_CONTENT.aboutParagraph2),
+    areasTitle: getVal('adminHomeAreasTitle', DEFAULT_HOME_CONTENT.areasTitle),
+    areasSubtitle: getVal('adminHomeAreasSubtitle', DEFAULT_HOME_CONTENT.areasSubtitle),
+    areas
+  };
+}
+
+async function handleSaveHomeContent() {
+  const btnTop = document.getElementById('btnSaveHomeContentTop');
+  const btnBottom = document.getElementById('btnSaveHomeContent');
+
+  const origTop = btnTop ? btnTop.innerHTML : '';
+  const origBottom = btnBottom ? btnBottom.innerHTML : '';
+
+  if (btnTop) {
+    btnTop.disabled = true;
+    btnTop.innerHTML = '<i data-lucide="loader-2" class="spin"></i> Guardando...';
+  }
+  if (btnBottom) {
+    btnBottom.disabled = true;
+    btnBottom.innerHTML = '<i data-lucide="loader-2" class="spin"></i> Guardando...';
+  }
+  if (window.lucide && lucide.createIcons) lucide.createIcons();
+
+  try {
+    const updated = collectHomeContentFromForm();
+    homeContent = updated;
+    await syncHomeContentToServer();
+    renderHomeContent();
+    showToast('✅ Cambios del Inicio guardados y sincronizados con éxito.');
+  } catch (err) {
+    console.error(err);
+    showToast('⚠️ Se guardó localmente, pero ocurrió un error al sincronizar con el servidor.');
+  } finally {
+    if (btnTop) {
+      btnTop.disabled = false;
+      btnTop.innerHTML = origTop || '<i data-lucide="save"></i> Guardar cambios';
+    }
+    if (btnBottom) {
+      btnBottom.disabled = false;
+      btnBottom.innerHTML = origBottom || '<i data-lucide="save"></i> Guardar cambios';
+    }
+    if (window.lucide && lucide.createIcons) lucide.createIcons();
+  }
+}
+
+function escapeHomeHtml(str) {
+  if (!str) return '';
+  return String(str)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#039;');
+}
+
+function handlePreviewHomeContent() {
+  const data = collectHomeContentFromForm();
+  const modal = document.getElementById('homePreviewModal');
+  const content = document.getElementById('homePreviewContent');
+  if (!modal || !content) return;
+
+  const areaCardsHtml = (data.areas || []).map((area) => `
+    <div style="background:#ffffff; border:1px solid #e2e8f0; border-radius:12px; padding:18px; box-shadow:0 2px 6px rgba(0,0,0,0.03);">
+      <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:10px; gap:8px;">
+        <h4 style="margin:0; font-size:16px; font-weight:700; color:#1e293b;">${escapeHomeHtml(area.title)}</h4>
+        <span style="display:inline-block; font-size:11px; font-weight:700; background:#e0f2fe; color:#0369a1; padding:3px 10px; border-radius:20px; white-space:nowrap;">${escapeHomeHtml(area.tag)}</span>
+      </div>
+      <p style="margin:0; font-size:13px; color:#64748b; line-height:1.5;">${escapeHomeHtml(area.desc)}</p>
+    </div>
+  `).join('');
+
+  content.innerHTML = `
+    <!-- Hero Preview -->
+    <div style="background:linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%); color:#ffffff; border-radius:16px; padding:28px 24px; margin-bottom:24px; text-align:center;">
+      <span style="display:inline-block; background:rgba(255,255,255,0.2); color:#ffffff; padding:4px 14px; border-radius:20px; font-size:12px; font-weight:700; margin-bottom:12px; letter-spacing:0.5px;">${escapeHomeHtml(data.identityBadge)}</span>
+      <h2 style="font-size:26px; font-weight:800; margin:0 0 10px 0; color:#ffffff;">${escapeHomeHtml(data.mainTitle)}</h2>
+      <p style="font-size:16px; font-style:italic; opacity:0.95; margin:0 0 18px 0; max-width:600px; margin-left:auto; margin-right:auto; color:#eff6ff;">${escapeHomeHtml(data.tagline)}</p>
+      <div style="max-width:700px; margin:0 auto; font-size:14px; line-height:1.6; opacity:0.95; text-align:left; background:rgba(255,255,255,0.12); padding:16px 20px; border-radius:10px; color:#ffffff;">
+        <p style="margin:0 0 10px 0;">${escapeHomeHtml(data.paragraph1)}</p>
+        <p style="margin:0 0 10px 0;">${escapeHomeHtml(data.paragraph2)}</p>
+        <p style="margin:0;">${escapeHomeHtml(data.paragraph3)}</p>
+      </div>
+    </div>
+
+    <!-- About Section Preview -->
+    <div style="background:#f8fafc; border:1px solid #e2e8f0; border-radius:16px; padding:24px; margin-bottom:24px;">
+      <span style="display:inline-block; background:#e2e8f0; color:#475569; padding:4px 12px; border-radius:20px; font-size:12px; font-weight:700; margin-bottom:10px;">${escapeHomeHtml(data.aboutBadge)}</span>
+      <h3 style="font-size:20px; font-weight:800; color:#1e293b; margin:0 0 6px 0;">${escapeHomeHtml(data.aboutTitle)}</h3>
+      <p style="font-size:14px; color:#64748b; margin:0 0 16px 0;">${escapeHomeHtml(data.aboutSubtitle)}</p>
+      <div style="font-size:14px; color:#334155; line-height:1.6;">
+        <p style="margin:0 0 10px 0;">${escapeHomeHtml(data.aboutParagraph1)}</p>
+        <p style="margin:0;">${escapeHomeHtml(data.aboutParagraph2)}</p>
+      </div>
+    </div>
+
+    <!-- Areas Section Preview -->
+    <div style="background:#ffffff; border:1px solid #e2e8f0; border-radius:16px; padding:24px;">
+      <h3 style="font-size:20px; font-weight:800; color:#1e293b; margin:0 0 6px 0;">${escapeHomeHtml(data.areasTitle)}</h3>
+      <p style="font-size:14px; color:#64748b; margin:0 0 18px 0;">${escapeHomeHtml(data.areasSubtitle)}</p>
+      <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(240px, 1fr)); gap:16px;">
+        ${areaCardsHtml}
+      </div>
+    </div>
+  `;
+
+  modal.style.display = 'flex';
+}
+
+function closeHomePreviewModal() {
+  const modal = document.getElementById('homePreviewModal');
+  if (modal) modal.style.display = 'none';
+}
+
+window.renderHomeContent = renderHomeContent;
+window.renderAdminInicio = renderAdminInicio;
+window.collectHomeContentFromForm = collectHomeContentFromForm;
+window.handleSaveHomeContent = handleSaveHomeContent;
+window.handlePreviewHomeContent = handlePreviewHomeContent;
+window.closeHomePreviewModal = closeHomePreviewModal;

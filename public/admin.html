@@ -149,6 +149,22 @@
 
       <!-- VISTA PRINCIPAL: CUADRÍCULA DE MÓDULOS (HUB) -->
       <div id="adminHubGrid" class="admin-hub-grid">
+        <!-- 0. Editar Inicio -->
+        <div class="hub-module-card" onclick="openAdminModule('inicio')">
+          <div>
+            <div class="hub-module-icon" style="background: #e0f2fe; color: #0284c7;">
+              <i data-lucide="home"></i>
+            </div>
+            <div class="hub-module-info">
+              <h4>Editar Inicio</h4>
+              <p>Personalizar la portada principal: identidad, títulos, párrafos, presentación y áreas formativas.</p>
+            </div>
+          </div>
+          <div class="hub-module-footer">
+            <span class="hub-action-link" style="color: #0284c7;">Abrir editor <i data-lucide="arrow-right"></i></span>
+          </div>
+        </div>
+
         <!-- 1. Estadísticas & Visitas -->
         <div class="hub-module-card" onclick="openAdminModule('estadisticas')">
           <div>
@@ -265,22 +281,6 @@
           </div>
         </div>
 
-        <!-- 9. Guía de Bienestar Emocional -->
-        <div class="hub-module-card" onclick="openAdminModule('ciclos'); selectAdminCycle('guia-bienestar');">
-          <div>
-            <div class="hub-module-icon" style="background: #eff6ff; color: #2563eb;">
-              <i data-lucide="heart-pulse"></i>
-            </div>
-            <div class="hub-module-info">
-              <h4>Guía de Bienestar Emocional</h4>
-              <p>Crear y editar recursos formativos, actividades, pautas y diapositivas de apoyo socioemocional post terremoto.</p>
-            </div>
-          </div>
-          <div class="hub-module-footer">
-            <span class="hub-action-link" style="color: #2563eb;">Diseñar contenidos <i data-lucide="arrow-right"></i></span>
-          </div>
-        </div>
-
         <!-- 7. Seguridad & Enlace -->
         <div class="hub-module-card" onclick="openAdminModule('seguridad')">
           <div>
@@ -294,6 +294,243 @@
           </div>
           <div class="hub-module-footer">
             <span class="hub-action-link">Abrir módulo <i data-lucide="arrow-right"></i></span>
+          </div>
+        </div>
+      </div>
+
+      <!-- PANE 0: EDITAR INICIO -->
+      <div class="dash-pane" id="pane-inicio">
+        <!-- Encabezado y Acciones Principales -->
+        <div class="pane-header" style="background: #ffffff; padding: 20px 24px; border-radius: var(--radius-lg); border: 1px solid var(--border-color); margin-bottom: 24px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 14px;">
+          <div>
+            <h4 style="margin: 0; font-size: 1.25rem; color: #1e3a8a; display: flex; align-items: center; gap: 8px;">
+              <i data-lucide="home"></i> Editar Contenido del Inicio (Portada)
+            </h4>
+            <p style="margin: 4px 0 0 0; color: #64748b; font-size: 0.88rem;">
+              Modifica los textos, párrafos y áreas institucionales que aparecen en la página principal <strong>/</strong>
+            </p>
+          </div>
+          <div class="dash-actions" style="display: flex; gap: 10px; align-items: center;">
+            <button type="button" class="btn btn-secondary" onclick="handlePreviewHomeContent()" style="display: inline-flex; align-items: center; gap: 6px;">
+              <i data-lucide="eye"></i> Vista previa
+            </button>
+            <button type="button" class="btn btn-primary" id="btnSaveHomeContentTop" onclick="handleSaveHomeContent()" style="display: inline-flex; align-items: center; gap: 6px;">
+              <i data-lucide="save"></i> Guardar cambios
+            </button>
+          </div>
+        </div>
+
+        <!-- 1. BLOQUE: IDENTIDAD & SECCIÓN BIENVENIDOS -->
+        <div class="form-card" style="background: white; border-radius: var(--radius-lg); padding: 24px 28px; border: 1px solid var(--border-color); margin-bottom: 24px; box-shadow: var(--shadow-sm);">
+          <div style="border-bottom: 2px solid #f1f5f9; padding-bottom: 12px; margin-bottom: 20px;">
+            <h5 style="margin: 0; color: #0f172a; font-size: 1.05rem; display: flex; align-items: center; gap: 8px;">
+              <span>🏛️</span> 1. Identidad & Sección Bienvenidos
+            </h5>
+            <p style="margin: 4px 0 0 0; font-size: 0.82rem; color: #64748b;">
+              Encabezado principal y texto introductorio de bienvenida al portal.
+            </p>
+          </div>
+
+          <div class="form-row" style="margin-bottom: 16px;">
+            <div class="form-group" style="flex: 1;">
+              <label for="adminHomeIdentityBadge">Distintivo / Identidad Superior *</label>
+              <input type="text" id="adminHomeIdentityBadge" placeholder="Ej: 🏛️ IDENTIDAD LEONÍSTICA" required>
+            </div>
+            <div class="form-group" style="flex: 2;">
+              <label for="adminHomeMainTitle">Título Principal de Bienvenida *</label>
+              <input type="text" id="adminHomeMainTitle" placeholder="Ej: Bienvenidos a Caminando Juntos" required>
+            </div>
+          </div>
+
+          <div class="form-group" style="margin-bottom: 16px;">
+            <label for="adminHomeTagline">Frase Principal / Lema Institucional *</label>
+            <input type="text" id="adminHomeTagline" placeholder='Ej: "Un espacio para crecer, aprender y construir bienestar."' required>
+          </div>
+
+          <div class="form-group" style="margin-bottom: 16px;">
+            <label for="adminHomeParagraph1">Primer Párrafo *</label>
+            <textarea id="adminHomeParagraph1" rows="3" placeholder="En Caminando Juntos creemos que cada etapa del desarrollo..." required></textarea>
+          </div>
+
+          <div class="form-group" style="margin-bottom: 16px;">
+            <label for="adminHomeParagraph2">Segundo Párrafo *</label>
+            <textarea id="adminHomeParagraph2" rows="3" placeholder="Desde el área de Psicoorientación, promovemos..." required></textarea>
+          </div>
+
+          <div class="form-group" style="margin-bottom: 0;">
+            <label for="adminHomeParagraph3">Tercer Párrafo *</label>
+            <textarea id="adminHomeParagraph3" rows="3" placeholder="Te invitamos a recorrer este espacio..." required></textarea>
+          </div>
+        </div>
+
+        <!-- 2. BLOQUE: EQUIPO DE ORIENTACIÓN (¿QUIÉNES SOMOS?) -->
+        <div class="form-card" style="background: white; border-radius: var(--radius-lg); padding: 24px 28px; border: 1px solid var(--border-color); margin-bottom: 24px; box-shadow: var(--shadow-sm);">
+          <div style="border-bottom: 2px solid #f1f5f9; padding-bottom: 12px; margin-bottom: 20px;">
+            <h5 style="margin: 0; color: #0f172a; font-size: 1.05rem; display: flex; align-items: center; gap: 8px;">
+              <span>🦁</span> 2. Sección ¿Quiénes Somos? (Equipo de Orientación)
+            </h5>
+            <p style="margin: 4px 0 0 0; font-size: 0.82rem; color: #64748b;">
+              Presentación institucional del equipo de orientación ubicado en la portada.
+            </p>
+          </div>
+
+          <div class="form-row" style="margin-bottom: 16px;">
+            <div class="form-group" style="flex: 1;">
+              <label for="adminHomeAboutBadge">Etiqueta Superior *</label>
+              <input type="text" id="adminHomeAboutBadge" placeholder="Ej: 🦁 EQUIPO DE ORIENTACIÓN" required>
+            </div>
+            <div class="form-group" style="flex: 1.5;">
+              <label for="adminHomeAboutTitle">Título de la Sección *</label>
+              <input type="text" id="adminHomeAboutTitle" placeholder="Ej: ¿Quiénes Somos?" required>
+            </div>
+          </div>
+
+          <div class="form-group" style="margin-bottom: 16px;">
+            <label for="adminHomeAboutSubtitle">Subtítulo Descriptivo *</label>
+            <input type="text" id="adminHomeAboutSubtitle" placeholder="Ej: Profesionales comprometidas con la formación integral leonística" required>
+          </div>
+
+          <div class="form-group" style="margin-bottom: 16px;">
+            <label for="adminHomeAboutParagraph1">Primer Párrafo Descriptivo *</label>
+            <textarea id="adminHomeAboutParagraph1" rows="3" placeholder="Somos un equipo de psicoorientadoras apasionadas por el bienestar..." required></textarea>
+          </div>
+
+          <div class="form-group" style="margin-bottom: 0;">
+            <label for="adminHomeAboutParagraph2">Segundo Párrafo Descriptivo *</label>
+            <textarea id="adminHomeAboutParagraph2" rows="3" placeholder="Trabajamos de la mano con las directivas, los docentes de aula y las familias..." required></textarea>
+          </div>
+        </div>
+
+        <!-- 3. BLOQUE: ÁREAS DE ACOMPAÑAMIENTO INSTITUCIONAL -->
+        <div class="form-card" style="background: white; border-radius: var(--radius-lg); padding: 24px 28px; border: 1px solid var(--border-color); margin-bottom: 24px; box-shadow: var(--shadow-sm);">
+          <div style="border-bottom: 2px solid #f1f5f9; padding-bottom: 12px; margin-bottom: 20px;">
+            <h5 style="margin: 0; color: #0f172a; font-size: 1.05rem; display: flex; align-items: center; gap: 8px;">
+              <span>💛</span> 3. Áreas de Acompañamiento Institucional
+            </h5>
+            <p style="margin: 4px 0 0 0; font-size: 0.82rem; color: #64748b;">
+              Edita los títulos, subtítulos y contenido de las 4 tarjetas de líneas formativas.
+            </p>
+          </div>
+
+          <div class="form-row" style="margin-bottom: 20px;">
+            <div class="form-group" style="flex: 1;">
+              <label for="adminHomeAreasTitle">Título General de la Sección *</label>
+              <input type="text" id="adminHomeAreasTitle" placeholder="Ej: Áreas de Acompañamiento Institucional" required>
+            </div>
+            <div class="form-group" style="flex: 1.5;">
+              <label for="adminHomeAreasSubtitle">Subtítulo General *</label>
+              <input type="text" id="adminHomeAreasSubtitle" placeholder="Ej: Líneas de trabajo diseñadas para respaldar cada etapa de tu vida escolar y familiar." required>
+            </div>
+          </div>
+
+          <!-- Grid de las 4 Tarjetas -->
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 18px;">
+            
+            <!-- Tarjeta 1: Bienestar Emocional -->
+            <div style="background: #fff7ed; border: 1.5px solid #fed7aa; border-radius: var(--radius-md); padding: 18px;">
+              <div style="font-weight: 700; color: #ea580c; margin-bottom: 12px; display: flex; align-items: center; gap: 6px;">
+                <span>🧡</span> Tarjeta 1
+              </div>
+              <div class="form-group" style="margin-bottom: 10px;">
+                <label style="font-size: 0.82rem;">Título:</label>
+                <input type="text" id="adminHomeAreaTitle_1" placeholder="Bienestar Emocional" required>
+              </div>
+              <div class="form-group" style="margin-bottom: 10px;">
+                <label style="font-size: 0.82rem;">Categoría / Etiqueta:</label>
+                <input type="text" id="adminHomeAreaTag_1" placeholder="Apoyo Personal" required>
+              </div>
+              <div class="form-group" style="margin-bottom: 0;">
+                <label style="font-size: 0.82rem;">Descripción:</label>
+                <textarea id="adminHomeAreaDesc_1" rows="3" placeholder="Estrategias para la gestión de emociones..." required></textarea>
+              </div>
+            </div>
+
+            <!-- Tarjeta 2: Orientación Vocacional -->
+            <div style="background: #eff6ff; border: 1.5px solid #bfdbfe; border-radius: var(--radius-md); padding: 18px;">
+              <div style="font-weight: 700; color: #2563eb; margin-bottom: 12px; display: flex; align-items: center; gap: 6px;">
+                <span>💙</span> Tarjeta 2
+              </div>
+              <div class="form-group" style="margin-bottom: 10px;">
+                <label style="font-size: 0.82rem;">Título:</label>
+                <input type="text" id="adminHomeAreaTitle_2" placeholder="Orientación Vocacional" required>
+              </div>
+              <div class="form-group" style="margin-bottom: 10px;">
+                <label style="font-size: 0.82rem;">Categoría / Etiqueta:</label>
+                <input type="text" id="adminHomeAreaTag_2" placeholder="Grados Superiores" required>
+              </div>
+              <div class="form-group" style="margin-bottom: 0;">
+                <label style="font-size: 0.82rem;">Descripción:</label>
+                <textarea id="adminHomeAreaDesc_2" rows="3" placeholder="Descubrimiento de talentos, pasiones..." required></textarea>
+              </div>
+            </div>
+
+            <!-- Tarjeta 3: Convivencia Escolar -->
+            <div style="background: #faf5ff; border: 1.5px solid #e9d5ff; border-radius: var(--radius-md); padding: 18px;">
+              <div style="font-weight: 700; color: #9333ea; margin-bottom: 12px; display: flex; align-items: center; gap: 6px;">
+                <span>💜</span> Tarjeta 3
+              </div>
+              <div class="form-group" style="margin-bottom: 10px;">
+                <label style="font-size: 0.82rem;">Título:</label>
+                <input type="text" id="adminHomeAreaTitle_3" placeholder="Convivencia Escolar" required>
+              </div>
+              <div class="form-group" style="margin-bottom: 10px;">
+                <label style="font-size: 0.82rem;">Categoría / Etiqueta:</label>
+                <input type="text" id="adminHomeAreaTag_3" placeholder="Comunidad" required>
+              </div>
+              <div class="form-group" style="margin-bottom: 0;">
+                <label style="font-size: 0.82rem;">Descripción:</label>
+                <textarea id="adminHomeAreaDesc_3" rows="3" placeholder="Promoción de relaciones basadas en el respeto..." required></textarea>
+              </div>
+            </div>
+
+            <!-- Tarjeta 4: Escuela de Familias -->
+            <div style="background: #f0fdf4; border: 1.5px solid #bbf7d0; border-radius: var(--radius-md); padding: 18px;">
+              <div style="font-weight: 700; color: #16a34a; margin-bottom: 12px; display: flex; align-items: center; gap: 6px;">
+                <span>💚</span> Tarjeta 4
+              </div>
+              <div class="form-group" style="margin-bottom: 10px;">
+                <label style="font-size: 0.82rem;">Título:</label>
+                <input type="text" id="adminHomeAreaTitle_4" placeholder="Escuela de Familias" required>
+              </div>
+              <div class="form-group" style="margin-bottom: 10px;">
+                <label style="font-size: 0.82rem;">Categoría / Etiqueta:</label>
+                <input type="text" id="adminHomeAreaTag_4" placeholder="Padres y Cuidadores" required>
+              </div>
+              <div class="form-group" style="margin-bottom: 0;">
+                <label style="font-size: 0.82rem;">Descripción:</label>
+                <textarea id="adminHomeAreaDesc_4" rows="3" placeholder="Espacios de formación y diálogo..." required></textarea>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Barra Inferior de Guardado -->
+        <div style="display: flex; justify-content: flex-end; gap: 12px; background: white; padding: 20px 24px; border-radius: var(--radius-lg); border: 1px solid var(--border-color); box-shadow: var(--shadow-sm);">
+          <button type="button" class="btn btn-secondary" onclick="handlePreviewHomeContent()" style="display: inline-flex; align-items: center; gap: 6px;">
+            <i data-lucide="eye"></i> Vista previa
+          </button>
+          <button type="button" class="btn btn-primary" id="btnSaveHomeContent" onclick="handleSaveHomeContent()" style="display: inline-flex; align-items: center; gap: 6px;">
+            <i data-lucide="save"></i> Guardar cambios
+          </button>
+        </div>
+      </div>
+
+      <!-- MODAL DE VISTA PREVIA DEL INICIO -->
+      <div id="homePreviewModal" style="display: none; position: fixed; inset: 0; background: rgba(15, 23, 42, 0.78); z-index: 9999; overflow-y: auto; padding: 24px 16px;">
+        <div style="background: white; border-radius: var(--radius-xl); max-width: 980px; margin: 30px auto; padding: 32px 36px; box-shadow: var(--shadow-xl); position: relative; border: 1px solid var(--border-color);">
+          <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #e2e8f0; padding-bottom: 16px; margin-bottom: 24px;">
+            <h4 style="margin: 0; display: flex; align-items: center; gap: 8px; color: #1e3a8a; font-size: 1.15rem;">
+              <i data-lucide="eye"></i> Vista Previa del Inicio (Sin guardar)
+            </h4>
+            <button type="button" class="btn btn-secondary btn-sm" onclick="closeHomePreviewModal()">✕ Cerrar</button>
+          </div>
+          <div id="homePreviewModalContent"></div>
+          <div style="margin-top: 28px; padding-top: 18px; border-top: 1px solid #e2e8f0; display: flex; justify-content: flex-end; gap: 10px;">
+            <button type="button" class="btn btn-secondary" onclick="closeHomePreviewModal()">Cerrar Vista Previa</button>
+            <button type="button" class="btn btn-primary" onclick="closeHomePreviewModal(); handleSaveHomeContent();" style="display: inline-flex; align-items: center; gap: 6px;">
+              <i data-lucide="save"></i> Guardar estos cambios
+            </button>
           </div>
         </div>
       </div>

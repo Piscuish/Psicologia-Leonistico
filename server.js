@@ -308,6 +308,48 @@ const DEFAULT_IMAGES = {
   about: 'https://lh3.googleusercontent.com/sitesv/AG8ngQXTnHzijkLW5x4q0oxIMOi07YzG-IBG1OfPXeoVkIVB8fjkFXyd17Exs0GpjRWuO_ve89ISCOVUerGrrxM5Btnf5tup2wv79zMnKOoluKmpvA0bbZU3sVSnjk80O_PqvnpU7L_xlejXLWd0rR4xWkxGQj7g0dTAeH3vz104NNIAC_EwotDlnekiU7aMZOxbjrQAZ56qxhieVbVysrZ75FKa5z5OY7hICFCfX1Ptwyo=w1280'
 };
 
+const DEFAULT_HOME_CONTENT = {
+  identityBadge: "🏛️ IDENTIDAD LEONÍSTICA",
+  mainTitle: "Bienvenidos a Caminando Juntos",
+  tagline: "\"Un espacio para crecer, aprender y construir bienestar.\"",
+  paragraph1: "En Caminando Juntos creemos que cada etapa del desarrollo es una oportunidad para aprender, descubrir fortalezas y construir un proyecto de vida con sentido. Este blog nace como un espacio de encuentro para estudiantes, familias, docentes y toda la comunidad educativa, donde compartiremos experiencias, recursos, actividades y estrategias que fortalecen el bienestar integral.",
+  paragraph2: "Desde el área de Psicoorientación, promovemos el desarrollo socioemocional, la Educación Sexual Integral, la orientación vocacional, la convivencia escolar y el acompañamiento a los diferentes procesos que contribuyen al crecimiento personal, académico y social de nuestros estudiantes.",
+  paragraph3: "Te invitamos a recorrer este espacio, conocer nuestras iniciativas, participar en las actividades y descubrir herramientas que nos permitan seguir caminando juntos hacia una comunidad más consciente, empática y comprometida con el bienestar de todos.",
+  aboutBadge: "🦁 EQUIPO DE ORIENTACIÓN",
+  aboutTitle: "¿Quiénes Somos?",
+  aboutSubtitle: "Profesionales comprometidas con la formación integral leonística",
+  aboutParagraph1: "Somos un equipo de psicoorientadoras apasionadas por el bienestar de los niños, niñas y jóvenes. Creemos firmemente que la educación académica trasciende cuando el corazón y la mente se encuentran en equilibrio.",
+  aboutParagraph2: "Trabajamos de la mano con las directivas, los docentes de aula y las familias para garantizar que cada estudiante cuente con las herramientas necesarias para construir un proyecto de vida feliz y exitoso.",
+  areasTitle: "Áreas de Acompañamiento Institucional",
+  areasSubtitle: "Líneas de trabajo diseñadas para respaldar cada etapa de tu vida escolar y familiar.",
+  areas: [
+    {
+      id: 1,
+      title: "Bienestar Emocional",
+      tag: "Apoyo Personal",
+      desc: "Estrategias para la gestión de emociones, manejo del estrés escolar, resolución asertiva de conflictos y autoestima."
+    },
+    {
+      id: 2,
+      title: "Orientación Vocacional",
+      tag: "Grados Superiores",
+      desc: "Descubrimiento de talentos, pasiones y orientación para la toma de decisiones profesionales hacia el futuro."
+    },
+    {
+      id: 3,
+      title: "Convivencia Escolar",
+      tag: "Comunidad",
+      desc: "Promoción de relaciones basadas en el respeto, empatía, prevención del acoso escolar y cultura de paz en las aulas."
+    },
+    {
+      id: 4,
+      title: "Escuela de Familias",
+      tag: "Padres y Cuidadores",
+      desc: "Espacios de formación y diálogo sobre pautas de crianza, límites afectivos y comunicación positiva en el hogar."
+    }
+  ]
+};
+
 const DEFAULT_PSYCHOLOGISTS = [
   {
     "id": 1,
@@ -1160,9 +1202,22 @@ apiRouter.get('/data', async (req, res) => {
     cycleBlocks: db.cycleBlocks || DEFAULT_CYCLE_BLOCKS,
     suggestions: db.suggestions || [],
     analytics: db.analytics || {},
+    homeContent: db.homeContent || DEFAULT_HOME_CONTENT,
     adminPassword: db.adminPassword || '123',
     adminSlug: db.adminSlug || 'admin451200'
   });
+});
+
+// 1.0 Contenido de la Portada Principal (Inicio)
+apiRouter.post('/home-content', async (req, res) => {
+  const { homeContent } = req.body;
+  if (!homeContent || typeof homeContent !== 'object') {
+    return res.status(400).json({ error: 'Formato inválido de contenido de inicio' });
+  }
+  const db = await getDbAsync();
+  db.homeContent = { ...DEFAULT_HOME_CONTENT, ...homeContent };
+  await saveDbAsync(db);
+  res.json({ success: true, version: db.version, homeContent: db.homeContent });
 });
 
 // 1.1 Elementos del Menú de Navegación
