@@ -355,18 +355,54 @@
     {
       "id": 5,
       "cycleId": "fundamental",
-      "title": "Transición a la Secundaria y Autonomía",
-      "subtitle": "Grados 6° y 7°",
-      "text": "Acompañamiento integral en los cambios socioemocionales de la preadolescencia, promoviendo el pensamiento crítico, la autoestima y la adaptación positiva a la vida en secundaria.",
+      "title": "¡Bienvenidos al Ciclo Fundamental!",
+      "subtitle": "Recuerda: conocerte, escucharte y pedir ayuda también son formas de cuidarte.",
+      "text": "Esta etapa trae nuevos aprendizajes, cambios y desafíos. Es un momento importante para fortalecer nuestra identidad, comprender nuestras emociones y desarrollar herramientas para tomar decisiones y relacionarnos de manera saludable. En este espacio encontrarás contenidos que te acompañarán en tu crecimiento personal, emocional y social.",
       "imageUrl": "",
       "imagePosition": "top",
       "badgeText": "6° y 7°",
       "order": 1,
       "type": "hero_banner",
-      "titleAlign": "left",
+      "titleAlign": "center",
       "size": "full",
       "imageSize": "full",
-      "imageFit": "contain"
+      "imageFit": "contain",
+      "galleryLayout": "single_full",
+      "galleryFit": "natural",
+      "galleryAlign": "center",
+      "buttonText": "",
+      "buttonUrl": "",
+      "iconEmoji": "💡",
+      "accentColor": "purple",
+      "slidesUrl": "",
+      "slidesBtnText": "",
+      "videoUrl": "",
+      "videoBtnText": "",
+      "slidesFileData": "",
+      "slidesFileName": "",
+      "itemsList": [
+        {
+          "icon": "💖",
+          "title": "Pauta de Bienestar",
+          "text": "Acompañamiento cercano y afectivo."
+        }
+      ],
+      "resourcesList": [
+        {
+          "title": "Guía Familiar (PDF)",
+          "desc": "Material imprimible de apoyo.",
+          "fileUrl": "",
+          "fileName": "",
+          "fileSize": "",
+          "icon": "file-text"
+        }
+      ],
+      "photosList": [
+        {
+          "url": "https://images.unsplash.com/photo-1577896851231-70ef18881754?auto=format&fit=crop&w=600&q=80",
+          "caption": ""
+        }
+      ]
     },
     {
       "id": 1788358207022,
@@ -378,7 +414,7 @@
       "subtitle": "Caminemos juntos en la construcción de entornos seguros, amorosos y respetuosos para nuestros niños y niñas.",
       "badgeText": "Jardín y transición",
       "text": "En este espacio encontrarás herramientas, estrategias y recursos para acompañar el desarrollo integral de la primera infancia desde el área de Psicoorientación.\n\nNuestro propósito es brindar orientaciones prácticas que permitan a familias, docentes y comunidad educativa acompañar a los niños y niñas en sus procesos emocionales, sociales, cognitivos y educativos, fortaleciendo su bienestar y desarrollo.",
-      "imageUrl": "/uploads/block_1788358207022_1789414573474_zp30d.png",
+      "imageUrl": "/uploads/block_1788358207022_1789414725735_b90nq.png",
       "imagePosition": "left",
       "buttonText": "",
       "buttonUrl": "",
@@ -586,7 +622,7 @@
       "subtitle": "",
       "badgeText": "PROMOCIÓN Y PREVENCIÓN",
       "text": "Este espacio está dedicado a la promoción del bienestar y la prevención en salud mental dentro de nuestra comunidad educativa. Aquí podrán conocer y evidenciar las diferentes actividades, campañas, talleres y experiencias que se han desarrollado en el colegio, orientadas a fortalecer el bienestar emocional y las habilidades para la vida. Además, encontrarán estrategias, recomendaciones y recursos que pueden ser de utilidad para acompañar el cuidado de la salud mental de nuestros estudiantes, familias y demás miembros de la comunidad educativa. Un espacio para aprender, reflexionar, compartir y construir juntos una comunidad que cuida el bienestar emocional.",
-      "imageUrl": "/uploads/block_1789414523980_1789414573488_4wzrl.jpg",
+      "imageUrl": "/uploads/block_1789414523980_1789414725753_j1uhi.jpg",
       "imagePosition": "bottom_banner",
       "imageSize": "medium",
       "imageFit": "contain",
@@ -631,13 +667,13 @@
   ],
   "suggestions": [],
   "analytics": {
-    "totalVisits": 33,
+    "totalVisits": 34,
     "uniqueSessions": 0,
-    "lastVisitDate": "14/9/2026 02:35 p. m.",
+    "lastVisitDate": "14/9/2026 02:36 p. m.",
     "tabs": {
       "inicio": 9,
       "encuentros": 0,
-      "ciclos": 24
+      "ciclos": 25
     },
     "cycles": {
       "primera_infancia": 18,
@@ -648,6 +684,13 @@
       "especializado": 0
     },
     "logs": [
+      {
+        "id": 1789414599319,
+        "date": "14/9/2026 02:36 p. m.",
+        "section": "Ciclos Escolares",
+        "action": "Consulta del Hub de Ciclos",
+        "device": "Escritorio"
+      },
       {
         "id": 1789414533190,
         "date": "14/9/2026 02:35 p. m.",
@@ -883,7 +926,7 @@
   },
   "adminPassword": "123",
   "adminSlug": "admin451200",
-  "version": "1789414577178",
+  "version": "1789414729622",
   "homeContent": {
     "identityBadge": "🏛️ IDENTIDAD LEONÍSTICA",
     "mainTitle": "Bienvenidos a Caminando Juntos",
