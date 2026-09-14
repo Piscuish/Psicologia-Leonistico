@@ -4799,7 +4799,12 @@ function resetCycleBlockForm() {
 }
 
 async function moveCycleBlockOrder(id, direction) {
-  const currentList = cycleBlocks.filter(b => b.cycleId === selectedAdminCycleKey).sort((a, b) => (a.order || 0) - (b.order || 0));
+  const meta = getAdminCycleOrPageMeta(selectedAdminCycleKey);
+  const targetKeys = [selectedAdminCycleKey];
+  if (meta && meta.key) targetKeys.push(meta.key);
+  if (selectedAdminCycleKey === 'promocion-prevencion') targetKeys.push('promocion_prevencion', 'promocion');
+  if (selectedAdminCycleKey === 'guia-bienestar') targetKeys.push('guia_bienestar', 'bienestar');
+  const currentList = cycleBlocks.filter(b => targetKeys.includes(b.cycleId)).sort((a, b) => (a.order || 0) - (b.order || 0));
   const idx = currentList.findIndex(b => b.id === id);
   if (idx === -1) return;
 
@@ -4904,7 +4909,12 @@ function setupCycleBlockDragAndDrop() {
       const targetId = parseInt(card.getAttribute('data-block-id'));
       if (!draggedBlockId || draggedBlockId === targetId) return;
 
-      const currentList = cycleBlocks.filter(b => b.cycleId === selectedAdminCycleKey).sort((a, b) => (a.order || 0) - (b.order || 0));
+      const meta = getAdminCycleOrPageMeta(selectedAdminCycleKey);
+      const targetKeys = [selectedAdminCycleKey];
+      if (meta && meta.key) targetKeys.push(meta.key);
+      if (selectedAdminCycleKey === 'promocion-prevencion') targetKeys.push('promocion_prevencion', 'promocion');
+      if (selectedAdminCycleKey === 'guia-bienestar') targetKeys.push('guia_bienestar', 'bienestar');
+      const currentList = cycleBlocks.filter(b => targetKeys.includes(b.cycleId)).sort((a, b) => (a.order || 0) - (b.order || 0));
       const fromIndex = currentList.findIndex(b => b.id === draggedBlockId);
       const toIndex = currentList.findIndex(b => b.id === targetId);
 
@@ -5391,7 +5401,7 @@ function renderAdminCycleBlocks() {
   if (!container) return;
 
   const targetKeys = [meta.key];
-  if (meta.key === 'promocion-prevencion') targetKeys.push('promocion_prevencion');
+  if (meta.key === 'promocion-prevencion') targetKeys.push('promocion_prevencion', 'promocion');
   if (meta.key === 'guia-bienestar') targetKeys.push('guia_bienestar', 'bienestar');
 
   const list = cycleBlocks.filter(b => targetKeys.includes(b.cycleId)).sort((a, b) => (a.order || 0) - (b.order || 0));
