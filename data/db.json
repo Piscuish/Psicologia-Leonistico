@@ -303,22 +303,6 @@
   ],
   "cycleBlocks": [
     {
-      "id": 5,
-      "cycleId": "fundamental",
-      "title": "Transición a la Secundaria y Autonomía",
-      "subtitle": "Grados 6° y 7°",
-      "text": "Acompañamiento integral en los cambios socioemocionales de la preadolescencia, promoviendo el pensamiento crítico, la autoestima y la adaptación positiva a la vida en secundaria.",
-      "imageUrl": "",
-      "imagePosition": "top",
-      "badgeText": "6° y 7°",
-      "order": 1,
-      "type": "hero_banner",
-      "titleAlign": "left",
-      "size": "full",
-      "imageSize": "full",
-      "imageFit": "contain"
-    },
-    {
       "id": 7,
       "cycleId": "especializado",
       "title": "Orientación Vocacional y Proyecto de Vida",
@@ -755,5 +739,5 @@
   },
   "adminPassword": "123",
   "adminSlug": "admin451200",
-  "version": "1789406269080"
+  "version": "1789406273227"
 }
