@@ -1049,10 +1049,12 @@ async function getDbAsync() {
   return inMemoryDb;
 }
 
-async function saveDbAsync(data) {
+async function saveDbAsync(data, options = {}) {
   try {
     initDb();
-    data.version = Date.now().toString();
+    if (options.bumpVersion !== false) {
+      data.version = Date.now().toString();
+    }
     inMemoryDb = data;
     lastCloudSyncTime = Date.now();
 
@@ -1071,8 +1073,10 @@ async function saveDbAsync(data) {
       await saveToUpstash(data);
     }
 
-    // Persistir en GitHub para que todos los usuarios y dispositivos vean los cambios
-    saveToGitHub(data).catch(() => {});
+    // Persistir en GitHub para que todos los usuarios y dispositivos vean los cambios (NUNCA en visitas públicas)
+    if (options.syncToGitHub !== false) {
+      saveToGitHub(data).catch(() => {});
+    }
 
     return true;
   } catch (err) {
@@ -1363,7 +1367,8 @@ apiRouter.post('/analytics/visit', async (req, res) => {
     db.analytics.logs = db.analytics.logs.slice(0, 50);
   }
 
-  await saveDbAsync(db);
+  // Guardar analíticas localmente / en memoria SIN hacer commit en GitHub ni alterar la versión de contenido
+  await saveDbAsync(db, { syncToGitHub: false, bumpVersion: false });
   res.json({ success: true, version: db.version, totalVisits: db.analytics.totalVisits });
 });
 
