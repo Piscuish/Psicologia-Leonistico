@@ -478,11 +478,11 @@
   ],
   "suggestions": [],
   "analytics": {
-    "totalVisits": 21,
+    "totalVisits": 22,
     "uniqueSessions": 0,
-    "lastVisitDate": "14/9/2026 04:38 a. m.",
+    "lastVisitDate": "14/9/2026 04:39 a. m.",
     "tabs": {
-      "inicio": 4,
+      "inicio": 5,
       "encuentros": 1,
       "ciclos": 16
     },
@@ -495,6 +495,13 @@
       "especializado": 0
     },
     "logs": [
+      {
+        "id": 1789360756708,
+        "date": "14/9/2026 04:39 a. m.",
+        "section": "Inicio / Portada",
+        "action": "Ingreso a la página de Inicio",
+        "device": "Escritorio"
+      },
       {
         "id": 1789360695783,
         "date": "14/9/2026 04:38 a. m.",
@@ -646,5 +653,5 @@
   },
   "adminPassword": "123",
   "adminSlug": "admin451200",
-  "version": "1789360695784"
+  "version": "1789360756708"
 }
