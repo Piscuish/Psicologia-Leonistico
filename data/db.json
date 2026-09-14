@@ -147,20 +147,6 @@
       "order": 6,
       "pageUrl": "/ciclos/especializado",
       "heroBgImage": ""
-    },
-    {
-      "key": "cycle_1788358007488",
-      "slug": "ciclo-juvenil-pro",
-      "name": "Ciclo Juvenil Pro",
-      "grades": "9°, 10° y 11°",
-      "badgeText": "9 10 y 11",
-      "pillClass": "pill-pink",
-      "borderClass": "card-border-pink",
-      "icon": "🎓",
-      "subtitle": "Espacio formativo y de orientación escolar.",
-      "order": 7,
-      "pageUrl": "/ciclos/ciclo-juvenil-pro",
-      "heroBgImage": ""
     }
   ],
   "customPages": [],
@@ -315,62 +301,6 @@
       "type": "hero_banner",
       "titleAlign": "left",
       "size": "full",
-      "imageSize": "full",
-      "imageFit": "contain"
-    },
-    {
-      "id": 1788358008335,
-      "cycleId": "cycle_1788358007488",
-      "type": "hero_banner",
-      "size": "full",
-      "titleAlign": "left",
-      "title": "Liderazgo y Orientación Vocacional 2026",
-      "subtitle": "Taller formativo para estudiantes de media académica",
-      "badgeText": "DESTACADO",
-      "text": "Este espacio formativo brinda herramientas para la elección de carrera y vida profesional.",
-      "imageUrl": "",
-      "imagePosition": "left",
-      "buttonText": "",
-      "buttonUrl": "",
-      "iconEmoji": "💡",
-      "accentColor": "purple",
-      "slidesUrl": "",
-      "slidesBtnText": "",
-      "slidesFileData": "",
-      "slidesFileName": "",
-      "itemsList": [
-        {
-          "icon": "💖",
-          "title": "Afecto y Diálogo",
-          "text": "Acompañamiento cercano y validación emocional constante."
-        },
-        {
-          "icon": "⏰",
-          "title": "Rutina y Horarios",
-          "text": "Fijar horas para estudiar, descansar y compartir en familia."
-        }
-      ],
-      "resourcesList": [
-        {
-          "title": "Guía de Orientación Familiar (PDF)",
-          "desc": "Material imprimible de apoyo para el hogar.",
-          "fileUrl": "",
-          "fileName": "",
-          "fileSize": "",
-          "icon": "file-text"
-        }
-      ],
-      "photosList": [
-        {
-          "url": "https://images.unsplash.com/photo-1577896851231-70ef18881754?auto=format&fit=crop&w=600&q=80",
-          "caption": "Talleres y actividades del ciclo"
-        },
-        {
-          "url": "https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&w=600&q=80",
-          "caption": "Encuentros formativos"
-        }
-      ],
-      "order": 1,
       "imageSize": "full",
       "imageFit": "contain"
     },
@@ -796,5 +726,5 @@
   },
   "adminPassword": "123",
   "adminSlug": "admin451200",
-  "version": "1789406335419"
+  "version": "1789406532659"
 }
