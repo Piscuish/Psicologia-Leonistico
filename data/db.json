@@ -383,22 +383,6 @@
       "imageFit": "contain"
     },
     {
-      "id": 7,
-      "cycleId": "especializado",
-      "title": "Orientación Vocacional y Proyecto de Vida",
-      "subtitle": "Grados 10° y 11°",
-      "text": "Asesoría y acompañamiento para la clarificación de intereses vocacionales, toma informada de decisiones profesionales, preparación para las Pruebas Saber y proyección al futuro universitario.",
-      "imageUrl": "",
-      "imagePosition": "top",
-      "badgeText": "10° y 11°",
-      "order": 1,
-      "type": "hero_banner",
-      "titleAlign": "left",
-      "size": "full",
-      "imageSize": "full",
-      "imageFit": "contain"
-    },
-    {
       "id": 1788358008335,
       "cycleId": "cycle_1788358007488",
       "type": "hero_banner",
@@ -824,7 +808,7 @@
   },
   "adminPassword": "123",
   "adminSlug": "admin451200",
-  "version": "1789414197023",
+  "version": "1789414200167",
   "homeContent": {
     "identityBadge": "🏛️ IDENTIDAD LEONÍSTICA",
     "mainTitle": "Bienvenidos a Caminando Juntos",
