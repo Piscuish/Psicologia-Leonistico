@@ -132,7 +132,7 @@
       "subtitle": "Comunicación asertiva, prevención de riesgos psicosociales y construcción de relaciones saludables.",
       "order": 5,
       "pageUrl": "/ciclos/exploratorio",
-      "heroBgImage": ""
+      "heroBgImage": "/uploads/hero_exploratorio_1789415015208_3qusb.jpg"
     },
     {
       "key": "especializado",
@@ -667,23 +667,65 @@
   ],
   "suggestions": [],
   "analytics": {
-    "totalVisits": 37,
+    "totalVisits": 43,
     "uniqueSessions": 0,
-    "lastVisitDate": "14/9/2026 02:39 p. m.",
+    "lastVisitDate": "14/9/2026 02:43 p. m.",
     "tabs": {
       "inicio": 9,
-      "encuentros": 0,
-      "ciclos": 28
+      "encuentros": 1,
+      "ciclos": 33
     },
     "cycles": {
-      "primera_infancia": 18,
-      "infantil": 3,
-      "basico": 2,
-      "fundamental": 1,
-      "exploratorio": 2,
+      "primera_infancia": 19,
+      "infantil": 4,
+      "basico": 3,
+      "fundamental": 2,
+      "exploratorio": 3,
       "especializado": 1
     },
     "logs": [
+      {
+        "id": 1789414996732,
+        "date": "14/9/2026 02:43 p. m.",
+        "section": "Ciclos: Ciclo Exploratorio (8° Y 9°)",
+        "action": "Visita a la página de Ciclo Exploratorio (8° Y 9°)",
+        "device": "Escritorio"
+      },
+      {
+        "id": 1789414994754,
+        "date": "14/9/2026 02:43 p. m.",
+        "section": "Ciclos: Ciclo Fundamental (6° Y 7°)",
+        "action": "Visita a la página de Ciclo Fundamental (6° Y 7°)",
+        "device": "Escritorio"
+      },
+      {
+        "id": 1789414993092,
+        "date": "14/9/2026 02:43 p. m.",
+        "section": "Ciclos: Ciclo Básico (4° Y 5°)",
+        "action": "Visita a la página de Ciclo Básico (4° Y 5°)",
+        "device": "Escritorio"
+      },
+      {
+        "id": 1789414991443,
+        "date": "14/9/2026 02:43 p. m.",
+        "section": "Ciclos: Ciclo Infantil (1°, 2° Y 3°)",
+        "action": "Visita a la página de Ciclo Infantil (1°, 2° Y 3°)",
+        "device": "Escritorio"
+      },
+      {
+        "id": 1789414989349,
+        "date": "14/9/2026 02:43 p. m.",
+        "section": "Ciclos: Primera Infancia (JARDÍN Y TRANSICIÓN)",
+        "action": "Visita a la página de Primera Infancia (JARDÍN Y TRANSICIÓN)",
+        "device": "Escritorio"
+      },
+      {
+        "id": 1789414857204,
+        "date": "14/9/2026 02:40 p. m.",
+        "section": "Encuentros Familiares",
+        "action": "Consulta de Calendario de Encuentros",
+        "device": "Escritorio"
+      },
       {
         "id": 1789414757855,
         "date": "14/9/2026 02:39 p. m.",
@@ -947,7 +989,7 @@
   },
   "adminPassword": "123",
   "adminSlug": "admin451200",
-  "version": "1789414772623",
+  "version": "1789415016649",
   "homeContent": {
     "identityBadge": "🏛️ IDENTIDAD LEONÍSTICA",
     "mainTitle": "Bienvenidos a Caminando Juntos",
