@@ -473,7 +473,7 @@
       ],
       "photosList": [
         {
-          "url": "https://images.unsplash.com/photo-1577896851231-70ef18881754?auto=format&fit=crop&w=600&q=80",
+          "url": "/uploads/gallery_1789410883226_0_1789411287531_v1t2d.png",
           "caption": ""
         }
       ],
@@ -643,7 +643,7 @@
   },
   "adminPassword": "123",
   "adminSlug": "admin451200",
-  "version": "1789411196554",
+  "version": "1789411289161",
   "homeContent": {
     "identityBadge": "🏛️ IDENTIDAD LEONÍSTICA",
     "mainTitle": "Bienvenidos a Caminando Juntos",
