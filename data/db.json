@@ -128,11 +128,11 @@
       "badgeText": "8 y 9",
       "pillClass": "pill-blue",
       "borderClass": "card-border-blue",
-      "icon": "🧭",
+      "icon": "",
       "subtitle": "Comunicación asertiva, prevención de riesgos psicosociales y construcción de relaciones saludables.",
       "order": 5,
       "pageUrl": "/ciclos/exploratorio",
-      "heroBgImage": "/uploads/hero_exploratorio_1788740308711_wv1w9.jpg"
+      "heroBgImage": ""
     },
     {
       "key": "especializado",
@@ -853,7 +853,7 @@
   },
   "adminPassword": "123",
   "adminSlug": "admin451200",
-  "version": "1789414369525",
+  "version": "1789414386276",
   "homeContent": {
     "identityBadge": "🏛️ IDENTIDAD LEONÍSTICA",
     "mainTitle": "Bienvenidos a Caminando Juntos",
