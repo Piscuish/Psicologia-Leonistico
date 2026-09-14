@@ -132,7 +132,7 @@
       "subtitle": "Comunicación asertiva, prevención de riesgos psicosociales y construcción de relaciones saludables.",
       "order": 5,
       "pageUrl": "/ciclos/exploratorio",
-      "heroBgImage": "/uploads/hero_exploratorio_1789415015208_3qusb.jpg"
+      "heroBgImage": ""
     },
     {
       "key": "especializado",
@@ -667,13 +667,13 @@
   ],
   "suggestions": [],
   "analytics": {
-    "totalVisits": 43,
+    "totalVisits": 44,
     "uniqueSessions": 0,
-    "lastVisitDate": "14/9/2026 02:43 p. m.",
+    "lastVisitDate": "14/9/2026 02:45 p. m.",
     "tabs": {
       "inicio": 9,
       "encuentros": 1,
-      "ciclos": 33
+      "ciclos": 34
     },
     "cycles": {
       "primera_infancia": 19,
@@ -681,9 +681,16 @@
       "basico": 3,
       "fundamental": 2,
       "exploratorio": 3,
-      "especializado": 1
+      "especializado": 2
     },
     "logs": [
+      {
+        "id": 1789415131344,
+        "date": "14/9/2026 02:45 p. m.",
+        "section": "Ciclos: Ciclo Especializado (10° Y 11°)",
+        "action": "Visita a la página de Ciclo Especializado (10° Y 11°)",
+        "device": "Escritorio"
+      },
       {
         "id": 1789414996732,
         "date": "14/9/2026 02:43 p. m.",
@@ -989,7 +996,7 @@
   },
   "adminPassword": "123",
   "adminSlug": "admin451200",
-  "version": "1789415016649",
+  "version": "1789415140526",
   "homeContent": {
     "identityBadge": "🏛️ IDENTIDAD LEONÍSTICA",
     "mainTitle": "Bienvenidos a Caminando Juntos",
