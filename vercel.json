@@ -1,6 +1,11 @@
 {
   "version": 2,
   "cleanUrls": true,
+  "functions": {
+    "api/index.js": {
+      "excludeFiles": "{uploads/**,public/uploads/**}"
+    }
+  },
   "headers": [
     {
       "source": "/(.*)\\.(css|js)",
