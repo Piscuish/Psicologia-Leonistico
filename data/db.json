@@ -567,72 +567,15 @@
         }
       ],
       "order": 1
-    },
-    {
-      "id": 1789408506159,
-      "cycleId": "promocion-prevencion",
-      "type": "hero_banner",
-      "size": "full",
-      "titleAlign": "center",
-      "title": "Prevención y Promoción",
-      "subtitle": "",
-      "badgeText": "PROMOCIÓN Y PREVENCIÓN",
-      "text": "Este espacio está dedicado a la promoción del bienestar y la prevención en salud mental dentro de nuestra comunidad educativa. Aquí podrán conocer y evidenciar las diferentes actividades, campañas, talleres y experiencias que se han desarrollado en el colegio, orientadas a fortalecer el bienestar emocional y las habilidades para la vida.\n\nAdemás, encontrarán estrategias, recomendaciones y recursos que pueden ser de utilidad para acompañar el cuidado de la salud mental de nuestros estudiantes, familias y demás miembros de la comunidad educativa.\n\nUn espacio para aprender, reflexionar, compartir y construir juntos una comunidad que cuida el bienestar emocional.",
-      "imageUrl": "/uploads/block_1789408506159_1789408506680_duhu2.jpg",
-      "imagePosition": "banner",
-      "imageSize": "full",
-      "imageFit": "cover",
-      "galleryLayout": "single_full",
-      "galleryFit": "natural",
-      "galleryAlign": "center",
-      "buttonText": "",
-      "buttonUrl": "",
-      "iconEmoji": "💡",
-      "accentColor": "purple",
-      "slidesUrl": "",
-      "slidesBtnText": "",
-      "videoUrl": "",
-      "videoBtnText": "",
-      "slidesFileData": "",
-      "slidesFileName": "",
-      "itemsList": [
-        {
-          "icon": "💖",
-          "title": "Afecto y Diálogo",
-          "text": "Acompañamiento cercano y validación emocional constante."
-        },
-        {
-          "icon": "⏰",
-          "title": "Rutina y Horarios",
-          "text": "Fijar horas para estudiar, descansar y compartir en familia."
-        }
-      ],
-      "resourcesList": [
-        {
-          "title": "Guía de Orientación Familiar (PDF)",
-          "desc": "Material imprimible de apoyo para el hogar.",
-          "fileUrl": "",
-          "fileName": "",
-          "fileSize": "",
-          "icon": "file-text"
-        }
-      ],
-      "photosList": [
-        {
-          "url": "https://images.unsplash.com/photo-1577896851231-70ef18881754?auto=format&fit=crop&w=600&q=80",
-          "caption": ""
-        }
-      ],
-      "order": 1
     }
   ],
   "suggestions": [],
   "analytics": {
-    "totalVisits": 26,
+    "totalVisits": 25,
     "uniqueSessions": 0,
-    "lastVisitDate": "14/9/2026 05:26 p. m.",
+    "lastVisitDate": "14/9/2026 05:10 p. m.",
     "tabs": {
-      "inicio": 11,
+      "inicio": 10,
       "encuentros": 0,
       "ciclos": 15
     },
@@ -645,13 +588,6 @@
       "especializado": 0
     },
     "logs": [
-      {
-        "id": 1789406761763,
-        "date": "14/9/2026 05:26 p. m.",
-        "section": "Inicio / Portada",
-        "action": "Ingreso a la página de Inicio",
-        "device": "Escritorio"
-      },
       {
         "id": 1789405853834,
         "date": "14/9/2026 05:10 p. m.",
@@ -831,5 +767,5 @@
   },
   "adminPassword": "123",
   "adminSlug": "admin451200",
-  "version": "1789408507731"
+  "version": "1789408539000"
 }
