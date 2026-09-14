@@ -535,63 +535,6 @@
         }
       ],
       "order": 1
-    },
-    {
-      "id": 1789412204316,
-      "cycleId": "guia-bienestar",
-      "type": "slides_embed",
-      "size": "full",
-      "titleAlign": "center",
-      "title": "Guía de acompañamiento emocional post terremoto (Copia)",
-      "subtitle": "",
-      "badgeText": "BIENESTAR EMOCIONAL",
-      "text": "El Colegio Leonístico La Merced está comprometido con el bienestar integral y emocional de su comunidad educativa. Por ello, desde el área de Psicoorientación se elaboraron las siguientes guías de acompañamiento emocional, con el propósito de brindar orientaciones para abordar las emociones que pueden surgir después de un evento sísmico, tanto en el contexto escolar como en el hogar.\n\nEstas guías fueron trabajadas en el colegio como parte del acompañamiento a los estudiantes, brindando orientaciones que permitieran reconocer y gestionar las diferentes emociones que pueden surgir después de una situación de este tipo. Asimismo, permitieron identificar posibles afectaciones emocionales que requirieran un acompañamiento más especializado, realizando la remisión a Psicología cuando fue necesario, con el fin de brindar el apoyo correspondiente.",
-      "imageUrl": "",
-      "imagePosition": "banner",
-      "imageSize": "full",
-      "imageFit": "contain",
-      "galleryLayout": "single_full",
-      "galleryFit": "natural",
-      "galleryAlign": "center",
-      "buttonText": "",
-      "buttonUrl": "",
-      "iconEmoji": "💡",
-      "accentColor": "purple",
-      "slidesUrl": "https://drive.google.com/file/d/16rDfkVUxBZZyRgf-7MRzDsLeQ82w4Ea9/view?usp=sharing",
-      "slidesBtnText": "",
-      "videoUrl": "",
-      "videoBtnText": "",
-      "slidesFileData": "",
-      "slidesFileName": "",
-      "itemsList": [
-        {
-          "icon": "💖",
-          "title": "Afecto y Diálogo",
-          "text": "Acompañamiento cercano y validación emocional constante."
-        },
-        {
-          "icon": "⏰",
-          "title": "Rutina y Horarios",
-          "text": "Fijar horas para estudiar, descansar y compartir en familia."
-        }
-      ],
-      "resourcesList": [
-        {
-          "title": "Guía de Orientación Familiar (PDF)",
-          "desc": "Material imprimible de apoyo para el hogar.",
-          "fileUrl": "https://drive.google.com/file/d/16ILTQguHWEY5Cuoa6qGE_CFpcw0gLYly/view?usp=sharing",
-          "fileName": "",
-          "fileSize": "",
-          "icon": "file-text"
-        }
-      ],
-      "photosList": [
-        {
-          "url": "https://images.unsplash.com/photo-1577896851231-70ef18881754?auto=format&fit=crop&w=600&q=80",
-          "caption": ""
-        }
-      ],
-      "order": 2
     }
   ],
   "suggestions": [],
@@ -757,7 +700,7 @@
   },
   "adminPassword": "123",
   "adminSlug": "admin451200",
-  "version": "1789412227180",
+  "version": "1789412236940",
   "homeContent": {
     "identityBadge": "🏛️ IDENTIDAD LEONÍSTICA",
     "mainTitle": "Bienvenidos a Caminando Juntos",
