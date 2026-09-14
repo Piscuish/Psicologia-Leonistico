@@ -378,7 +378,7 @@
       "subtitle": "Caminemos juntos en la construcción de entornos seguros, amorosos y respetuosos para nuestros niños y niñas.",
       "badgeText": "Jardín y transición",
       "text": "En este espacio encontrarás herramientas, estrategias y recursos para acompañar el desarrollo integral de la primera infancia desde el área de Psicoorientación.\n\nNuestro propósito es brindar orientaciones prácticas que permitan a familias, docentes y comunidad educativa acompañar a los niños y niñas en sus procesos emocionales, sociales, cognitivos y educativos, fortaleciendo su bienestar y desarrollo.",
-      "imageUrl": "/uploads/block_1788358207022_1789414528322_5268r.png",
+      "imageUrl": "/uploads/block_1788358207022_1789414542684_ursbw.png",
       "imagePosition": "left",
       "buttonText": "",
       "buttonUrl": "",
@@ -461,18 +461,6 @@
       "iconEmoji": "🌱",
       "accentColor": "blue",
       "order": 3
-    },
-    {
-      "id": 1789413673089,
-      "cycleId": "promocion-prevencion",
-      "type": "hero_banner",
-      "size": "full",
-      "titleAlign": "left",
-      "title": "Estrategias de Autocuidado y Bienestar Comunitario",
-      "subtitle": "Rutas de Atención y Redes de Apoyo Escolar",
-      "badgeText": "CAMPAÑAS FORMATIVAS",
-      "text": "Compartimos herramientas para identificar factores de riesgo, promover la empatía en las aulas y fortalecer la convivencia escolar.",
-      "order": 2
     },
     {
       "id": 1789414197019,
@@ -598,7 +586,7 @@
       "subtitle": "",
       "badgeText": "PROMOCIÓN Y PREVENCIÓN",
       "text": "Este espacio está dedicado a la promoción del bienestar y la prevención en salud mental dentro de nuestra comunidad educativa. Aquí podrán conocer y evidenciar las diferentes actividades, campañas, talleres y experiencias que se han desarrollado en el colegio, orientadas a fortalecer el bienestar emocional y las habilidades para la vida. Además, encontrarán estrategias, recomendaciones y recursos que pueden ser de utilidad para acompañar el cuidado de la salud mental de nuestros estudiantes, familias y demás miembros de la comunidad educativa. Un espacio para aprender, reflexionar, compartir y construir juntos una comunidad que cuida el bienestar emocional.",
-      "imageUrl": "/uploads/block_1789414523980_1789414528334_v9032.jpg",
+      "imageUrl": "/uploads/block_1789414523980_1789414542696_iejcr.jpg",
       "imagePosition": "bottom_banner",
       "imageSize": "medium",
       "imageFit": "contain",
@@ -643,11 +631,11 @@
   ],
   "suggestions": [],
   "analytics": {
-    "totalVisits": 32,
+    "totalVisits": 33,
     "uniqueSessions": 0,
-    "lastVisitDate": "14/9/2026 02:32 p. m.",
+    "lastVisitDate": "14/9/2026 02:35 p. m.",
     "tabs": {
-      "inicio": 8,
+      "inicio": 9,
       "encuentros": 0,
       "ciclos": 24
     },
@@ -660,6 +648,13 @@
       "especializado": 0
     },
     "logs": [
+      {
+        "id": 1789414533190,
+        "date": "14/9/2026 02:35 p. m.",
+        "section": "Inicio / Portada",
+        "action": "Ingreso a la página de Inicio",
+        "device": "Escritorio"
+      },
       {
         "id": 1789414347718,
         "date": "14/9/2026 02:32 p. m.",
@@ -888,7 +883,7 @@
   },
   "adminPassword": "123",
   "adminSlug": "admin451200",
-  "version": "1789414531446",
+  "version": "1789414546329",
   "homeContent": {
     "identityBadge": "🏛️ IDENTIDAD LEONÍSTICA",
     "mainTitle": "Bienvenidos a Caminando Juntos",
