@@ -132,7 +132,7 @@
       "subtitle": "Comunicación asertiva, prevención de riesgos psicosociales y construcción de relaciones saludables.",
       "order": 5,
       "pageUrl": "/ciclos/exploratorio",
-      "heroBgImage": ""
+      "heroBgImage": "/uploads/hero_exploratorio_1789415156596_0hlxx.png"
     },
     {
       "key": "especializado",
@@ -996,7 +996,7 @@
   },
   "adminPassword": "123",
   "adminSlug": "admin451200",
-  "version": "1789415140526",
+  "version": "1789415157939",
   "homeContent": {
     "identityBadge": "🏛️ IDENTIDAD LEONÍSTICA",
     "mainTitle": "Bienvenidos a Caminando Juntos",
