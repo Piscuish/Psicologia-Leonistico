@@ -705,7 +705,7 @@
       "buttonUrl": "",
       "iconEmoji": "💡",
       "accentColor": "purple",
-      "slidesUrl": "https://drive.google.com/file/d/16ILTQguHWEY5Cuoa6qGE_CFpcw0gLYly/view",
+      "slidesUrl": "https://drive.google.com/file/d/16rDfkVUxBZZyRgf-7MRzDsLeQ82w4Ea9/view",
       "slidesBtnText": "",
       "videoUrl": "",
       "videoBtnText": "",
@@ -744,12 +744,12 @@
   ],
   "suggestions": [],
   "analytics": {
-    "totalVisits": 50,
+    "totalVisits": 51,
     "uniqueSessions": 0,
-    "lastVisitDate": "14/9/2026 08:04 p. m.",
+    "lastVisitDate": "14/9/2026 08:10 p. m.",
     "tabs": {
       "inicio": 11,
-      "encuentros": 1,
+      "encuentros": 2,
       "ciclos": 38
     },
     "cycles": {
@@ -761,6 +761,13 @@
       "especializado": 2
     },
     "logs": [
+      {
+        "id": 1789416618335,
+        "date": "14/9/2026 08:10 p. m.",
+        "section": "Encuentros Familiares",
+        "action": "Consulta de Calendario de Encuentros",
+        "device": "Escritorio"
+      },
       {
         "id": 1789416254424,
         "date": "14/9/2026 08:04 p. m.",
@@ -1103,19 +1110,12 @@
         "section": "Ciclos: Primera Infancia (JARDÍN Y TRANSICIÓN)",
         "action": "Visita a la página de Primera Infancia (JARDÍN Y TRANSICIÓN)",
         "device": "Escritorio"
-      },
-      {
-        "id": 1789141252154,
-        "date": "11/9/2026 10:40 a. m.",
-        "section": "Ciclos: Primera Infancia (JARDÍN Y TRANSICIÓN)",
-        "action": "Visita a la página de Primera Infancia (JARDÍN Y TRANSICIÓN)",
-        "device": "Escritorio"
       }
     ]
   },
   "adminPassword": "123",
   "adminSlug": "admin451200",
-  "version": "1789416492457",
+  "version": "1789416708523",
   "homeContent": {
     "identityBadge": "🏛️ IDENTIDAD LEONÍSTICA",
     "mainTitle": "Bienvenidos a Caminando Juntos",
