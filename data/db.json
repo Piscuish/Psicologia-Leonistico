@@ -86,7 +86,7 @@
       "badgeText": "1, 2 y 3",
       "pillClass": "pill-teal",
       "borderClass": "card-border-teal",
-      "icon": "🌱",
+      "icon": "",
       "subtitle": "Acompañamiento socioemocional y fortalecimiento de la convivencia, empatía y habilidades de aprendizaje.",
       "order": 2,
       "pageUrl": "/ciclos/infantil",
@@ -608,23 +608,51 @@
   ],
   "suggestions": [],
   "analytics": {
-    "totalVisits": 28,
+    "totalVisits": 32,
     "uniqueSessions": 0,
-    "lastVisitDate": "14/9/2026 02:31 p. m.",
+    "lastVisitDate": "14/9/2026 02:32 p. m.",
     "tabs": {
-      "inicio": 7,
+      "inicio": 8,
       "encuentros": 0,
-      "ciclos": 21
+      "ciclos": 24
     },
     "cycles": {
-      "primera_infancia": 17,
-      "infantil": 2,
-      "basico": 1,
+      "primera_infancia": 18,
+      "infantil": 3,
+      "basico": 2,
       "fundamental": 0,
       "exploratorio": 1,
       "especializado": 0
     },
     "logs": [
+      {
+        "id": 1789414347718,
+        "date": "14/9/2026 02:32 p. m.",
+        "section": "Ciclos: Ciclo Básico (4° Y 5°)",
+        "action": "Visita a la página de Ciclo Básico (4° Y 5°)",
+        "device": "Escritorio"
+      },
+      {
+        "id": 1789414343394,
+        "date": "14/9/2026 02:32 p. m.",
+        "section": "Ciclos: Ciclo Infantil (1°, 2° Y 3°)",
+        "action": "Visita a la página de Ciclo Infantil (1°, 2° Y 3°)",
+        "device": "Escritorio"
+      },
+      {
+        "id": 1789414341159,
+        "date": "14/9/2026 02:32 p. m.",
+        "section": "Ciclos: Primera Infancia (JARDÍN Y TRANSICIÓN)",
+        "action": "Visita a la página de Primera Infancia (JARDÍN Y TRANSICIÓN)",
+        "device": "Escritorio"
+      },
+      {
+        "id": 1789414339932,
+        "date": "14/9/2026 02:32 p. m.",
+        "section": "Inicio / Portada",
+        "action": "Ingreso a la página de Inicio",
+        "device": "Escritorio"
+      },
       {
         "id": 1789414263545,
         "date": "14/9/2026 02:31 p. m.",
@@ -825,7 +853,7 @@
   },
   "adminPassword": "123",
   "adminSlug": "admin451200",
-  "version": "1789414335969",
+  "version": "1789414360982",
   "homeContent": {
     "identityBadge": "🏛️ IDENTIDAD LEONÍSTICA",
     "mainTitle": "Bienvenidos a Caminando Juntos",
