@@ -301,9 +301,9 @@
     {
       "id": 3,
       "cycleId": "infantil",
-      "title": "Empatía, Convivencia y Amistad",
-      "subtitle": "Grados 1°, 2° y 3°",
-      "text": "Fortalecemos la convivencia escolar en el Ciclo Infantil guiando a los estudiantes en la empatía, el trabajo en equipo, la resolución pacífica de conflictos y el respeto mutuo en el aula de clase.",
+      "title": "¡Bienvenidos al Ciclo Infantil!",
+      "subtitle": "¡Caminemos juntos en esta maravillosa etapa de crecer!",
+      "text": "Este es un espacio para crecer, descubrir y aprender juntos. Aquí encontrarás recursos y actividades pensados para acompañar a nuestros niños y niñas en sus primeros años, fortaleciendo sus emociones, habilidades sociales, autonomía y bienestar. Porque cada pequeño paso es una oportunidad para aprender, jugar, expresar lo que sentimos y construir relaciones llenas de cariño y respeto.",
       "imageUrl": "",
       "imagePosition": "top",
       "badgeText": "1°, 2° y 3°",
@@ -312,7 +312,43 @@
       "titleAlign": "left",
       "size": "full",
       "imageSize": "full",
-      "imageFit": "contain"
+      "imageFit": "contain",
+      "galleryLayout": "single_full",
+      "galleryFit": "natural",
+      "galleryAlign": "center",
+      "buttonText": "",
+      "buttonUrl": "",
+      "iconEmoji": "💡",
+      "accentColor": "purple",
+      "slidesUrl": "",
+      "slidesBtnText": "",
+      "videoUrl": "",
+      "videoBtnText": "",
+      "slidesFileData": "",
+      "slidesFileName": "",
+      "itemsList": [
+        {
+          "icon": "💖",
+          "title": "Pauta de Bienestar",
+          "text": "Acompañamiento cercano y afectivo."
+        }
+      ],
+      "resourcesList": [
+        {
+          "title": "Guía Familiar (PDF)",
+          "desc": "Material imprimible de apoyo.",
+          "fileUrl": "",
+          "fileName": "",
+          "fileSize": "",
+          "icon": "file-text"
+        }
+      ],
+      "photosList": [
+        {
+          "url": "https://images.unsplash.com/photo-1577896851231-70ef18881754?auto=format&fit=crop&w=600&q=80",
+          "caption": ""
+        }
+      ]
     },
     {
       "id": 4,
@@ -731,7 +767,7 @@
   },
   "adminPassword": "123",
   "adminSlug": "admin451200",
-  "version": "1789413673065",
+  "version": "1789414072116",
   "homeContent": {
     "identityBadge": "🏛️ IDENTIDAD LEONÍSTICA",
     "mainTitle": "Bienvenidos a Caminando Juntos",
