@@ -478,16 +478,16 @@
   ],
   "suggestions": [],
   "analytics": {
-    "totalVisits": 23,
+    "totalVisits": 26,
     "uniqueSessions": 0,
-    "lastVisitDate": "14/9/2026 05:09 a. m.",
+    "lastVisitDate": "14/9/2026 01:01 p. m.",
     "tabs": {
-      "inicio": 6,
-      "encuentros": 1,
-      "ciclos": 16
+      "inicio": 7,
+      "encuentros": 2,
+      "ciclos": 17
     },
     "cycles": {
-      "primera_infancia": 16,
+      "primera_infancia": 17,
       "infantil": 0,
       "basico": 0,
       "fundamental": 0,
@@ -495,6 +495,27 @@
       "especializado": 0
     },
     "logs": [
+      {
+        "id": 1789390892510,
+        "date": "14/9/2026 01:01 p. m.",
+        "section": "Encuentros Familiares",
+        "action": "Consulta de Calendario de Encuentros",
+        "device": "Escritorio"
+      },
+      {
+        "id": 1789390890718,
+        "date": "14/9/2026 01:01 p. m.",
+        "section": "Ciclos: Primera Infancia (JARDÍN Y TRANSICIÓN)",
+        "action": "Visita a la página de Primera Infancia (JARDÍN Y TRANSICIÓN)",
+        "device": "Escritorio"
+      },
+      {
+        "id": 1789390889569,
+        "date": "14/9/2026 01:01 p. m.",
+        "section": "Inicio / Portada",
+        "action": "Ingreso a la página de Inicio",
+        "device": "Escritorio"
+      },
       {
         "id": 1789362572285,
         "date": "14/9/2026 05:09 a. m.",
@@ -660,5 +681,5 @@
   },
   "adminPassword": "123",
   "adminSlug": "admin451200",
-  "version": "1789362572285"
+  "version": "1789390892510"
 }
