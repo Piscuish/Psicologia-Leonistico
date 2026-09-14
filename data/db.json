@@ -690,7 +690,7 @@
       "type": "slides_embed",
       "size": "full",
       "titleAlign": "center",
-      "title": "Cuento de acompañamiento emocional post terremoto (Copia)",
+      "title": "Guia de acompañamiento emocional post terremoto",
       "subtitle": "",
       "badgeText": "BIENESTAR EMOCIONAL",
       "text": "El Colegio Leonístico La Merced está comprometido con el bienestar integral y emocional de su comunidad educativa. Por ello, desde el área de Psicoorientación se elaboraron las siguientes guías de acompañamiento emocional, con el propósito de brindar orientaciones para abordar las emociones que pueden surgir después de un evento sísmico, tanto en el contexto escolar como en el hogar.\n\nEstas guías fueron trabajadas en el colegio como parte del acompañamiento a los estudiantes, brindando orientaciones que permitieran reconocer y gestionar las diferentes emociones que pueden surgir después de una situación de este tipo. Asimismo, permitieron identificar posibles afectaciones emocionales que requirieran un acompañamiento más especializado, realizando la remisión a Psicología cuando fue necesario, con el fin de brindar el apoyo correspondiente.",
@@ -1115,7 +1115,7 @@
   },
   "adminPassword": "123",
   "adminSlug": "admin451200",
-  "version": "1789416478984",
+  "version": "1789416492457",
   "homeContent": {
     "identityBadge": "🏛️ IDENTIDAD LEONÍSTICA",
     "mainTitle": "Bienvenidos a Caminando Juntos",
