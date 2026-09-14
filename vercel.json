@@ -4,6 +4,9 @@
   "functions": {
     "api/index.js": {
       "excludeFiles": "{uploads/**,public/uploads/**}"
+    },
+    "api/[...slug].js": {
+      "excludeFiles": "{uploads/**,public/uploads/**}"
     }
   },
   "headers": [
