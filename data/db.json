@@ -100,7 +100,7 @@
       "badgeText": "4 y 5",
       "pillClass": "pill-yellow",
       "borderClass": "card-border-yellow",
-      "icon": "📘",
+      "icon": "",
       "subtitle": "Orientación en hábitos de estudio, autonomía escolar y desarrollo integral de preadolescentes.",
       "order": 3,
       "pageUrl": "/ciclos/basico",
@@ -853,7 +853,7 @@
   },
   "adminPassword": "123",
   "adminSlug": "admin451200",
-  "version": "1789414360982",
+  "version": "1789414365668",
   "homeContent": {
     "identityBadge": "🏛️ IDENTIDAD LEONÍSTICA",
     "mainTitle": "Bienvenidos a Caminando Juntos",
