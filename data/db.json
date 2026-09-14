@@ -421,7 +421,7 @@
     {
       "id": 1788358207022,
       "cycleId": "primera_infancia",
-      "type": "photo_gallery",
+      "type": "hero_banner",
       "size": "full",
       "titleAlign": "center",
       "title": "Bienvenidos",
@@ -478,16 +478,16 @@
   ],
   "suggestions": [],
   "analytics": {
-    "totalVisits": 26,
+    "totalVisits": 20,
     "uniqueSessions": 0,
-    "lastVisitDate": "14/9/2026 01:01 p. m.",
+    "lastVisitDate": "14/9/2026 08:10 a. m.",
     "tabs": {
-      "inicio": 7,
-      "encuentros": 2,
-      "ciclos": 17
+      "inicio": 5,
+      "encuentros": 0,
+      "ciclos": 15
     },
     "cycles": {
-      "primera_infancia": 17,
+      "primera_infancia": 15,
       "infantil": 0,
       "basico": 0,
       "fundamental": 0,
@@ -496,80 +496,38 @@
     },
     "logs": [
       {
-        "id": 1789390892510,
-        "date": "14/9/2026 01:01 p. m.",
-        "section": "Encuentros Familiares",
-        "action": "Consulta de Calendario de Encuentros",
-        "device": "Escritorio"
-      },
-      {
-        "id": 1789390890718,
-        "date": "14/9/2026 01:01 p. m.",
-        "section": "Ciclos: Primera Infancia (JARDÍN Y TRANSICIÓN)",
-        "action": "Visita a la página de Primera Infancia (JARDÍN Y TRANSICIÓN)",
-        "device": "Escritorio"
-      },
-      {
-        "id": 1789390889569,
-        "date": "14/9/2026 01:01 p. m.",
+        "id": 1789391414147,
+        "date": "14/9/2026 08:10 a. m.",
         "section": "Inicio / Portada",
-        "action": "Ingreso a la página de Inicio",
+        "action": "Visita de prueba #5",
         "device": "Escritorio"
       },
       {
-        "id": 1789362572285,
-        "date": "14/9/2026 05:09 a. m.",
+        "id": 1789391414141,
+        "date": "14/9/2026 08:10 a. m.",
         "section": "Inicio / Portada",
-        "action": "Ingreso a la página de Inicio",
+        "action": "Visita de prueba #4",
         "device": "Escritorio"
       },
       {
-        "id": 1789360756708,
-        "date": "14/9/2026 04:39 a. m.",
+        "id": 1789391414134,
+        "date": "14/9/2026 08:10 a. m.",
         "section": "Inicio / Portada",
-        "action": "Ingreso a la página de Inicio",
+        "action": "Visita de prueba #3",
         "device": "Escritorio"
       },
       {
-        "id": 1789360695783,
-        "date": "14/9/2026 04:38 a. m.",
+        "id": 1789391414127,
+        "date": "14/9/2026 08:10 a. m.",
         "section": "Inicio / Portada",
-        "action": "Ingreso a la página de Inicio",
+        "action": "Visita de prueba #2",
         "device": "Escritorio"
       },
       {
-        "id": 1789336909905,
-        "date": "13/9/2026 10:01 p. m.",
+        "id": 1789391414118,
+        "date": "14/9/2026 08:10 a. m.",
         "section": "Inicio / Portada",
-        "action": "Ingreso a la página de Inicio",
-        "device": "Escritorio"
-      },
-      {
-        "id": 1789336909661,
-        "date": "13/9/2026 10:01 p. m.",
-        "section": "Inicio / Portada",
-        "action": "Ingreso a la página de Inicio",
-        "device": "Escritorio"
-      },
-      {
-        "id": 1789336671658,
-        "date": "13/9/2026 09:57 p. m.",
-        "section": "Encuentros Familiares",
-        "action": "Consulta de Calendario de Encuentros",
-        "device": "Escritorio"
-      },
-      {
-        "id": 1789336645454,
-        "date": "13/9/2026 09:57 p. m.",
-        "section": "Inicio / Portada",
-        "action": "Ingreso a la página de Inicio",
-        "device": "Escritorio"
-      },
-      {
-        "id": 1789172217240,
-        "date": "12/9/2026 12:16 a. m.",
-        "section": "Ciclos: Primera Infancia (JARDÍN Y TRANSICIÓN)",
-        "action": "Visita a la página de Primera Infancia (JARDÍN Y TRANSICIÓN)",
+        "action": "Visita de prueba #1",
         "device": "Escritorio"
       },
       {
@@ -681,5 +639,5 @@
   },
   "adminPassword": "123",
   "adminSlug": "admin451200",
-  "version": "1789390892510"
+  "version": "1789391418466"
 }
