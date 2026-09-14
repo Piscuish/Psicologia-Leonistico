@@ -142,7 +142,7 @@
       "badgeText": "10 y 11",
       "pillClass": "pill-green",
       "borderClass": "card-border-green",
-      "icon": "🎓",
+      "icon": "",
       "subtitle": "Orientación vocacional, preparación para la educación superior y consolidación del proyecto de vida.",
       "order": 6,
       "pageUrl": "/ciclos/especializado",
@@ -853,7 +853,7 @@
   },
   "adminPassword": "123",
   "adminSlug": "admin451200",
-  "version": "1789414386276",
+  "version": "1789414392612",
   "homeContent": {
     "identityBadge": "🏛️ IDENTIDAD LEONÍSTICA",
     "mainTitle": "Bienvenidos a Caminando Juntos",
