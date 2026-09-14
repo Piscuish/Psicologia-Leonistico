@@ -303,22 +303,6 @@
   ],
   "cycleBlocks": [
     {
-      "id": 4,
-      "cycleId": "basico",
-      "title": "Hábitos de Estudio y Gestión del Tiempo",
-      "subtitle": "Grados 4° y 5°",
-      "text": "Estrategias para que los estudiantes de Ciclo Básico organicen su tiempo de estudio, fortalezcan su concentración y asuman con motivación y responsabilidad sus compromisos académicos.",
-      "imageUrl": "",
-      "imagePosition": "top",
-      "badgeText": "4° y 5°",
-      "order": 1,
-      "type": "hero_banner",
-      "titleAlign": "left",
-      "size": "full",
-      "imageSize": "full",
-      "imageFit": "contain"
-    },
-    {
       "id": 5,
       "cycleId": "fundamental",
       "title": "Transición a la Secundaria y Autonomía",
@@ -714,5 +698,5 @@
   },
   "adminPassword": "123",
   "adminSlug": "admin451200",
-  "version": "1789406128855"
+  "version": "1789406200127"
 }
