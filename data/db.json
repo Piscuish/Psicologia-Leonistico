@@ -114,7 +114,7 @@
       "badgeText": "6 y 7",
       "pillClass": "pill-purple",
       "borderClass": "card-border-purple",
-      "icon": "🔮",
+      "icon": "",
       "subtitle": "Transición a la secundaria, gestión de emociones, prevención y fortalecimiento de la autoestima.",
       "order": 4,
       "pageUrl": "/ciclos/fundamental",
@@ -853,7 +853,7 @@
   },
   "adminPassword": "123",
   "adminSlug": "admin451200",
-  "version": "1789414365668",
+  "version": "1789414369525",
   "homeContent": {
     "identityBadge": "🏛️ IDENTIDAD LEONÍSTICA",
     "mainTitle": "Bienvenidos a Caminando Juntos",
