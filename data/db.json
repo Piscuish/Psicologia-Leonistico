@@ -289,22 +289,6 @@
   ],
   "cycleBlocks": [
     {
-      "id": 7,
-      "cycleId": "especializado",
-      "title": "Orientación Vocacional y Proyecto de Vida",
-      "subtitle": "Grados 10° y 11°",
-      "text": "Asesoría y acompañamiento para la clarificación de intereses vocacionales, toma informada de decisiones profesionales, preparación para las Pruebas Saber y proyección al futuro universitario.",
-      "imageUrl": "",
-      "imagePosition": "top",
-      "badgeText": "10° y 11°",
-      "order": 1,
-      "type": "hero_banner",
-      "titleAlign": "left",
-      "size": "full",
-      "imageSize": "full",
-      "imageFit": "contain"
-    },
-    {
       "id": 1788358207022,
       "cycleId": "primera_infancia",
       "type": "photo_gallery",
@@ -480,6 +464,63 @@
       "subtitle": "Un espacio para  explorar, descubrir y darle sentido a tu camino!",
       "badgeText": "8 y 9",
       "text": "Explorar quiénes somos también significa descubrir nuestros intereses, talentos, emociones, sueños y posibilidades.\n\nEste espacio ha sido creado para acompañarte en una etapa llena de preguntas y decisiones, brindándote herramientas para conocerte mejor, fortalecer tus habilidades y comenzar a pensar en el futuro que quieres construir.",
+      "imageUrl": "",
+      "imagePosition": "banner",
+      "imageSize": "full",
+      "imageFit": "contain",
+      "galleryLayout": "single_full",
+      "galleryFit": "natural",
+      "galleryAlign": "center",
+      "buttonText": "",
+      "buttonUrl": "",
+      "iconEmoji": "💡",
+      "accentColor": "purple",
+      "slidesUrl": "",
+      "slidesBtnText": "",
+      "videoUrl": "",
+      "videoBtnText": "",
+      "slidesFileData": "",
+      "slidesFileName": "",
+      "itemsList": [
+        {
+          "icon": "💖",
+          "title": "Afecto y Diálogo",
+          "text": "Acompañamiento cercano y validación emocional constante."
+        },
+        {
+          "icon": "⏰",
+          "title": "Rutina y Horarios",
+          "text": "Fijar horas para estudiar, descansar y compartir en familia."
+        }
+      ],
+      "resourcesList": [
+        {
+          "title": "Guía de Orientación Familiar (PDF)",
+          "desc": "Material imprimible de apoyo para el hogar.",
+          "fileUrl": "",
+          "fileName": "",
+          "fileSize": "",
+          "icon": "file-text"
+        }
+      ],
+      "photosList": [
+        {
+          "url": "https://images.unsplash.com/photo-1577896851231-70ef18881754?auto=format&fit=crop&w=600&q=80",
+          "caption": ""
+        }
+      ],
+      "order": 1
+    },
+    {
+      "id": 1789406576017,
+      "cycleId": "especializado",
+      "type": "hero_banner",
+      "size": "full",
+      "titleAlign": "left",
+      "title": "¡Bienvenidos al Ciclo Especializado!",
+      "subtitle": "Tu camino es único. Conócete, confía en tus capacidades y construye tu futuro paso a paso.",
+      "badgeText": "10 y 11",
+      "text": "Llegar a esta etapa significa estar cada vez más cerca de nuevos caminos, decisiones y proyectos. Es un momento para mirar hacia adelante, reconocer lo que hemos aprendido y descubrir aquello que queremos construir.\n\nEn este espacio encontrarás recursos para fortalecer tu bienestar emocional, tomar decisiones, proyectarte hacia el futuro y construir un proyecto de vida conectado con tus intereses, capacidades y sueños.",
       "imageUrl": "",
       "imagePosition": "banner",
       "imageSize": "full",
@@ -726,5 +767,5 @@
   },
   "adminPassword": "123",
   "adminSlug": "admin451200",
-  "version": "1789406532659"
+  "version": "1789406576218"
 }
