@@ -303,22 +303,6 @@
   ],
   "cycleBlocks": [
     {
-      "id": 3,
-      "cycleId": "infantil",
-      "title": "Empatía, Convivencia y Amistad",
-      "subtitle": "Grados 1°, 2° y 3°",
-      "text": "Fortalecemos la convivencia escolar en el Ciclo Infantil guiando a los estudiantes en la empatía, el trabajo en equipo, la resolución pacífica de conflictos y el respeto mutuo en el aula de clase.",
-      "imageUrl": "",
-      "imagePosition": "top",
-      "badgeText": "1°, 2° y 3°",
-      "order": 1,
-      "type": "hero_banner",
-      "titleAlign": "left",
-      "size": "full",
-      "imageSize": "full",
-      "imageFit": "contain"
-    },
-    {
       "id": 4,
       "cycleId": "basico",
       "title": "Hábitos de Estudio y Gestión del Tiempo",
@@ -730,5 +714,5 @@
   },
   "adminPassword": "123",
   "adminSlug": "admin451200",
-  "version": "1789406123759"
+  "version": "1789406128855"
 }
