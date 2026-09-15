@@ -625,7 +625,7 @@
         }
       ],
       "photosList": [],
-      "order": 3
+      "order": 1
     },
     {
       "id": 1789416313077,
@@ -1172,7 +1172,7 @@
   },
   "adminPassword": "123",
   "adminSlug": "admin451200",
-  "version": "1789484786375",
+  "version": "1789484794091",
   "homeContent": {
     "identityBadge": "🏛️ IDENTIDAD LEONÍSTICA",
     "mainTitle": "Bienvenidos a Caminando Juntos",
