@@ -740,27 +740,119 @@
         }
       ],
       "order": 2
+    },
+    {
+      "id": 1789484788271,
+      "cycleId": "promocion-prevencion",
+      "type": "hero_banner",
+      "size": "full",
+      "titleAlign": "left",
+      "title": "dasd",
+      "subtitle": "asdsa",
+      "badgeText": "dsadas",
+      "text": "dsadas",
+      "imageUrl": "",
+      "imagePosition": "banner",
+      "imageSize": "full",
+      "imageFit": "contain",
+      "galleryLayout": "single_full",
+      "galleryFit": "natural",
+      "galleryAlign": "center",
+      "buttonText": "",
+      "buttonUrl": "",
+      "iconEmoji": "💡",
+      "accentColor": "purple",
+      "slidesUrl": "",
+      "slidesBtnText": "",
+      "videoUrl": "",
+      "videoBtnText": "",
+      "slidesFileData": "",
+      "slidesFileName": "",
+      "itemsList": [
+        {
+          "icon": "💖",
+          "title": "Afecto y Diálogo",
+          "text": "Acompañamiento cercano y validación emocional constante."
+        },
+        {
+          "icon": "⏰",
+          "title": "Rutina y Horarios",
+          "text": "Fijar horas para estudiar, descansar y compartir en familia."
+        }
+      ],
+      "resourcesList": [
+        {
+          "title": "Guía de Orientación Familiar (PDF)",
+          "desc": "Material imprimible de apoyo para el hogar.",
+          "fileUrl": "",
+          "fileName": "",
+          "fileSize": "",
+          "icon": "file-text"
+        }
+      ],
+      "photosList": [
+        {
+          "url": "https://images.unsplash.com/photo-1577896851231-70ef18881754?auto=format&fit=crop&w=600&q=80",
+          "caption": ""
+        }
+      ],
+      "order": 2
     }
   ],
   "suggestions": [],
   "analytics": {
-    "totalVisits": 51,
+    "totalVisits": 56,
     "uniqueSessions": 0,
-    "lastVisitDate": "14/9/2026 08:10 p. m.",
+    "lastVisitDate": "15/9/2026 03:02 p. m.",
     "tabs": {
-      "inicio": 11,
+      "inicio": 12,
       "encuentros": 2,
-      "ciclos": 38
+      "ciclos": 42
     },
     "cycles": {
-      "primera_infancia": 20,
-      "infantil": 4,
+      "primera_infancia": 21,
+      "infantil": 5,
       "basico": 4,
-      "fundamental": 3,
+      "fundamental": 4,
       "exploratorio": 4,
       "especializado": 2
     },
     "logs": [
+      {
+        "id": 1789484557769,
+        "date": "15/9/2026 03:02 p. m.",
+        "section": "Ciclos: Ciclo Fundamental (6° Y 7°)",
+        "action": "Visita a la página de Ciclo Fundamental (6° Y 7°)",
+        "device": "Escritorio"
+      },
+      {
+        "id": 1789484553951,
+        "date": "15/9/2026 03:02 p. m.",
+        "section": "Ciclos Escolares",
+        "action": "Consulta del Hub de Ciclos",
+        "device": "Escritorio"
+      },
+      {
+        "id": 1789484551484,
+        "date": "15/9/2026 03:02 p. m.",
+        "section": "Ciclos: Ciclo Infantil (1°, 2° Y 3°)",
+        "action": "Visita a la página de Ciclo Infantil (1°, 2° Y 3°)",
+        "device": "Escritorio"
+      },
+      {
+        "id": 1789484519803,
+        "date": "15/9/2026 03:01 p. m.",
+        "section": "Ciclos: Primera Infancia (JARDÍN Y TRANSICIÓN)",
+        "action": "Visita a la página de Primera Infancia (JARDÍN Y TRANSICIÓN)",
+        "device": "Escritorio"
+      },
+      {
+        "id": 1789484492510,
+        "date": "15/9/2026 03:01 p. m.",
+        "section": "Inicio / Portada",
+        "action": "Ingreso a la página de Inicio",
+        "device": "Escritorio"
+      },
       {
         "id": 1789416618335,
         "date": "14/9/2026 08:10 p. m.",
@@ -1075,47 +1167,12 @@
         "section": "Ciclos: Primera Infancia (JARDÍN Y TRANSICIÓN)",
         "action": "Visita a la página de Primera Infancia (JARDÍN Y TRANSICIÓN)",
         "device": "Escritorio"
-      },
-      {
-        "id": 1789145203843,
-        "date": "11/9/2026 11:46 a. m.",
-        "section": "Ciclos: Primera Infancia (JARDÍN Y TRANSICIÓN)",
-        "action": "Visita a la página de Primera Infancia (JARDÍN Y TRANSICIÓN)",
-        "device": "Escritorio"
-      },
-      {
-        "id": 1789143900183,
-        "date": "11/9/2026 11:25 a. m.",
-        "section": "Ciclos: Primera Infancia (JARDÍN Y TRANSICIÓN)",
-        "action": "Visita a la página de Primera Infancia (JARDÍN Y TRANSICIÓN)",
-        "device": "Escritorio"
-      },
-      {
-        "id": 1789141364477,
-        "date": "11/9/2026 10:42 a. m.",
-        "section": "Ciclos: Primera Infancia (JARDÍN Y TRANSICIÓN)",
-        "action": "Visita a la página de Primera Infancia (JARDÍN Y TRANSICIÓN)",
-        "device": "Escritorio"
-      },
-      {
-        "id": 1789141335203,
-        "date": "11/9/2026 10:42 a. m.",
-        "section": "Ciclos: Primera Infancia (JARDÍN Y TRANSICIÓN)",
-        "action": "Visita a la página de Primera Infancia (JARDÍN Y TRANSICIÓN)",
-        "device": "Escritorio"
-      },
-      {
-        "id": 1789141286913,
-        "date": "11/9/2026 10:41 a. m.",
-        "section": "Ciclos: Primera Infancia (JARDÍN Y TRANSICIÓN)",
-        "action": "Visita a la página de Primera Infancia (JARDÍN Y TRANSICIÓN)",
-        "device": "Escritorio"
       }
     ]
   },
   "adminPassword": "123",
   "adminSlug": "admin451200",
-  "version": "1789416708523",
+  "version": "1789484786375",
   "homeContent": {
     "identityBadge": "🏛️ IDENTIDAD LEONÍSTICA",
     "mainTitle": "Bienvenidos a Caminando Juntos",
