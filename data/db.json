@@ -744,11 +744,11 @@
   ],
   "suggestions": [],
   "analytics": {
-    "totalVisits": 62,
+    "totalVisits": 63,
     "uniqueSessions": 0,
-    "lastVisitDate": "17/9/2026 06:37 p. m.",
+    "lastVisitDate": "17/9/2026 06:52 p. m.",
     "tabs": {
-      "inicio": 13,
+      "inicio": 14,
       "encuentros": 2,
       "ciclos": 47
     },
@@ -761,6 +761,13 @@
       "especializado": 2
     },
     "logs": [
+      {
+        "id": 1789671148853,
+        "date": "17/9/2026 06:52 p. m.",
+        "section": "Inicio / Portada",
+        "action": "Ingreso a la página de Inicio",
+        "device": "Escritorio"
+      },
       {
         "id": 1789670245150,
         "date": "17/9/2026 06:37 p. m.",
@@ -1103,19 +1110,12 @@
         "section": "Ciclos: Primera Infancia (JARDÍN Y TRANSICIÓN)",
         "action": "Visita a la página de Primera Infancia (JARDÍN Y TRANSICIÓN)",
         "device": "Escritorio"
-      },
-      {
-        "id": 1789145622770,
-        "date": "11/9/2026 11:53 a. m.",
-        "section": "Ciclos: Primera Infancia (JARDÍN Y TRANSICIÓN)",
-        "action": "Visita a la página de Primera Infancia (JARDÍN Y TRANSICIÓN)",
-        "device": "Escritorio"
       }
     ]
   },
   "adminPassword": "123",
   "adminSlug": "admin451200",
-  "version": "1789670961454",
+  "version": "1789671462614",
   "homeContent": {
     "identityBadge": "Psicologia Colegio Leonistico La Merced",
     "mainTitle": "Bienvenidos a Caminando Juntos",
@@ -1125,8 +1125,8 @@
     "paragraph3": "A través de este espacio compartiremos orientaciones y estrategias que contribuyan al bienestar integral, al desarrollo socioemocional, al fortalecimiento de las relaciones y a la construcción de entornos que favorezcan el crecimiento y aprendizaje de nuestra comunidad educativa.",
     "aboutBadge": "EQUIPO DE PSICO ORIENTACIÓN",
     "aboutTitle": "¿Quiénes Somos?",
-    "aboutSubtitle": "Acompañamos a nuestros estudiantes en sus procesos emocionales, sociales y académicos, fortaleciendo sus habilidades y potenciando su desarrollo integral.",
-    "aboutParagraph1": "Somos un equipo de psicoorientadoras apasionadas por el bienestar de los niños, niñas y jóvenes. Creemos firmemente que la educación académica trasciende cuando el corazón y la mente se encuentran en equilibrio.",
+    "aboutSubtitle": "Estrategias y acompañamiento para el desarrollo integral de nuestros estudiantes",
+    "aboutParagraph1": "Acompañamos a nuestros estudiantes en sus procesos emocionales, sociales y académicos, fortaleciendo sus habilidades y potenciando su desarrollo integral.",
     "aboutParagraph2": "Trabajamos de la mano con las directivas, los docentes de aula y las familias para garantizar que cada estudiante cuente con las herramientas necesarias para construir un proyecto de vida feliz y exitoso.",
     "areasTitle": "Áreas de Acompañamiento Institucional",
     "areasSubtitle": "Líneas de trabajo diseñadas para respaldar cada etapa de tu vida escolar y familiar.",
