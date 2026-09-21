@@ -882,7 +882,7 @@
       "imagePosition": "banner",
       "imageSize": "full",
       "imageFit": "contain",
-      "galleryLayout": "cols_3",
+      "galleryLayout": "single_full",
       "galleryFit": "natural",
       "galleryAlign": "center",
       "buttonText": "",
@@ -923,7 +923,11 @@
           "caption": ""
         },
         {
-          "url": "/uploads/gallery_1790003584909_1_1790007045657_nzh55.png",
+          "url": "/uploads/gallery_1790003584909_1_1790006996757_dzngr.png",
+          "caption": ""
+        },
+        {
+          "url": "/uploads/gallery_1790003584909_2_1790007066927_1npni.png",
           "caption": ""
         }
       ],
@@ -1303,7 +1307,7 @@
   },
   "adminPassword": "123",
   "adminSlug": "admin451200",
-  "version": "1790007047759",
+  "version": "1790007068543",
   "homeContent": {
     "identityBadge": "Psicólogia Colegio Leonistico \"La Merced\"",
     "mainTitle": "Bienvenidos a \"Caminando Juntos\"",
