@@ -810,7 +810,7 @@
     {
       "id": 1790001190745,
       "cycleId": "primera_infancia",
-      "type": "hero_banner",
+      "type": "photo_gallery",
       "size": "full",
       "titleAlign": "center",
       "title": "Actividades Educacion sexual Integral ( ESI)",
@@ -821,7 +821,7 @@
       "imagePosition": "banner",
       "imageSize": "full",
       "imageFit": "cover",
-      "galleryLayout": "single_full",
+      "galleryLayout": "cols_2",
       "galleryFit": "natural",
       "galleryAlign": "center",
       "buttonText": "",
@@ -856,16 +856,7 @@
           "icon": "file-text"
         }
       ],
-      "photosList": [
-        {
-          "url": "https://images.unsplash.com/photo-1577896851231-70ef18881754?auto=format&fit=crop&w=600&q=80",
-          "caption": "Talleres y actividades del ciclo"
-        },
-        {
-          "url": "https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&w=600&q=80",
-          "caption": "Encuentros formativos"
-        }
-      ],
+      "photosList": [],
       "order": 2
     },
     {
@@ -928,10 +919,6 @@
         },
         {
           "url": "/uploads/gallery_1790003584909_2_1790007066927_1npni.png",
-          "caption": ""
-        },
-        {
-          "url": "/uploads/gallery_1790003584909_3_1790007202089_zwxpm.png",
           "caption": ""
         }
       ],
@@ -1311,7 +1298,7 @@
   },
   "adminPassword": "123",
   "adminSlug": "admin451200",
-  "version": "1790007203828",
+  "version": "1790007241866",
   "homeContent": {
     "identityBadge": "Psicólogia Colegio Leonistico \"La Merced\"",
     "mainTitle": "Bienvenidos a \"Caminando Juntos\"",
