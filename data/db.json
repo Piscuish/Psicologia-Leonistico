@@ -871,7 +871,7 @@
     {
       "id": 1790003584909,
       "cycleId": "infantil",
-      "type": "hero_banner",
+      "type": "photo_gallery",
       "size": "full",
       "titleAlign": "left",
       "title": "Actividades Educacion sexual Integral ( ESI)",
@@ -917,22 +917,17 @@
           "icon": "file-text"
         }
       ],
-      "photosList": [
-        {
-          "url": "https://images.unsplash.com/photo-1577896851231-70ef18881754?auto=format&fit=crop&w=600&q=80",
-          "caption": ""
-        }
-      ],
+      "photosList": [],
       "order": 2
     }
   ],
   "suggestions": [],
   "analytics": {
-    "totalVisits": 64,
+    "totalVisits": 65,
     "uniqueSessions": 0,
-    "lastVisitDate": "21/9/2026 02:22 p. m.",
+    "lastVisitDate": "21/9/2026 04:03 p. m.",
     "tabs": {
-      "inicio": 14,
+      "inicio": 15,
       "encuentros": 2,
       "ciclos": 48
     },
@@ -945,6 +940,13 @@
       "especializado": 2
     },
     "logs": [
+      {
+        "id": 1790006596499,
+        "date": "21/9/2026 04:03 p. m.",
+        "section": "Inicio / Portada",
+        "action": "Ingreso a la página de Inicio",
+        "device": "Escritorio"
+      },
       {
         "id": 1790000570853,
         "date": "21/9/2026 02:22 p. m.",
@@ -1287,19 +1289,12 @@
         "section": "Inicio / Portada",
         "action": "Visita de prueba #1",
         "device": "Escritorio"
-      },
-      {
-        "id": 1789150630249,
-        "date": "11/9/2026 01:17 p. m.",
-        "section": "Ciclos: Primera Infancia (JARDÍN Y TRANSICIÓN)",
-        "action": "Visita a la página de Primera Infancia (JARDÍN Y TRANSICIÓN)",
-        "device": "Escritorio"
       }
     ]
   },
   "adminPassword": "123",
   "adminSlug": "admin451200",
-  "version": "1790003588152",
+  "version": "1790006889156",
   "homeContent": {
     "identityBadge": "Psicólogia Colegio Leonistico \"La Merced\"",
     "mainTitle": "Bienvenidos a \"Caminando Juntos\"",
