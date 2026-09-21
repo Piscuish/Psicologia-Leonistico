@@ -806,6 +806,67 @@
         }
       ],
       "order": 3
+    },
+    {
+      "id": 1790001190745,
+      "cycleId": "primera_infancia",
+      "type": "hero_banner",
+      "size": "full",
+      "titleAlign": "left",
+      "title": "Actividades Educacion sexual Integral ( ESI)",
+      "subtitle": "",
+      "badgeText": "J y T",
+      "text": "La Educación Sexual Integral es importante porque permite acompañar a nuestros estudiantes en el conocimiento y comprensión de sí mismos, fortaleciendo herramientas para cuidar su bienestar, reconocer sus emociones, establecer límites y construir relaciones basadas en el respeto. Desde Psicoorientación, nuestro trabajo se adapta a cada etapa del desarrollo y, especialmente con los niños y niñas, nos enfocamos en el reconocimiento de sí mismos y de su cuerpo, promoviendo el autocuidado, el respeto por su propio cuerpo y el reconocimiento de sus emociones y necesidades de una manera cercana, clara y acorde con su edad.",
+      "imageUrl": "",
+      "imagePosition": "banner",
+      "imageSize": "full",
+      "imageFit": "contain",
+      "galleryLayout": "single_full",
+      "galleryFit": "natural",
+      "galleryAlign": "center",
+      "buttonText": "",
+      "buttonUrl": "",
+      "iconEmoji": "💡",
+      "accentColor": "purple",
+      "slidesUrl": "",
+      "slidesBtnText": "",
+      "videoUrl": "",
+      "videoBtnText": "",
+      "slidesFileData": "",
+      "slidesFileName": "",
+      "itemsList": [
+        {
+          "icon": "💖",
+          "title": "Afecto y Diálogo",
+          "text": "Acompañamiento cercano y validación emocional constante."
+        },
+        {
+          "icon": "⏰",
+          "title": "Rutina y Horarios",
+          "text": "Fijar horas para estudiar, descansar y compartir en familia."
+        }
+      ],
+      "resourcesList": [
+        {
+          "title": "Guía de Orientación Familiar (PDF)",
+          "desc": "Material imprimible de apoyo para el hogar.",
+          "fileUrl": "",
+          "fileName": "",
+          "fileSize": "",
+          "icon": "file-text"
+        }
+      ],
+      "photosList": [
+        {
+          "url": "https://images.unsplash.com/photo-1577896851231-70ef18881754?auto=format&fit=crop&w=600&q=80",
+          "caption": "Talleres y actividades del ciclo"
+        },
+        {
+          "url": "https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&w=600&q=80",
+          "caption": "Encuentros formativos"
+        }
+      ],
+      "order": 2
     }
   ],
   "suggestions": [],
@@ -1181,7 +1242,7 @@
   },
   "adminPassword": "123",
   "adminSlug": "admin451200",
-  "version": "1790000599737",
+  "version": "1790001191008",
   "homeContent": {
     "identityBadge": "Psicólogia Colegio Leonistico \"La Merced\"",
     "mainTitle": "Bienvenidos a \"Caminando Juntos\"",
