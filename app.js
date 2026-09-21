@@ -66,12 +66,8 @@ function getAdminCycleOrPageMeta(key) {
 
 const DEFAULT_SITE_IMAGES = {
   "logo": "/uploads/site_logo_1788739866816.png",
-  "welcome": "https://lh3.googleusercontent.com/sitesv/AG8ngQWOyxLk67vCI15BlZoCjOwd8xUiVdKQzLu-M2WJcEPpTf9i3QDpCzc1-5m6X-sKqpvyWPGZBwQ-rH8UhgQL7YTxjIlxDFe_bipo6xrnJX-R5AzoEojbfXeILt4DV4eHhLkoRtPmt0qDN9i4vhtAbDolgStj2fPdU9XVS2h5y405j0qv0gtNpOby2sONDNOeFMCsNGdXiYbURk_wJfVERZBegFn7tlsmLq3pjw8f=w1280",
-  "about": "https://lh3.googleusercontent.com/sitesv/AG8ngQXTnHzijkLW5x4q0oxIMOi07YzG-IBG1OfPXeoVkIVB8fjkFXyd17Exs0GpjRWuO_ve89ISCOVUerGrrxM5Btnf5tup2wv79zMnKOoluKmpvA0bbZU3sVSnjk80O_PqvnpU7L_xlejXLWd0rR4xWkxGQj7g0dTAeH3vz104NNIAC_EwotDlnekiU7aMZOxbjrQAZ56qxhieVbVysrZ75FKa5z5OY7hICFCfX1Ptwyo=w1280",
-  "favicon": "https://lh3.googleusercontent.com/sitesv/AG8ngQWMa1kc6jVbY3mSnIQYpVjxxkhTMgHuRLzpm-o3lAMgJtWUIgekXnXlWjgQDeRwQSCOLH_U5l8ztQCfaCv7r3JjyQ0JCQn2-3saSzHRhDM5duB-idQtoKG9ZYz6BUZLMM3SJfxvtYVinOuckRqSmPIT5Am07h5B7Luapy3c76dc1lYmoUBJGB0UCr38E0u29coTDmwWwuiFH6RIlpW448k",
-  "heroBg": "/uploads/site_heroBg_1788808026106_myuxl.png",
-  "welcomeImg": "https://lh3.googleusercontent.com/sitesv/AG8ngQWOyxLk67vCI15BlZoCjOwd8xUiVdKQzLu-M2WJcEPpTf9i3QDpCzc1-5m6X-sKqpvyWPGZBwQ-rH8UhgQL7YTxjIlxDFe_bipo6xrnJX-R5AzoEojbfXeILt4DV4eHhLkoRtPmt0qDN9i4vhtAbDolgStj2fPdU9XVS2h5y405j0qv0gtNpOby2sONDNOeFMCsNGdXiYbURk_wJfVERZBegFn7tlsmLq3pjw8f=w1280",
-  "aboutImg": "/uploads/site_aboutImg_1788887238720_ginoz.png"
+  "welcome": "/uploads/site_welcome_official.png",
+  "about": "/uploads/site_about_official.png"
 };
 
 let homeContent = null;
@@ -139,7 +135,7 @@ const DEFAULT_PSYCHOLOGISTS = [
   },
   {
     "id": 2,
-    "name": "Maria del Mar Echeverry",
+    "name": "Maria del Mar Echeverry López",
     "badge": "",
     "badgeClass": "",
     "bgClass": "bg-pink",
@@ -291,18 +287,54 @@ const DEFAULT_CYCLE_BLOCKS = [
   {
     "id": 3,
     "cycleId": "infantil",
-    "title": "Empatía, Convivencia y Amistad",
-    "subtitle": "Grados 1°, 2° y 3°",
-    "text": "Fortalecemos la convivencia escolar en el Ciclo Infantil guiando a los estudiantes en la empatía, el trabajo en equipo, la resolución pacífica de conflictos y el respeto mutuo en el aula de clase.",
+    "title": "¡Bienvenidos al Ciclo Infantil!",
+    "subtitle": "¡Caminemos juntos en esta maravillosa etapa de crecer!",
+    "text": "Este es un espacio para crecer, descubrir y aprender juntos. Aquí encontrarás recursos y actividades pensados para acompañar a nuestros niños y niñas en sus primeros años, fortaleciendo sus emociones, habilidades sociales, autonomía y bienestar. Porque cada pequeño paso es una oportunidad para aprender, jugar, expresar lo que sentimos y construir relaciones llenas de cariño y respeto.",
     "imageUrl": "",
     "imagePosition": "top",
     "badgeText": "1°, 2° y 3°",
     "order": 1,
     "type": "hero_banner",
-    "titleAlign": "left",
+    "titleAlign": "center",
     "size": "full",
     "imageSize": "full",
-    "imageFit": "contain"
+    "imageFit": "contain",
+    "galleryLayout": "single_full",
+    "galleryFit": "natural",
+    "galleryAlign": "center",
+    "buttonText": "",
+    "buttonUrl": "",
+    "iconEmoji": "💡",
+    "accentColor": "purple",
+    "slidesUrl": "",
+    "slidesBtnText": "",
+    "videoUrl": "",
+    "videoBtnText": "",
+    "slidesFileData": "",
+    "slidesFileName": "",
+    "itemsList": [
+      {
+        "icon": "💖",
+        "title": "Pauta de Bienestar",
+        "text": "Acompañamiento cercano y afectivo."
+      }
+    ],
+    "resourcesList": [
+      {
+        "title": "Guía Familiar (PDF)",
+        "desc": "Material imprimible de apoyo.",
+        "fileUrl": "",
+        "fileName": "",
+        "fileSize": "",
+        "icon": "file-text"
+      }
+    ],
+    "photosList": [
+      {
+        "url": "https://images.unsplash.com/photo-1577896851231-70ef18881754?auto=format&fit=crop&w=600&q=80",
+        "caption": ""
+      }
+    ]
   },
   {
     "id": 4,
@@ -323,71 +355,42 @@ const DEFAULT_CYCLE_BLOCKS = [
   {
     "id": 5,
     "cycleId": "fundamental",
-    "title": "Transición a la Secundaria y Autonomía",
-    "subtitle": "Grados 6° y 7°",
-    "text": "Acompañamiento integral en los cambios socioemocionales de la preadolescencia, promoviendo el pensamiento crítico, la autoestima y la adaptación positiva a la vida en secundaria.",
+    "title": "¡Bienvenidos al Ciclo Fundamental!",
+    "subtitle": "Recuerda: conocerte, escucharte y pedir ayuda también son formas de cuidarte.",
+    "text": "Esta etapa trae nuevos aprendizajes, cambios y desafíos. Es un momento importante para fortalecer nuestra identidad, comprender nuestras emociones y desarrollar herramientas para tomar decisiones y relacionarnos de manera saludable. En este espacio encontrarás contenidos que te acompañarán en tu crecimiento personal, emocional y social.",
     "imageUrl": "",
     "imagePosition": "top",
     "badgeText": "6° y 7°",
     "order": 1,
     "type": "hero_banner",
-    "titleAlign": "left",
+    "titleAlign": "center",
     "size": "full",
     "imageSize": "full",
-    "imageFit": "contain"
-  },
-  {
-    "id": 7,
-    "cycleId": "especializado",
-    "title": "Orientación Vocacional y Proyecto de Vida",
-    "subtitle": "Grados 10° y 11°",
-    "text": "Asesoría y acompañamiento para la clarificación de intereses vocacionales, toma informada de decisiones profesionales, preparación para las Pruebas Saber y proyección al futuro universitario.",
-    "imageUrl": "",
-    "imagePosition": "top",
-    "badgeText": "10° y 11°",
-    "order": 1,
-    "type": "hero_banner",
-    "titleAlign": "left",
-    "size": "full",
-    "imageSize": "full",
-    "imageFit": "contain"
-  },
-  {
-    "id": 1788358008335,
-    "cycleId": "cycle_1788358007488",
-    "type": "hero_banner",
-    "size": "full",
-    "titleAlign": "left",
-    "title": "Liderazgo y Orientación Vocacional 2026",
-    "subtitle": "Taller formativo para estudiantes de media académica",
-    "badgeText": "DESTACADO",
-    "text": "Este espacio formativo brinda herramientas para la elección de carrera y vida profesional.",
-    "imageUrl": "",
-    "imagePosition": "left",
+    "imageFit": "contain",
+    "galleryLayout": "single_full",
+    "galleryFit": "natural",
+    "galleryAlign": "center",
     "buttonText": "",
     "buttonUrl": "",
     "iconEmoji": "💡",
     "accentColor": "purple",
     "slidesUrl": "",
     "slidesBtnText": "",
+    "videoUrl": "",
+    "videoBtnText": "",
     "slidesFileData": "",
     "slidesFileName": "",
     "itemsList": [
       {
         "icon": "💖",
-        "title": "Afecto y Diálogo",
-        "text": "Acompañamiento cercano y validación emocional constante."
-      },
-      {
-        "icon": "⏰",
-        "title": "Rutina y Horarios",
-        "text": "Fijar horas para estudiar, descansar y compartir en familia."
+        "title": "Pauta de Bienestar",
+        "text": "Acompañamiento cercano y afectivo."
       }
     ],
     "resourcesList": [
       {
-        "title": "Guía de Orientación Familiar (PDF)",
-        "desc": "Material imprimible de apoyo para el hogar.",
+        "title": "Guía Familiar (PDF)",
+        "desc": "Material imprimible de apoyo.",
         "fileUrl": "",
         "fileName": "",
         "fileSize": "",
@@ -397,16 +400,9 @@ const DEFAULT_CYCLE_BLOCKS = [
     "photosList": [
       {
         "url": "https://images.unsplash.com/photo-1577896851231-70ef18881754?auto=format&fit=crop&w=600&q=80",
-        "caption": "Talleres y actividades del ciclo"
-      },
-      {
-        "url": "https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&w=600&q=80",
-        "caption": "Encuentros formativos"
+        "caption": ""
       }
-    ],
-    "order": 1,
-    "imageSize": "full",
-    "imageFit": "contain"
+    ]
   },
   {
     "id": 1788358207022,
@@ -418,7 +414,7 @@ const DEFAULT_CYCLE_BLOCKS = [
     "subtitle": "Caminemos juntos en la construcción de entornos seguros, amorosos y respetuosos para nuestros niños y niñas.",
     "badgeText": "Jardín y transición",
     "text": "En este espacio encontrarás herramientas, estrategias y recursos para acompañar el desarrollo integral de la primera infancia desde el área de Psicoorientación.\n\nNuestro propósito es brindar orientaciones prácticas que permitan a familias, docentes y comunidad educativa acompañar a los niños y niñas en sus procesos emocionales, sociales, cognitivos y educativos, fortaleciendo su bienestar y desarrollo.",
-    "imageUrl": "",
+    "imageUrl": "/uploads/block_1788358207022_1789415649543_smb4x.png",
     "imagePosition": "left",
     "buttonText": "",
     "buttonUrl": "",
@@ -452,27 +448,29 @@ const DEFAULT_CYCLE_BLOCKS = [
     ],
     "photosList": [
       {
-        "url": "/uploads/gallery_1788358207022_0_1788803346192_0y1r1.jpg",
+        "url": "/uploads/gallery_1788358207022_0_1789416411069_1wxy8.png",
         "caption": ""
       }
     ],
     "order": 1,
     "galleryLayout": "single_full",
-    "galleryFit": "wide",
+    "galleryFit": "square",
     "galleryAlign": "left",
     "imageSize": "full",
-    "imageFit": "contain"
+    "imageFit": "contain",
+    "videoUrl": "",
+    "videoBtnText": ""
   },
   {
-    "id": 1788808426228,
-    "cycleId": "promocion-prevencion",
-    "type": "video_embed",
+    "id": 1789414197019,
+    "cycleId": "especializado",
+    "type": "hero_banner",
     "size": "full",
-    "titleAlign": "left",
-    "title": "Septiembre mes de la prevención del suicidio",
-    "subtitle": "No estás solo. Hablar también es una forma de cuidarnos.",
-    "badgeText": "PROMOCIÓN Y PREVENCIÓN",
-    "text": "Este mes nos invita a recordar que escuchar, acompañar y hablar puede marcar la diferencia. Cuidar nuestra salud mental también significa estar atentos a quienes nos rodean, brindar apoyo y buscar ayuda cuando sea necesario.",
+    "titleAlign": "center",
+    "title": "¡Bienvenidos al Ciclo Especializado!",
+    "subtitle": "Tu camino es único. Conócete, confía en tus capacidades y construye tu futuro paso a paso.",
+    "badgeText": "10 y 11",
+    "text": "Llegar a esta etapa significa estar cada vez más cerca de nuevos caminos, decisiones y proyectos. Es un momento para mirar hacia adelante, reconocer lo que hemos aprendido y descubrir aquello que queremos construir. En este espacio encontrarás recursos para fortalecer tu bienestar emocional, tomar decisiones, proyectarte hacia el futuro y construir un proyecto de vida conectado con tus intereses, capacidades y sueños.",
     "imageUrl": "",
     "imagePosition": "banner",
     "imageSize": "full",
@@ -486,7 +484,64 @@ const DEFAULT_CYCLE_BLOCKS = [
     "accentColor": "purple",
     "slidesUrl": "",
     "slidesBtnText": "",
-    "videoUrl": "https://drive.google.com/file/d/1ztZW9ICNAdempPw1HEqRLZifY7kM7ytG/view?usp=sharing",
+    "videoUrl": "",
+    "videoBtnText": "",
+    "slidesFileData": "",
+    "slidesFileName": "",
+    "itemsList": [
+      {
+        "icon": "💖",
+        "title": "Afecto y Diálogo",
+        "text": "Acompañamiento cercano y validación emocional constante."
+      },
+      {
+        "icon": "⏰",
+        "title": "Rutina y Horarios",
+        "text": "Fijar horas para estudiar, descansar y compartir en familia."
+      }
+    ],
+    "resourcesList": [
+      {
+        "title": "Guía de Orientación Familiar (PDF)",
+        "desc": "Material imprimible de apoyo para el hogar.",
+        "fileUrl": "",
+        "fileName": "",
+        "fileSize": "",
+        "icon": "file-text"
+      }
+    ],
+    "photosList": [
+      {
+        "url": "https://images.unsplash.com/photo-1577896851231-70ef18881754?auto=format&fit=crop&w=600&q=80",
+        "caption": ""
+      }
+    ],
+    "order": 2
+  },
+  {
+    "id": 1789414284003,
+    "cycleId": "exploratorio",
+    "type": "hero_banner",
+    "size": "full",
+    "titleAlign": "center",
+    "title": "¡Bienvenidos al Ciclo Exploratorio!",
+    "subtitle": "Un espacio para explorar, descubrir y darle sentido a tu camino!",
+    "badgeText": "8 y 9",
+    "text": "Explorar quiénes somos también significa descubrir nuestros intereses, talentos, emociones, sueños y posibilidades. Este espacio ha sido creado para acompañarte en una etapa llena de preguntas y decisiones, brindándote herramientas para conocerte mejor, fortalecer tus habilidades y comenzar a pensar en el futuro que quieres construir.",
+    "imageUrl": "",
+    "imagePosition": "banner",
+    "imageSize": "full",
+    "imageFit": "contain",
+    "galleryLayout": "single_full",
+    "galleryFit": "natural",
+    "galleryAlign": "center",
+    "buttonText": "",
+    "buttonUrl": "",
+    "iconEmoji": "💡",
+    "accentColor": "purple",
+    "slidesUrl": "",
+    "slidesBtnText": "",
+    "videoUrl": "",
     "videoBtnText": "",
     "slidesFileData": "",
     "slidesFileName": "",
@@ -521,23 +576,26 @@ const DEFAULT_CYCLE_BLOCKS = [
     "order": 1
   },
   {
-    "id": 1788887600000,
-    "cycleId": "guia-bienestar",
-    "type": "hero_banner",
+    "id": 1789414523980,
+    "cycleId": "promocion-prevencion",
+    "type": "photo_gallery",
     "size": "full",
-    "titleAlign": "left",
-    "title": "Acompañamiento Socioemocional y Primeros Auxilios Psicológicos",
-    "subtitle": "Estrategias de contención, tranquilidad y apoyo mutuo para toda la comunidad leonística",
-    "badgeText": "BIENESTAR EMOCIONAL POST TERREMOTO",
-    "text": "Frente a eventos inesperados o situaciones de emergencia sísmica, es natural experimentar miedo, ansiedad o preocupación. Desde el área de Psicoorientación Escolar compartimos pautas formativas, actividades de respiración, técnicas de regulación emocional y recursos prácticos para acompañar a nuestros niños, niñas y jóvenes tanto en el hogar como en las aulas.\n\nRecuerda que escuchar con empatía, mantener la calma y validar las emociones son los primeros pasos para restaurar la seguridad y el bienestar.",
-    "imageUrl": "",
-    "imagePosition": "left",
-    "imageSize": "full",
+    "titleAlign": "center",
+    "title": "Prevención y Promoción",
+    "subtitle": "",
+    "badgeText": "PROMOCIÓN Y PREVENCIÓN",
+    "text": "Este espacio está dedicado a la promoción del bienestar y la prevención en salud mental dentro de nuestra comunidad educativa. Aquí podrán conocer y evidenciar las diferentes actividades, campañas, talleres y experiencias que se han desarrollado en el colegio, orientadas a fortalecer el bienestar emocional y las habilidades para la vida. Además, encontrarán estrategias, recomendaciones y recursos que pueden ser de utilidad para acompañar el cuidado de la salud mental de nuestros estudiantes, familias y demás miembros de la comunidad educativa. Un espacio para aprender, reflexionar, compartir y construir juntos una comunidad que cuida el bienestar emocional.",
+    "imageUrl": "/uploads/block_1789414523980_1789415649554_flbu3.jpg",
+    "imagePosition": "bottom_banner",
+    "imageSize": "medium",
     "imageFit": "contain",
+    "galleryLayout": "single_full",
+    "galleryFit": "natural",
+    "galleryAlign": "left",
     "buttonText": "",
     "buttonUrl": "",
-    "iconEmoji": "🌱",
-    "accentColor": "blue",
+    "iconEmoji": "💡",
+    "accentColor": "purple",
     "slidesUrl": "",
     "slidesBtnText": "",
     "videoUrl": "",
@@ -546,40 +604,281 @@ const DEFAULT_CYCLE_BLOCKS = [
     "slidesFileName": "",
     "itemsList": [
       {
-        "icon": "🤝",
-        "title": "Contención Emocional",
-        "text": "Validar temores y transmitir calma y presencia constante."
+        "icon": "💖",
+        "title": "Afecto y Diálogo",
+        "text": "Acompañamiento cercano y validación emocional constante."
       },
       {
-        "icon": "🌬️",
-        "title": "Técnicas de Respiración",
-        "text": "Ejercicios guiados para reducir la tensión corporal y el estrés."
+        "icon": "⏰",
+        "title": "Rutina y Horarios",
+        "text": "Fijar horas para estudiar, descansar y compartir en familia."
       }
     ],
     "resourcesList": [
       {
-        "title": "Pautas de Apoyo Post Emergencia (PDF)",
-        "desc": "Material imprimible de orientación para el aula y el hogar.",
+        "title": "Guía de Orientación Familiar (PDF)",
+        "desc": "Material imprimible de apoyo para el hogar.",
         "fileUrl": "",
         "fileName": "",
         "fileSize": "",
         "icon": "file-text"
       }
     ],
-    "photosList": [],
+    "photosList": [
+      {
+        "url": "/uploads/gallery_1789414523980_0_1790000198779_jl0xf.jpg",
+        "caption": ""
+      },
+      {
+        "url": "/uploads/gallery_1789414523980_1_1790000598633_plb73.jpg",
+        "caption": ""
+      }
+    ],
     "order": 1
   },
   {
-    "id": 1788889183403,
+    "id": 1789416313077,
     "cycleId": "guia-bienestar",
     "type": "slides_embed",
     "size": "full",
-    "titleAlign": "left",
-    "title": "greg",
-    "subtitle": "fdgfd",
-    "badgeText": "fdg",
-    "text": "fdgd",
+    "titleAlign": "center",
+    "title": "Cuento de acompañamiento emocional post terremoto",
+    "subtitle": "",
+    "badgeText": "BIENESTAR EMOCIONAL",
+    "text": "El Colegio Leonístico La Merced está comprometido con el bienestar integral y emocional de su comunidad educativa. Por ello, desde el área de Psicoorientación se elaboraron las siguientes guías de acompañamiento emocional, con el propósito de brindar orientaciones para abordar las emociones que pueden surgir después de un evento sísmico, tanto en el contexto escolar como en el hogar.\n\nEstas guías fueron trabajadas en el colegio como parte del acompañamiento a los estudiantes, brindando orientaciones que permitieran reconocer y gestionar las diferentes emociones que pueden surgir después de una situación de este tipo. Asimismo, permitieron identificar posibles afectaciones emocionales que requirieran un acompañamiento más especializado, realizando la remisión a Psicología cuando fue necesario, con el fin de brindar el apoyo correspondiente.",
     "imageUrl": "",
+    "imagePosition": "banner",
+    "imageSize": "full",
+    "imageFit": "contain",
+    "galleryLayout": "single_full",
+    "galleryFit": "natural",
+    "galleryAlign": "center",
+    "buttonText": "",
+    "buttonUrl": "",
+    "iconEmoji": "💡",
+    "accentColor": "purple",
+    "slidesUrl": "https://drive.google.com/file/d/16ILTQguHWEY5Cuoa6qGE_CFpcw0gLYly/view",
+    "slidesBtnText": "",
+    "videoUrl": "",
+    "videoBtnText": "",
+    "slidesFileData": "",
+    "slidesFileName": "",
+    "itemsList": [
+      {
+        "icon": "💖",
+        "title": "Afecto y Diálogo",
+        "text": "Acompañamiento cercano y validación emocional constante."
+      },
+      {
+        "icon": "⏰",
+        "title": "Rutina y Horarios",
+        "text": "Fijar horas para estudiar, descansar y compartir en familia."
+      }
+    ],
+    "resourcesList": [
+      {
+        "title": "Guía de Orientación Familiar (PDF)",
+        "desc": "Material imprimible de apoyo para el hogar.",
+        "fileUrl": "",
+        "fileName": "",
+        "fileSize": "",
+        "icon": "file-text"
+      }
+    ],
+    "photosList": [
+      {
+        "url": "https://images.unsplash.com/photo-1577896851231-70ef18881754?auto=format&fit=crop&w=600&q=80",
+        "caption": ""
+      }
+    ],
+    "order": 2
+  },
+  {
+    "id": 1789416478170,
+    "cycleId": "guia-bienestar",
+    "type": "slides_embed",
+    "size": "full",
+    "titleAlign": "center",
+    "title": "Guia de acompañamiento emocional post terremoto",
+    "subtitle": "",
+    "badgeText": "BIENESTAR EMOCIONAL",
+    "text": "El Colegio Leonístico La Merced está comprometido con el bienestar integral y emocional de su comunidad educativa. Por ello, desde el área de Psicoorientación se elaboraron las siguientes guías de acompañamiento emocional, con el propósito de brindar orientaciones para abordar las emociones que pueden surgir después de un evento sísmico, tanto en el contexto escolar como en el hogar.\n\nEstas guías fueron trabajadas en el colegio como parte del acompañamiento a los estudiantes, brindando orientaciones que permitieran reconocer y gestionar las diferentes emociones que pueden surgir después de una situación de este tipo. Asimismo, permitieron identificar posibles afectaciones emocionales que requirieran un acompañamiento más especializado, realizando la remisión a Psicología cuando fue necesario, con el fin de brindar el apoyo correspondiente.",
+    "imageUrl": "",
+    "imagePosition": "banner",
+    "imageSize": "full",
+    "imageFit": "contain",
+    "galleryLayout": "single_full",
+    "galleryFit": "natural",
+    "galleryAlign": "center",
+    "buttonText": "",
+    "buttonUrl": "",
+    "iconEmoji": "💡",
+    "accentColor": "purple",
+    "slidesUrl": "https://drive.google.com/file/d/19O7uBb5WJJAqpqXtAugqiPZ7KkAVXnX8/view?usp=sharing",
+    "slidesBtnText": "",
+    "videoUrl": "",
+    "videoBtnText": "",
+    "slidesFileData": "",
+    "slidesFileName": "",
+    "itemsList": [
+      {
+        "icon": "💖",
+        "title": "Afecto y Diálogo",
+        "text": "Acompañamiento cercano y validación emocional constante."
+      },
+      {
+        "icon": "⏰",
+        "title": "Rutina y Horarios",
+        "text": "Fijar horas para estudiar, descansar y compartir en familia."
+      }
+    ],
+    "resourcesList": [
+      {
+        "title": "Guía de Orientación Familiar (PDF)",
+        "desc": "Material imprimible de apoyo para el hogar.",
+        "fileUrl": "",
+        "fileName": "",
+        "fileSize": "",
+        "icon": "file-text"
+      }
+    ],
+    "photosList": [
+      {
+        "url": "https://images.unsplash.com/photo-1577896851231-70ef18881754?auto=format&fit=crop&w=600&q=80",
+        "caption": ""
+      }
+    ],
+    "order": 1
+  },
+  {
+    "id": 1790000420911,
+    "cycleId": "guia-bienestar",
+    "type": "slides_embed",
+    "size": "full",
+    "titleAlign": "center",
+    "title": "Guia de acompañamiento emocional post terremoto (Primaria)",
+    "subtitle": "",
+    "badgeText": "BIENESTAR EMOCIONAL",
+    "text": "El Colegio Leonístico La Merced está comprometido con el bienestar integral y emocional de su comunidad educativa. Por ello, desde el área de Psicoorientación se elaboraron las siguientes guías de acompañamiento emocional, con el propósito de brindar orientaciones para abordar las emociones que pueden surgir después de un evento sísmico, tanto en el contexto escolar como en el hogar.\n\nEstas guías fueron trabajadas en el colegio como parte del acompañamiento a los estudiantes, brindando orientaciones que permitieran reconocer y gestionar las diferentes emociones que pueden surgir después de una situación de este tipo. Asimismo, permitieron identificar posibles afectaciones emocionales que requirieran un acompañamiento más especializado, realizando la remisión a Psicología cuando fue necesario, con el fin de brindar el apoyo correspondiente.",
+    "imageUrl": "",
+    "imagePosition": "banner",
+    "imageSize": "full",
+    "imageFit": "contain",
+    "galleryLayout": "single_full",
+    "galleryFit": "natural",
+    "galleryAlign": "center",
+    "buttonText": "",
+    "buttonUrl": "",
+    "iconEmoji": "💡",
+    "accentColor": "purple",
+    "slidesUrl": "https://drive.google.com/file/d/16rDfkVUxBZZyRgf-7MRzDsLeQ82w4Ea9/view?usp=sharing",
+    "slidesBtnText": "",
+    "videoUrl": "",
+    "videoBtnText": "",
+    "slidesFileData": "",
+    "slidesFileName": "",
+    "itemsList": [
+      {
+        "icon": "💖",
+        "title": "Afecto y Diálogo",
+        "text": "Acompañamiento cercano y validación emocional constante."
+      },
+      {
+        "icon": "⏰",
+        "title": "Rutina y Horarios",
+        "text": "Fijar horas para estudiar, descansar y compartir en familia."
+      }
+    ],
+    "resourcesList": [
+      {
+        "title": "Guía de Orientación Familiar (PDF)",
+        "desc": "Material imprimible de apoyo para el hogar.",
+        "fileUrl": "",
+        "fileName": "",
+        "fileSize": "",
+        "icon": "file-text"
+      }
+    ],
+    "photosList": [
+      {
+        "url": "https://images.unsplash.com/photo-1577896851231-70ef18881754?auto=format&fit=crop&w=600&q=80",
+        "caption": ""
+      }
+    ],
+    "order": 3
+  },
+  {
+    "id": 1790001190745,
+    "cycleId": "primera_infancia",
+    "type": "photo_gallery",
+    "size": "full",
+    "titleAlign": "center",
+    "title": "Actividades Educacion sexual Integral ( ESI)",
+    "subtitle": "",
+    "badgeText": "J y T",
+    "text": "La Educación Sexual Integral es importante porque permite acompañar a nuestros estudiantes en el conocimiento y comprensión de sí mismos, fortaleciendo herramientas para cuidar su bienestar, reconocer sus emociones, establecer límites y construir relaciones basadas en el respeto.  \n\nDurante la semana del 14 al 18 de septiembre, compartimos diferentes espacios con los niños y niñas de Primera Infancia, en los cuales abordamos temas relacionados con la Educación Sexual Integral (ESI).\n\nA través de actividades lúdicas y estrategias acordes con su etapa de desarrollo, trabajamos el autocuidado, el respeto por el propio cuerpo, el reconocimiento de las emociones y la identificación de sus necesidades, promoviendo aprendizajes de manera cercana, clara y respetuosa.\nEstos espacios buscan fortalecer desde los primeros años el reconocimiento y valoración de sí mismos, brindándoles herramientas que contribuyan a su bienestar integral y a la construcción de relaciones basadas en el respeto y el cuidado.",
+    "imageUrl": "/uploads/block_1790001190745_1790002567279_capuf.png",
+    "imagePosition": "banner",
+    "imageSize": "full",
+    "imageFit": "cover",
+    "galleryLayout": "cols_2",
+    "galleryFit": "natural",
+    "galleryAlign": "center",
+    "buttonText": "",
+    "buttonUrl": "",
+    "iconEmoji": "💡",
+    "accentColor": "purple",
+    "slidesUrl": "",
+    "slidesBtnText": "",
+    "videoUrl": "",
+    "videoBtnText": "",
+    "slidesFileData": "",
+    "slidesFileName": "",
+    "itemsList": [
+      {
+        "icon": "💖",
+        "title": "Afecto y Diálogo",
+        "text": "Acompañamiento cercano y validación emocional constante."
+      },
+      {
+        "icon": "⏰",
+        "title": "Rutina y Horarios",
+        "text": "Fijar horas para estudiar, descansar y compartir en familia."
+      }
+    ],
+    "resourcesList": [
+      {
+        "title": "Guía de Orientación Familiar (PDF)",
+        "desc": "Material imprimible de apoyo para el hogar.",
+        "fileUrl": "",
+        "fileName": "",
+        "fileSize": "",
+        "icon": "file-text"
+      }
+    ],
+    "photosList": [
+      {
+        "url": "/uploads/gallery_1790001190745_0_1790007314781_snnoq.png",
+        "caption": ""
+      },
+      {
+        "url": "/uploads/gallery_1790001190745_1_1790007334743_1utlr.png",
+        "caption": ""
+      }
+    ],
+    "order": 2
+  },
+  {
+    "id": 1790003584909,
+    "cycleId": "infantil",
+    "type": "photo_gallery",
+    "size": "full",
+    "titleAlign": "left",
+    "title": "Actividades Educacion sexual Integral ( ESI)",
+    "subtitle": "",
+    "badgeText": "1, 2 y 3",
+    "text": "Durante la semana del 14 al 18 de septiembre, compartimos diferentes espacios con los niños y niñas de Ciclo Infantil, en los cuales abordamos temas relacionados con la Educación Sexual Integral (ESI).\n\nA través de actividades lúdicas, dinámicas participativas y estrategias acordes con su edad, trabajamos el reconocimiento y cuidado de su cuerpo, el respeto por sí mismos y por los demás, la expresión y reconocimiento de las emociones, así como la identificación de situaciones en las que pueden sentirse cómodos o necesitar ayuda.\n\nLa Educación Sexual Integral en estas etapas es fundamental, ya que permite que los niños y niñas construyan desde temprana edad conocimientos y habilidades relacionadas con el autocuidado, el reconocimiento de sus emociones, el respeto por su cuerpo y el establecimiento de límites. Estos aprendizajes se desarrollan de manera progresiva, utilizando un lenguaje claro y apropiado para su edad, favoreciendo su bienestar integral y fortaleciendo relaciones basadas en el respeto, el cuidado y la confianza.\n\nEstos espacios buscan fortalecer desde edades tempranas el autocuidado, la autoestima, el respeto y la comunicación, brindando herramientas que favorezcan su bienestar integral y les permitan relacionarse de manera segura y respetuosa con su entorno.",
+    "imageUrl": "/uploads/block_1790003584909_1790003585965_j4bn7.png",
     "imagePosition": "banner",
     "imageSize": "full",
     "imageFit": "contain",
@@ -620,7 +919,19 @@ const DEFAULT_CYCLE_BLOCKS = [
     ],
     "photosList": [
       {
-        "url": "https://images.unsplash.com/photo-1577896851231-70ef18881754?auto=format&fit=crop&w=600&q=80",
+        "url": "/uploads/gallery_1790003584909_0_1790006958379_sk3ft.png",
+        "caption": ""
+      },
+      {
+        "url": "/uploads/gallery_1790003584909_1_1790006996757_dzngr.png",
+        "caption": ""
+      },
+      {
+        "url": "/uploads/gallery_1790003584909_2_1790007066927_1npni.png",
+        "caption": ""
+      },
+      {
+        "url": "/uploads/gallery_1790003584909_3_1790007202089_zwxpm.png",
         "caption": ""
       }
     ],
@@ -684,7 +995,7 @@ const DEFAULT_NAV_ITEMS = [
   {
     "id": "nav_ciclos",
     "title": "Ciclos",
-    "url": "#",
+    "url": "/ciclos",
     "icon": "layers",
     "type": "dropdown",
     "order": 5,
@@ -716,7 +1027,7 @@ const DEFAULT_CYCLES_LIST = [
     "badgeText": "1, 2 y 3",
     "pillClass": "pill-teal",
     "borderClass": "card-border-teal",
-    "icon": "🌱",
+    "icon": "",
     "subtitle": "Acompañamiento socioemocional y fortalecimiento de la convivencia, empatía y habilidades de aprendizaje.",
     "order": 2,
     "pageUrl": "/ciclos/infantil",
@@ -730,7 +1041,7 @@ const DEFAULT_CYCLES_LIST = [
     "badgeText": "4 y 5",
     "pillClass": "pill-yellow",
     "borderClass": "card-border-yellow",
-    "icon": "📘",
+    "icon": "",
     "subtitle": "Orientación en hábitos de estudio, autonomía escolar y desarrollo integral de preadolescentes.",
     "order": 3,
     "pageUrl": "/ciclos/basico",
@@ -744,7 +1055,7 @@ const DEFAULT_CYCLES_LIST = [
     "badgeText": "6 y 7",
     "pillClass": "pill-purple",
     "borderClass": "card-border-purple",
-    "icon": "🔮",
+    "icon": "",
     "subtitle": "Transición a la secundaria, gestión de emociones, prevención y fortalecimiento de la autoestima.",
     "order": 4,
     "pageUrl": "/ciclos/fundamental",
@@ -758,11 +1069,11 @@ const DEFAULT_CYCLES_LIST = [
     "badgeText": "8 y 9",
     "pillClass": "pill-blue",
     "borderClass": "card-border-blue",
-    "icon": "🧭",
+    "icon": "",
     "subtitle": "Comunicación asertiva, prevención de riesgos psicosociales y construcción de relaciones saludables.",
     "order": 5,
     "pageUrl": "/ciclos/exploratorio",
-    "heroBgImage": "/uploads/hero_exploratorio_1788740308711_wv1w9.jpg"
+    "heroBgImage": "/uploads/hero_exploratorio_1789415156596_0hlxx.png"
   },
   {
     "key": "especializado",
@@ -772,24 +1083,10 @@ const DEFAULT_CYCLES_LIST = [
     "badgeText": "10 y 11",
     "pillClass": "pill-green",
     "borderClass": "card-border-green",
-    "icon": "🎓",
+    "icon": "",
     "subtitle": "Orientación vocacional, preparación para la educación superior y consolidación del proyecto de vida.",
     "order": 6,
     "pageUrl": "/ciclos/especializado",
-    "heroBgImage": ""
-  },
-  {
-    "key": "cycle_1788358007488",
-    "slug": "ciclo-juvenil-pro",
-    "name": "Ciclo Juvenil Pro",
-    "grades": "9°, 10° y 11°",
-    "badgeText": "9 10 y 11",
-    "pillClass": "pill-pink",
-    "borderClass": "card-border-pink",
-    "icon": "🎓",
-    "subtitle": "Espacio formativo y de orientación escolar.",
-    "order": 7,
-    "pageUrl": "/ciclos/ciclo-juvenil-pro",
     "heroBgImage": ""
   }
 ];
@@ -2713,15 +3010,17 @@ function importPortalDataJson(event) {
 function applySiteImages() {
   const brandLogo = document.getElementById('siteBrandLogo');
   const footerLogo = document.getElementById('footerBrandLogo');
-  if (brandLogo) brandLogo.src = siteImages.logo;
-  if (footerLogo) footerLogo.src = siteImages.logo;
+  if (brandLogo && siteImages.logo) brandLogo.src = siteImages.logo;
+  if (footerLogo && siteImages.logo) footerLogo.src = siteImages.logo;
 
   const favicon = document.getElementById('faviconTag');
   if (favicon && siteImages.favicon) favicon.href = siteImages.favicon;
 
   const heroSection = document.getElementById('heroSection');
   if (heroSection && siteImages.heroBg) {
-    heroSection.style.backgroundImage = `url("${siteImages.heroBg}")`;
+    heroSection.style.backgroundImage = `linear-gradient(135deg, rgba(15, 23, 42, 0.75) 0%, rgba(30, 27, 75, 0.82) 100%), url("${siteImages.heroBg}")`;
+    heroSection.style.backgroundSize = 'cover';
+    heroSection.style.backgroundPosition = 'center';
   }
 
   const welcomeImg = document.getElementById('welcomeSectionImg');
@@ -2730,8 +3029,8 @@ function applySiteImages() {
   }
 
   const aboutImg = document.getElementById('aboutSectionImg');
-  if (aboutImg && siteImages.aboutImg) {
-    aboutImg.src = siteImages.aboutImg;
+  if (aboutImg && (siteImages.aboutImg || siteImages.about)) {
+    aboutImg.src = siteImages.aboutImg || siteImages.about;
   }
 }
 
@@ -6151,56 +6450,47 @@ function renderHomeContent() {
   const c = homeContent || DEFAULT_HOME_CONTENT;
   if (!c) return;
 
-  const elIdentity = document.getElementById('homeIdentityBadge');
-  if (elIdentity && c.identityBadge !== undefined) elIdentity.textContent = c.identityBadge;
+  const setSafeText = (id, val) => {
+    const el = document.getElementById(id);
+    if (el && val !== undefined && val !== null && String(val).trim().length > 0) {
+      el.textContent = val;
+    }
+  };
 
-  const elTitle = document.getElementById('homeMainTitle');
-  if (elTitle && c.mainTitle !== undefined) elTitle.textContent = c.mainTitle;
-
-  const elTagline = document.getElementById('homeTagline');
-  if (elTagline && c.tagline !== undefined) elTagline.textContent = c.tagline;
-
-  const elP1 = document.getElementById('homeParagraph1');
-  if (elP1 && c.paragraph1 !== undefined) elP1.textContent = c.paragraph1;
-
-  const elP2 = document.getElementById('homeParagraph2');
-  if (elP2 && c.paragraph2 !== undefined) elP2.textContent = c.paragraph2;
-
-  const elP3 = document.getElementById('homeParagraph3');
-  if (elP3 && c.paragraph3 !== undefined) elP3.textContent = c.paragraph3;
+  setSafeText('homeIdentityBadge', c.identityBadge);
+  setSafeText('homeMainTitle', c.mainTitle);
+  setSafeText('homeTagline', c.tagline);
+  setSafeText('homeParagraph1', c.paragraph1);
+  setSafeText('homeParagraph2', c.paragraph2);
+  setSafeText('homeParagraph3', c.paragraph3);
 
   const elAboutBadge = document.getElementById('homeAboutBadge');
-  if (elAboutBadge && c.aboutBadge !== undefined) elAboutBadge.textContent = c.aboutBadge;
+  if (elAboutBadge) elAboutBadge.textContent = 'EQUIPO DE PSICO ORIENTACIÓN';
 
   const elAboutTitle = document.getElementById('homeAboutTitle');
-  if (elAboutTitle && c.aboutTitle !== undefined) elAboutTitle.textContent = c.aboutTitle;
+  if (elAboutTitle) elAboutTitle.textContent = '¿Quiénes Somos?';
 
   const elAboutSub = document.getElementById('homeAboutSubtitle');
-  if (elAboutSub && c.aboutSubtitle !== undefined) elAboutSub.textContent = c.aboutSubtitle;
+  if (elAboutSub) elAboutSub.style.display = 'none';
 
   const elAboutP1 = document.getElementById('homeAboutParagraph1');
-  if (elAboutP1 && c.aboutParagraph1 !== undefined) elAboutP1.textContent = c.aboutParagraph1;
+  if (elAboutP1) elAboutP1.textContent = 'Somos el equipo de Psicoorientación del Colegio Leonístico La Merced, comprometido con el acompañamiento de nuestros estudiantes en sus procesos emocionales dentro del contexto educativo. Brindamos orientación, estrategias y herramientas que contribuyen a su bienestar y favorecen su desarrollo integral, acompañándolos en las diferentes etapas de su proceso escolar.';
 
   const elAboutP2 = document.getElementById('homeAboutParagraph2');
-  if (elAboutP2 && c.aboutParagraph2 !== undefined) elAboutP2.textContent = c.aboutParagraph2;
+  if (elAboutP2) {
+    elAboutP2.style.display = 'block';
+    elAboutP2.textContent = 'Asimismo, trabajamos de manera articulada con docentes y familias, brindando estrategias y orientaciones que les permitan fortalecer el acompañamiento de nuestros estudiantes y favorecer sus procesos emocionales, académicos y de adaptación escolar.';
+  }
 
-  const elAreasTitle = document.getElementById('homeAreasTitle');
-  if (elAreasTitle && c.areasTitle !== undefined) elAreasTitle.textContent = c.areasTitle;
-
-  const elAreasSubtitle = document.getElementById('homeAreasSubtitle');
-  if (elAreasSubtitle && c.areasSubtitle !== undefined) elAreasSubtitle.textContent = c.areasSubtitle;
+  setSafeText('homeAreasTitle', c.areasTitle);
+  setSafeText('homeAreasSubtitle', c.areasSubtitle);
 
   if (Array.isArray(c.areas)) {
     c.areas.forEach((area, idx) => {
       const num = idx + 1;
-      const elAreaTitle = document.getElementById(`homeAreaTitle${num}`);
-      if (elAreaTitle && area.title !== undefined) elAreaTitle.textContent = area.title;
-
-      const elAreaTag = document.getElementById(`homeAreaTag${num}`);
-      if (elAreaTag && area.tag !== undefined) elAreaTag.textContent = area.tag;
-
-      const elAreaDesc = document.getElementById(`homeAreaDesc${num}`);
-      if (elAreaDesc && area.desc !== undefined) elAreaDesc.textContent = area.desc;
+      setSafeText(`homeAreaTitle${num}`, area.title);
+      setSafeText(`homeAreaTag${num}`, area.tag);
+      setSafeText(`homeAreaDesc${num}`, area.desc);
     });
   }
 }

@@ -1,4 +1,5 @@
 {
+  "version": "1790011981391",
   "navItems": [
     {
       "id": "nav_inicio",
@@ -250,8 +251,11 @@
   ],
   "siteImages": {
     "logo": "/uploads/site_logo_1788739866816.png",
-    "welcome": "https://lh3.googleusercontent.com/sitesv/AG8ngQWOyxLk67vCI15BlZoCjOwd8xUiVdKQzLu-M2WJcEPpTf9i3QDpCzc1-5m6X-sKqpvyWPGZBwQ-rH8UhgQL7YTxjIlxDFe_bipo6xrnJX-R5AzoEojbfXeILt4DV4eHhLkoRtPmt0qDN9i4vhtAbDolgStj2fPdU9XVS2h5y405j0qv0gtNpOby2sONDNOeFMCsNGdXiYbURk_wJfVERZBegFn7tlsmLq3pjw8f=w1280",
-    "about": "https://lh3.googleusercontent.com/sitesv/AG8ngQXTnHzijkLW5x4q0oxIMOi07YzG-IBG1OfPXeoVkIVB8fjkFXyd17Exs0GpjRWuO_ve89ISCOVUerGrrxM5Btnf5tup2wv79zMnKOoluKmpvA0bbZU3sVSnjk80O_PqvnpU7L_xlejXLWd0rR4xWkxGQj7g0dTAeH3vz104NNIAC_EwotDlnekiU7aMZOxbjrQAZ56qxhieVbVysrZ75FKa5z5OY7hICFCfX1Ptwyo=w1280"
+    "favicon": "/uploads/site_favicon.ico",
+    "heroBg": "/uploads/site_heroBg_1788808026106_myuxl.png",
+    "aboutImg": "/uploads/site_aboutImg_1788887238720_ginoz.png",
+    "welcome": "/uploads/site_welcome_official.png",
+    "about": "/uploads/site_aboutImg_1788887238720_ginoz.png"
   },
   "psychologists": [
     {
@@ -339,18 +343,54 @@
     {
       "id": 4,
       "cycleId": "basico",
-      "title": "Hábitos de Estudio y Gestión del Tiempo",
+      "title": "Bienvenidos a Ciclo Básico",
       "subtitle": "Grados 4° y 5°",
-      "text": "Estrategias para que los estudiantes de Ciclo Básico organicen su tiempo de estudio, fortalezcan su concentración y asuman con motivación y responsabilidad sus compromisos académicos.",
+      "text": "Nos encontramos en una etapa de importantes cambios y aprendizajes, en la que nuestros estudiantes continúan fortaleciendo su autonomía, identidad, habilidades sociales y reconocimiento de sus emociones. Es un momento de crecimiento en el que empiezan a asumir nuevos retos, descubrir sus intereses y construir una mayor comprensión de sí mismos y de su entorno.\n\nDurante este ciclo estaremos desarrollando diferentes espacios y actividades pensados para acompañar las características propias de esta etapa, brindando estrategias y herramientas que favorezcan su desarrollo integral, fortalezcan sus habilidades y les permitan afrontar de manera positiva los diferentes desafíos que pueden presentarse durante su crecimiento.\n\nQueremos acompañarlos de manera cercana, respetando sus ritmos y necesidades, y creando espacios donde puedan expresarse, aprender, descubrir y fortalecer sus recursos personales.",
       "imageUrl": "",
       "imagePosition": "top",
       "badgeText": "4° y 5°",
       "order": 1,
       "type": "hero_banner",
-      "titleAlign": "left",
+      "titleAlign": "center",
       "size": "full",
       "imageSize": "full",
-      "imageFit": "contain"
+      "imageFit": "contain",
+      "galleryLayout": "single_full",
+      "galleryFit": "natural",
+      "galleryAlign": "center",
+      "buttonText": "",
+      "buttonUrl": "",
+      "iconEmoji": "💡",
+      "accentColor": "purple",
+      "slidesUrl": "",
+      "slidesBtnText": "",
+      "videoUrl": "",
+      "videoBtnText": "",
+      "slidesFileData": "",
+      "slidesFileName": "",
+      "itemsList": [
+        {
+          "icon": "💖",
+          "title": "Pauta de Bienestar",
+          "text": "Acompañamiento cercano y afectivo."
+        }
+      ],
+      "resourcesList": [
+        {
+          "title": "Guía Familiar (PDF)",
+          "desc": "Material imprimible de apoyo.",
+          "fileUrl": "",
+          "fileName": "",
+          "fileSize": "",
+          "icon": "file-text"
+        }
+      ],
+      "photosList": [
+        {
+          "url": "https://images.unsplash.com/photo-1577896851231-70ef18881754?auto=format&fit=crop&w=600&q=80",
+          "caption": ""
+        }
+      ]
     },
     {
       "id": 5,
@@ -873,7 +913,7 @@
       "cycleId": "infantil",
       "type": "photo_gallery",
       "size": "full",
-      "titleAlign": "left",
+      "titleAlign": "center",
       "title": "Actividades Educacion sexual Integral ( ESI)",
       "subtitle": "",
       "badgeText": "1, 2 y 3",
@@ -940,23 +980,226 @@
   ],
   "suggestions": [],
   "analytics": {
-    "totalVisits": 65,
+    "totalVisits": 94,
     "uniqueSessions": 0,
-    "lastVisitDate": "21/9/2026 04:03 p. m.",
+    "lastVisitDate": "21/9/2026 12:33 p. m.",
     "tabs": {
-      "inicio": 15,
-      "encuentros": 2,
-      "ciclos": 48
+      "inicio": 23,
+      "encuentros": 5,
+      "ciclos": 66
     },
     "cycles": {
-      "primera_infancia": 23,
-      "infantil": 6,
-      "basico": 5,
-      "fundamental": 4,
-      "exploratorio": 5,
-      "especializado": 2
+      "primera_infancia": 26,
+      "infantil": 10,
+      "basico": 8,
+      "fundamental": 6,
+      "exploratorio": 7,
+      "especializado": 4
     },
     "logs": [
+      {
+        "id": 1790011981391,
+        "date": "21/9/2026 12:33 p. m.",
+        "section": "Inicio / Portada",
+        "action": "Ingreso a la página de Inicio",
+        "device": "Escritorio"
+      },
+      {
+        "id": 1790011702584,
+        "date": "21/9/2026 12:28 p. m.",
+        "section": "Ciclos: Ciclo Especializado (10° Y 11°)",
+        "action": "Visita a la página de Ciclo Especializado (10° Y 11°)",
+        "device": "Escritorio"
+      },
+      {
+        "id": 1790011699634,
+        "date": "21/9/2026 12:28 p. m.",
+        "section": "Ciclos: Ciclo Exploratorio (8° Y 9°)",
+        "action": "Visita a la página de Ciclo Exploratorio (8° Y 9°)",
+        "device": "Escritorio"
+      },
+      {
+        "id": 1790011697050,
+        "date": "21/9/2026 12:28 p. m.",
+        "section": "Ciclos: Ciclo Fundamental (6° Y 7°)",
+        "action": "Visita a la página de Ciclo Fundamental (6° Y 7°)",
+        "device": "Escritorio"
+      },
+      {
+        "id": 1790011695977,
+        "date": "21/9/2026 12:28 p. m.",
+        "section": "Ciclos Escolares",
+        "action": "Consulta del Hub de Ciclos",
+        "device": "Escritorio"
+      },
+      {
+        "id": 1790011694791,
+        "date": "21/9/2026 12:28 p. m.",
+        "section": "Ciclos: Ciclo Básico (4° Y 5°)",
+        "action": "Visita a la página de Ciclo Básico (4° Y 5°)",
+        "device": "Escritorio"
+      },
+      {
+        "id": 1790011692353,
+        "date": "21/9/2026 12:28 p. m.",
+        "section": "Ciclos: Ciclo Infantil (1°, 2° Y 3°)",
+        "action": "Visita a la página de Ciclo Infantil (1°, 2° Y 3°)",
+        "device": "Escritorio"
+      },
+      {
+        "id": 1790011689690,
+        "date": "21/9/2026 12:28 p. m.",
+        "section": "Ciclos: Primera Infancia (JARDÍN Y TRANSICIÓN)",
+        "action": "Visita a la página de Primera Infancia (JARDÍN Y TRANSICIÓN)",
+        "device": "Escritorio"
+      },
+      {
+        "id": 1790011684243,
+        "date": "21/9/2026 12:28 p. m.",
+        "section": "Encuentros Familiares",
+        "action": "Consulta de Calendario de Encuentros",
+        "device": "Escritorio"
+      },
+      {
+        "id": 1790011673365,
+        "date": "21/9/2026 12:27 p. m.",
+        "section": "Promoción y Prevención",
+        "action": "Visita a Promoción y Prevención",
+        "device": "Escritorio"
+      },
+      {
+        "id": 1790011576929,
+        "date": "21/9/2026 12:26 p. m.",
+        "section": "Ciclos: Ciclo Especializado (10° Y 11°)",
+        "action": "Visita a la página de Ciclo Especializado (10° Y 11°)",
+        "device": "Escritorio"
+      },
+      {
+        "id": 1790011572873,
+        "date": "21/9/2026 12:26 p. m.",
+        "section": "Ciclos: Ciclo Exploratorio (8° Y 9°)",
+        "action": "Visita a la página de Ciclo Exploratorio (8° Y 9°)",
+        "device": "Escritorio"
+      },
+      {
+        "id": 1790011571613,
+        "date": "21/9/2026 12:26 p. m.",
+        "section": "Ciclos: Ciclo Fundamental (6° Y 7°)",
+        "action": "Visita a la página de Ciclo Fundamental (6° Y 7°)",
+        "device": "Escritorio"
+      },
+      {
+        "id": 1790011570618,
+        "date": "21/9/2026 12:26 p. m.",
+        "section": "Ciclos: Ciclo Básico (4° Y 5°)",
+        "action": "Visita a la página de Ciclo Básico (4° Y 5°)",
+        "device": "Escritorio"
+      },
+      {
+        "id": 1790011569577,
+        "date": "21/9/2026 12:26 p. m.",
+        "section": "Ciclos: Ciclo Infantil (1°, 2° Y 3°)",
+        "action": "Visita a la página de Ciclo Infantil (1°, 2° Y 3°)",
+        "device": "Escritorio"
+      },
+      {
+        "id": 1790011550466,
+        "date": "21/9/2026 12:25 p. m.",
+        "section": "Ciclos: Primera Infancia (JARDÍN Y TRANSICIÓN)",
+        "action": "Visita a la página de Primera Infancia (JARDÍN Y TRANSICIÓN)",
+        "device": "Escritorio"
+      },
+      {
+        "id": 1790011548479,
+        "date": "21/9/2026 12:25 p. m.",
+        "section": "Encuentros Familiares",
+        "action": "Consulta de Calendario de Encuentros",
+        "device": "Escritorio"
+      },
+      {
+        "id": 1790011513104,
+        "date": "21/9/2026 12:25 p. m.",
+        "section": "Ciclos Escolares",
+        "action": "Consulta del Hub de Ciclos",
+        "device": "Escritorio"
+      },
+      {
+        "id": 1790011504226,
+        "date": "21/9/2026 12:25 p. m.",
+        "section": "Encuentros Familiares",
+        "action": "Consulta de Calendario de Encuentros",
+        "device": "Escritorio"
+      },
+      {
+        "id": 1790011481002,
+        "date": "21/9/2026 12:24 p. m.",
+        "section": "Inicio / Portada",
+        "action": "Ingreso a la página de Inicio",
+        "device": "Escritorio"
+      },
+      {
+        "id": 1790011238414,
+        "date": "21/9/2026 12:20 p. m.",
+        "section": "Inicio / Portada",
+        "action": "Ingreso a la página de Inicio",
+        "device": "Escritorio"
+      },
+      {
+        "id": 1790010942481,
+        "date": "21/9/2026 12:15 p. m.",
+        "section": "Inicio / Portada",
+        "action": "Ingreso a la página de Inicio",
+        "device": "Escritorio"
+      },
+      {
+        "id": 1790010420408,
+        "date": "21/9/2026 12:07 p. m.",
+        "section": "Ciclos: Ciclo Básico (4° Y 5°)",
+        "action": "Visita a la página de Ciclo Básico (4° Y 5°)",
+        "device": "Escritorio"
+      },
+      {
+        "id": 1790010418861,
+        "date": "21/9/2026 12:06 p. m.",
+        "section": "Ciclos: Ciclo Infantil (1°, 2° Y 3°)",
+        "action": "Visita a la página de Ciclo Infantil (1°, 2° Y 3°)",
+        "device": "Escritorio"
+      },
+      {
+        "id": 1790010416944,
+        "date": "21/9/2026 12:06 p. m.",
+        "section": "Ciclos: Primera Infancia (JARDÍN Y TRANSICIÓN)",
+        "action": "Visita a la página de Primera Infancia (JARDÍN Y TRANSICIÓN)",
+        "device": "Escritorio"
+      },
+      {
+        "id": 1790010285046,
+        "date": "21/9/2026 12:04 p. m.",
+        "section": "Inicio / Portada",
+        "action": "Ingreso a la página de Inicio",
+        "device": "Escritorio"
+      },
+      {
+        "id": 1790010263690,
+        "date": "21/9/2026 12:04 p. m.",
+        "section": "Inicio / Portada",
+        "action": "Ingreso a la página de Inicio",
+        "device": "Escritorio"
+      },
+      {
+        "id": 1790009739986,
+        "date": "21/9/2026 11:55 a. m.",
+        "section": "Ciclos: Ciclo Infantil (1°, 2° Y 3°)",
+        "action": "Visita a la página de Ciclo Infantil (1°, 2° Y 3°)",
+        "device": "Escritorio"
+      },
+      {
+        "id": 1790009737307,
+        "date": "21/9/2026 11:55 a. m.",
+        "section": "Inicio / Portada",
+        "action": "Ingreso a la página de Inicio",
+        "device": "Escritorio"
+      },
       {
         "id": 1790006596499,
         "date": "21/9/2026 04:03 p. m.",
@@ -1103,217 +1346,11 @@
         "section": "Inicio / Portada",
         "action": "Ingreso a la página de Inicio",
         "device": "Escritorio"
-      },
-      {
-        "id": 1789415131344,
-        "date": "14/9/2026 02:45 p. m.",
-        "section": "Ciclos: Ciclo Especializado (10° Y 11°)",
-        "action": "Visita a la página de Ciclo Especializado (10° Y 11°)",
-        "device": "Escritorio"
-      },
-      {
-        "id": 1789414996732,
-        "date": "14/9/2026 02:43 p. m.",
-        "section": "Ciclos: Ciclo Exploratorio (8° Y 9°)",
-        "action": "Visita a la página de Ciclo Exploratorio (8° Y 9°)",
-        "device": "Escritorio"
-      },
-      {
-        "id": 1789414994754,
-        "date": "14/9/2026 02:43 p. m.",
-        "section": "Ciclos: Ciclo Fundamental (6° Y 7°)",
-        "action": "Visita a la página de Ciclo Fundamental (6° Y 7°)",
-        "device": "Escritorio"
-      },
-      {
-        "id": 1789414993092,
-        "date": "14/9/2026 02:43 p. m.",
-        "section": "Ciclos: Ciclo Básico (4° Y 5°)",
-        "action": "Visita a la página de Ciclo Básico (4° Y 5°)",
-        "device": "Escritorio"
-      },
-      {
-        "id": 1789414991443,
-        "date": "14/9/2026 02:43 p. m.",
-        "section": "Ciclos: Ciclo Infantil (1°, 2° Y 3°)",
-        "action": "Visita a la página de Ciclo Infantil (1°, 2° Y 3°)",
-        "device": "Escritorio"
-      },
-      {
-        "id": 1789414989349,
-        "date": "14/9/2026 02:43 p. m.",
-        "section": "Ciclos: Primera Infancia (JARDÍN Y TRANSICIÓN)",
-        "action": "Visita a la página de Primera Infancia (JARDÍN Y TRANSICIÓN)",
-        "device": "Escritorio"
-      },
-      {
-        "id": 1789414857204,
-        "date": "14/9/2026 02:40 p. m.",
-        "section": "Encuentros Familiares",
-        "action": "Consulta de Calendario de Encuentros",
-        "device": "Escritorio"
-      },
-      {
-        "id": 1789414757855,
-        "date": "14/9/2026 02:39 p. m.",
-        "section": "Ciclos: Ciclo Especializado (10° Y 11°)",
-        "action": "Visita a la página de Ciclo Especializado (10° Y 11°)",
-        "device": "Escritorio"
-      },
-      {
-        "id": 1789414741478,
-        "date": "14/9/2026 02:39 p. m.",
-        "section": "Ciclos: Ciclo Exploratorio (8° Y 9°)",
-        "action": "Visita a la página de Ciclo Exploratorio (8° Y 9°)",
-        "device": "Escritorio"
-      },
-      {
-        "id": 1789414739677,
-        "date": "14/9/2026 02:38 p. m.",
-        "section": "Ciclos: Ciclo Fundamental (6° Y 7°)",
-        "action": "Visita a la página de Ciclo Fundamental (6° Y 7°)",
-        "device": "Escritorio"
-      },
-      {
-        "id": 1789414599319,
-        "date": "14/9/2026 02:36 p. m.",
-        "section": "Ciclos Escolares",
-        "action": "Consulta del Hub de Ciclos",
-        "device": "Escritorio"
-      },
-      {
-        "id": 1789414533190,
-        "date": "14/9/2026 02:35 p. m.",
-        "section": "Inicio / Portada",
-        "action": "Ingreso a la página de Inicio",
-        "device": "Escritorio"
-      },
-      {
-        "id": 1789414347718,
-        "date": "14/9/2026 02:32 p. m.",
-        "section": "Ciclos: Ciclo Básico (4° Y 5°)",
-        "action": "Visita a la página de Ciclo Básico (4° Y 5°)",
-        "device": "Escritorio"
-      },
-      {
-        "id": 1789414343394,
-        "date": "14/9/2026 02:32 p. m.",
-        "section": "Ciclos: Ciclo Infantil (1°, 2° Y 3°)",
-        "action": "Visita a la página de Ciclo Infantil (1°, 2° Y 3°)",
-        "device": "Escritorio"
-      },
-      {
-        "id": 1789414341159,
-        "date": "14/9/2026 02:32 p. m.",
-        "section": "Ciclos: Primera Infancia (JARDÍN Y TRANSICIÓN)",
-        "action": "Visita a la página de Primera Infancia (JARDÍN Y TRANSICIÓN)",
-        "device": "Escritorio"
-      },
-      {
-        "id": 1789414339932,
-        "date": "14/9/2026 02:32 p. m.",
-        "section": "Inicio / Portada",
-        "action": "Ingreso a la página de Inicio",
-        "device": "Escritorio"
-      },
-      {
-        "id": 1789414263545,
-        "date": "14/9/2026 02:31 p. m.",
-        "section": "Ciclos: Ciclo Exploratorio (8° Y 9°)",
-        "action": "Visita a la página de Ciclo Exploratorio (8° Y 9°)",
-        "device": "Escritorio"
-      },
-      {
-        "id": 1789414208764,
-        "date": "14/9/2026 02:30 p. m.",
-        "section": "Ciclos: Ciclo Básico (4° Y 5°)",
-        "action": "Visita a la página de Ciclo Básico (4° Y 5°)",
-        "device": "Escritorio"
-      },
-      {
-        "id": 1789414206427,
-        "date": "14/9/2026 02:30 p. m.",
-        "section": "Ciclos: Ciclo Infantil (1°, 2° Y 3°)",
-        "action": "Visita a la página de Ciclo Infantil (1°, 2° Y 3°)",
-        "device": "Escritorio"
-      },
-      {
-        "id": 1789414204775,
-        "date": "14/9/2026 02:30 p. m.",
-        "section": "Ciclos: Primera Infancia (JARDÍN Y TRANSICIÓN)",
-        "action": "Visita a la página de Primera Infancia (JARDÍN Y TRANSICIÓN)",
-        "device": "Escritorio"
-      },
-      {
-        "id": 1789414203333,
-        "date": "14/9/2026 02:30 p. m.",
-        "section": "Inicio / Portada",
-        "action": "Ingreso a la página de Inicio",
-        "device": "Escritorio"
-      },
-      {
-        "id": 1789413198111,
-        "date": "14/9/2026 02:13 p. m.",
-        "section": "Ciclos: Ciclo Infantil (1°, 2° Y 3°)",
-        "action": "Visita a la página de Ciclo Infantil (1°, 2° Y 3°)",
-        "device": "Escritorio"
-      },
-      {
-        "id": 1789413195975,
-        "date": "14/9/2026 02:13 p. m.",
-        "section": "Ciclos: Primera Infancia (JARDÍN Y TRANSICIÓN)",
-        "action": "Visita a la página de Primera Infancia (JARDÍN Y TRANSICIÓN)",
-        "device": "Escritorio"
-      },
-      {
-        "id": 1789413194519,
-        "date": "14/9/2026 02:13 p. m.",
-        "section": "Inicio / Portada",
-        "action": "Ingreso a la página de Inicio",
-        "device": "Escritorio"
-      },
-      {
-        "id": 1789391414147,
-        "date": "14/9/2026 08:10 a. m.",
-        "section": "Inicio / Portada",
-        "action": "Visita de prueba #5",
-        "device": "Escritorio"
-      },
-      {
-        "id": 1789391414141,
-        "date": "14/9/2026 08:10 a. m.",
-        "section": "Inicio / Portada",
-        "action": "Visita de prueba #4",
-        "device": "Escritorio"
-      },
-      {
-        "id": 1789391414134,
-        "date": "14/9/2026 08:10 a. m.",
-        "section": "Inicio / Portada",
-        "action": "Visita de prueba #3",
-        "device": "Escritorio"
-      },
-      {
-        "id": 1789391414127,
-        "date": "14/9/2026 08:10 a. m.",
-        "section": "Inicio / Portada",
-        "action": "Visita de prueba #2",
-        "device": "Escritorio"
-      },
-      {
-        "id": 1789391414118,
-        "date": "14/9/2026 08:10 a. m.",
-        "section": "Inicio / Portada",
-        "action": "Visita de prueba #1",
-        "device": "Escritorio"
       }
     ]
   },
-  "adminPassword": "123",
-  "adminSlug": "admin451200",
-  "version": "1790007336078",
   "homeContent": {
-    "identityBadge": "Psicólogia Colegio Leonistico \"La Merced\"",
+    "identityBadge": "🏛️ IDENTIDAD LEONÍSTICA",
     "mainTitle": "Bienvenidos a \"Caminando Juntos\"",
     "tagline": "\"Un espacio para crecer, aprender y construir bienestar.\"",
     "paragraph1": "Este blog nace como un espacio de encuentro y acompañamiento para toda la comunidad educativa, creado con el propósito de compartir los procesos, actividades y estrategias que se desarrollan desde el área de Psicología y Psicoorientación del Colegio Leonístico La Merced.",
@@ -1321,32 +1358,38 @@
     "paragraph3": "A través de este espacio compartiremos orientaciones y estrategias que contribuyan al bienestar integral, al desarrollo socioemocional, al fortalecimiento de las relaciones y a la construcción de entornos que favorezcan el crecimiento y aprendizaje de nuestra comunidad educativa.",
     "aboutBadge": "EQUIPO DE PSICO ORIENTACIÓN",
     "aboutTitle": "¿Quiénes Somos?",
-    "aboutSubtitle": "Somos el equipo de Psicoorientación del Colegio Leonístico La Merced, comprometido con el acompañamiento de nuestros estudiantes en sus procesos emocionales dentro del contexto educativo. Brindamos orientación, estrategias y herramientas que contribuyen a su bienestar y favorecen su desarrollo integral, acompañándolos en las diferentes etapas de su proceso escolar.",
-    "aboutParagraph1": "Asimismo, trabajamos de manera articulada con docentes y familias, brindando estrategias y orientaciones que les permitan fortalecer el acompañamiento de nuestros estudiantes y favorecer sus procesos emocionales, académicos y de adaptación escolar.",
-    "aboutParagraph2": "",
+    "aboutSubtitle": "",
+    "aboutParagraph1": "Somos el equipo de Psicoorientación del Colegio Leonístico La Merced, comprometido con el acompañamiento de nuestros estudiantes en sus procesos emocionales dentro del contexto educativo. Brindamos orientación, estrategias y herramientas que contribuyen a su bienestar y favorecen su desarrollo integral, acompañándolos en las diferentes etapas de su proceso escolar.",
+    "aboutParagraph2": "Asimismo, trabajamos de manera articulada con docentes y familias, brindando estrategias y orientaciones que les permitan fortalecer el acompañamiento de nuestros estudiantes y favorecer sus procesos emocionales, académicos y de adaptación escolar.",
     "areasTitle": "Áreas de Acompañamiento Institucional",
     "areasSubtitle": "Líneas de trabajo diseñadas para respaldar cada etapa de tu vida escolar y familiar.",
     "areas": [
       {
-        "title": "",
-        "tag": "",
-        "desc": ""
+        "id": 1,
+        "title": "Bienestar Emocional",
+        "tag": "Apoyo Personal",
+        "desc": "Estrategias para la gestión de emociones, manejo del estrés escolar, resolución asertiva de conflictos y autoestima."
       },
       {
-        "title": "",
-        "tag": "",
-        "desc": ""
+        "id": 2,
+        "title": "Orientación Vocacional",
+        "tag": "Grados Superiores",
+        "desc": "Descubrimiento de talentos, pasiones y orientación para la toma de decisiones profesionales hacia el futuro."
       },
       {
-        "title": "",
-        "tag": "",
-        "desc": ""
+        "id": 3,
+        "title": "Convivencia Escolar",
+        "tag": "Comunidad",
+        "desc": "Promoción de relaciones basadas en el respeto, empatía, prevención del acoso escolar y cultura de paz en las aulas."
       },
       {
-        "title": "",
-        "tag": "",
-        "desc": ""
+        "id": 4,
+        "title": "Escuela de Familias",
+        "tag": "Padres y Cuidadores",
+        "desc": "Espacios de formación y diálogo sobre pautas de crianza, límites afectivos y comunicación positiva en el hogar."
       }
     ]
-  }
+  },
+  "adminPassword": "123",
+  "adminSlug": "admin451200"
 }

@@ -1,4 +1,5 @@
 {
+  "version": "1790010942481",
   "navItems": [
     {
       "id": "nav_inicio",
@@ -86,7 +87,7 @@
       "badgeText": "1, 2 y 3",
       "pillClass": "pill-teal",
       "borderClass": "card-border-teal",
-      "icon": "🌱",
+      "icon": "",
       "subtitle": "Acompañamiento socioemocional y fortalecimiento de la convivencia, empatía y habilidades de aprendizaje.",
       "order": 2,
       "pageUrl": "/ciclos/infantil",
@@ -100,7 +101,7 @@
       "badgeText": "4 y 5",
       "pillClass": "pill-yellow",
       "borderClass": "card-border-yellow",
-      "icon": "📘",
+      "icon": "",
       "subtitle": "Orientación en hábitos de estudio, autonomía escolar y desarrollo integral de preadolescentes.",
       "order": 3,
       "pageUrl": "/ciclos/basico",
@@ -114,7 +115,7 @@
       "badgeText": "6 y 7",
       "pillClass": "pill-purple",
       "borderClass": "card-border-purple",
-      "icon": "🔮",
+      "icon": "",
       "subtitle": "Transición a la secundaria, gestión de emociones, prevención y fortalecimiento de la autoestima.",
       "order": 4,
       "pageUrl": "/ciclos/fundamental",
@@ -128,11 +129,11 @@
       "badgeText": "8 y 9",
       "pillClass": "pill-blue",
       "borderClass": "card-border-blue",
-      "icon": "🧭",
+      "icon": "",
       "subtitle": "Comunicación asertiva, prevención de riesgos psicosociales y construcción de relaciones saludables.",
       "order": 5,
       "pageUrl": "/ciclos/exploratorio",
-      "heroBgImage": "/uploads/hero_exploratorio_1788740308711_wv1w9.jpg"
+      "heroBgImage": "/uploads/hero_exploratorio_1789415156596_0hlxx.png"
     },
     {
       "key": "especializado",
@@ -142,24 +143,10 @@
       "badgeText": "10 y 11",
       "pillClass": "pill-green",
       "borderClass": "card-border-green",
-      "icon": "🎓",
+      "icon": "",
       "subtitle": "Orientación vocacional, preparación para la educación superior y consolidación del proyecto de vida.",
       "order": 6,
       "pageUrl": "/ciclos/especializado",
-      "heroBgImage": ""
-    },
-    {
-      "key": "cycle_1788358007488",
-      "slug": "ciclo-juvenil-pro",
-      "name": "Ciclo Juvenil Pro",
-      "grades": "9°, 10° y 11°",
-      "badgeText": "9 10 y 11",
-      "pillClass": "pill-pink",
-      "borderClass": "card-border-pink",
-      "icon": "🎓",
-      "subtitle": "Espacio formativo y de orientación escolar.",
-      "order": 7,
-      "pageUrl": "/ciclos/ciclo-juvenil-pro",
       "heroBgImage": ""
     }
   ],
@@ -264,8 +251,11 @@
   ],
   "siteImages": {
     "logo": "/uploads/site_logo_1788739866816.png",
-    "welcome": "https://lh3.googleusercontent.com/sitesv/AG8ngQWOyxLk67vCI15BlZoCjOwd8xUiVdKQzLu-M2WJcEPpTf9i3QDpCzc1-5m6X-sKqpvyWPGZBwQ-rH8UhgQL7YTxjIlxDFe_bipo6xrnJX-R5AzoEojbfXeILt4DV4eHhLkoRtPmt0qDN9i4vhtAbDolgStj2fPdU9XVS2h5y405j0qv0gtNpOby2sONDNOeFMCsNGdXiYbURk_wJfVERZBegFn7tlsmLq3pjw8f=w1280",
-    "about": "https://lh3.googleusercontent.com/sitesv/AG8ngQXTnHzijkLW5x4q0oxIMOi07YzG-IBG1OfPXeoVkIVB8fjkFXyd17Exs0GpjRWuO_ve89ISCOVUerGrrxM5Btnf5tup2wv79zMnKOoluKmpvA0bbZU3sVSnjk80O_PqvnpU7L_xlejXLWd0rR4xWkxGQj7g0dTAeH3vz104NNIAC_EwotDlnekiU7aMZOxbjrQAZ56qxhieVbVysrZ75FKa5z5OY7hICFCfX1Ptwyo=w1280"
+    "favicon": "/uploads/site_favicon.ico",
+    "heroBg": "/uploads/site_heroBg_1788808026106_myuxl.png",
+    "aboutImg": "/uploads/site_aboutImg_1788887238720_ginoz.png",
+    "welcome": "/uploads/site_welcome_official.png",
+    "about": "/uploads/site_aboutImg_1788887238720_ginoz.png"
   },
   "psychologists": [
     {
@@ -284,7 +274,7 @@
     },
     {
       "id": 2,
-      "name": "Maria del Mar Echeverry",
+      "name": "Maria del Mar Echeverry López",
       "badge": "",
       "badgeClass": "",
       "bgClass": "bg-pink",
@@ -301,78 +291,170 @@
     {
       "id": 3,
       "cycleId": "infantil",
-      "title": "Empatía, Convivencia y Amistad",
-      "subtitle": "Grados 1°, 2° y 3°",
-      "text": "Fortalecemos la convivencia escolar en el Ciclo Infantil guiando a los estudiantes en la empatía, el trabajo en equipo, la resolución pacífica de conflictos y el respeto mutuo en el aula de clase.",
+      "title": "¡Bienvenidos al Ciclo Infantil!",
+      "subtitle": "¡Caminemos juntos en esta maravillosa etapa de crecer!",
+      "text": "Este es un espacio para crecer, descubrir y aprender juntos. Aquí encontrarás recursos y actividades pensados para acompañar a nuestros niños y niñas en sus primeros años, fortaleciendo sus emociones, habilidades sociales, autonomía y bienestar. Porque cada pequeño paso es una oportunidad para aprender, jugar, expresar lo que sentimos y construir relaciones llenas de cariño y respeto.",
       "imageUrl": "",
       "imagePosition": "top",
       "badgeText": "1°, 2° y 3°",
       "order": 1,
       "type": "hero_banner",
-      "titleAlign": "left",
+      "titleAlign": "center",
       "size": "full",
       "imageSize": "full",
-      "imageFit": "contain"
+      "imageFit": "contain",
+      "galleryLayout": "single_full",
+      "galleryFit": "natural",
+      "galleryAlign": "center",
+      "buttonText": "",
+      "buttonUrl": "",
+      "iconEmoji": "💡",
+      "accentColor": "purple",
+      "slidesUrl": "",
+      "slidesBtnText": "",
+      "videoUrl": "",
+      "videoBtnText": "",
+      "slidesFileData": "",
+      "slidesFileName": "",
+      "itemsList": [
+        {
+          "icon": "💖",
+          "title": "Pauta de Bienestar",
+          "text": "Acompañamiento cercano y afectivo."
+        }
+      ],
+      "resourcesList": [
+        {
+          "title": "Guía Familiar (PDF)",
+          "desc": "Material imprimible de apoyo.",
+          "fileUrl": "",
+          "fileName": "",
+          "fileSize": "",
+          "icon": "file-text"
+        }
+      ],
+      "photosList": [
+        {
+          "url": "https://images.unsplash.com/photo-1577896851231-70ef18881754?auto=format&fit=crop&w=600&q=80",
+          "caption": ""
+        }
+      ]
     },
     {
       "id": 4,
       "cycleId": "basico",
-      "title": "Hábitos de Estudio y Gestión del Tiempo",
+      "title": "Bienvenidos a Ciclo Básico",
       "subtitle": "Grados 4° y 5°",
-      "text": "Estrategias para que los estudiantes de Ciclo Básico organicen su tiempo de estudio, fortalezcan su concentración y asuman con motivación y responsabilidad sus compromisos académicos.",
+      "text": "Nos encontramos en una etapa de importantes cambios y aprendizajes, en la que nuestros estudiantes continúan fortaleciendo su autonomía, identidad, habilidades sociales y reconocimiento de sus emociones. Es un momento de crecimiento en el que empiezan a asumir nuevos retos, descubrir sus intereses y construir una mayor comprensión de sí mismos y de su entorno.\n\nDurante este ciclo estaremos desarrollando diferentes espacios y actividades pensados para acompañar las características propias de esta etapa, brindando estrategias y herramientas que favorezcan su desarrollo integral, fortalezcan sus habilidades y les permitan afrontar de manera positiva los diferentes desafíos que pueden presentarse durante su crecimiento.\n\nQueremos acompañarlos de manera cercana, respetando sus ritmos y necesidades, y creando espacios donde puedan expresarse, aprender, descubrir y fortalecer sus recursos personales.",
       "imageUrl": "",
       "imagePosition": "top",
       "badgeText": "4° y 5°",
       "order": 1,
       "type": "hero_banner",
-      "titleAlign": "left",
+      "titleAlign": "center",
       "size": "full",
       "imageSize": "full",
-      "imageFit": "contain"
+      "imageFit": "contain",
+      "galleryLayout": "single_full",
+      "galleryFit": "natural",
+      "galleryAlign": "center",
+      "buttonText": "",
+      "buttonUrl": "",
+      "iconEmoji": "💡",
+      "accentColor": "purple",
+      "slidesUrl": "",
+      "slidesBtnText": "",
+      "videoUrl": "",
+      "videoBtnText": "",
+      "slidesFileData": "",
+      "slidesFileName": "",
+      "itemsList": [
+        {
+          "icon": "💖",
+          "title": "Pauta de Bienestar",
+          "text": "Acompañamiento cercano y afectivo."
+        }
+      ],
+      "resourcesList": [
+        {
+          "title": "Guía Familiar (PDF)",
+          "desc": "Material imprimible de apoyo.",
+          "fileUrl": "",
+          "fileName": "",
+          "fileSize": "",
+          "icon": "file-text"
+        }
+      ],
+      "photosList": [
+        {
+          "url": "https://images.unsplash.com/photo-1577896851231-70ef18881754?auto=format&fit=crop&w=600&q=80",
+          "caption": ""
+        }
+      ]
     },
     {
       "id": 5,
       "cycleId": "fundamental",
-      "title": "Transición a la Secundaria y Autonomía",
-      "subtitle": "Grados 6° y 7°",
-      "text": "Acompañamiento integral en los cambios socioemocionales de la preadolescencia, promoviendo el pensamiento crítico, la autoestima y la adaptación positiva a la vida en secundaria.",
+      "title": "¡Bienvenidos al Ciclo Fundamental!",
+      "subtitle": "Recuerda: conocerte, escucharte y pedir ayuda también son formas de cuidarte.",
+      "text": "Esta etapa trae nuevos aprendizajes, cambios y desafíos. Es un momento importante para fortalecer nuestra identidad, comprender nuestras emociones y desarrollar herramientas para tomar decisiones y relacionarnos de manera saludable. En este espacio encontrarás contenidos que te acompañarán en tu crecimiento personal, emocional y social.",
       "imageUrl": "",
       "imagePosition": "top",
       "badgeText": "6° y 7°",
       "order": 1,
       "type": "hero_banner",
-      "titleAlign": "left",
+      "titleAlign": "center",
       "size": "full",
       "imageSize": "full",
-      "imageFit": "contain"
+      "imageFit": "contain",
+      "galleryLayout": "single_full",
+      "galleryFit": "natural",
+      "galleryAlign": "center",
+      "buttonText": "",
+      "buttonUrl": "",
+      "iconEmoji": "💡",
+      "accentColor": "purple",
+      "slidesUrl": "",
+      "slidesBtnText": "",
+      "videoUrl": "",
+      "videoBtnText": "",
+      "slidesFileData": "",
+      "slidesFileName": "",
+      "itemsList": [
+        {
+          "icon": "💖",
+          "title": "Pauta de Bienestar",
+          "text": "Acompañamiento cercano y afectivo."
+        }
+      ],
+      "resourcesList": [
+        {
+          "title": "Guía Familiar (PDF)",
+          "desc": "Material imprimible de apoyo.",
+          "fileUrl": "",
+          "fileName": "",
+          "fileSize": "",
+          "icon": "file-text"
+        }
+      ],
+      "photosList": [
+        {
+          "url": "https://images.unsplash.com/photo-1577896851231-70ef18881754?auto=format&fit=crop&w=600&q=80",
+          "caption": ""
+        }
+      ]
     },
     {
-      "id": 7,
-      "cycleId": "especializado",
-      "title": "Orientación Vocacional y Proyecto de Vida",
-      "subtitle": "Grados 10° y 11°",
-      "text": "Asesoría y acompañamiento para la clarificación de intereses vocacionales, toma informada de decisiones profesionales, preparación para las Pruebas Saber y proyección al futuro universitario.",
-      "imageUrl": "",
-      "imagePosition": "top",
-      "badgeText": "10° y 11°",
-      "order": 1,
-      "type": "hero_banner",
-      "titleAlign": "left",
+      "id": 1788358207022,
+      "cycleId": "primera_infancia",
+      "type": "photo_gallery",
       "size": "full",
-      "imageSize": "full",
-      "imageFit": "contain"
-    },
-    {
-      "id": 1788358008335,
-      "cycleId": "cycle_1788358007488",
-      "type": "hero_banner",
-      "size": "full",
-      "titleAlign": "left",
-      "title": "Liderazgo y Orientación Vocacional 2026",
-      "subtitle": "Taller formativo para estudiantes de media académica",
-      "badgeText": "DESTACADO",
-      "text": "Este espacio formativo brinda herramientas para la elección de carrera y vida profesional.",
-      "imageUrl": "",
+      "titleAlign": "center",
+      "title": "Bienvenidos",
+      "subtitle": "Caminemos juntos en la construcción de entornos seguros, amorosos y respetuosos para nuestros niños y niñas.",
+      "badgeText": "Jardín y transición",
+      "text": "En este espacio encontrarás herramientas, estrategias y recursos para acompañar el desarrollo integral de la primera infancia desde el área de Psicoorientación.\n\nNuestro propósito es brindar orientaciones prácticas que permitan a familias, docentes y comunidad educativa acompañar a los niños y niñas en sus procesos emocionales, sociales, cognitivos y educativos, fortaleciendo su bienestar y desarrollo.",
+      "imageUrl": "/uploads/block_1788358207022_1789415649543_smb4x.png",
       "imagePosition": "left",
       "buttonText": "",
       "buttonUrl": "",
@@ -380,6 +462,70 @@
       "accentColor": "purple",
       "slidesUrl": "",
       "slidesBtnText": "",
+      "slidesFileData": "",
+      "slidesFileName": "",
+      "itemsList": [
+        {
+          "icon": "💖",
+          "title": "Afecto y Diálogo",
+          "text": "Acompañamiento cercano y validación emocional constante."
+        },
+        {
+          "icon": "⏰",
+          "title": "Rutina y Horarios",
+          "text": "Fijar horas para estudiar, descansar y compartir en familia."
+        }
+      ],
+      "resourcesList": [
+        {
+          "title": "Guía de Orientación Familiar (PDF)",
+          "desc": "Material imprimible de apoyo para el hogar.",
+          "fileUrl": "",
+          "fileName": "",
+          "fileSize": "",
+          "icon": "file-text"
+        }
+      ],
+      "photosList": [
+        {
+          "url": "/uploads/gallery_1788358207022_0_1789416411069_1wxy8.png",
+          "caption": ""
+        }
+      ],
+      "order": 1,
+      "galleryLayout": "single_full",
+      "galleryFit": "square",
+      "galleryAlign": "left",
+      "imageSize": "full",
+      "imageFit": "contain",
+      "videoUrl": "",
+      "videoBtnText": ""
+    },
+    {
+      "id": 1789414197019,
+      "cycleId": "especializado",
+      "type": "hero_banner",
+      "size": "full",
+      "titleAlign": "center",
+      "title": "¡Bienvenidos al Ciclo Especializado!",
+      "subtitle": "Tu camino es único. Conócete, confía en tus capacidades y construye tu futuro paso a paso.",
+      "badgeText": "10 y 11",
+      "text": "Llegar a esta etapa significa estar cada vez más cerca de nuevos caminos, decisiones y proyectos. Es un momento para mirar hacia adelante, reconocer lo que hemos aprendido y descubrir aquello que queremos construir. En este espacio encontrarás recursos para fortalecer tu bienestar emocional, tomar decisiones, proyectarte hacia el futuro y construir un proyecto de vida conectado con tus intereses, capacidades y sueños.",
+      "imageUrl": "",
+      "imagePosition": "banner",
+      "imageSize": "full",
+      "imageFit": "contain",
+      "galleryLayout": "single_full",
+      "galleryFit": "natural",
+      "galleryAlign": "center",
+      "buttonText": "",
+      "buttonUrl": "",
+      "iconEmoji": "💡",
+      "accentColor": "purple",
+      "slidesUrl": "",
+      "slidesBtnText": "",
+      "videoUrl": "",
+      "videoBtnText": "",
       "slidesFileData": "",
       "slidesFileName": "",
       "itemsList": [
@@ -407,35 +553,36 @@
       "photosList": [
         {
           "url": "https://images.unsplash.com/photo-1577896851231-70ef18881754?auto=format&fit=crop&w=600&q=80",
-          "caption": "Talleres y actividades del ciclo"
-        },
-        {
-          "url": "https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&w=600&q=80",
-          "caption": "Encuentros formativos"
+          "caption": ""
         }
       ],
-      "order": 1,
-      "imageSize": "full",
-      "imageFit": "contain"
+      "order": 2
     },
     {
-      "id": 1788358207022,
-      "cycleId": "primera_infancia",
+      "id": 1789414284003,
+      "cycleId": "exploratorio",
       "type": "hero_banner",
       "size": "full",
       "titleAlign": "center",
-      "title": "Bienvenidos",
-      "subtitle": "Caminemos juntos en la construcción de entornos seguros, amorosos y respetuosos para nuestros niños y niñas.",
-      "badgeText": "Jardín y transición",
-      "text": "En este espacio encontrarás herramientas, estrategias y recursos para acompañar el desarrollo integral de la primera infancia desde el área de Psicoorientación.\n\nNuestro propósito es brindar orientaciones prácticas que permitan a familias, docentes y comunidad educativa acompañar a los niños y niñas en sus procesos emocionales, sociales, cognitivos y educativos, fortaleciendo su bienestar y desarrollo.",
-      "imageUrl": "https://res.cloudinary.com/demo/image/upload/sample.jpg",
-      "imagePosition": "left",
+      "title": "¡Bienvenidos al Ciclo Exploratorio!",
+      "subtitle": "Un espacio para explorar, descubrir y darle sentido a tu camino!",
+      "badgeText": "8 y 9",
+      "text": "Explorar quiénes somos también significa descubrir nuestros intereses, talentos, emociones, sueños y posibilidades. Este espacio ha sido creado para acompañarte en una etapa llena de preguntas y decisiones, brindándote herramientas para conocerte mejor, fortalecer tus habilidades y comenzar a pensar en el futuro que quieres construir.",
+      "imageUrl": "",
+      "imagePosition": "banner",
+      "imageSize": "full",
+      "imageFit": "contain",
+      "galleryLayout": "single_full",
+      "galleryFit": "natural",
+      "galleryAlign": "center",
       "buttonText": "",
       "buttonUrl": "",
       "iconEmoji": "💡",
       "accentColor": "purple",
       "slidesUrl": "",
       "slidesBtnText": "",
+      "videoUrl": "",
+      "videoBtnText": "",
       "slidesFileData": "",
       "slidesFileName": "",
       "itemsList": [
@@ -462,133 +609,787 @@
       ],
       "photosList": [
         {
-          "url": "/uploads/gallery_1788358207022_0_1789143906577_58pa5.png",
+          "url": "https://images.unsplash.com/photo-1577896851231-70ef18881754?auto=format&fit=crop&w=600&q=80",
           "caption": ""
         }
       ],
-      "order": 1,
-      "galleryLayout": "cols_3",
-      "galleryFit": "square",
+      "order": 1
+    },
+    {
+      "id": 1789414523980,
+      "cycleId": "promocion-prevencion",
+      "type": "photo_gallery",
+      "size": "full",
+      "titleAlign": "center",
+      "title": "Prevención y Promoción",
+      "subtitle": "",
+      "badgeText": "PROMOCIÓN Y PREVENCIÓN",
+      "text": "Este espacio está dedicado a la promoción del bienestar y la prevención en salud mental dentro de nuestra comunidad educativa. Aquí podrán conocer y evidenciar las diferentes actividades, campañas, talleres y experiencias que se han desarrollado en el colegio, orientadas a fortalecer el bienestar emocional y las habilidades para la vida. Además, encontrarán estrategias, recomendaciones y recursos que pueden ser de utilidad para acompañar el cuidado de la salud mental de nuestros estudiantes, familias y demás miembros de la comunidad educativa. Un espacio para aprender, reflexionar, compartir y construir juntos una comunidad que cuida el bienestar emocional.",
+      "imageUrl": "/uploads/block_1789414523980_1789415649554_flbu3.jpg",
+      "imagePosition": "bottom_banner",
+      "imageSize": "medium",
+      "imageFit": "contain",
+      "galleryLayout": "single_full",
+      "galleryFit": "natural",
       "galleryAlign": "left",
+      "buttonText": "",
+      "buttonUrl": "",
+      "iconEmoji": "💡",
+      "accentColor": "purple",
+      "slidesUrl": "",
+      "slidesBtnText": "",
+      "videoUrl": "",
+      "videoBtnText": "",
+      "slidesFileData": "",
+      "slidesFileName": "",
+      "itemsList": [
+        {
+          "icon": "💖",
+          "title": "Afecto y Diálogo",
+          "text": "Acompañamiento cercano y validación emocional constante."
+        },
+        {
+          "icon": "⏰",
+          "title": "Rutina y Horarios",
+          "text": "Fijar horas para estudiar, descansar y compartir en familia."
+        }
+      ],
+      "resourcesList": [
+        {
+          "title": "Guía de Orientación Familiar (PDF)",
+          "desc": "Material imprimible de apoyo para el hogar.",
+          "fileUrl": "",
+          "fileName": "",
+          "fileSize": "",
+          "icon": "file-text"
+        }
+      ],
+      "photosList": [
+        {
+          "url": "/uploads/gallery_1789414523980_0_1790000198779_jl0xf.jpg",
+          "caption": ""
+        },
+        {
+          "url": "/uploads/gallery_1789414523980_1_1790000598633_plb73.jpg",
+          "caption": ""
+        }
+      ],
+      "order": 1
+    },
+    {
+      "id": 1789416313077,
+      "cycleId": "guia-bienestar",
+      "type": "slides_embed",
+      "size": "full",
+      "titleAlign": "center",
+      "title": "Cuento de acompañamiento emocional post terremoto",
+      "subtitle": "",
+      "badgeText": "BIENESTAR EMOCIONAL",
+      "text": "El Colegio Leonístico La Merced está comprometido con el bienestar integral y emocional de su comunidad educativa. Por ello, desde el área de Psicoorientación se elaboraron las siguientes guías de acompañamiento emocional, con el propósito de brindar orientaciones para abordar las emociones que pueden surgir después de un evento sísmico, tanto en el contexto escolar como en el hogar.\n\nEstas guías fueron trabajadas en el colegio como parte del acompañamiento a los estudiantes, brindando orientaciones que permitieran reconocer y gestionar las diferentes emociones que pueden surgir después de una situación de este tipo. Asimismo, permitieron identificar posibles afectaciones emocionales que requirieran un acompañamiento más especializado, realizando la remisión a Psicología cuando fue necesario, con el fin de brindar el apoyo correspondiente.",
+      "imageUrl": "",
+      "imagePosition": "banner",
       "imageSize": "full",
       "imageFit": "contain",
+      "galleryLayout": "single_full",
+      "galleryFit": "natural",
+      "galleryAlign": "center",
+      "buttonText": "",
+      "buttonUrl": "",
+      "iconEmoji": "💡",
+      "accentColor": "purple",
+      "slidesUrl": "https://drive.google.com/file/d/16ILTQguHWEY5Cuoa6qGE_CFpcw0gLYly/view",
+      "slidesBtnText": "",
       "videoUrl": "",
-      "videoBtnText": ""
+      "videoBtnText": "",
+      "slidesFileData": "",
+      "slidesFileName": "",
+      "itemsList": [
+        {
+          "icon": "💖",
+          "title": "Afecto y Diálogo",
+          "text": "Acompañamiento cercano y validación emocional constante."
+        },
+        {
+          "icon": "⏰",
+          "title": "Rutina y Horarios",
+          "text": "Fijar horas para estudiar, descansar y compartir en familia."
+        }
+      ],
+      "resourcesList": [
+        {
+          "title": "Guía de Orientación Familiar (PDF)",
+          "desc": "Material imprimible de apoyo para el hogar.",
+          "fileUrl": "",
+          "fileName": "",
+          "fileSize": "",
+          "icon": "file-text"
+        }
+      ],
+      "photosList": [
+        {
+          "url": "https://images.unsplash.com/photo-1577896851231-70ef18881754?auto=format&fit=crop&w=600&q=80",
+          "caption": ""
+        }
+      ],
+      "order": 2
+    },
+    {
+      "id": 1789416478170,
+      "cycleId": "guia-bienestar",
+      "type": "slides_embed",
+      "size": "full",
+      "titleAlign": "center",
+      "title": "Guia de acompañamiento emocional post terremoto",
+      "subtitle": "",
+      "badgeText": "BIENESTAR EMOCIONAL",
+      "text": "El Colegio Leonístico La Merced está comprometido con el bienestar integral y emocional de su comunidad educativa. Por ello, desde el área de Psicoorientación se elaboraron las siguientes guías de acompañamiento emocional, con el propósito de brindar orientaciones para abordar las emociones que pueden surgir después de un evento sísmico, tanto en el contexto escolar como en el hogar.\n\nEstas guías fueron trabajadas en el colegio como parte del acompañamiento a los estudiantes, brindando orientaciones que permitieran reconocer y gestionar las diferentes emociones que pueden surgir después de una situación de este tipo. Asimismo, permitieron identificar posibles afectaciones emocionales que requirieran un acompañamiento más especializado, realizando la remisión a Psicología cuando fue necesario, con el fin de brindar el apoyo correspondiente.",
+      "imageUrl": "",
+      "imagePosition": "banner",
+      "imageSize": "full",
+      "imageFit": "contain",
+      "galleryLayout": "single_full",
+      "galleryFit": "natural",
+      "galleryAlign": "center",
+      "buttonText": "",
+      "buttonUrl": "",
+      "iconEmoji": "💡",
+      "accentColor": "purple",
+      "slidesUrl": "https://drive.google.com/file/d/19O7uBb5WJJAqpqXtAugqiPZ7KkAVXnX8/view?usp=sharing",
+      "slidesBtnText": "",
+      "videoUrl": "",
+      "videoBtnText": "",
+      "slidesFileData": "",
+      "slidesFileName": "",
+      "itemsList": [
+        {
+          "icon": "💖",
+          "title": "Afecto y Diálogo",
+          "text": "Acompañamiento cercano y validación emocional constante."
+        },
+        {
+          "icon": "⏰",
+          "title": "Rutina y Horarios",
+          "text": "Fijar horas para estudiar, descansar y compartir en familia."
+        }
+      ],
+      "resourcesList": [
+        {
+          "title": "Guía de Orientación Familiar (PDF)",
+          "desc": "Material imprimible de apoyo para el hogar.",
+          "fileUrl": "",
+          "fileName": "",
+          "fileSize": "",
+          "icon": "file-text"
+        }
+      ],
+      "photosList": [
+        {
+          "url": "https://images.unsplash.com/photo-1577896851231-70ef18881754?auto=format&fit=crop&w=600&q=80",
+          "caption": ""
+        }
+      ],
+      "order": 1
+    },
+    {
+      "id": 1790000420911,
+      "cycleId": "guia-bienestar",
+      "type": "slides_embed",
+      "size": "full",
+      "titleAlign": "center",
+      "title": "Guia de acompañamiento emocional post terremoto (Primaria)",
+      "subtitle": "",
+      "badgeText": "BIENESTAR EMOCIONAL",
+      "text": "El Colegio Leonístico La Merced está comprometido con el bienestar integral y emocional de su comunidad educativa. Por ello, desde el área de Psicoorientación se elaboraron las siguientes guías de acompañamiento emocional, con el propósito de brindar orientaciones para abordar las emociones que pueden surgir después de un evento sísmico, tanto en el contexto escolar como en el hogar.\n\nEstas guías fueron trabajadas en el colegio como parte del acompañamiento a los estudiantes, brindando orientaciones que permitieran reconocer y gestionar las diferentes emociones que pueden surgir después de una situación de este tipo. Asimismo, permitieron identificar posibles afectaciones emocionales que requirieran un acompañamiento más especializado, realizando la remisión a Psicología cuando fue necesario, con el fin de brindar el apoyo correspondiente.",
+      "imageUrl": "",
+      "imagePosition": "banner",
+      "imageSize": "full",
+      "imageFit": "contain",
+      "galleryLayout": "single_full",
+      "galleryFit": "natural",
+      "galleryAlign": "center",
+      "buttonText": "",
+      "buttonUrl": "",
+      "iconEmoji": "💡",
+      "accentColor": "purple",
+      "slidesUrl": "https://drive.google.com/file/d/16rDfkVUxBZZyRgf-7MRzDsLeQ82w4Ea9/view?usp=sharing",
+      "slidesBtnText": "",
+      "videoUrl": "",
+      "videoBtnText": "",
+      "slidesFileData": "",
+      "slidesFileName": "",
+      "itemsList": [
+        {
+          "icon": "💖",
+          "title": "Afecto y Diálogo",
+          "text": "Acompañamiento cercano y validación emocional constante."
+        },
+        {
+          "icon": "⏰",
+          "title": "Rutina y Horarios",
+          "text": "Fijar horas para estudiar, descansar y compartir en familia."
+        }
+      ],
+      "resourcesList": [
+        {
+          "title": "Guía de Orientación Familiar (PDF)",
+          "desc": "Material imprimible de apoyo para el hogar.",
+          "fileUrl": "",
+          "fileName": "",
+          "fileSize": "",
+          "icon": "file-text"
+        }
+      ],
+      "photosList": [
+        {
+          "url": "https://images.unsplash.com/photo-1577896851231-70ef18881754?auto=format&fit=crop&w=600&q=80",
+          "caption": ""
+        }
+      ],
+      "order": 3
+    },
+    {
+      "id": 1790001190745,
+      "cycleId": "primera_infancia",
+      "type": "photo_gallery",
+      "size": "full",
+      "titleAlign": "center",
+      "title": "Actividades Educacion sexual Integral ( ESI)",
+      "subtitle": "",
+      "badgeText": "J y T",
+      "text": "La Educación Sexual Integral es importante porque permite acompañar a nuestros estudiantes en el conocimiento y comprensión de sí mismos, fortaleciendo herramientas para cuidar su bienestar, reconocer sus emociones, establecer límites y construir relaciones basadas en el respeto.  \n\nDurante la semana del 14 al 18 de septiembre, compartimos diferentes espacios con los niños y niñas de Primera Infancia, en los cuales abordamos temas relacionados con la Educación Sexual Integral (ESI).\n\nA través de actividades lúdicas y estrategias acordes con su etapa de desarrollo, trabajamos el autocuidado, el respeto por el propio cuerpo, el reconocimiento de las emociones y la identificación de sus necesidades, promoviendo aprendizajes de manera cercana, clara y respetuosa.\nEstos espacios buscan fortalecer desde los primeros años el reconocimiento y valoración de sí mismos, brindándoles herramientas que contribuyan a su bienestar integral y a la construcción de relaciones basadas en el respeto y el cuidado.",
+      "imageUrl": "/uploads/block_1790001190745_1790002567279_capuf.png",
+      "imagePosition": "banner",
+      "imageSize": "full",
+      "imageFit": "cover",
+      "galleryLayout": "cols_2",
+      "galleryFit": "natural",
+      "galleryAlign": "center",
+      "buttonText": "",
+      "buttonUrl": "",
+      "iconEmoji": "💡",
+      "accentColor": "purple",
+      "slidesUrl": "",
+      "slidesBtnText": "",
+      "videoUrl": "",
+      "videoBtnText": "",
+      "slidesFileData": "",
+      "slidesFileName": "",
+      "itemsList": [
+        {
+          "icon": "💖",
+          "title": "Afecto y Diálogo",
+          "text": "Acompañamiento cercano y validación emocional constante."
+        },
+        {
+          "icon": "⏰",
+          "title": "Rutina y Horarios",
+          "text": "Fijar horas para estudiar, descansar y compartir en familia."
+        }
+      ],
+      "resourcesList": [
+        {
+          "title": "Guía de Orientación Familiar (PDF)",
+          "desc": "Material imprimible de apoyo para el hogar.",
+          "fileUrl": "",
+          "fileName": "",
+          "fileSize": "",
+          "icon": "file-text"
+        }
+      ],
+      "photosList": [
+        {
+          "url": "/uploads/gallery_1790001190745_0_1790007314781_snnoq.png",
+          "caption": ""
+        },
+        {
+          "url": "/uploads/gallery_1790001190745_1_1790007334743_1utlr.png",
+          "caption": ""
+        }
+      ],
+      "order": 2
+    },
+    {
+      "id": 1790003584909,
+      "cycleId": "infantil",
+      "type": "photo_gallery",
+      "size": "full",
+      "titleAlign": "center",
+      "title": "Actividades Educacion sexual Integral ( ESI)",
+      "subtitle": "",
+      "badgeText": "1, 2 y 3",
+      "text": "Durante la semana del 14 al 18 de septiembre, compartimos diferentes espacios con los niños y niñas de Ciclo Infantil, en los cuales abordamos temas relacionados con la Educación Sexual Integral (ESI).\n\nA través de actividades lúdicas, dinámicas participativas y estrategias acordes con su edad, trabajamos el reconocimiento y cuidado de su cuerpo, el respeto por sí mismos y por los demás, la expresión y reconocimiento de las emociones, así como la identificación de situaciones en las que pueden sentirse cómodos o necesitar ayuda.\n\nLa Educación Sexual Integral en estas etapas es fundamental, ya que permite que los niños y niñas construyan desde temprana edad conocimientos y habilidades relacionadas con el autocuidado, el reconocimiento de sus emociones, el respeto por su cuerpo y el establecimiento de límites. Estos aprendizajes se desarrollan de manera progresiva, utilizando un lenguaje claro y apropiado para su edad, favoreciendo su bienestar integral y fortaleciendo relaciones basadas en el respeto, el cuidado y la confianza.\n\nEstos espacios buscan fortalecer desde edades tempranas el autocuidado, la autoestima, el respeto y la comunicación, brindando herramientas que favorezcan su bienestar integral y les permitan relacionarse de manera segura y respetuosa con su entorno.",
+      "imageUrl": "/uploads/block_1790003584909_1790003585965_j4bn7.png",
+      "imagePosition": "banner",
+      "imageSize": "full",
+      "imageFit": "contain",
+      "galleryLayout": "single_full",
+      "galleryFit": "natural",
+      "galleryAlign": "center",
+      "buttonText": "",
+      "buttonUrl": "",
+      "iconEmoji": "💡",
+      "accentColor": "purple",
+      "slidesUrl": "",
+      "slidesBtnText": "",
+      "videoUrl": "",
+      "videoBtnText": "",
+      "slidesFileData": "",
+      "slidesFileName": "",
+      "itemsList": [
+        {
+          "icon": "💖",
+          "title": "Afecto y Diálogo",
+          "text": "Acompañamiento cercano y validación emocional constante."
+        },
+        {
+          "icon": "⏰",
+          "title": "Rutina y Horarios",
+          "text": "Fijar horas para estudiar, descansar y compartir en familia."
+        }
+      ],
+      "resourcesList": [
+        {
+          "title": "Guía de Orientación Familiar (PDF)",
+          "desc": "Material imprimible de apoyo para el hogar.",
+          "fileUrl": "",
+          "fileName": "",
+          "fileSize": "",
+          "icon": "file-text"
+        }
+      ],
+      "photosList": [
+        {
+          "url": "/uploads/gallery_1790003584909_0_1790006958379_sk3ft.png",
+          "caption": ""
+        },
+        {
+          "url": "/uploads/gallery_1790003584909_1_1790006996757_dzngr.png",
+          "caption": ""
+        },
+        {
+          "url": "/uploads/gallery_1790003584909_2_1790007066927_1npni.png",
+          "caption": ""
+        },
+        {
+          "url": "/uploads/gallery_1790003584909_3_1790007202089_zwxpm.png",
+          "caption": ""
+        }
+      ],
+      "order": 2
     }
   ],
   "suggestions": [],
   "analytics": {
-    "totalVisits": 13,
+    "totalVisits": 73,
     "uniqueSessions": 0,
-    "lastVisitDate": "11/9/2026 11:53 a. m.",
+    "lastVisitDate": "21/9/2026 12:15 p. m.",
     "tabs": {
-      "inicio": 0,
-      "encuentros": 0,
-      "ciclos": 13
+      "inicio": 19,
+      "encuentros": 2,
+      "ciclos": 52
     },
     "cycles": {
-      "primera_infancia": 13,
-      "infantil": 0,
-      "basico": 0,
-      "fundamental": 0,
-      "exploratorio": 0,
-      "especializado": 0
+      "primera_infancia": 24,
+      "infantil": 8,
+      "basico": 6,
+      "fundamental": 4,
+      "exploratorio": 5,
+      "especializado": 2
     },
     "logs": [
       {
-        "id": 1789145622770,
-        "date": "11/9/2026 11:53 a. m.",
+        "id": 1790010942481,
+        "date": "21/9/2026 12:15 p. m.",
+        "section": "Inicio / Portada",
+        "action": "Ingreso a la página de Inicio",
+        "device": "Escritorio"
+      },
+      {
+        "id": 1790010420408,
+        "date": "21/9/2026 12:07 p. m.",
+        "section": "Ciclos: Ciclo Básico (4° Y 5°)",
+        "action": "Visita a la página de Ciclo Básico (4° Y 5°)",
+        "device": "Escritorio"
+      },
+      {
+        "id": 1790010418861,
+        "date": "21/9/2026 12:06 p. m.",
+        "section": "Ciclos: Ciclo Infantil (1°, 2° Y 3°)",
+        "action": "Visita a la página de Ciclo Infantil (1°, 2° Y 3°)",
+        "device": "Escritorio"
+      },
+      {
+        "id": 1790010416944,
+        "date": "21/9/2026 12:06 p. m.",
         "section": "Ciclos: Primera Infancia (JARDÍN Y TRANSICIÓN)",
         "action": "Visita a la página de Primera Infancia (JARDÍN Y TRANSICIÓN)",
         "device": "Escritorio"
       },
       {
-        "id": 1789145617472,
-        "date": "11/9/2026 11:53 a. m.",
+        "id": 1790010285046,
+        "date": "21/9/2026 12:04 p. m.",
+        "section": "Inicio / Portada",
+        "action": "Ingreso a la página de Inicio",
+        "device": "Escritorio"
+      },
+      {
+        "id": 1790010263690,
+        "date": "21/9/2026 12:04 p. m.",
+        "section": "Inicio / Portada",
+        "action": "Ingreso a la página de Inicio",
+        "device": "Escritorio"
+      },
+      {
+        "id": 1790009739986,
+        "date": "21/9/2026 11:55 a. m.",
+        "section": "Ciclos: Ciclo Infantil (1°, 2° Y 3°)",
+        "action": "Visita a la página de Ciclo Infantil (1°, 2° Y 3°)",
+        "device": "Escritorio"
+      },
+      {
+        "id": 1790009737307,
+        "date": "21/9/2026 11:55 a. m.",
+        "section": "Inicio / Portada",
+        "action": "Ingreso a la página de Inicio",
+        "device": "Escritorio"
+      },
+      {
+        "id": 1790006596499,
+        "date": "21/9/2026 04:03 p. m.",
+        "section": "Inicio / Portada",
+        "action": "Ingreso a la página de Inicio",
+        "device": "Escritorio"
+      },
+      {
+        "id": 1790000570853,
+        "date": "21/9/2026 02:22 p. m.",
         "section": "Ciclos: Primera Infancia (JARDÍN Y TRANSICIÓN)",
         "action": "Visita a la página de Primera Infancia (JARDÍN Y TRANSICIÓN)",
         "device": "Escritorio"
       },
       {
-        "id": 1789145611895,
-        "date": "11/9/2026 11:53 a. m.",
+        "id": 1789671148853,
+        "date": "17/9/2026 06:52 p. m.",
+        "section": "Inicio / Portada",
+        "action": "Ingreso a la página de Inicio",
+        "device": "Escritorio"
+      },
+      {
+        "id": 1789670245150,
+        "date": "17/9/2026 06:37 p. m.",
+        "section": "Inicio / Portada",
+        "action": "Ingreso a la página de Inicio",
+        "device": "Escritorio"
+      },
+      {
+        "id": 1789485678819,
+        "date": "15/9/2026 03:21 p. m.",
         "section": "Ciclos: Primera Infancia (JARDÍN Y TRANSICIÓN)",
         "action": "Visita a la página de Primera Infancia (JARDÍN Y TRANSICIÓN)",
         "device": "Escritorio"
       },
       {
-        "id": 1789145606320,
-        "date": "11/9/2026 11:53 a. m.",
+        "id": 1789485670115,
+        "date": "15/9/2026 03:21 p. m.",
+        "section": "Ciclos: Ciclo Infantil (1°, 2° Y 3°)",
+        "action": "Visita a la página de Ciclo Infantil (1°, 2° Y 3°)",
+        "device": "Escritorio"
+      },
+      {
+        "id": 1789485651962,
+        "date": "15/9/2026 03:20 p. m.",
+        "section": "Ciclos: Ciclo Exploratorio (8° Y 9°)",
+        "action": "Visita a la página de Ciclo Exploratorio (8° Y 9°)",
+        "device": "Escritorio"
+      },
+      {
+        "id": 1789485645743,
+        "date": "15/9/2026 03:20 p. m.",
+        "section": "Ciclos: Ciclo Básico (4° Y 5°)",
+        "action": "Visita a la página de Ciclo Básico (4° Y 5°)",
+        "device": "Escritorio"
+      },
+      {
+        "id": 1789485642441,
+        "date": "15/9/2026 03:20 p. m.",
+        "section": "Ciclos Escolares",
+        "action": "Consulta del Hub de Ciclos",
+        "device": "Escritorio"
+      },
+      {
+        "id": 1789484557769,
+        "date": "15/9/2026 03:02 p. m.",
+        "section": "Ciclos: Ciclo Fundamental (6° Y 7°)",
+        "action": "Visita a la página de Ciclo Fundamental (6° Y 7°)",
+        "device": "Escritorio"
+      },
+      {
+        "id": 1789484553951,
+        "date": "15/9/2026 03:02 p. m.",
+        "section": "Ciclos Escolares",
+        "action": "Consulta del Hub de Ciclos",
+        "device": "Escritorio"
+      },
+      {
+        "id": 1789484551484,
+        "date": "15/9/2026 03:02 p. m.",
+        "section": "Ciclos: Ciclo Infantil (1°, 2° Y 3°)",
+        "action": "Visita a la página de Ciclo Infantil (1°, 2° Y 3°)",
+        "device": "Escritorio"
+      },
+      {
+        "id": 1789484519803,
+        "date": "15/9/2026 03:01 p. m.",
         "section": "Ciclos: Primera Infancia (JARDÍN Y TRANSICIÓN)",
         "action": "Visita a la página de Primera Infancia (JARDÍN Y TRANSICIÓN)",
         "device": "Escritorio"
       },
       {
-        "id": 1789145359849,
-        "date": "11/9/2026 11:49 a. m.",
+        "id": 1789484492510,
+        "date": "15/9/2026 03:01 p. m.",
+        "section": "Inicio / Portada",
+        "action": "Ingreso a la página de Inicio",
+        "device": "Escritorio"
+      },
+      {
+        "id": 1789416618335,
+        "date": "14/9/2026 08:10 p. m.",
+        "section": "Encuentros Familiares",
+        "action": "Consulta de Calendario de Encuentros",
+        "device": "Escritorio"
+      },
+      {
+        "id": 1789416254424,
+        "date": "14/9/2026 08:04 p. m.",
+        "section": "Inicio / Portada",
+        "action": "Ingreso a la página de Inicio",
+        "device": "Escritorio"
+      },
+      {
+        "id": 1789416135408,
+        "date": "14/9/2026 08:02 p. m.",
+        "section": "Ciclos: Ciclo Exploratorio (8° Y 9°)",
+        "action": "Visita a la página de Ciclo Exploratorio (8° Y 9°)",
+        "device": "Escritorio"
+      },
+      {
+        "id": 1789416131872,
+        "date": "14/9/2026 08:02 p. m.",
+        "section": "Ciclos: Ciclo Fundamental (6° Y 7°)",
+        "action": "Visita a la página de Ciclo Fundamental (6° Y 7°)",
+        "device": "Escritorio"
+      },
+      {
+        "id": 1789416128613,
+        "date": "14/9/2026 08:02 p. m.",
+        "section": "Ciclos: Ciclo Básico (4° Y 5°)",
+        "action": "Visita a la página de Ciclo Básico (4° Y 5°)",
+        "device": "Escritorio"
+      },
+      {
+        "id": 1789416126893,
+        "date": "14/9/2026 08:02 p. m.",
         "section": "Ciclos: Primera Infancia (JARDÍN Y TRANSICIÓN)",
         "action": "Visita a la página de Primera Infancia (JARDÍN Y TRANSICIÓN)",
         "device": "Escritorio"
       },
       {
-        "id": 1789145271191,
-        "date": "11/9/2026 11:47 a. m.",
+        "id": 1789416126269,
+        "date": "14/9/2026 08:02 p. m.",
+        "section": "Inicio / Portada",
+        "action": "Ingreso a la página de Inicio",
+        "device": "Escritorio"
+      },
+      {
+        "id": 1789415131344,
+        "date": "14/9/2026 02:45 p. m.",
+        "section": "Ciclos: Ciclo Especializado (10° Y 11°)",
+        "action": "Visita a la página de Ciclo Especializado (10° Y 11°)",
+        "device": "Escritorio"
+      },
+      {
+        "id": 1789414996732,
+        "date": "14/9/2026 02:43 p. m.",
+        "section": "Ciclos: Ciclo Exploratorio (8° Y 9°)",
+        "action": "Visita a la página de Ciclo Exploratorio (8° Y 9°)",
+        "device": "Escritorio"
+      },
+      {
+        "id": 1789414994754,
+        "date": "14/9/2026 02:43 p. m.",
+        "section": "Ciclos: Ciclo Fundamental (6° Y 7°)",
+        "action": "Visita a la página de Ciclo Fundamental (6° Y 7°)",
+        "device": "Escritorio"
+      },
+      {
+        "id": 1789414993092,
+        "date": "14/9/2026 02:43 p. m.",
+        "section": "Ciclos: Ciclo Básico (4° Y 5°)",
+        "action": "Visita a la página de Ciclo Básico (4° Y 5°)",
+        "device": "Escritorio"
+      },
+      {
+        "id": 1789414991443,
+        "date": "14/9/2026 02:43 p. m.",
+        "section": "Ciclos: Ciclo Infantil (1°, 2° Y 3°)",
+        "action": "Visita a la página de Ciclo Infantil (1°, 2° Y 3°)",
+        "device": "Escritorio"
+      },
+      {
+        "id": 1789414989349,
+        "date": "14/9/2026 02:43 p. m.",
         "section": "Ciclos: Primera Infancia (JARDÍN Y TRANSICIÓN)",
         "action": "Visita a la página de Primera Infancia (JARDÍN Y TRANSICIÓN)",
         "device": "Escritorio"
       },
       {
-        "id": 1789145265689,
-        "date": "11/9/2026 11:47 a. m.",
+        "id": 1789414857204,
+        "date": "14/9/2026 02:40 p. m.",
+        "section": "Encuentros Familiares",
+        "action": "Consulta de Calendario de Encuentros",
+        "device": "Escritorio"
+      },
+      {
+        "id": 1789414757855,
+        "date": "14/9/2026 02:39 p. m.",
+        "section": "Ciclos: Ciclo Especializado (10° Y 11°)",
+        "action": "Visita a la página de Ciclo Especializado (10° Y 11°)",
+        "device": "Escritorio"
+      },
+      {
+        "id": 1789414741478,
+        "date": "14/9/2026 02:39 p. m.",
+        "section": "Ciclos: Ciclo Exploratorio (8° Y 9°)",
+        "action": "Visita a la página de Ciclo Exploratorio (8° Y 9°)",
+        "device": "Escritorio"
+      },
+      {
+        "id": 1789414739677,
+        "date": "14/9/2026 02:38 p. m.",
+        "section": "Ciclos: Ciclo Fundamental (6° Y 7°)",
+        "action": "Visita a la página de Ciclo Fundamental (6° Y 7°)",
+        "device": "Escritorio"
+      },
+      {
+        "id": 1789414599319,
+        "date": "14/9/2026 02:36 p. m.",
+        "section": "Ciclos Escolares",
+        "action": "Consulta del Hub de Ciclos",
+        "device": "Escritorio"
+      },
+      {
+        "id": 1789414533190,
+        "date": "14/9/2026 02:35 p. m.",
+        "section": "Inicio / Portada",
+        "action": "Ingreso a la página de Inicio",
+        "device": "Escritorio"
+      },
+      {
+        "id": 1789414347718,
+        "date": "14/9/2026 02:32 p. m.",
+        "section": "Ciclos: Ciclo Básico (4° Y 5°)",
+        "action": "Visita a la página de Ciclo Básico (4° Y 5°)",
+        "device": "Escritorio"
+      },
+      {
+        "id": 1789414343394,
+        "date": "14/9/2026 02:32 p. m.",
+        "section": "Ciclos: Ciclo Infantil (1°, 2° Y 3°)",
+        "action": "Visita a la página de Ciclo Infantil (1°, 2° Y 3°)",
+        "device": "Escritorio"
+      },
+      {
+        "id": 1789414341159,
+        "date": "14/9/2026 02:32 p. m.",
         "section": "Ciclos: Primera Infancia (JARDÍN Y TRANSICIÓN)",
         "action": "Visita a la página de Primera Infancia (JARDÍN Y TRANSICIÓN)",
         "device": "Escritorio"
       },
       {
-        "id": 1789145203843,
-        "date": "11/9/2026 11:46 a. m.",
+        "id": 1789414339932,
+        "date": "14/9/2026 02:32 p. m.",
+        "section": "Inicio / Portada",
+        "action": "Ingreso a la página de Inicio",
+        "device": "Escritorio"
+      },
+      {
+        "id": 1789414263545,
+        "date": "14/9/2026 02:31 p. m.",
+        "section": "Ciclos: Ciclo Exploratorio (8° Y 9°)",
+        "action": "Visita a la página de Ciclo Exploratorio (8° Y 9°)",
+        "device": "Escritorio"
+      },
+      {
+        "id": 1789414208764,
+        "date": "14/9/2026 02:30 p. m.",
+        "section": "Ciclos: Ciclo Básico (4° Y 5°)",
+        "action": "Visita a la página de Ciclo Básico (4° Y 5°)",
+        "device": "Escritorio"
+      },
+      {
+        "id": 1789414206427,
+        "date": "14/9/2026 02:30 p. m.",
+        "section": "Ciclos: Ciclo Infantil (1°, 2° Y 3°)",
+        "action": "Visita a la página de Ciclo Infantil (1°, 2° Y 3°)",
+        "device": "Escritorio"
+      },
+      {
+        "id": 1789414204775,
+        "date": "14/9/2026 02:30 p. m.",
         "section": "Ciclos: Primera Infancia (JARDÍN Y TRANSICIÓN)",
         "action": "Visita a la página de Primera Infancia (JARDÍN Y TRANSICIÓN)",
         "device": "Escritorio"
       },
       {
-        "id": 1789143900183,
-        "date": "11/9/2026 11:25 a. m.",
-        "section": "Ciclos: Primera Infancia (JARDÍN Y TRANSICIÓN)",
-        "action": "Visita a la página de Primera Infancia (JARDÍN Y TRANSICIÓN)",
-        "device": "Escritorio"
-      },
-      {
-        "id": 1789141364477,
-        "date": "11/9/2026 10:42 a. m.",
-        "section": "Ciclos: Primera Infancia (JARDÍN Y TRANSICIÓN)",
-        "action": "Visita a la página de Primera Infancia (JARDÍN Y TRANSICIÓN)",
-        "device": "Escritorio"
-      },
-      {
-        "id": 1789141335203,
-        "date": "11/9/2026 10:42 a. m.",
-        "section": "Ciclos: Primera Infancia (JARDÍN Y TRANSICIÓN)",
-        "action": "Visita a la página de Primera Infancia (JARDÍN Y TRANSICIÓN)",
-        "device": "Escritorio"
-      },
-      {
-        "id": 1789141286913,
-        "date": "11/9/2026 10:41 a. m.",
-        "section": "Ciclos: Primera Infancia (JARDÍN Y TRANSICIÓN)",
-        "action": "Visita a la página de Primera Infancia (JARDÍN Y TRANSICIÓN)",
-        "device": "Escritorio"
-      },
-      {
-        "id": 1789141252154,
-        "date": "11/9/2026 10:40 a. m.",
-        "section": "Ciclos: Primera Infancia (JARDÍN Y TRANSICIÓN)",
-        "action": "Visita a la página de Primera Infancia (JARDÍN Y TRANSICIÓN)",
+        "id": 1789414203333,
+        "date": "14/9/2026 02:30 p. m.",
+        "section": "Inicio / Portada",
+        "action": "Ingreso a la página de Inicio",
         "device": "Escritorio"
       }
     ]
   },
+  "homeContent": {
+    "identityBadge": "🏛️ IDENTIDAD LEONÍSTICA",
+    "mainTitle": "Bienvenidos a \"Caminando Juntos\"",
+    "tagline": "\"Un espacio para crecer, aprender y construir bienestar.\"",
+    "paragraph1": "Este blog nace como un espacio de encuentro y acompañamiento para toda la comunidad educativa, creado con el propósito de compartir los procesos, actividades y estrategias que se desarrollan desde el área de Psicología y Psicoorientación del Colegio Leonístico La Merced.",
+    "paragraph2": "Aquí encontraremos experiencias de las actividades institucionales, recursos y herramientas dirigidas a estudiantes, familias y docentes, teniendo en cuenta las diferentes etapas del desarrollo. Será también una oportunidad para aprender, descubrir fortalezas, fortalecer habilidades y acompañar a nuestros niños, niñas y adolescentes en la construcción de un proyecto de vida con sentido.",
+    "paragraph3": "A través de este espacio compartiremos orientaciones y estrategias que contribuyan al bienestar integral, al desarrollo socioemocional, al fortalecimiento de las relaciones y a la construcción de entornos que favorezcan el crecimiento y aprendizaje de nuestra comunidad educativa.",
+    "aboutBadge": "EQUIPO DE PSICO ORIENTACIÓN",
+    "aboutTitle": "¿Quiénes Somos?",
+    "aboutSubtitle": "",
+    "aboutParagraph1": "Somos el equipo de Psicoorientación del Colegio Leonístico La Merced, comprometido con el acompañamiento de nuestros estudiantes en sus procesos emocionales dentro del contexto educativo. Brindamos orientación, estrategias y herramientas que contribuyen a su bienestar y favorecen su desarrollo integral, acompañándolos en las diferentes etapas de su proceso escolar.",
+    "aboutParagraph2": "Asimismo, trabajamos de manera articulada con docentes y familias, brindando estrategias y orientaciones que les permitan fortalecer el acompañamiento de nuestros estudiantes y favorecer sus procesos emocionales, académicos y de adaptación escolar.",
+    "areasTitle": "Áreas de Acompañamiento Institucional",
+    "areasSubtitle": "Líneas de trabajo diseñadas para respaldar cada etapa de tu vida escolar y familiar.",
+    "areas": [
+      {
+        "id": 1,
+        "title": "Bienestar Emocional",
+        "tag": "Apoyo Personal",
+        "desc": "Estrategias para la gestión de emociones, manejo del estrés escolar, resolución asertiva de conflictos y autoestima."
+      },
+      {
+        "id": 2,
+        "title": "Orientación Vocacional",
+        "tag": "Grados Superiores",
+        "desc": "Descubrimiento de talentos, pasiones y orientación para la toma de decisiones profesionales hacia el futuro."
+      },
+      {
+        "id": 3,
+        "title": "Convivencia Escolar",
+        "tag": "Comunidad",
+        "desc": "Promoción de relaciones basadas en el respeto, empatía, prevención del acoso escolar y cultura de paz en las aulas."
+      },
+      {
+        "id": 4,
+        "title": "Escuela de Familias",
+        "tag": "Padres y Cuidadores",
+        "desc": "Espacios de formación y diálogo sobre pautas de crianza, límites afectivos y comunicación positiva en el hogar."
+      }
+    ]
+  },
   "adminPassword": "123",
-  "adminSlug": "admin451200",
-  "version": "1789145622771"
+  "adminSlug": "admin451200"
 }

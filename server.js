@@ -17,14 +17,7 @@ app.use(express.json({ limit: '25mb' }));
 app.use(express.urlencoded({ extended: true, limit: '25mb' }));
 
 
-// Configuración de Repositorio y Token de Persistencia GitHub
-const GITHUB_REPO = 'Piscuish/Psicologia-Leonistico';
-const _p1 = 'gh' + 'p_';
-const _p2 = 'xRmuTuwxQ4AY11Po';
-const _p3 = '1XAfw7LOHOS1eE4HLm3y';
-const GITHUB_TOKEN = process.env.GITHUB_TOKEN || (_p1 + _p2 + _p3);
-
-// Servir uploads con cache inmutable y almacenamiento híbrido
+// Servir uploads con cache inmutable de 30 días
 const isVercel = Boolean(process.env.VERCEL || process.env.AWS_LAMBDA_FUNCTION_NAME);
 const UPLOADS_DIR = isVercel ? path.join('/tmp', 'uploads') : path.join(__dirname, 'public', 'uploads');
 try {
@@ -32,106 +25,9 @@ try {
     fs.mkdirSync(UPLOADS_DIR, { recursive: true });
   }
 } catch (_) {}
-
-// Cola para esperar las subidas a GitHub antes de finalizar la respuesta API
-let pendingImageUploads = [];
-
-async function uploadImageToGitHub(filename, base64Content) {
-  if (!GITHUB_TOKEN) return false;
-  try {
-    const fileUrl = `https://api.github.com/repos/${GITHUB_REPO}/contents/public/uploads/${filename}`;
-    let sha = '';
-    try {
-      const getRes = await fetch(fileUrl, {
-        headers: {
-          'Authorization': `token ${GITHUB_TOKEN}`,
-          'Accept': 'application/vnd.github.v3+json',
-          'User-Agent': 'Psico-Leonistico-Sync'
-        }
-      });
-      if (getRes.ok) {
-        const existing = await getRes.json();
-        sha = existing.sha;
-      }
-    } catch (_) {}
-
-    const putRes = await fetch(fileUrl, {
-      method: 'PUT',
-      headers: {
-        'Authorization': `token ${GITHUB_TOKEN}`,
-        'Accept': 'application/vnd.github.v3+json',
-        'Content-Type': 'application/json',
-        'User-Agent': 'Psico-Leonistico-Sync'
-      },
-      body: JSON.stringify({
-        message: `CMS Media Upload: ${filename} [skip ci]`,
-        content: base64Content,
-        sha: sha || undefined,
-        branch: 'main'
-      })
-    });
-    if (putRes.ok) {
-      console.log(`✅ Imagen persistida en GitHub: public/uploads/${filename}`);
-      return true;
-    } else {
-      const err = await putRes.text();
-      console.warn(`Aviso subiendo imagen a GitHub (${putRes.status}):`, err.substring(0, 120));
-      return false;
-    }
-  } catch (err) {
-    console.warn('Error subiendo imagen a GitHub:', err.message);
-    return false;
-  }
-}
-
-// Servir uploads con cache inmutable y fallback inteligente a GitHub raw (clave para Vercel)
-app.get('/uploads/:filename', async (req, res, next) => {
-  const filename = path.basename(req.params.filename);
-  const localPath = path.join(UPLOADS_DIR, filename);
-  const publicPath = path.join(__dirname, 'public', 'uploads', filename);
-
-  // 1. Si existe localmente en disco, servir inmediatamente
-  if (fs.existsSync(localPath)) {
-    res.setHeader('Cache-Control', 'public, max-age=2592000, immutable');
-    return res.sendFile(localPath);
-  }
-  if (fs.existsSync(publicPath)) {
-    res.setHeader('Cache-Control', 'public, max-age=2592000, immutable');
-    return res.sendFile(publicPath);
-  }
-
-  // 2. Si no existe localmente (instancias serverless recreadas de Vercel),
-  // descargar desde GitHub raw, almacenar en /tmp/uploads/ como cache y servir
-  try {
-    const rawUrl = `https://raw.githubusercontent.com/${GITHUB_REPO}/main/public/uploads/${filename}`;
-    const ghRes = await fetch(rawUrl);
-    if (ghRes.ok) {
-      const ext = path.extname(filename).toLowerCase();
-      const mimeMap = {
-        '.png': 'image/png',
-        '.jpg': 'image/jpeg',
-        '.jpeg': 'image/jpeg',
-        '.webp': 'image/webp',
-        '.gif': 'image/gif',
-        '.svg': 'image/svg+xml'
-      };
-      const contentType = ghRes.headers.get('content-type') || mimeMap[ext] || 'application/octet-stream';
-      const arrayBuf = await ghRes.arrayBuffer();
-      const buf = Buffer.from(arrayBuf);
-      try {
-        fs.writeFileSync(localPath, buf);
-      } catch (_) {}
-      res.setHeader('Content-Type', contentType);
-      res.setHeader('Cache-Control', 'public, max-age=2592000, immutable');
-      return res.end(buf);
-    }
-  } catch (err) {
-    console.warn('Aviso obteniendo imagen de GitHub raw:', err.message);
-  }
-
-  next();
-});
-
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+app.use('/js', express.static(path.join(__dirname, 'js')));
+app.use('/js', express.static(path.join(__dirname, 'public', 'js')));
 app.use('/uploads', express.static(UPLOADS_DIR, {
   maxAge: '30d',
   immutable: true
@@ -152,7 +48,7 @@ app.use(express.static(path.join(__dirname, 'public'), {
   }
 }));
 
-// Helper para guardar imágenes Base64 automáticamente en disco /uploads/ y en GitHub
+// Helper para guardar imágenes Base64 automáticamente en disco /uploads/
 function saveBase64ToFile(base64Str, prefix = 'img') {
   if (!base64Str || typeof base64Str !== 'string' || !base64Str.startsWith('data:image/')) {
     return base64Str;
@@ -163,19 +59,13 @@ function saveBase64ToFile(base64Str, prefix = 'img') {
     const ext = matches[1] === 'jpeg' ? 'jpg' : matches[1];
     const filename = `${prefix}_${Date.now()}_${Math.random().toString(36).substring(2, 7)}.${ext}`;
     const filePath = path.join(UPLOADS_DIR, filename);
-    const buffer = Buffer.from(matches[2], 'base64');
-    fs.writeFileSync(filePath, buffer);
+    fs.writeFileSync(filePath, Buffer.from(matches[2], 'base64'));
     const rootUploadsPath = path.join(__dirname, 'uploads', filename);
     try {
       if (fs.existsSync(path.join(__dirname, 'uploads'))) {
         fs.copyFileSync(filePath, rootUploadsPath);
       }
     } catch (_) {}
-
-    // Encolar persistencia a GitHub para que no se pierda al reiniciar la función serverless
-    const uploadTask = uploadImageToGitHub(filename, matches[2]);
-    pendingImageUploads.push(uploadTask);
-
     return `/uploads/${filename}`;
   } catch (err) {
     console.error('Error guardando imagen base64:', err);
@@ -304,50 +194,8 @@ const DEFAULT_CALENDAR_WORKSHOPS = [
 
 const DEFAULT_IMAGES = {
   logo: '/uploads/site_logo_1788739866816.png',
-  welcome: 'https://lh3.googleusercontent.com/sitesv/AG8ngQWOyxLk67vCI15BlZoCjOwd8xUiVdKQzLu-M2WJcEPpTf9i3QDpCzc1-5m6X-sKqpvyWPGZBwQ-rH8UhgQL7YTxjIlxDFe_bipo6xrnJX-R5AzoEojbfXeILt4DV4eHhLkoRtPmt0qDN9i4vhtAbDolgStj2fPdU9XVS2h5y405j0qv0gtNpOby2sONDNOeFMCsNGdXiYbURk_wJfVERZBegFn7tlsmLq3pjw8f=w1280',
-  about: 'https://lh3.googleusercontent.com/sitesv/AG8ngQXTnHzijkLW5x4q0oxIMOi07YzG-IBG1OfPXeoVkIVB8fjkFXyd17Exs0GpjRWuO_ve89ISCOVUerGrrxM5Btnf5tup2wv79zMnKOoluKmpvA0bbZU3sVSnjk80O_PqvnpU7L_xlejXLWd0rR4xWkxGQj7g0dTAeH3vz104NNIAC_EwotDlnekiU7aMZOxbjrQAZ56qxhieVbVysrZ75FKa5z5OY7hICFCfX1Ptwyo=w1280'
-};
-
-const DEFAULT_HOME_CONTENT = {
-  identityBadge: "🏛️ IDENTIDAD LEONÍSTICA",
-  mainTitle: "Bienvenidos a Caminando Juntos",
-  tagline: "\"Un espacio para crecer, aprender y construir bienestar.\"",
-  paragraph1: "En Caminando Juntos creemos que cada etapa del desarrollo es una oportunidad para aprender, descubrir fortalezas y construir un proyecto de vida con sentido. Este blog nace como un espacio de encuentro para estudiantes, familias, docentes y toda la comunidad educativa, donde compartiremos experiencias, recursos, actividades y estrategias que fortalecen el bienestar integral.",
-  paragraph2: "Desde el área de Psicoorientación, promovemos el desarrollo socioemocional, la Educación Sexual Integral, la orientación vocacional, la convivencia escolar y el acompañamiento a los diferentes procesos que contribuyen al crecimiento personal, académico y social de nuestros estudiantes.",
-  paragraph3: "Te invitamos a recorrer este espacio, conocer nuestras iniciativas, participar en las actividades y descubrir herramientas que nos permitan seguir caminando juntos hacia una comunidad más consciente, empática y comprometida con el bienestar de todos.",
-  aboutBadge: "🦁 EQUIPO DE ORIENTACIÓN",
-  aboutTitle: "¿Quiénes Somos?",
-  aboutSubtitle: "Profesionales comprometidas con la formación integral leonística",
-  aboutParagraph1: "Somos un equipo de psicoorientadoras apasionadas por el bienestar de los niños, niñas y jóvenes. Creemos firmemente que la educación académica trasciende cuando el corazón y la mente se encuentran en equilibrio.",
-  aboutParagraph2: "Trabajamos de la mano con las directivas, los docentes de aula y las familias para garantizar que cada estudiante cuente con las herramientas necesarias para construir un proyecto de vida feliz y exitoso.",
-  areasTitle: "Áreas de Acompañamiento Institucional",
-  areasSubtitle: "Líneas de trabajo diseñadas para respaldar cada etapa de tu vida escolar y familiar.",
-  areas: [
-    {
-      id: 1,
-      title: "Bienestar Emocional",
-      tag: "Apoyo Personal",
-      desc: "Estrategias para la gestión de emociones, manejo del estrés escolar, resolución asertiva de conflictos y autoestima."
-    },
-    {
-      id: 2,
-      title: "Orientación Vocacional",
-      tag: "Grados Superiores",
-      desc: "Descubrimiento de talentos, pasiones y orientación para la toma de decisiones profesionales hacia el futuro."
-    },
-    {
-      id: 3,
-      title: "Convivencia Escolar",
-      tag: "Comunidad",
-      desc: "Promoción de relaciones basadas en el respeto, empatía, prevención del acoso escolar y cultura de paz en las aulas."
-    },
-    {
-      id: 4,
-      title: "Escuela de Familias",
-      tag: "Padres y Cuidadores",
-      desc: "Espacios de formación y diálogo sobre pautas de crianza, límites afectivos y comunicación positiva en el hogar."
-    }
-  ]
+  welcome: '/uploads/site_welcome_official.png',
+  about: '/uploads/site_about_official.png'
 };
 
 const DEFAULT_PSYCHOLOGISTS = [
@@ -385,18 +233,54 @@ const DEFAULT_CYCLE_BLOCKS = [
   {
     "id": 3,
     "cycleId": "infantil",
-    "title": "Empatía, Convivencia y Amistad",
-    "subtitle": "Grados 1°, 2° y 3°",
-    "text": "Fortalecemos la convivencia escolar en el Ciclo Infantil guiando a los estudiantes en la empatía, el trabajo en equipo, la resolución pacífica de conflictos y el respeto mutuo en el aula de clase.",
+    "title": "¡Bienvenidos al Ciclo Infantil!",
+    "subtitle": "¡Caminemos juntos en esta maravillosa etapa de crecer!",
+    "text": "Este es un espacio para crecer, descubrir y aprender juntos. Aquí encontrarás recursos y actividades pensados para acompañar a nuestros niños y niñas en sus primeros años, fortaleciendo sus emociones, habilidades sociales, autonomía y bienestar. Porque cada pequeño paso es una oportunidad para aprender, jugar, expresar lo que sentimos y construir relaciones llenas de cariño y respeto.",
     "imageUrl": "",
     "imagePosition": "top",
     "badgeText": "1°, 2° y 3°",
     "order": 1,
     "type": "hero_banner",
-    "titleAlign": "left",
+    "titleAlign": "center",
     "size": "full",
     "imageSize": "full",
-    "imageFit": "contain"
+    "imageFit": "contain",
+    "galleryLayout": "single_full",
+    "galleryFit": "natural",
+    "galleryAlign": "center",
+    "buttonText": "",
+    "buttonUrl": "",
+    "iconEmoji": "💡",
+    "accentColor": "purple",
+    "slidesUrl": "",
+    "slidesBtnText": "",
+    "videoUrl": "",
+    "videoBtnText": "",
+    "slidesFileData": "",
+    "slidesFileName": "",
+    "itemsList": [
+      {
+        "icon": "💖",
+        "title": "Pauta de Bienestar",
+        "text": "Acompañamiento cercano y afectivo."
+      }
+    ],
+    "resourcesList": [
+      {
+        "title": "Guía Familiar (PDF)",
+        "desc": "Material imprimible de apoyo.",
+        "fileUrl": "",
+        "fileName": "",
+        "fileSize": "",
+        "icon": "file-text"
+      }
+    ],
+    "photosList": [
+      {
+        "url": "/uploads/block_3_photo_1_1790007048952_ih3wj.jpg",
+        "caption": ""
+      }
+    ]
   },
   {
     "id": 4,
@@ -417,71 +301,42 @@ const DEFAULT_CYCLE_BLOCKS = [
   {
     "id": 5,
     "cycleId": "fundamental",
-    "title": "Transición a la Secundaria y Autonomía",
-    "subtitle": "Grados 6° y 7°",
-    "text": "Acompañamiento integral en los cambios socioemocionales de la preadolescencia, promoviendo el pensamiento crítico, la autoestima y la adaptación positiva a la vida en secundaria.",
+    "title": "¡Bienvenidos al Ciclo Fundamental!",
+    "subtitle": "Recuerda: conocerte, escucharte y pedir ayuda también son formas de cuidarte.",
+    "text": "Esta etapa trae nuevos aprendizajes, cambios y desafíos. Es un momento importante para fortalecer nuestra identidad, comprender nuestras emociones y desarrollar herramientas para tomar decisiones y relacionarnos de manera saludable. En este espacio encontrarás contenidos que te acompañarán en tu crecimiento personal, emocional y social.",
     "imageUrl": "",
     "imagePosition": "top",
     "badgeText": "6° y 7°",
     "order": 1,
     "type": "hero_banner",
-    "titleAlign": "left",
+    "titleAlign": "center",
     "size": "full",
     "imageSize": "full",
-    "imageFit": "contain"
-  },
-  {
-    "id": 7,
-    "cycleId": "especializado",
-    "title": "Orientación Vocacional y Proyecto de Vida",
-    "subtitle": "Grados 10° y 11°",
-    "text": "Asesoría y acompañamiento para la clarificación de intereses vocacionales, toma informada de decisiones profesionales, preparación para las Pruebas Saber y proyección al futuro universitario.",
-    "imageUrl": "",
-    "imagePosition": "top",
-    "badgeText": "10° y 11°",
-    "order": 1,
-    "type": "hero_banner",
-    "titleAlign": "left",
-    "size": "full",
-    "imageSize": "full",
-    "imageFit": "contain"
-  },
-  {
-    "id": 1788358008335,
-    "cycleId": "cycle_1788358007488",
-    "type": "hero_banner",
-    "size": "full",
-    "titleAlign": "left",
-    "title": "Liderazgo y Orientación Vocacional 2026",
-    "subtitle": "Taller formativo para estudiantes de media académica",
-    "badgeText": "DESTACADO",
-    "text": "Este espacio formativo brinda herramientas para la elección de carrera y vida profesional.",
-    "imageUrl": "",
-    "imagePosition": "left",
+    "imageFit": "contain",
+    "galleryLayout": "single_full",
+    "galleryFit": "natural",
+    "galleryAlign": "center",
     "buttonText": "",
     "buttonUrl": "",
     "iconEmoji": "💡",
     "accentColor": "purple",
     "slidesUrl": "",
     "slidesBtnText": "",
+    "videoUrl": "",
+    "videoBtnText": "",
     "slidesFileData": "",
     "slidesFileName": "",
     "itemsList": [
       {
         "icon": "💖",
-        "title": "Afecto y Diálogo",
-        "text": "Acompañamiento cercano y validación emocional constante."
-      },
-      {
-        "icon": "⏰",
-        "title": "Rutina y Horarios",
-        "text": "Fijar horas para estudiar, descansar y compartir en familia."
+        "title": "Pauta de Bienestar",
+        "text": "Acompañamiento cercano y afectivo."
       }
     ],
     "resourcesList": [
       {
-        "title": "Guía de Orientación Familiar (PDF)",
-        "desc": "Material imprimible de apoyo para el hogar.",
+        "title": "Guía Familiar (PDF)",
+        "desc": "Material imprimible de apoyo.",
         "fileUrl": "",
         "fileName": "",
         "fileSize": "",
@@ -490,17 +345,10 @@ const DEFAULT_CYCLE_BLOCKS = [
     ],
     "photosList": [
       {
-        "url": "https://images.unsplash.com/photo-1577896851231-70ef18881754?auto=format&fit=crop&w=600&q=80",
-        "caption": "Talleres y actividades del ciclo"
-      },
-      {
-        "url": "https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&w=600&q=80",
-        "caption": "Encuentros formativos"
+        "url": "/uploads/block_3_photo_1_1790007048952_ih3wj.jpg",
+        "caption": ""
       }
-    ],
-    "order": 1,
-    "imageSize": "full",
-    "imageFit": "contain"
+    ]
   },
   {
     "id": 1788358207022,
@@ -512,7 +360,7 @@ const DEFAULT_CYCLE_BLOCKS = [
     "subtitle": "Caminemos juntos en la construcción de entornos seguros, amorosos y respetuosos para nuestros niños y niñas.",
     "badgeText": "Jardín y transición",
     "text": "En este espacio encontrarás herramientas, estrategias y recursos para acompañar el desarrollo integral de la primera infancia desde el área de Psicoorientación.\n\nNuestro propósito es brindar orientaciones prácticas que permitan a familias, docentes y comunidad educativa acompañar a los niños y niñas en sus procesos emocionales, sociales, cognitivos y educativos, fortaleciendo su bienestar y desarrollo.",
-    "imageUrl": "",
+    "imageUrl": "/uploads/block_1788358207022_1789415649543_smb4x.png",
     "imagePosition": "left",
     "buttonText": "",
     "buttonUrl": "",
@@ -546,27 +394,29 @@ const DEFAULT_CYCLE_BLOCKS = [
     ],
     "photosList": [
       {
-        "url": "/uploads/gallery_1788358207022_0_1788803346192_0y1r1.jpg",
+        "url": "/uploads/gallery_1788358207022_0_1789416411069_1wxy8.png",
         "caption": ""
       }
     ],
     "order": 1,
     "galleryLayout": "single_full",
-    "galleryFit": "wide",
+    "galleryFit": "square",
     "galleryAlign": "left",
     "imageSize": "full",
-    "imageFit": "contain"
+    "imageFit": "contain",
+    "videoUrl": "",
+    "videoBtnText": ""
   },
   {
-    "id": 1788808426228,
-    "cycleId": "promocion-prevencion",
-    "type": "video_embed",
+    "id": 1789414197019,
+    "cycleId": "especializado",
+    "type": "hero_banner",
     "size": "full",
-    "titleAlign": "left",
-    "title": "Septiembre mes de la prevención del suicidio",
-    "subtitle": "No estás solo. Hablar también es una forma de cuidarnos.",
-    "badgeText": "PROMOCIÓN Y PREVENCIÓN",
-    "text": "Este mes nos invita a recordar que escuchar, acompañar y hablar puede marcar la diferencia. Cuidar nuestra salud mental también significa estar atentos a quienes nos rodean, brindar apoyo y buscar ayuda cuando sea necesario.",
+    "titleAlign": "center",
+    "title": "¡Bienvenidos al Ciclo Especializado!",
+    "subtitle": "Tu camino es único. Conócete, confía en tus capacidades y construye tu futuro paso a paso.",
+    "badgeText": "10 y 11",
+    "text": "Llegar a esta etapa significa estar cada vez más cerca de nuevos caminos, decisiones y proyectos. Es un momento para mirar hacia adelante, reconocer lo que hemos aprendido y descubrir aquello que queremos construir. En este espacio encontrarás recursos para fortalecer tu bienestar emocional, tomar decisiones, proyectarte hacia el futuro y construir un proyecto de vida conectado con tus intereses, capacidades y sueños.",
     "imageUrl": "",
     "imagePosition": "banner",
     "imageSize": "full",
@@ -580,7 +430,7 @@ const DEFAULT_CYCLE_BLOCKS = [
     "accentColor": "purple",
     "slidesUrl": "",
     "slidesBtnText": "",
-    "videoUrl": "https://drive.google.com/file/d/1ztZW9ICNAdempPw1HEqRLZifY7kM7ytG/view?usp=sharing",
+    "videoUrl": "",
     "videoBtnText": "",
     "slidesFileData": "",
     "slidesFileName": "",
@@ -608,30 +458,33 @@ const DEFAULT_CYCLE_BLOCKS = [
     ],
     "photosList": [
       {
-        "url": "https://images.unsplash.com/photo-1577896851231-70ef18881754?auto=format&fit=crop&w=600&q=80",
+        "url": "/uploads/block_3_photo_1_1790007048952_ih3wj.jpg",
         "caption": ""
       }
     ],
-    "order": 1
+    "order": 2
   },
   {
-    "id": 1788887600000,
-    "cycleId": "guia-bienestar",
+    "id": 1789414284003,
+    "cycleId": "exploratorio",
     "type": "hero_banner",
     "size": "full",
-    "titleAlign": "left",
-    "title": "Acompañamiento Socioemocional y Primeros Auxilios Psicológicos",
-    "subtitle": "Estrategias de contención, tranquilidad y apoyo mutuo para toda la comunidad leonística",
-    "badgeText": "BIENESTAR EMOCIONAL POST TERREMOTO",
-    "text": "Frente a eventos inesperados o situaciones de emergencia sísmica, es natural experimentar miedo, ansiedad o preocupación. Desde el área de Psicoorientación Escolar compartimos pautas formativas, actividades de respiración, técnicas de regulación emocional y recursos prácticos para acompañar a nuestros niños, niñas y jóvenes tanto en el hogar como en las aulas.\n\nRecuerda que escuchar con empatía, mantener la calma y validar las emociones son los primeros pasos para restaurar la seguridad y el bienestar.",
+    "titleAlign": "center",
+    "title": "¡Bienvenidos al Ciclo Exploratorio!",
+    "subtitle": "Un espacio para explorar, descubrir y darle sentido a tu camino!",
+    "badgeText": "8 y 9",
+    "text": "Explorar quiénes somos también significa descubrir nuestros intereses, talentos, emociones, sueños y posibilidades. Este espacio ha sido creado para acompañarte en una etapa llena de preguntas y decisiones, brindándote herramientas para conocerte mejor, fortalecer tus habilidades y comenzar a pensar en el futuro que quieres construir.",
     "imageUrl": "",
-    "imagePosition": "left",
+    "imagePosition": "banner",
     "imageSize": "full",
     "imageFit": "contain",
+    "galleryLayout": "single_full",
+    "galleryFit": "natural",
+    "galleryAlign": "center",
     "buttonText": "",
     "buttonUrl": "",
-    "iconEmoji": "🌱",
-    "accentColor": "blue",
+    "iconEmoji": "💡",
+    "accentColor": "purple",
     "slidesUrl": "",
     "slidesBtnText": "",
     "videoUrl": "",
@@ -640,20 +493,370 @@ const DEFAULT_CYCLE_BLOCKS = [
     "slidesFileName": "",
     "itemsList": [
       {
-        "icon": "🤝",
-        "title": "Contención Emocional",
-        "text": "Validar temores y transmitir calma y presencia constante."
+        "icon": "💖",
+        "title": "Afecto y Diálogo",
+        "text": "Acompañamiento cercano y validación emocional constante."
       },
       {
-        "icon": "🌬️",
-        "title": "Técnicas de Respiración",
-        "text": "Ejercicios guiados para reducir la tensión corporal y el estrés."
+        "icon": "⏰",
+        "title": "Rutina y Horarios",
+        "text": "Fijar horas para estudiar, descansar y compartir en familia."
       }
     ],
     "resourcesList": [
       {
-        "title": "Pautas de Apoyo Post Emergencia (PDF)",
-        "desc": "Material imprimible de orientación para el aula y el hogar.",
+        "title": "Guía de Orientación Familiar (PDF)",
+        "desc": "Material imprimible de apoyo para el hogar.",
+        "fileUrl": "",
+        "fileName": "",
+        "fileSize": "",
+        "icon": "file-text"
+      }
+    ],
+    "photosList": [
+      {
+        "url": "/uploads/block_3_photo_1_1790007048952_ih3wj.jpg",
+        "caption": ""
+      }
+    ],
+    "order": 1
+  },
+  {
+    "id": 1789414523980,
+    "cycleId": "promocion-prevencion",
+    "type": "photo_gallery",
+    "size": "full",
+    "titleAlign": "center",
+    "title": "Prevención y Promoción",
+    "subtitle": "",
+    "badgeText": "PROMOCIÓN Y PREVENCIÓN",
+    "text": "Este espacio está dedicado a la promoción del bienestar y la prevención en salud mental dentro de nuestra comunidad educativa. Aquí podrán conocer y evidenciar las diferentes actividades, campañas, talleres y experiencias que se han desarrollado en el colegio, orientadas a fortalecer el bienestar emocional y las habilidades para la vida. Además, encontrarán estrategias, recomendaciones y recursos que pueden ser de utilidad para acompañar el cuidado de la salud mental de nuestros estudiantes, familias y demás miembros de la comunidad educativa. Un espacio para aprender, reflexionar, compartir y construir juntos una comunidad que cuida el bienestar emocional.",
+    "imageUrl": "/uploads/block_1789414523980_1789415649554_flbu3.jpg",
+    "imagePosition": "bottom_banner",
+    "imageSize": "medium",
+    "imageFit": "contain",
+    "galleryLayout": "single_full",
+    "galleryFit": "natural",
+    "galleryAlign": "left",
+    "buttonText": "",
+    "buttonUrl": "",
+    "iconEmoji": "💡",
+    "accentColor": "purple",
+    "slidesUrl": "",
+    "slidesBtnText": "",
+    "videoUrl": "",
+    "videoBtnText": "",
+    "slidesFileData": "",
+    "slidesFileName": "",
+    "itemsList": [
+      {
+        "icon": "💖",
+        "title": "Afecto y Diálogo",
+        "text": "Acompañamiento cercano y validación emocional constante."
+      },
+      {
+        "icon": "⏰",
+        "title": "Rutina y Horarios",
+        "text": "Fijar horas para estudiar, descansar y compartir en familia."
+      }
+    ],
+    "resourcesList": [
+      {
+        "title": "Guía de Orientación Familiar (PDF)",
+        "desc": "Material imprimible de apoyo para el hogar.",
+        "fileUrl": "",
+        "fileName": "",
+        "fileSize": "",
+        "icon": "file-text"
+      }
+    ],
+    "photosList": [
+      {
+        "url": "/uploads/gallery_1789414523980_0_1790000198779_jl0xf.jpg",
+        "caption": ""
+      },
+      {
+        "url": "/uploads/gallery_1789414523980_1_1790000598633_plb73.jpg",
+        "caption": ""
+      }
+    ],
+    "order": 1
+  },
+  {
+    "id": 1789416313077,
+    "cycleId": "guia-bienestar",
+    "type": "slides_embed",
+    "size": "full",
+    "titleAlign": "center",
+    "title": "Cuento de acompañamiento emocional post terremoto",
+    "subtitle": "",
+    "badgeText": "BIENESTAR EMOCIONAL",
+    "text": "El Colegio Leonístico La Merced está comprometido con el bienestar integral y emocional de su comunidad educativa. Por ello, desde el área de Psicoorientación se elaboraron las siguientes guías de acompañamiento emocional, con el propósito de brindar orientaciones para abordar las emociones que pueden surgir después de un evento sísmico, tanto en el contexto escolar como en el hogar.\n\nEstas guías fueron trabajadas en el colegio como parte del acompañamiento a los estudiantes, brindando orientaciones que permitieran reconocer y gestionar las diferentes emociones que pueden surgir después de una situación de este tipo. Asimismo, permitieron identificar posibles afectaciones emocionales que requirieran un acompañamiento más especializado, realizando la remisión a Psicología cuando fue necesario, con el fin de brindar el apoyo correspondiente.",
+    "imageUrl": "",
+    "imagePosition": "banner",
+    "imageSize": "full",
+    "imageFit": "contain",
+    "galleryLayout": "single_full",
+    "galleryFit": "natural",
+    "galleryAlign": "center",
+    "buttonText": "",
+    "buttonUrl": "",
+    "iconEmoji": "💡",
+    "accentColor": "purple",
+    "slidesUrl": "https://drive.google.com/file/d/16ILTQguHWEY5Cuoa6qGE_CFpcw0gLYly/view",
+    "slidesBtnText": "",
+    "videoUrl": "",
+    "videoBtnText": "",
+    "slidesFileData": "",
+    "slidesFileName": "",
+    "itemsList": [
+      {
+        "icon": "💖",
+        "title": "Afecto y Diálogo",
+        "text": "Acompañamiento cercano y validación emocional constante."
+      },
+      {
+        "icon": "⏰",
+        "title": "Rutina y Horarios",
+        "text": "Fijar horas para estudiar, descansar y compartir en familia."
+      }
+    ],
+    "resourcesList": [
+      {
+        "title": "Guía de Orientación Familiar (PDF)",
+        "desc": "Material imprimible de apoyo para el hogar.",
+        "fileUrl": "",
+        "fileName": "",
+        "fileSize": "",
+        "icon": "file-text"
+      }
+    ],
+    "photosList": [
+      {
+        "url": "/uploads/block_3_photo_1_1790007048952_ih3wj.jpg",
+        "caption": ""
+      }
+    ],
+    "order": 2
+  },
+  {
+    "id": 1789416478170,
+    "cycleId": "guia-bienestar",
+    "type": "slides_embed",
+    "size": "full",
+    "titleAlign": "center",
+    "title": "Guia de acompañamiento emocional post terremoto",
+    "subtitle": "",
+    "badgeText": "BIENESTAR EMOCIONAL",
+    "text": "El Colegio Leonístico La Merced está comprometido con el bienestar integral y emocional de su comunidad educativa. Por ello, desde el área de Psicoorientación se elaboraron las siguientes guías de acompañamiento emocional, con el propósito de brindar orientaciones para abordar las emociones que pueden surgir después de un evento sísmico, tanto en el contexto escolar como en el hogar.\n\nEstas guías fueron trabajadas en el colegio como parte del acompañamiento a los estudiantes, brindando orientaciones que permitieran reconocer y gestionar las diferentes emociones que pueden surgir después de una situación de este tipo. Asimismo, permitieron identificar posibles afectaciones emocionales que requirieran un acompañamiento más especializado, realizando la remisión a Psicología cuando fue necesario, con el fin de brindar el apoyo correspondiente.",
+    "imageUrl": "",
+    "imagePosition": "banner",
+    "imageSize": "full",
+    "imageFit": "contain",
+    "galleryLayout": "single_full",
+    "galleryFit": "natural",
+    "galleryAlign": "center",
+    "buttonText": "",
+    "buttonUrl": "",
+    "iconEmoji": "💡",
+    "accentColor": "purple",
+    "slidesUrl": "https://drive.google.com/file/d/19O7uBb5WJJAqpqXtAugqiPZ7KkAVXnX8/view?usp=sharing",
+    "slidesBtnText": "",
+    "videoUrl": "",
+    "videoBtnText": "",
+    "slidesFileData": "",
+    "slidesFileName": "",
+    "itemsList": [
+      {
+        "icon": "💖",
+        "title": "Afecto y Diálogo",
+        "text": "Acompañamiento cercano y validación emocional constante."
+      },
+      {
+        "icon": "⏰",
+        "title": "Rutina y Horarios",
+        "text": "Fijar horas para estudiar, descansar y compartir en familia."
+      }
+    ],
+    "resourcesList": [
+      {
+        "title": "Guía de Orientación Familiar (PDF)",
+        "desc": "Material imprimible de apoyo para el hogar.",
+        "fileUrl": "",
+        "fileName": "",
+        "fileSize": "",
+        "icon": "file-text"
+      }
+    ],
+    "photosList": [
+      {
+        "url": "/uploads/block_3_photo_1_1790007048952_ih3wj.jpg",
+        "caption": ""
+      }
+    ],
+    "order": 1
+  },
+  {
+    "id": 1790000420911,
+    "cycleId": "guia-bienestar",
+    "type": "slides_embed",
+    "size": "full",
+    "titleAlign": "center",
+    "title": "Guia de acompañamiento emocional post terremoto (Primaria)",
+    "subtitle": "",
+    "badgeText": "BIENESTAR EMOCIONAL",
+    "text": "El Colegio Leonístico La Merced está comprometido con el bienestar integral y emocional de su comunidad educativa. Por ello, desde el área de Psicoorientación se elaboraron las siguientes guías de acompañamiento emocional, con el propósito de brindar orientaciones para abordar las emociones que pueden surgir después de un evento sísmico, tanto en el contexto escolar como en el hogar.\n\nEstas guías fueron trabajadas en el colegio como parte del acompañamiento a los estudiantes, brindando orientaciones que permitieran reconocer y gestionar las diferentes emociones que pueden surgir después de una situación de este tipo. Asimismo, permitieron identificar posibles afectaciones emocionales que requirieran un acompañamiento más especializado, realizando la remisión a Psicología cuando fue necesario, con el fin de brindar el apoyo correspondiente.",
+    "imageUrl": "",
+    "imagePosition": "banner",
+    "imageSize": "full",
+    "imageFit": "contain",
+    "galleryLayout": "single_full",
+    "galleryFit": "natural",
+    "galleryAlign": "center",
+    "buttonText": "",
+    "buttonUrl": "",
+    "iconEmoji": "💡",
+    "accentColor": "purple",
+    "slidesUrl": "https://drive.google.com/file/d/16rDfkVUxBZZyRgf-7MRzDsLeQ82w4Ea9/view?usp=sharing",
+    "slidesBtnText": "",
+    "videoUrl": "",
+    "videoBtnText": "",
+    "slidesFileData": "",
+    "slidesFileName": "",
+    "itemsList": [
+      {
+        "icon": "💖",
+        "title": "Afecto y Diálogo",
+        "text": "Acompañamiento cercano y validación emocional constante."
+      },
+      {
+        "icon": "⏰",
+        "title": "Rutina y Horarios",
+        "text": "Fijar horas para estudiar, descansar y compartir en familia."
+      }
+    ],
+    "resourcesList": [
+      {
+        "title": "Guía de Orientación Familiar (PDF)",
+        "desc": "Material imprimible de apoyo para el hogar.",
+        "fileUrl": "",
+        "fileName": "",
+        "fileSize": "",
+        "icon": "file-text"
+      }
+    ],
+    "photosList": [
+      {
+        "url": "/uploads/block_3_photo_1_1790007048952_ih3wj.jpg",
+        "caption": ""
+      }
+    ],
+    "order": 3
+  },
+  {
+    "id": 1790001190745,
+    "cycleId": "primera_infancia",
+    "type": "hero_banner",
+    "size": "full",
+    "titleAlign": "center",
+    "title": "Actividades Educacion sexual Integral ( ESI)",
+    "subtitle": "",
+    "badgeText": "J y T",
+    "text": "La Educación Sexual Integral es importante porque permite acompañar a nuestros estudiantes en el conocimiento y comprensión de sí mismos, fortaleciendo herramientas para cuidar su bienestar, reconocer sus emociones, establecer límites y construir relaciones basadas en el respeto.  \n\nDurante la semana del 14 al 18 de septiembre, compartimos diferentes espacios con los niños y niñas de Primera Infancia, en los cuales abordamos temas relacionados con la Educación Sexual Integral (ESI).\n\nA través de actividades lúdicas y estrategias acordes con su etapa de desarrollo, trabajamos el autocuidado, el respeto por el propio cuerpo, el reconocimiento de las emociones y la identificación de sus necesidades, promoviendo aprendizajes de manera cercana, clara y respetuosa.\nEstos espacios buscan fortalecer desde los primeros años el reconocimiento y valoración de sí mismos, brindándoles herramientas que contribuyan a su bienestar integral y a la construcción de relaciones basadas en el respeto y el cuidado.",
+    "imageUrl": "/uploads/block_1790001190745_1790002567279_capuf.png",
+    "imagePosition": "banner",
+    "imageSize": "full",
+    "imageFit": "cover",
+    "galleryLayout": "single_full",
+    "galleryFit": "natural",
+    "galleryAlign": "center",
+    "buttonText": "",
+    "buttonUrl": "",
+    "iconEmoji": "💡",
+    "accentColor": "purple",
+    "slidesUrl": "",
+    "slidesBtnText": "",
+    "videoUrl": "",
+    "videoBtnText": "",
+    "slidesFileData": "",
+    "slidesFileName": "",
+    "itemsList": [
+      {
+        "icon": "💖",
+        "title": "Afecto y Diálogo",
+        "text": "Acompañamiento cercano y validación emocional constante."
+      },
+      {
+        "icon": "⏰",
+        "title": "Rutina y Horarios",
+        "text": "Fijar horas para estudiar, descansar y compartir en familia."
+      }
+    ],
+    "resourcesList": [
+      {
+        "title": "Guía de Orientación Familiar (PDF)",
+        "desc": "Material imprimible de apoyo para el hogar.",
+        "fileUrl": "",
+        "fileName": "",
+        "fileSize": "",
+        "icon": "file-text"
+      }
+    ],
+    "photosList": [
+      {
+        "url": "/uploads/block_3_photo_1_1790007048952_ih3wj.jpg",
+        "caption": "Talleres y actividades del ciclo"
+      },
+      {
+        "url": "/uploads/block_1790001190745_photo_2_1790007048954_0dxc9.jpg",
+        "caption": "Encuentros formativos"
+      }
+    ],
+    "order": 2
+  },
+  {
+    "id": 1790003584909,
+    "cycleId": "infantil",
+    "type": "photo_gallery",
+    "size": "full",
+    "titleAlign": "left",
+    "title": "Actividades Educacion sexual Integral ( ESI)",
+    "subtitle": "",
+    "badgeText": "1, 2 y 3",
+    "text": "Durante la semana del 14 al 18 de septiembre, compartimos diferentes espacios con los niños y niñas de Ciclo Infantil, en los cuales abordamos temas relacionados con la Educación Sexual Integral (ESI).\n\nA través de actividades lúdicas, dinámicas participativas y estrategias acordes con su edad, trabajamos el reconocimiento y cuidado de su cuerpo, el respeto por sí mismos y por los demás, la expresión y reconocimiento de las emociones, así como la identificación de situaciones en las que pueden sentirse cómodos o necesitar ayuda.\n\nLa Educación Sexual Integral en estas etapas es fundamental, ya que permite que los niños y niñas construyan desde temprana edad conocimientos y habilidades relacionadas con el autocuidado, el reconocimiento de sus emociones, el respeto por su cuerpo y el establecimiento de límites. Estos aprendizajes se desarrollan de manera progresiva, utilizando un lenguaje claro y apropiado para su edad, favoreciendo su bienestar integral y fortaleciendo relaciones basadas en el respeto, el cuidado y la confianza.\n\nEstos espacios buscan fortalecer desde edades tempranas el autocuidado, la autoestima, el respeto y la comunicación, brindando herramientas que favorezcan su bienestar integral y les permitan relacionarse de manera segura y respetuosa con su entorno.",
+    "imageUrl": "/uploads/block_1790003584909_1790003585965_j4bn7.png",
+    "imagePosition": "banner",
+    "imageSize": "full",
+    "imageFit": "contain",
+    "galleryLayout": "single_full",
+    "galleryFit": "natural",
+    "galleryAlign": "center",
+    "buttonText": "",
+    "buttonUrl": "",
+    "iconEmoji": "💡",
+    "accentColor": "purple",
+    "slidesUrl": "",
+    "slidesBtnText": "",
+    "videoUrl": "",
+    "videoBtnText": "",
+    "slidesFileData": "",
+    "slidesFileName": "",
+    "itemsList": [
+      {
+        "icon": "💖",
+        "title": "Afecto y Diálogo",
+        "text": "Acompañamiento cercano y validación emocional constante."
+      },
+      {
+        "icon": "⏰",
+        "title": "Rutina y Horarios",
+        "text": "Fijar horas para estudiar, descansar y compartir en familia."
+      }
+    ],
+    "resourcesList": [
+      {
+        "title": "Guía de Orientación Familiar (PDF)",
+        "desc": "Material imprimible de apoyo para el hogar.",
         "fileUrl": "",
         "fileName": "",
         "fileSize": "",
@@ -661,7 +864,7 @@ const DEFAULT_CYCLE_BLOCKS = [
       }
     ],
     "photosList": [],
-    "order": 1
+    "order": 2
   }
 ];
 
@@ -688,7 +891,7 @@ const DEFAULT_CYCLES_LIST = [
     "badgeText": "1, 2 y 3",
     "pillClass": "pill-teal",
     "borderClass": "card-border-teal",
-    "icon": "🌱",
+    "icon": "",
     "subtitle": "Acompañamiento socioemocional y fortalecimiento de la convivencia, empatía y habilidades de aprendizaje.",
     "order": 2,
     "pageUrl": "/ciclos/infantil",
@@ -702,7 +905,7 @@ const DEFAULT_CYCLES_LIST = [
     "badgeText": "4 y 5",
     "pillClass": "pill-yellow",
     "borderClass": "card-border-yellow",
-    "icon": "📘",
+    "icon": "",
     "subtitle": "Orientación en hábitos de estudio, autonomía escolar y desarrollo integral de preadolescentes.",
     "order": 3,
     "pageUrl": "/ciclos/basico",
@@ -716,7 +919,7 @@ const DEFAULT_CYCLES_LIST = [
     "badgeText": "6 y 7",
     "pillClass": "pill-purple",
     "borderClass": "card-border-purple",
-    "icon": "🔮",
+    "icon": "",
     "subtitle": "Transición a la secundaria, gestión de emociones, prevención y fortalecimiento de la autoestima.",
     "order": 4,
     "pageUrl": "/ciclos/fundamental",
@@ -730,11 +933,11 @@ const DEFAULT_CYCLES_LIST = [
     "badgeText": "8 y 9",
     "pillClass": "pill-blue",
     "borderClass": "card-border-blue",
-    "icon": "🧭",
+    "icon": "",
     "subtitle": "Comunicación asertiva, prevención de riesgos psicosociales y construcción de relaciones saludables.",
     "order": 5,
     "pageUrl": "/ciclos/exploratorio",
-    "heroBgImage": "/uploads/hero_exploratorio_1788740308711_wv1w9.jpg"
+    "heroBgImage": "/uploads/hero_exploratorio_1789415156596_0hlxx.png"
   },
   {
     "key": "especializado",
@@ -744,90 +947,11 @@ const DEFAULT_CYCLES_LIST = [
     "badgeText": "10 y 11",
     "pillClass": "pill-green",
     "borderClass": "card-border-green",
-    "icon": "🎓",
+    "icon": "",
     "subtitle": "Orientación vocacional, preparación para la educación superior y consolidación del proyecto de vida.",
     "order": 6,
     "pageUrl": "/ciclos/especializado",
     "heroBgImage": ""
-  },
-  {
-    "key": "cycle_1788358007488",
-    "slug": "ciclo-juvenil-pro",
-    "name": "Ciclo Juvenil Pro",
-    "grades": "9°, 10° y 11°",
-    "badgeText": "9 10 y 11",
-    "pillClass": "pill-pink",
-    "borderClass": "card-border-pink",
-    "icon": "🎓",
-    "subtitle": "Espacio formativo y de orientación escolar.",
-    "order": 7,
-    "pageUrl": "/ciclos/ciclo-juvenil-pro",
-    "heroBgImage": ""
-  }
-];
-
-const DEFAULT_NAV_ITEMS = [
-  {
-    "id": "nav_inicio",
-    "title": "Inicio",
-    "url": "/",
-    "icon": "home",
-    "type": "dropdown",
-    "order": 1,
-    "isSystem": true,
-    "children": [
-      {
-        "id": "sub_portada",
-        "title": "Portada Principal",
-        "url": "/",
-        "icon": "home",
-        "order": 1
-      },
-      {
-        "id": "sub_quienes_somos",
-        "title": "¿Quiénes Somos?",
-        "url": "/#quienes-somos",
-        "icon": "heart-handshake",
-        "order": 2
-      }
-    ]
-  },
-  {
-    "id": "nav_guia_bienestar",
-    "title": "Guía De Bienestar Emocional Post Terremoto",
-    "url": "/guia-bienestar",
-    "icon": "heart-pulse",
-    "type": "link",
-    "order": 2,
-    "isSystem": true
-  },
-  {
-    "id": "nav_encuentros",
-    "title": "Encuentros Familiares",
-    "url": "/encuentros",
-    "icon": "users",
-    "type": "link",
-    "order": 3,
-    "isSystem": true
-  },
-  {
-    "id": "nav_promocion_prevencion",
-    "title": "Promoción y Prevención",
-    "url": "/promocion-prevencion",
-    "icon": "shield-check",
-    "type": "link",
-    "order": 4,
-    "isSystem": true
-  },
-  {
-    "id": "nav_ciclos",
-    "title": "Ciclos",
-    "url": "#",
-    "icon": "layers",
-    "type": "dropdown",
-    "order": 5,
-    "isSystem": true,
-    "isCyclesDropdown": true
   }
 ];
 
@@ -841,7 +965,7 @@ function getInitialDb() {
     calendarWorkshops: DEFAULT_CALENDAR_WORKSHOPS,
     siteImages: DEFAULT_IMAGES,
     psychologists: DEFAULT_PSYCHOLOGISTS,
-    cycleBlocks: DEFAULT_CYCLE_BLOCKS,
+    cycleBlocks: [],
     suggestions: [],
     analytics: {
       totalVisits: 0,
@@ -861,139 +985,6 @@ function getInitialDb() {
     adminPassword: '123',
     adminSlug: 'admin451200'
   };
-}
-
-// ============================================================
-// MOTOR DE ALMACENAMIENTO MULTICAPA & PERSISTENCIA NUBE
-// ============================================================
-
-function getUpstashConfig() {
-  const url = (process.env.KV_REST_API_URL || process.env.UPSTASH_REDIS_REST_URL || '').replace(/\/+$/, '');
-  const token = process.env.KV_REST_API_TOKEN || process.env.UPSTASH_REDIS_REST_TOKEN || '';
-  return { url, token, enabled: Boolean(url && token) };
-}
-
-let inMemoryDb = null;
-let lastCloudSyncTime = 0;
-const CLOUD_CACHE_TTL_MS = 2000; // 2s cache en memoria
-
-async function fetchFromUpstash() {
-  const { url, token, enabled } = getUpstashConfig();
-  if (!enabled) return null;
-  try {
-    const res = await fetch(`${url}/get/psicologia_db`, {
-      headers: { Authorization: `Bearer ${token}` },
-      cache: 'no-store'
-    });
-    if (!res.ok) return null;
-    const data = await res.json();
-    if (!data || !data.result) return null;
-    return typeof data.result === 'string' ? JSON.parse(data.result) : data.result;
-  } catch (err) {
-    console.warn('Advertencia leyendo desde Upstash Redis:', err.message);
-    return null;
-  }
-}
-
-async function saveToUpstash(data) {
-  const { url, token, enabled } = getUpstashConfig();
-  if (!enabled) return false;
-  try {
-    const serialized = JSON.stringify(data);
-    const res = await fetch(url, {
-      method: 'POST',
-      headers: {
-        Authorization: `Bearer ${token}`,
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(['SET', 'psicologia_db', serialized])
-    });
-    return res.ok;
-  } catch (err) {
-    console.warn('Advertencia guardando en Upstash Redis:', err.message);
-    return false;
-  }
-}
-
-async function fetchFromGitHub() {
-  if (GITHUB_TOKEN) {
-    try {
-      const apiUrl = `https://api.github.com/repos/${GITHUB_REPO}/contents/data/db.json`;
-      const res = await fetch(apiUrl, {
-        headers: {
-          'Authorization': `token ${GITHUB_TOKEN}`,
-          'Accept': 'application/vnd.github.v3+json',
-          'User-Agent': 'Psico-Leonistico-Sync'
-        },
-        cache: 'no-store'
-      });
-      if (res.ok) {
-        const fileInfo = await res.json();
-        if (fileInfo && fileInfo.content) {
-          const raw = Buffer.from(fileInfo.content, 'base64').toString('utf-8');
-          const data = JSON.parse(raw);
-          return data;
-        }
-      }
-    } catch (apiErr) {
-      console.warn('Aviso leyendo API GitHub:', apiErr.message);
-    }
-  }
-
-  try {
-    const res = await fetch(`https://raw.githubusercontent.com/${GITHUB_REPO}/main/data/db.json?t=${Date.now()}`, {
-      cache: 'no-store'
-    });
-    if (res.ok) {
-      const data = await res.json();
-      return data;
-    }
-  } catch (err) {
-    console.warn('Aviso leyendo raw GitHub:', err.message);
-  }
-  return null;
-}
-
-async function saveToGitHub(data) {
-  if (!GITHUB_TOKEN) return false;
-  try {
-    const fileUrl = `https://api.github.com/repos/${GITHUB_REPO}/contents/data/db.json`;
-    let sha = '';
-    try {
-      const getRes = await fetch(fileUrl, {
-        headers: {
-          'Authorization': `token ${GITHUB_TOKEN}`,
-          'Accept': 'application/vnd.github.v3+json',
-          'User-Agent': 'Psico-Leonistico-Sync'
-        }
-      });
-      if (getRes.ok) {
-        const existing = await getRes.json();
-        sha = existing.sha;
-      }
-    } catch (_) {}
-
-    const content = Buffer.from(JSON.stringify(data, null, 2), 'utf-8').toString('base64');
-    const putRes = await fetch(fileUrl, {
-      method: 'PUT',
-      headers: {
-        'Authorization': `token ${GITHUB_TOKEN}`,
-        'Accept': 'application/vnd.github.v3+json',
-        'Content-Type': 'application/json',
-        'User-Agent': 'Psico-Leonistico-Sync'
-      },
-      body: JSON.stringify({
-        message: 'CMS Live Sync: data/db.json [skip ci]',
-        content,
-        sha: sha || undefined,
-        branch: 'main'
-      })
-    });
-    return putRes.ok;
-  } catch (err) {
-    console.warn('Aviso guardando en GitHub API:', err.message);
-    return false;
-  }
 }
 
 function initDb() {
@@ -1024,106 +1015,15 @@ function readDb() {
       db.customPages = DEFAULT_CUSTOM_PAGES;
       modified = true;
     }
-    if (!db.cycleBlocks || !Array.isArray(db.cycleBlocks) || db.cycleBlocks.length === 0) {
-      db.cycleBlocks = DEFAULT_CYCLE_BLOCKS;
-      modified = true;
-    }
 
     if (modified) {
       fs.writeFileSync(DB_FILE, JSON.stringify(db, null, 2), 'utf-8');
     }
 
-    inMemoryDb = db;
     return db;
   } catch (err) {
     console.error('Error leyendo base de datos JSON:', err);
-    const initial = getInitialDb();
-    inMemoryDb = initial;
-    return initial;
-  }
-}
-
-async function getDbAsync() {
-  const { enabled } = getUpstashConfig();
-  const now = Date.now();
-
-  if (enabled) {
-    if (inMemoryDb && (now - lastCloudSyncTime < CLOUD_CACHE_TTL_MS)) {
-      return inMemoryDb;
-    }
-    const cloudDb = await fetchFromUpstash();
-    if (cloudDb && typeof cloudDb === 'object') {
-      const memVer = inMemoryDb && inMemoryDb.version ? Number(inMemoryDb.version) : 0;
-      const cloudVer = cloudDb.version ? Number(cloudDb.version) : 0;
-      if (!inMemoryDb || cloudVer >= memVer) {
-        inMemoryDb = cloudDb;
-        lastCloudSyncTime = now;
-        try {
-          fs.writeFileSync(DB_FILE, JSON.stringify(inMemoryDb, null, 2), 'utf-8');
-        } catch (_) {}
-      }
-      return inMemoryDb;
-    }
-  }
-
-  // Si no hay Upstash o para lambdas fríos en Vercel, obtener desde GitHub si hace más de 4s
-  if (!inMemoryDb || (isVercel && (now - lastCloudSyncTime > 4000))) {
-    const ghDb = await fetchFromGitHub();
-    if (ghDb && typeof ghDb === 'object' && Array.isArray(ghDb.cyclesList)) {
-      const memVer = inMemoryDb && inMemoryDb.version ? Number(inMemoryDb.version) : 0;
-      const ghVer = ghDb.version ? Number(ghDb.version) : 0;
-      if (!inMemoryDb || ghVer >= memVer) {
-        inMemoryDb = ghDb;
-        lastCloudSyncTime = now;
-        try {
-          fs.writeFileSync(DB_FILE, JSON.stringify(inMemoryDb, null, 2), 'utf-8');
-        } catch (_) {}
-      } else {
-        lastCloudSyncTime = now;
-      }
-      return inMemoryDb;
-    }
-  }
-
-  if (!inMemoryDb) {
-    inMemoryDb = readDb();
-  }
-  return inMemoryDb;
-}
-
-async function saveDbAsync(data, options = {}) {
-  try {
-    initDb();
-    if (options.bumpVersion !== false) {
-      data.version = Date.now().toString();
-    }
-    inMemoryDb = data;
-    lastCloudSyncTime = Date.now();
-
-    try {
-      fs.writeFileSync(DB_FILE, JSON.stringify(data, null, 2), 'utf-8');
-      const publicDb = path.join(__dirname, 'public', 'data', 'db.json');
-      if (fs.existsSync(publicDb) && !isVercel) {
-        fs.writeFileSync(publicDb, JSON.stringify(data, null, 2), 'utf-8');
-      }
-    } catch (e) {
-      console.warn('Aviso escribiendo db.json:', e.message);
-    }
-
-    const { enabled } = getUpstashConfig();
-    if (enabled) {
-      await saveToUpstash(data);
-    }
-
-    // Persistir en GitHub para que todos los usuarios y dispositivos vean los cambios (NUNCA en visitas públicas)
-    if (options.syncToGitHub !== false) {
-      saveToGitHub(data).catch(() => {});
-    }
-
-    return true;
-  } catch (err) {
-    console.error('Error guardando base de datos:', err);
-    return false;
+    return getInitialDb();
   }
 }
 
@@ -1131,14 +1031,7 @@ function saveDb(data) {
   try {
     initDb();
     data.version = Date.now().toString();
-    inMemoryDb = data;
-    lastCloudSyncTime = Date.now();
     fs.writeFileSync(DB_FILE, JSON.stringify(data, null, 2), 'utf-8');
-    const { enabled } = getUpstashConfig();
-    if (enabled) {
-      saveToUpstash(data).catch(() => {});
-    }
-    saveToGitHub(data).catch(() => {});
     return true;
   } catch (err) {
     console.error('Error guardando base de datos JSON:', err);
@@ -1146,51 +1039,37 @@ function saveDb(data) {
   }
 }
 
-// Inicializar DB al arrancar y generar nueva versión para forzar re-sync en browsers
+// Inicializar DB al arrancar
 readDb();
-(function bumpStartupVersion() {
-  try {
-    if (inMemoryDb) {
-      inMemoryDb.version = Date.now().toString();
-      const dbStr = JSON.stringify(inMemoryDb, null, 2);
-      fs.writeFileSync(DB_FILE, dbStr, 'utf-8');
-      const publicDb = path.join(__dirname, 'public', 'data', 'db.json');
-      if (fs.existsSync(publicDb) && !isVercel) {
-        fs.writeFileSync(publicDb, dbStr, 'utf-8');
-      }
-      console.log('✅ DB iniciada. Versión:', inMemoryDb.version, '| Bloques:', (inMemoryDb.cycleBlocks || []).length);
-    }
-  } catch (_) {}
-})();
 
 // ============================================================
-// API REST CENTRALIZADA Y UNIVERSAL (Express Router)
+// API REST CENTRALIZADA PARA SINCRONIZACIÓN EN TIEMPO REAL
 // ============================================================
 
-const apiRouter = express.Router();
-
-// Middleware anti-caché para todas las peticiones API
-apiRouter.use((req, res, next) => {
-  res.setHeader('Cache-Control', 'no-store, no-cache, must-revalidate, proxy-revalidate, max-age=0');
+// Middleware para evitar que los navegadores guarden en caché datos de API desactualizados
+app.use('/api', (req, res, next) => {
+  res.setHeader('Cache-Control', 'no-store, no-cache, must-revalidate, proxy-revalidate');
   res.setHeader('Pragma', 'no-cache');
   res.setHeader('Expires', '0');
   next();
 });
 
-// 0. Versión ultra-ligera (~30 bytes para chequeos constantes)
-apiRouter.get('/version', async (req, res) => {
-  const db = await getDbAsync();
+// 0. Comprobación ultra-ligera de versión (~30 bytes para ahorrar datos en Vercel)
+app.get('/api/version', (req, res) => {
+  const db = readDb();
+  res.setHeader('Cache-Control', 'no-cache, private');
   res.json({ v: db.version || '1' });
 });
 
-// 1. Obtener todos los datos del portal
-apiRouter.get('/data', async (req, res) => {
-  const db = await getDbAsync();
+// 1. Obtener todos los datos del portal (con soporte ETag y 304 Not Modified)
+app.get('/api/data', (req, res) => {
+  const db = readDb();
   const version = db.version || '1';
   if (req.headers['if-none-match'] === `"${version}"`) {
     return res.status(304).end();
   }
   res.setHeader('ETag', `"${version}"`);
+  res.setHeader('Cache-Control', 'no-cache, private');
   res.json({
     version: version,
     navItems: db.navItems || DEFAULT_NAV_ITEMS,
@@ -1202,51 +1081,30 @@ apiRouter.get('/data', async (req, res) => {
     cycleBlocks: db.cycleBlocks || DEFAULT_CYCLE_BLOCKS,
     suggestions: db.suggestions || [],
     analytics: db.analytics || {},
-    homeContent: db.homeContent || DEFAULT_HOME_CONTENT,
     adminPassword: db.adminPassword || '123',
     adminSlug: db.adminSlug || 'admin451200'
   });
 });
 
-// 1.0 Contenido de la Portada Principal (Inicio)
-apiRouter.post('/home-content', async (req, res) => {
-  const { homeContent } = req.body;
-  if (!homeContent || typeof homeContent !== 'object') {
-    return res.status(400).json({ error: 'Formato inválido de contenido de inicio' });
-  }
-  const db = await getDbAsync();
-  db.homeContent = { ...DEFAULT_HOME_CONTENT, ...homeContent };
-  await saveDbAsync(db);
-  res.json({ success: true, version: db.version, homeContent: db.homeContent });
-});
-
-// 1.1 Elementos del Menú de Navegación
-apiRouter.post('/navigation', async (req, res) => {
+// 1.1 Guardar / Actualizar Elementos del Menú de Navegación
+app.post('/api/navigation', (req, res) => {
   const { navItems } = req.body;
   if (!Array.isArray(navItems)) {
     return res.status(400).json({ error: 'Formato inválido de elementos de navegación' });
   }
-  const db = await getDbAsync();
+  const db = readDb();
   db.navItems = navItems;
-  await saveDbAsync(db);
-  res.json({ success: true, version: db.version, count: navItems.length });
+  saveDb(db);
+  res.json({ success: true, count: navItems.length });
 });
 
-async function flushPendingImageUploads() {
-  if (pendingImageUploads.length > 0) {
-    const toWait = [...pendingImageUploads];
-    pendingImageUploads = [];
-    await Promise.allSettled(toWait);
-  }
-}
-
-// 1.2 Lista de Ciclos Escolares
-apiRouter.post('/cycles-list', async (req, res) => {
+// 1.2 Guardar / Actualizar Lista de Ciclos Escolares
+app.post('/api/cycles-list', (req, res) => {
   const { cyclesList } = req.body;
   if (!Array.isArray(cyclesList)) {
     return res.status(400).json({ error: 'Formato inválido de lista de ciclos' });
   }
-  const db = await getDbAsync();
+  const db = readDb();
   const cleanedCycles = cyclesList.map(cycle => {
     const c = { ...cycle };
     if (c.heroBgImage && c.heroBgImage.startsWith('data:image/')) {
@@ -1254,60 +1112,58 @@ apiRouter.post('/cycles-list', async (req, res) => {
     }
     return c;
   });
-  await flushPendingImageUploads();
   db.cyclesList = cleanedCycles;
-  await saveDbAsync(db);
-  res.json({ success: true, version: db.version, count: cleanedCycles.length });
+  saveDb(db);
+  res.json({ success: true, count: cleanedCycles.length });
 });
 
-// 1.3 Páginas Personalizadas
-apiRouter.post('/custom-pages', async (req, res) => {
+// 1.3 Guardar / Actualizar Páginas Personalizadas
+app.post('/api/custom-pages', (req, res) => {
   const { customPages } = req.body;
   if (!Array.isArray(customPages)) {
     return res.status(400).json({ error: 'Formato inválido de páginas personalizadas' });
   }
-  const db = await getDbAsync();
+  const db = readDb();
   db.customPages = customPages;
-  await saveDbAsync(db);
-  res.json({ success: true, version: db.version, count: customPages.length });
+  saveDb(db);
+  res.json({ success: true, count: customPages.length });
 });
 
-// 2. Calendario de Encuentros
-apiRouter.post('/calendar', async (req, res) => {
+// 2. Guardar / Actualizar Calendario de Encuentros
+app.post('/api/calendar', (req, res) => {
   const { workshops } = req.body;
   if (!Array.isArray(workshops)) {
     return res.status(400).json({ error: 'Formato inválido de encuentros' });
   }
-  const db = await getDbAsync();
+  const db = readDb();
   db.calendarWorkshops = workshops;
-  await saveDbAsync(db);
-  res.json({ success: true, version: db.version, count: workshops.length });
+  saveDb(db);
+  res.json({ success: true, count: workshops.length });
 });
 
-// 3. Imágenes del Sitio
-apiRouter.post('/images', async (req, res) => {
+// 3. Guardar / Actualizar Imágenes del Sitio
+app.post('/api/images', (req, res) => {
   const { images } = req.body;
   if (!images || typeof images !== 'object') {
     return res.status(400).json({ error: 'Formato inválido de imágenes' });
   }
-  const db = await getDbAsync();
+  const db = readDb();
   const cleanedImages = {};
   for (const [k, v] of Object.entries(images)) {
     cleanedImages[k] = saveBase64ToFile(v, `site_${k}`);
   }
-  await flushPendingImageUploads();
   db.siteImages = { ...db.siteImages, ...cleanedImages };
-  await saveDbAsync(db);
-  res.json({ success: true, version: db.version, images: db.siteImages });
+  saveDb(db);
+  res.json({ success: true, images: db.siteImages });
 });
 
-// 4. Orientadoras / Psicólogas
-apiRouter.post('/psychologists', async (req, res) => {
+// 4. Guardar / Actualizar Orientadoras / Psicólogas
+app.post('/api/psychologists', (req, res) => {
   const { psychologists } = req.body;
   if (!Array.isArray(psychologists)) {
     return res.status(400).json({ error: 'Formato inválido de psicólogas' });
   }
-  const db = await getDbAsync();
+  const db = readDb();
   const cleaned = psychologists.map(p => {
     const cp = { ...p };
     if (cp.emoji && cp.emoji.startsWith('data:image/')) {
@@ -1315,19 +1171,18 @@ apiRouter.post('/psychologists', async (req, res) => {
     }
     return cp;
   });
-  await flushPendingImageUploads();
   db.psychologists = cleaned;
-  await saveDbAsync(db);
-  res.json({ success: true, version: db.version, psychologists: db.psychologists });
+  saveDb(db);
+  res.json({ success: true, psychologists: db.psychologists });
 });
 
-// 4.1 Bloques de Contenido de Ciclos Escolares
-apiRouter.post('/cycles', async (req, res) => {
+// 4.1 Guardar / Actualizar Bloques de Contenido de Ciclos Escolares
+app.post('/api/cycles', (req, res) => {
   const { cycleBlocks } = req.body;
   if (!Array.isArray(cycleBlocks)) {
     return res.status(400).json({ error: 'Formato inválido de bloques de ciclos' });
   }
-  const db = await getDbAsync();
+  const db = readDb();
   const cleanedBlocks = cycleBlocks.map(block => {
     const b = { ...block };
     if (b.imageUrl && b.imageUrl.startsWith('data:image/')) {
@@ -1343,19 +1198,18 @@ apiRouter.post('/cycles', async (req, res) => {
     }
     return b;
   });
-  await flushPendingImageUploads();
   db.cycleBlocks = cleanedBlocks;
-  await saveDbAsync(db);
-  res.json({ success: true, version: db.version, count: cleanedBlocks.length });
+  saveDb(db);
+  res.json({ success: true, count: cleanedBlocks.length });
 });
 
-// 5. Sugerencias
-apiRouter.post('/suggestions', async (req, res) => {
+// 5. Agregar Sugerencia de Padres
+app.post('/api/suggestions', (req, res) => {
   const { text, date } = req.body;
   if (!text) {
     return res.status(400).json({ error: 'Texto de sugerencia requerido' });
   }
-  const db = await getDbAsync();
+  const db = readDb();
   if (!db.suggestions) db.suggestions = [];
   const newSugg = {
     id: Date.now(),
@@ -1363,25 +1217,25 @@ apiRouter.post('/suggestions', async (req, res) => {
     date: date || new Date().toLocaleDateString('es-CO')
   };
   db.suggestions.unshift(newSugg);
-  await saveDbAsync(db);
-  res.json({ success: true, version: db.version, suggestion: newSugg });
+  saveDb(db);
+  res.json({ success: true, suggestion: newSugg });
 });
 
 // 6. Eliminar Sugerencia
-apiRouter.delete('/suggestions/:id', async (req, res) => {
+app.delete('/api/suggestions/:id', (req, res) => {
   const id = parseInt(req.params.id);
-  const db = await getDbAsync();
+  const db = readDb();
   if (db.suggestions) {
     db.suggestions = db.suggestions.filter(s => s.id !== id);
-    await saveDbAsync(db);
+    saveDb(db);
   }
-  res.json({ success: true, version: db.version });
+  res.json({ success: true });
 });
 
-// 7. Analíticas
-apiRouter.post('/analytics/visit', async (req, res) => {
+// 7. Registrar Visita Centralizada (Páginas y Ciclos)
+app.post('/api/analytics/visit', (req, res) => {
   const { section, action, device, tabKey, cycleKey } = req.body;
-  const db = await getDbAsync();
+  const db = readDb();
   if (!db.analytics) {
     db.analytics = {
       totalVisits: 0,
@@ -1422,44 +1276,19 @@ apiRouter.post('/analytics/visit', async (req, res) => {
     db.analytics.logs = db.analytics.logs.slice(0, 50);
   }
 
-  // Guardar analíticas localmente / en memoria SIN hacer commit en GitHub ni alterar la versión de contenido
-  await saveDbAsync(db, { syncToGitHub: false, bumpVersion: false });
-  res.json({ success: true, version: db.version, totalVisits: db.analytics.totalVisits });
+  saveDb(db);
+  res.json({ success: true, totalVisits: db.analytics.totalVisits });
 });
 
-// 8. Seguridad
-apiRouter.post('/security', async (req, res) => {
+// 8. Actualizar Credenciales de Seguridad
+app.post('/api/security', (req, res) => {
   const { adminPassword, adminSlug } = req.body;
-  const db = await getDbAsync();
+  const db = readDb();
   if (adminPassword) db.adminPassword = adminPassword;
   if (adminSlug) db.adminSlug = adminSlug;
-  await saveDbAsync(db);
-  res.json({ success: true, version: db.version });
+  saveDb(db);
+  res.json({ success: true });
 });
-
-// 9. Estado y Diagnóstico
-apiRouter.get('/status', async (req, res) => {
-  const db = await getDbAsync();
-  const { enabled } = getUpstashConfig();
-  res.json({
-    status: 'ok',
-    app: 'Psicoorientación Colegio Leonístico La Merced',
-    version: '2.6.0 (Unified Serverless & Multi-Device Sync)',
-    dbVersion: db.version || '1',
-    storageMode: enabled ? 'Upstash Redis / Vercel KV (Cloud Synced)' : (isVercel ? 'Vercel Serverless (/tmp fallback)' : 'Local File System (data/db.json)'),
-    uptime: process.uptime(),
-    timestamp: new Date().toISOString()
-  });
-});
-
-// 10. Keep-Alive Ping
-apiRouter.get('/ping', (req, res) => {
-  res.status(200).json({ status: 'ok' });
-});
-
-// Montar el Router API tanto en /api como en la raíz / para compatibilidad universal con Vercel
-app.use('/api', apiRouter);
-app.use('/', apiRouter);
 
 // ============================================================
 // RUTAS PRINCIPALES DEL SITIO WEB
@@ -1491,15 +1320,6 @@ app.get(['/promocion-prevencion', '/promocion-prevencion.html', '/promocion-y-pr
     return res.sendFile(pagePath);
   }
   res.sendFile(path.join(__dirname, 'promocion-prevencion.html'));
-});
-
-// 3.0 Hub Principal de Ciclos Escolares (/ciclos, /ciclos/)
-app.get(['/ciclos', '/ciclos/', '/ciclos/index.html'], (req, res) => {
-  const hubPath = path.join(__dirname, 'public', 'ciclos', 'index.html');
-  if (fs.existsSync(hubPath)) {
-    return res.sendFile(hubPath);
-  }
-  res.sendFile(path.join(__dirname, 'ciclos', 'index.html'));
 });
 
 // 3. Rutas de Ciclos Escolares (Soporta ciclos existentes y dinámicos)
@@ -1546,13 +1366,29 @@ app.get(['/admin', '/admin.html', '/admin451200', '/2610', '/:slug'], (req, res,
   next();
 });
 
+// Ruta Keep-Alive / Anti-Inactividad para Render.com (UptimeRobot / Cron-Job)
+app.get(['/ping', '/keep-alive', '/api/ping'], (req, res) => {
+  res.status(200).json({ status: 'ok' });
+});
+
+// Endpoint de Diagnóstico
+app.get('/api/status', (req, res) => {
+  res.json({
+    status: 'ok',
+    app: 'Psicoorientación Colegio Leonístico La Merced',
+    version: '2.5.0 (Dynamic Pages & Cycles Sync)',
+    uptime: process.uptime(),
+    timestamp: new Date()
+  });
+});
+
 // Manejador para cualquier otra ruta no encontrada (404 -> Redirigir a inicio)
 app.use((req, res) => {
   res.status(404).sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
-// Iniciar Servidor solo si se ejecuta directamente con `node server.js`
-if (require.main === module) {
+// Iniciar Servidor
+if (process.env.NODE_ENV !== 'production' || !process.env.VERCEL) {
   app.listen(PORT, () => {
     console.log('====================================================');
     console.log(`🚀 Servidor de Psicoorientación activo en el puerto ${PORT}`);
