@@ -867,6 +867,63 @@
         }
       ],
       "order": 2
+    },
+    {
+      "id": 1790003584909,
+      "cycleId": "infantil",
+      "type": "hero_banner",
+      "size": "full",
+      "titleAlign": "left",
+      "title": "Actividades Educacion sexual Integral ( ESI)",
+      "subtitle": "",
+      "badgeText": "1, 2 y 3",
+      "text": "Durante la semana del 14 al 18 de septiembre, compartimos diferentes espacios con los niños y niñas de Ciclo Infantil, en los cuales abordamos temas relacionados con la Educación Sexual Integral (ESI).\n\nA través de actividades lúdicas, dinámicas participativas y estrategias acordes con su edad, trabajamos el reconocimiento y cuidado de su cuerpo, el respeto por sí mismos y por los demás, la expresión y reconocimiento de las emociones, así como la identificación de situaciones en las que pueden sentirse cómodos o necesitar ayuda.\n\nLa Educación Sexual Integral en estas etapas es fundamental, ya que permite que los niños y niñas construyan desde temprana edad conocimientos y habilidades relacionadas con el autocuidado, el reconocimiento de sus emociones, el respeto por su cuerpo y el establecimiento de límites. Estos aprendizajes se desarrollan de manera progresiva, utilizando un lenguaje claro y apropiado para su edad, favoreciendo su bienestar integral y fortaleciendo relaciones basadas en el respeto, el cuidado y la confianza.\n\nEstos espacios buscan fortalecer desde edades tempranas el autocuidado, la autoestima, el respeto y la comunicación, brindando herramientas que favorezcan su bienestar integral y les permitan relacionarse de manera segura y respetuosa con su entorno.",
+      "imageUrl": "/uploads/block_1790003584909_1790003585965_j4bn7.png",
+      "imagePosition": "banner",
+      "imageSize": "full",
+      "imageFit": "contain",
+      "galleryLayout": "single_full",
+      "galleryFit": "natural",
+      "galleryAlign": "center",
+      "buttonText": "",
+      "buttonUrl": "",
+      "iconEmoji": "💡",
+      "accentColor": "purple",
+      "slidesUrl": "",
+      "slidesBtnText": "",
+      "videoUrl": "",
+      "videoBtnText": "",
+      "slidesFileData": "",
+      "slidesFileName": "",
+      "itemsList": [
+        {
+          "icon": "💖",
+          "title": "Afecto y Diálogo",
+          "text": "Acompañamiento cercano y validación emocional constante."
+        },
+        {
+          "icon": "⏰",
+          "title": "Rutina y Horarios",
+          "text": "Fijar horas para estudiar, descansar y compartir en familia."
+        }
+      ],
+      "resourcesList": [
+        {
+          "title": "Guía de Orientación Familiar (PDF)",
+          "desc": "Material imprimible de apoyo para el hogar.",
+          "fileUrl": "",
+          "fileName": "",
+          "fileSize": "",
+          "icon": "file-text"
+        }
+      ],
+      "photosList": [
+        {
+          "url": "https://images.unsplash.com/photo-1577896851231-70ef18881754?auto=format&fit=crop&w=600&q=80",
+          "caption": ""
+        }
+      ],
+      "order": 2
     }
   ],
   "suggestions": [],
@@ -1242,7 +1299,7 @@
   },
   "adminPassword": "123",
   "adminSlug": "admin451200",
-  "version": "1790003235790",
+  "version": "1790003588152",
   "homeContent": {
     "identityBadge": "Psicólogia Colegio Leonistico \"La Merced\"",
     "mainTitle": "Bienvenidos a \"Caminando Juntos\"",
