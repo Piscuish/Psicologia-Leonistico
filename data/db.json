@@ -270,7 +270,7 @@
     },
     {
       "id": 2,
-      "name": "Maria del Mar Echeverry",
+      "name": "Maria del Mar Echeverry López",
       "badge": "",
       "badgeClass": "",
       "bgClass": "bg-pink",
@@ -1115,7 +1115,7 @@
   },
   "adminPassword": "123",
   "adminSlug": "admin451200",
-  "version": "1789999822294",
+  "version": "1789999881347",
   "homeContent": {
     "identityBadge": "Psicólogia Colegio Leonistico \"La Merced\"",
     "mainTitle": "Bienvenidos a \"Caminando Juntos\"",
