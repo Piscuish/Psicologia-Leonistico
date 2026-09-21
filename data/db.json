@@ -1115,7 +1115,7 @@
   },
   "adminPassword": "123",
   "adminSlug": "admin451200",
-  "version": "1789999548357",
+  "version": "1789999822294",
   "homeContent": {
     "identityBadge": "Psicólogia Colegio Leonistico \"La Merced\"",
     "mainTitle": "Bienvenidos a \"Caminando Juntos\"",
@@ -1125,9 +1125,9 @@
     "paragraph3": "A través de este espacio compartiremos orientaciones y estrategias que contribuyan al bienestar integral, al desarrollo socioemocional, al fortalecimiento de las relaciones y a la construcción de entornos que favorezcan el crecimiento y aprendizaje de nuestra comunidad educativa.",
     "aboutBadge": "EQUIPO DE PSICO ORIENTACIÓN",
     "aboutTitle": "¿Quiénes Somos?",
-    "aboutSubtitle": "Brindamos estrategias y acompañamiento para favorecer el desarrollo integral de nuestros estudiantes.",
-    "aboutParagraph1": "Acompañamos a nuestros estudiantes en sus procesos emocionales, sociales y académicos, fortaleciendo sus habilidades y potenciando su desarrollo integral.",
-    "aboutParagraph2": "Trabajamos de la mano con las directivas, los docentes de aula y las familias para garantizar que cada estudiante cuente con las herramientas necesarias para construir un proyecto de vida feliz y exitoso.",
+    "aboutSubtitle": "Somos el equipo de Psicoorientación del Colegio Leonístico La Merced, comprometido con el acompañamiento de nuestros estudiantes en sus procesos emocionales dentro del contexto educativo. Brindamos orientación, estrategias y herramientas que contribuyen a su bienestar y favorecen su desarrollo integral, acompañándolos en las diferentes etapas de su proceso escolar.",
+    "aboutParagraph1": "Asimismo, trabajamos de manera articulada con docentes y familias, brindando estrategias y orientaciones que les permitan fortalecer el acompañamiento de nuestros estudiantes y favorecer sus procesos emocionales, académicos y de adaptación escolar.",
+    "aboutParagraph2": "",
     "areasTitle": "Áreas de Acompañamiento Institucional",
     "areasSubtitle": "Líneas de trabajo diseñadas para respaldar cada etapa de tu vida escolar y familiar.",
     "areas": [
