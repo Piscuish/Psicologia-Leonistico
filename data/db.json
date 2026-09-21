@@ -628,6 +628,10 @@
         {
           "url": "/uploads/gallery_1789414523980_0_1790000198779_jl0xf.jpg",
           "caption": ""
+        },
+        {
+          "url": "/uploads/gallery_1789414523980_1_1790000598633_plb73.jpg",
+          "caption": ""
         }
       ],
       "order": 1
@@ -806,16 +810,16 @@
   ],
   "suggestions": [],
   "analytics": {
-    "totalVisits": 63,
+    "totalVisits": 64,
     "uniqueSessions": 0,
-    "lastVisitDate": "17/9/2026 06:52 p. m.",
+    "lastVisitDate": "21/9/2026 02:22 p. m.",
     "tabs": {
       "inicio": 14,
       "encuentros": 2,
-      "ciclos": 47
+      "ciclos": 48
     },
     "cycles": {
-      "primera_infancia": 22,
+      "primera_infancia": 23,
       "infantil": 6,
       "basico": 5,
       "fundamental": 4,
@@ -823,6 +827,13 @@
       "especializado": 2
     },
     "logs": [
+      {
+        "id": 1790000570853,
+        "date": "21/9/2026 02:22 p. m.",
+        "section": "Ciclos: Primera Infancia (JARDÍN Y TRANSICIÓN)",
+        "action": "Visita a la página de Primera Infancia (JARDÍN Y TRANSICIÓN)",
+        "device": "Escritorio"
+      },
       {
         "id": 1789671148853,
         "date": "17/9/2026 06:52 p. m.",
@@ -1165,19 +1176,12 @@
         "section": "Ciclos: Primera Infancia (JARDÍN Y TRANSICIÓN)",
         "action": "Visita a la página de Primera Infancia (JARDÍN Y TRANSICIÓN)",
         "device": "Escritorio"
-      },
-      {
-        "id": 1789145820521,
-        "date": "11/9/2026 11:57 a. m.",
-        "section": "Ciclos: Primera Infancia (JARDÍN Y TRANSICIÓN)",
-        "action": "Visita a la página de Primera Infancia (JARDÍN Y TRANSICIÓN)",
-        "device": "Escritorio"
       }
     ]
   },
   "adminPassword": "123",
   "adminSlug": "admin451200",
-  "version": "1790000510026",
+  "version": "1790000599737",
   "homeContent": {
     "identityBadge": "Psicólogia Colegio Leonistico \"La Merced\"",
     "mainTitle": "Bienvenidos a \"Caminando Juntos\"",
