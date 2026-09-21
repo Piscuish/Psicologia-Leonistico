@@ -626,7 +626,11 @@
       ],
       "photosList": [
         {
-          "url": "/uploads/gallery_1789414523980_0_1790000198779_jl0xf.jpg",
+          "url": "/uploads/gallery_1789414523980_0_1790000231921_uuqgx.jpg",
+          "caption": ""
+        },
+        {
+          "url": "/uploads/gallery_1789414523980_1_1790000231925_75fuu.jpg",
           "caption": ""
         }
       ],
@@ -1120,7 +1124,7 @@
   },
   "adminPassword": "123",
   "adminSlug": "admin451200",
-  "version": "1790000199792",
+  "version": "1790000232942",
   "homeContent": {
     "identityBadge": "Psicólogia Colegio Leonistico \"La Merced\"",
     "mainTitle": "Bienvenidos a \"Caminando Juntos\"",
